@@ -10,6 +10,8 @@ gem 'bundler'
 gem 'pg'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
 

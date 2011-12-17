@@ -1,4 +1,11 @@
 OmniauthDemo::Application.routes.draw do
+
+  get   '/login', :to => 'sessions#new', :as => :login
+  get   '/logout', :to => 'sessions#destroy'
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +55,7 @@ OmniauthDemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'pages#home'
 
   # See how all your routes lay out with "rake routes"
 
