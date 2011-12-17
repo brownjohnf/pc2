@@ -1,0 +1,25 @@
+postgres: &postgres
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  username: postgres
+  password: testing
+  encoding: unicode
+
+
+common: &common
+  # Choose one of the following
+  <<: *postgres
+
+
+development:
+  <<: *common
+  database: omniauth_demo_development
+
+production:
+  <<: *common
+  database: omniauth_demo_production
+
+test:
+  <<: *common
+  database: omniauth_demo_test
