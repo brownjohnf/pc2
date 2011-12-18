@@ -1,6 +1,6 @@
 <p>
 <% if signed_in? %>
-  Signed in. Pleas add other auth providers. <%= link_to 'Facebook', '/auth/facebook' %> | <%= link_to 'Google', '/auth/google_oauth2' %> | <%= link_to 'Twitter', '/auth/twitter' %></p>
+  Signed in. Please add other auth providers. <%= link_to 'Facebook', '/auth/facebook' %> | <%= link_to 'Google', '/auth/google_oauth2' %> | <%= link_to 'Twitter', '/auth/twitter' %></p>
   <p>You have currently registered using</p><ul>
   <% current_user.authorizations.each do |a| %>
     <li><%= a.provider %></li>
