@@ -14,12 +14,12 @@ common: &common
 
 development:
   <<: *common
-  database: omniauth_demo_development
+  database: pc2_development
 
 production:
   <<: *common
-  database: omniauth_demo_production
+  database: pc2_production
 
 test:
   <<: *common
-  database: omniauth_demo_test
+  database: pc2_test

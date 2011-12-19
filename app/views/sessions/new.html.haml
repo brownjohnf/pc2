@@ -1,0 +1,9 @@
+.container
+  .row
+    .twelvecol.last
+      %p
+        Please sign in using
+        %ul
+          %li= link_to 'Facebook', '/auth/facebook'
+          %li= link_to 'Google', '/auth/google_oauth2'
+          %li= link_to 'Twitter', '/auth/twitter'

@@ -5,6 +5,7 @@ OmniauthDemo::Application.routes.draw do
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
+  match 'about_us', :to => 'pages#about_us'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
