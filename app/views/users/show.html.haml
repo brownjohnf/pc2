@@ -1,0 +1,8 @@
+.container
+  .row
+    .threecol
+    .ninecol.last
+      %ul
+        = render @user
+        - if @authorizations
+          = render @authorizations

@@ -1,11 +1,25 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :regiontypes
+
+  resources :pcregions
+
+  resources :countries
+
+  resources :regions
+
+  resources :users, :only => [ :index, :show, :edit, :update, :destroy ]
+
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
   match 'about_us', :to => 'pages#about_us'
+  match 'disclaimer', :to => 'pages#disclaimer'
+  match 'privacy_policy', :to => 'pages#privacy_policy'
+  match 'support', :to => 'pages#support'
+  match 'security', :to => 'pages#security'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -10,8 +10,8 @@
     = render 'layouts/header'
     #main
       #header_spacing
-      #menu_bar.container
-        %h1 Menu Item &rArr; &rang; &diams;
+      = render 'layouts/menu_bar' unless @title.nil?
+      = render 'layouts/admin_menu_bar' if admin_user?
       #page
         = yield
     = render 'layouts/footer'

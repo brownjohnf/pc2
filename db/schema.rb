@@ -11,12 +11,47 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213015750) do
+ActiveRecord::Schema.define(:version => 20111223070408) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "short"
+    t.string   "description"
+    t.integer  "pcregion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pcregions", :force => true do |t|
+    t.string   "name"
+    t.string   "short"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regions", :force => true do |t|
+    t.string   "name"
+    t.string   "short"
+    t.integer  "parent_id"
+    t.integer  "type_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "country_id"
+  end
+
+  create_table "regiontypes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20111213015750) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",      :default => false
+    t.boolean  "moderator",  :default => false
   end
 
 end

@@ -3,9 +3,9 @@
 /* ============================== */
 
 	body {
-		
+
 	}
-	
+
 
 /* ============================= */
 /* ! Layout for mobile version   */
@@ -14,7 +14,30 @@
 @media handheld, only screen and (max-width: 767px) {
 
 	body {
-		
+
+	}
+
+  header {
+		height: 7em !important;
+		li {
+			a {
+				padding: .25em !important;
+				background: none !important;
+			}
+			&:last-child {
+				border: none !important;
+			}
+			&:first-child {
+				border: none !important;
+			}
+		}
+
+  }
+
+	#main {
+		#header_spacing {
+			padding-bottom: 7em !important;
+		}
 	}
 
 }
@@ -24,7 +47,7 @@
 /* ! Provide higher res assets for iPhone 4   */
 /* ========================================== */
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
 
 /*	.logo {
 		background: url(logo2x.jpg) no-repeat;

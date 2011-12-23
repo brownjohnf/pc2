@@ -1,0 +1,7 @@
+%li
+  = gravatar_for user
+  = link_to user.name, user
+  - if user.admin?
+    %span.admin= 'admin'
+  - if user.moderator?
+    %span.moderator= 'moderator'

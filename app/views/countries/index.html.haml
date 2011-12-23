@@ -1,0 +1,27 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Short</th>
+            <th>Description</th>
+            <th>Pcregion</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @countries.each do |country| %>
+          <tr>
+            <td><%= country.name %></td>
+            <td><%= country.short %></td>
+            <td><%= country.description %></td>
+            <td><%= country.pcregion.name %></td>
+            <td><%= link_to 'Show', country %></td>
+            <td><%= link_to 'Edit', edit_country_path(country) %></td>
+            <td><%= link_to 'Destroy', country, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

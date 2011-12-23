@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  short: MyString
+  parent_id: 1
+  type_id: 1
+  description: MyString
+
+two:
+  name: MyString
+  short: MyString
+  parent_id: 1
+  type_id: 1
+  description: MyString

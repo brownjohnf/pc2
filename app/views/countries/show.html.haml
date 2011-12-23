@@ -1,0 +1,25 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <b>Name:</b>
+          <%= @country.name %>
+        </p>
+
+        <p>
+          <b>Short:</b>
+          <%= @country.short %>
+        </p>
+
+        <p>
+          <b>Description:</b>
+          <%= @country.description %>
+        </p>
+
+        <p>
+          <b>Pcregion:</b>
+          <%= @country.pcregion.name %>
+        </p>

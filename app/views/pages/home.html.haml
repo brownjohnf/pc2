@@ -1,0 +1,15 @@
+.container
+  .row
+    .twelvecol.last
+      %p Welcome to #{organization} #{country}! Check below for the latest updates.
+  .row
+    .threecol
+      %h1 Pages
+    .threecol
+      %h1 Case Studies
+    .threecol
+      %h1 Documents
+    .threecol.last
+      - if @users
+        %h1 Featured Users
+        = render @users

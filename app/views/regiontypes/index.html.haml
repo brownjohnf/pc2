@@ -1,0 +1,23 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @regiontypes.each do |regiontype| %>
+          <tr>
+            <td><%= regiontype.name %></td>
+            <td><%= regiontype.description %></td>
+            <td><%= link_to 'Show', regiontype %></td>
+            <td><%= link_to 'Edit', edit_regiontype_path(regiontype) %></td>
+            <td><%= link_to 'Destroy', regiontype, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

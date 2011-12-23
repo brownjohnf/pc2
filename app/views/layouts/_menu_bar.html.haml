@@ -1,0 +1,8 @@
+#menu_bar.container
+  %ul
+    %li #{@title} &rang;&nbsp;
+  %ul
+    - unless @context_menu.nil?
+      - @context_menu.each do |key, val|
+        %li= link_to key, val
+  .clearfloat

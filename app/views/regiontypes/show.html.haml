@@ -1,0 +1,15 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <p id="notice"><%= notice %></p>
+        
+        <p>
+          <b>Name:</b>
+          <%= @regiontype.name %>
+        </p>
+
+        <p>
+          <b>Description:</b>
+          <%= @regiontype.description %>
+        </p>

@@ -1,0 +1,10 @@
+.container
+  .row
+    .threecol
+      = render 'menu'
+      = render 'layouts/menu'
+    .ninecol.last
+      = will_paginate
+      %ul
+        = render @users
+      = will_paginate

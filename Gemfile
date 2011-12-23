@@ -44,4 +44,5 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'faker'
 end

@@ -8,3 +8,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require 1140_cssgrid/css3-mediaqueries
+//= require jquery.formalize.min
