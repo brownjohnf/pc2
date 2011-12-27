@@ -7,6 +7,7 @@
           <th>Name</th>
           <th>Short</th>
           <th>Description</th>
+          <th>Countries</th>
           <th></th>
           <th></th>
           <th></th>
@@ -17,6 +18,7 @@
           <td><%= pcregion.name %></td>
           <td><%= pcregion.short %></td>
           <td><%= pcregion.description %></td>
+          <td><%= pcregion.countries.count %></td>
           <td><%= link_to 'Show', pcregion %></td>
           <td><%= link_to 'Edit', edit_pcregion_path(pcregion) %></td>
           <td><%= link_to 'Destroy', pcregion, confirm: 'Are you sure?', method: :delete %></td>

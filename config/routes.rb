@@ -1,5 +1,15 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :pages do
+    collection do
+      get :feed
+    end
+  end
+
+  resources :memberships, :only => [ :index, :new, :create, :destroy ]
+
+  resources :groups
+
   resources :regiontypes
 
   resources :pcregions
@@ -15,11 +25,11 @@ OmniauthDemo::Application.routes.draw do
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
-  match 'about_us', :to => 'pages#about_us'
-  match 'disclaimer', :to => 'pages#disclaimer'
-  match 'privacy_policy', :to => 'pages#privacy_policy'
-  match 'support', :to => 'pages#support'
-  match 'security', :to => 'pages#security'
+  match 'disclaimer', :to => redirect('/pages/1')
+  match 'privacy_policy', :to => redirect('/pages/2')
+  match 'support', :to => redirect('/pages/3')
+  match 'security', :to => redirect('/pages/4')
+  match "about_us", :to => redirect("/pages/5")
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -70,7 +80,7 @@ OmniauthDemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#home'
+  root :to => 'statics#home'
 
   # See how all your routes lay out with "rake routes"
 

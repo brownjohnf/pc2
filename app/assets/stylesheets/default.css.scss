@@ -16,6 +16,7 @@ $white: #fff;
 $black: #000;
 $steel_blue: #95b4c9;
 $panic: red;
+$pale_green: #a1d1a1;
 
 $header_font_size: 1.3em;
 
@@ -47,6 +48,12 @@ body {
   background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
   background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
   background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
+  em {
+    font-style: italic;
+  }
+  strong {
+    font-weight: bold;
+  }
 }
 
 
@@ -60,6 +67,7 @@ header {
   background: $dark_gray;
   color: $header_color;
   font-size: $header_font_size;
+  z-index: 20;
   #site_title {
     display: inline-block;
     float: left;
@@ -90,18 +98,28 @@ header {
         background-color: $very_dark_gray;
         letter-spacing: 1px;
         font-variant: small-caps;
+        border-top: 3px solid transparent;
         &:hover {
           background-color: $black;
           color: $white;
+          border-top-color: $light_gray;
+        }
+        &:active {
+          border-top-color: $green;
         }
         img {
           height: 3em;
           width: 3em;
           line-height: 1em;
         }
-        &#gravatar {
-          margin: 0;
+      }
+      &#gravatar {
+        height: 3em;
+        width: 3em;
+        a {
+          height: 3em;
           padding: 0;
+          margin: 0;
           line-height: 1em;
         }
       }
@@ -134,12 +152,24 @@ footer {
 
 #main {
   @include red-links;
+  #notice {
+    background-color: $pale_green;
+    color: green;
+    padding: 1em 0;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 5px $box_shadow;
+    p {
+      text-align: center;
+    }
+  }
   #header_spacing {
-    padding-bottom: $header_font_size * 3; // don't change, calibrates off of the setting for the variable.
+    padding-bottom: $header_font_size * 3 + 3px; // don't change, calibrates off of the setting for the variable.
   }
   #menu_bar, #admin_menu_bar {
-    padding-left: 1%;
     background-color: $steel_blue;
+    position: relative;
+    z-index: 18;
     ul {
       list-style-type: none;
       font-size: 1.5em;
@@ -163,14 +193,32 @@ footer {
       }
       &:first-child {
         background: none;
+      }
+      &#menu_title {
+        background-color: $red;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
         li {
-          font-size: 1.5em;
+          padding: .5em;
+          margin: 0;
+          color: $steel_blue;
+          &:first-child {
+          }
+          &.arrow {
+            padding: 0;
+            border-top: 1.5em solid $steel_blue;
+            border-bottom: 1.5em solid $steel_blue;
+            border-left: 1.5em solid transparent;
+            border-right: none;
+          }
         }
       }
     }
   }
   #admin_menu_bar {
     background: none;
+    z-index: 15;
     ul {
       font-size: 1em;
       li {
@@ -182,6 +230,37 @@ footer {
   }
   #page {
     margin: 1.5em 0;
+    p {
+      margin: 5px;
+      line-height: 1.5em;
+    }
+    ul {
+      margin: 10px 0;
+    }
+    .row {
+      margin-bottom: 2em;
+    }
+    h1, h2, h3, h4 {
+      font-weight: bold;
+    }
+    h1, h2 {
+      color: $blue;
+      border-bottom: 1px solid $light_gray;
+    }
+    h1 {
+      font-size: 2em;
+      padding: 15px 0 10px 0;
+    }
+    h2 {
+      font-size: 1.75em;
+      padding: 10px 0 5px 0;
+    }
+    h3 {
+      font-size: 1.5em;
+    }
+    h4 {
+      font-size: 1.25em;
+    }
     .pagination {
       margin: 2em 0;
     }

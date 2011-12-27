@@ -2,7 +2,7 @@ class CountriesController < ApplicationController
   # GET /countries
   # GET /countries.json
   def index
-    @countries = Country.all
+    @countries = Country.paginate(:page => params[:page])
     @title = 'Listing Countries'
     @context_menu = {'new' => new_country_path}
 

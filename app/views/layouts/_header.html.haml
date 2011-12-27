@@ -13,8 +13,8 @@
     %li= link_to 'Blogs', ''
   %ul{:style => "float:right;"}
     - if signed_in?
-      %li= gravatar_for current_user
-      %li= link_to current_user.name, logout_path
+      %li#gravatar= gravatar_for current_user
+      %li= link_to current_user.name, current_user
     - else
       %li= link_to 'Sign in', login_path
   .clearfloat

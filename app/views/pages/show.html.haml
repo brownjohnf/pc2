@@ -1,0 +1,8 @@
+.container
+  .row
+    .threecol
+      %p= @page.description
+      = render 'menu'
+    .ninecol.last
+      %h1= @page.title
+      = markdown(@page.content)

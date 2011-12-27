@@ -1,0 +1,8 @@
+%tr
+  %td
+    %h1= page.title
+  %td= page.description
+  %td= page.content
+  %td= link_to 'show', page
+  %td= link_to 'edit', edit_page_path(page)
+  %td= link_to 'destroy', page, confirm: 'Are you sure?', method: :delete

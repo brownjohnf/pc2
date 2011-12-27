@@ -15,6 +15,7 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
+gem 'redcarpet'
 
 
 # Gems used only for assets and not required

@@ -1,8 +1,19 @@
 .container
   .row
     .threecol
-    .ninecol.last
+      = gravatar_for @user, :size => 255
+    .threecol
+      %h1= @user.name
+      %p= @user.email
+    .threecol
+      %h2 Authorizations
       %ul
-        = render @user
-        - if @authorizations
-          = render @authorizations
+        = render @authorizations if @authorizations
+    .threecol.last
+      %h2 Groups
+      %ul
+        = render @groups if @groups
+  .row
+    .threecol
+    .ninecol.last
+      = markdown(@user.bio)

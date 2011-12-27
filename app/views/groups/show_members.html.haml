@@ -1,0 +1,9 @@
+.container
+  .row
+    .threecol
+    .ninecol.last
+      %p= "The following users are members of the #{@group.name} group:"
+      = will_paginate @users
+      %ul
+        = render @users if @users
+      = will_paginate @users

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111223070408) do
+ActiveRecord::Schema.define(:version => 20111224232306) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(:version => 20111223070408) do
     t.string   "short"
     t.string   "description"
     t.integer  "pcregion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,8 +84,8 @@ ActiveRecord::Schema.define(:version => 20111223070408) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",      :default => false
-    t.boolean  "moderator",  :default => false
+    t.string   "bio"
+    t.integer  "country_id"
   end
 
 end

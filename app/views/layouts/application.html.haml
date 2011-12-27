@@ -12,6 +12,7 @@
       #header_spacing
       = render 'layouts/menu_bar' unless @title.nil?
       = render 'layouts/admin_menu_bar' if admin_user?
+      = render 'layouts/notice_bar' if notice
       #page
         = yield
     = render 'layouts/footer'

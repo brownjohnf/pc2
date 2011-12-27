@@ -28,8 +28,8 @@ module SessionsHelper
   end
 
   def admin_user?
-    #signed_in? && current_user.admin?
-    true
+    signed_in? && current_user.admin?
+    #true
   end
 
   def authenticate

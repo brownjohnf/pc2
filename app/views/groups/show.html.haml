@@ -1,0 +1,10 @@
+.container
+  .row
+    .threecol
+      %p= @group.description
+    .ninecol.last
+      %h1= pluralize(@group.users.count, @group.name)
+      = will_paginate @users
+      %ul
+        = render @users if @users
+      = will_paginate @users

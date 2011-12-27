@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 
-  has_many :authorizations
+  has_many :authorizations, :dependent => :destroy
+  has_many :memberships, :dependent => :destroy
+  has_many :groups, :through => :memberships
+  belongs_to :country
 
   validates :name, :email, :presence => true
 
@@ -16,6 +19,10 @@ class User < ActiveRecord::Base
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
+  end
+
+  def admin?
+    admin = Group.find_by_name('Administrator').users.find_by_id(self)
   end
 
   private

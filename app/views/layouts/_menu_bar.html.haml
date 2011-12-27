@@ -1,6 +1,7 @@
-#menu_bar.container
-  %ul
+#menu_bar
+  %ul#menu_title
     %li #{@title} &rang;&nbsp;
+    %li.arrow
   %ul
     - unless @context_menu.nil?
       - @context_menu.each do |key, val|
