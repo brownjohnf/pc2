@@ -164,7 +164,7 @@ footer {
     }
   }
   #header_spacing {
-    padding-bottom: $header_font_size * 3 + 3px; // don't change, calibrates off of the setting for the variable.
+    padding-bottom: $header_font_size * 3; // don't change, calibrates off of the setting for the variable.
   }
   #menu_bar, #admin_menu_bar {
     background-color: $steel_blue;
