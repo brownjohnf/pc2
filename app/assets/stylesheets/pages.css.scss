@@ -1,3 +1,35 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.menu_col {
+  ul {
+    margin: 0 0 1em 0 !important;
+    font-size: 1.5em;
+    li {
+      &:hover {
+      }
+      a {
+        border: 1px solid transparent;
+        display: block;
+        padding: .25em;
+        &:hover {
+          text-decoration: none !important;
+          border: 1px solid gray;
+        }
+      }
+      ul {
+        font-size: .8em;
+        a {
+          padding-left: .25em + 1;
+        }
+      }
+    }
+  }
+}
+
+#main {
+  ul {
+    margin-left: 2em !important;
+  }
+}

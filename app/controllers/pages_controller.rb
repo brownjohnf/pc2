@@ -49,7 +49,8 @@ class PagesController < ApplicationController
   def edit
     @page = Page.find(params[:id])
     @title = @page.title
-    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => pages_path}
+    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => page_path}
+    
   end
 
   # POST /pages
