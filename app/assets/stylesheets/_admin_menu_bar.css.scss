@@ -1,0 +1,17 @@
+#admin_menu_bar {
+  @extend #feedback;
+  z-index: 15;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 10em;
+  ul {
+    li {
+      margin: .5em 0;
+      a {
+        border-left: 2px solid $steel_blue;
+        padding: 0 .5em;
+      }
+    }
+  }
+}

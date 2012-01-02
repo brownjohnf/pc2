@@ -1,4 +1,4 @@
-.feed
-  %h2= feed_item.title
+.feed.feed_item
+  %h4= link_to feed_item.title, feed_item
   %p= feed_item.description
-  %p= feed_item.content
+  %p= wrap(feed_item.content, 10)

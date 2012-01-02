@@ -1,19 +1,27 @@
 .container
   .row
-    .threecol
-      = gravatar_for @user, :size => 255
-    .threecol
+    .twocol
+      = render 'layouts/menu'
+    .eightcol
       %h1= @user.name
+      %p alias
+      %p
+        sector
+        %br emphasis
+        %br projects
+      %h3 Contact Info
       %p= @user.email
-    .threecol
-      %h2 Authorizations
-      %ul
-        = render @authorizations if @authorizations
-    .threecol.last
-      %h2 Groups
+      %h3 Authorizations
+      %h4 Groups
       %ul
         = render @groups if @groups
-  .row
-    .threecol
-    .ninecol.last
+      %H4 Logins
+      %ul
+        = render @authorizations if (@authorizations && current_user?)
+      %h3 Social Connections
+      %h3 Authorship
+      %h3 Editorship
+      %h3 A little bit about #{@user.name}
       = markdown(@user.bio)
+    .twocol.last
+      = gravatar_for @user, :size => 160

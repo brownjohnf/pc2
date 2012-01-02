@@ -4,7 +4,6 @@ namespace :db do
 		make_users
 		make_countries
 		make_pcregions
-		make_groups
 		make_memberships
 		make_regiontypes
 		make_regions
@@ -26,12 +25,6 @@ def make_users
     email = "example-#{n+1}@railstutorial.org"
     User.create!(:name => name, :email => email, :country_id => 1, :bio => '# Bio Here')
   end
-end
-
-def make_groups
-	Group.create!(:name => 'User')
-	Group.create!(:name => 'Administrator')
-	Group.create!(:name => 'Moderator')
 end
 
 def make_memberships

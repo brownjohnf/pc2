@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111224232306) do
+ActiveRecord::Schema.define(:version => 20120102081005) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
   end
 
   create_table "pages", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
     t.string   "title"
     t.string   "description"
     t.text     "content"
@@ -55,6 +58,24 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
   create_table "pcregions", :force => true do |t|
     t.string   "name"
     t.string   "short"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "scope_id"
+    t.integer  "privilege_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "target_id"
+  end
+
+  create_table "privileges", :force => true do |t|
+    t.string   "name"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -72,6 +93,13 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
   end
 
   create_table "regiontypes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scopes", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"

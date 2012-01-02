@@ -1,0 +1,33 @@
+= form_for(@permission) do |f|
+  .row
+    .twelvecol.last
+      = render :partial => 'shared/form_error', :collection => @permission
+  .row
+    .threecol
+      .field
+        = f.label :user_id
+        %br
+        = f.collection_select(:user_id, User.all, :id, :name)
+    .threecol
+      .field
+        = f.label :group_id
+        %br
+        = f.collection_select(:group_id, Group.all, :id, :name)
+    .threecol
+      .field
+        = f.label :scope_id
+        %br
+        = f.collection_select(:scope_id, Scope.all, :id, :name)
+    .threecol.last
+      .field
+        = f.label :privilege_id
+        %br
+        = f.collection_select(:privilege_id, Privilege.all, :id, :name)
+  .row
+    .twelvecol.last
+      .field
+        = f.label :comment
+        %br
+        = f.text_area :comment
+      .actions
+        = f.submit

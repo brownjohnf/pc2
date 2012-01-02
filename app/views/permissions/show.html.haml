@@ -1,0 +1,28 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <p>
+          <b>User:</b>
+          <%= @permission.user.name if @permission.user_id %>
+        </p>
+
+        <p>
+          <b>Group:</b>
+          <%= @permission.group.name if @permission.group_id %>
+        </p>
+
+        <p>
+          <b>Scope:</b>
+          <%= @permission.scope.name %>
+        </p>
+
+        <p>
+          <b>Privilege:</b>
+          <%= @permission.privilege.name %>
+        </p>
+
+        <p>
+          <b>Comment:</b>
+          <%= @permission.comment %>
+        </p>

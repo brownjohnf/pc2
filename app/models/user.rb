@@ -3,11 +3,16 @@ class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
+  has_many :permissions
+  has_many :privileges, :through => :permissions
+
   belongs_to :country
 
   validates :name, :email, :presence => true
 
   before_save :make_salt
+
+  default_scope :order => 'users.name ASC'
 
   def add_provider(auth_hash)
     # Check if the provider already exists, so we don't add it twice
@@ -22,7 +27,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    admin = Group.find_by_name('Administrator').users.find_by_id(self)
+    Group.find_by_name('Administrator').users.find_by_id(self)
+  end
+
+  def moderator?
+    admin = Group.find_by_name('Moderator').users.find_by_id(self)
   end
 
   private

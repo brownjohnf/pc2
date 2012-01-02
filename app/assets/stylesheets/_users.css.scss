@@ -6,3 +6,20 @@
 span.admin, span.moderator {
   color: orange;
 }
+
+.users {
+  &#show {
+    #page {
+      a.gravatar {
+        img {
+          @include shadow;
+          border-radius: 10px;
+        }
+      }
+      ul {
+        li {
+        }
+      }
+    }
+  }
+}

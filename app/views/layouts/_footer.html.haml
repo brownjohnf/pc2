@@ -5,7 +5,7 @@
       .twocol
         %ul
           %li Pages
-          %li Recently added
+          %li= link_to 'Recently added', pages_path
           %li Recently updated
           %li Most popular
           %li Site map
@@ -34,14 +34,17 @@
     .clearfloat
   .container
     .row
-      .twelvecol.last
+      .sixcol
         %ul
           %li= link_to 'Disclaimer', disclaimer_path
           %li= link_to 'Privacy Policy', privacy_policy_path
           %li= link_to 'Support', support_path
           %li= link_to 'Security', security_path
           %li= link_to 'About us', about_us_path
-          %li= link_to 'Log out', logout_path
+          %li= (signed_in?) ? link_to('Log out', logout_path) : link_to('Sign in', login_path)
         #legal
-          Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 John F. Brown. Icons courtesy of Neurovit.
+          Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 John F. Brown.
         .clearfloat
+      .sixcol.last
+        %p Powered by Ruby on Rails 3.1
+        %p Hosted by Heroku

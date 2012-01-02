@@ -23,13 +23,8 @@ module SessionsHelper
     #session[:user_id] = nil
   end
 
-  def current_user?(user)
+  def current_user?(user = current_user)
     user == current_user
-  end
-
-  def admin_user?
-    signed_in? && current_user.admin?
-    #true
   end
 
   def authenticate

@@ -2,6 +2,7 @@ $blue: #3F8FBA;
 $very_dark_gray: #1a1a1a;
 $dark_gray: #222;
 $light_gray: lightgray;
+$very_light_gray: whitesmoke;
 $red: darkred;
 $gradient_top: #e5f4ff;
 $gradient_bottom: #fff;
@@ -18,7 +19,11 @@ $steel_blue: #95b4c9;
 $panic: red;
 $pale_green: #a1d1a1;
 
-$header_font_size: 1.3em;
+$header_font_size: 1em;
+$header_menu_padding: 1em;
+$header_menu_top_border: .2em;
+$header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_border );
+
 
 @mixin red-links {
   a {
@@ -31,327 +36,186 @@ $header_font_size: 1.3em;
   }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-  font: 12px "Helvetica", Arial, sans-serif;
+@mixin shadow {
+  box-shadow: 0 0 5px $box_shadow;
+  -moz-box-shadow: 0 0 5px $box_shadow;
 }
 
-html, body, #main {
-  height: 100%;
+@mixin shadow-bottom {
+  box-shadow: 0 0 5px $box_shadow;
+  -moz-box-shadow: 0 0 5px $box_shadow;
 }
-
-body {
-  background: -webkit-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($gradient_top), to($gradient_bottom));
-  background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
-  em {
-    font-style: italic;
-  }
-  strong {
-    font-weight: bold;
-  }
-}
-
 
 .clearfloat {
   clear: both;
 }
 
-header {
-  position: fixed;
-  width: 100%;
-  background: $dark_gray;
-  color: $header_color;
-  font-size: $header_font_size;
-  z-index: 20;
-  #site_title {
-    display: inline-block;
-    float: left;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    padding: 0 1%;
-    #title_organization {
-      color: $blue;
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font: 12px "Helvetica", Arial, sans-serif;
+  height: 100%;
+  body {
+    @extend html;
+    em {
+      font-style: italic;
     }
-    #title_separator {
-      color: $red;
-    }
-    #title_country {
-      color: $light_gray;
-    }
-  }
-  ul {
-    list-style-type: none;
-    li {
-      float: left;
-      border-left: 2px solid $header_border;
-      &:last-child {
-        border-right: 2px solid $header_border;
-      }
-      a {
-        padding: 1em .5em;
-        display: inline-block;
-        background-color: $very_dark_gray;
-        letter-spacing: 1px;
-        font-variant: small-caps;
-        border-top: 3px solid transparent;
-        &:hover {
-          background-color: $black;
-          color: $white;
-          border-top-color: $light_gray;
-        }
-        &:active {
-          border-top-color: $green;
-        }
-        img {
-          height: 3em;
-          width: 3em;
-          line-height: 1em;
-        }
-      }
-      &#gravatar {
-        height: 3em;
-        width: 3em;
-        a {
-          height: 3em;
-          padding: 0;
-          margin: 0;
-          line-height: 1em;
-        }
-      }
-    }
-  }
-  sub {
-    color: $green;
-    vertical-align: sub;
-    font-size: .5em;
-  }
-  a {
-    text-decoration: none;
-    color: $header_color;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
-
-footer {
-  @include red-links;
-  div#legal {
-    float: left;
-    clear: left;
-  }
-  ul {
-    list-style-type: none;
-  }
-}
-
-#main {
-  @include red-links;
-  #notice {
-    background-color: $pale_green;
-    color: green;
-    padding: 1em 0;
-    position: relative;
-    z-index: 10;
-    box-shadow: 0 0 5px $box_shadow;
-    p {
-      text-align: center;
-    }
-  }
-  #header_spacing {
-    padding-bottom: $header_font_size * 3; // don't change, calibrates off of the setting for the variable.
-  }
-  #menu_bar, #admin_menu_bar {
-    background-color: $steel_blue;
-    position: relative;
-    z-index: 18;
-    ul {
-      list-style-type: none;
-      font-size: 1.5em;
-      line-height: 1.5em;
-      background: $light_gray;
-      border-radius: 10px;
-      float: left;
-      margin: .5em;
-      li {
-        float: left;
-        margin: .25em 0;
-        a {
-          border-left: 2px solid $black;
-          padding: 0 .5em;
-        }
-        &:first-child {
-          a {
-            border: none;
-          }
-        }
-      }
-      &:first-child {
-        background: none;
-      }
-      &#menu_title {
-        background-color: $red;
-        padding: 0;
-        margin: 0;
-        border-radius: 0;
-        li {
-          padding: .5em;
-          margin: 0;
-          color: $steel_blue;
-          &:first-child {
-          }
-          &.arrow {
-            padding: 0;
-            border-top: 1.5em solid $steel_blue;
-            border-bottom: 1.5em solid $steel_blue;
-            border-left: 1.5em solid transparent;
-            border-right: none;
-          }
-        }
-      }
-    }
-  }
-  #admin_menu_bar {
-    background: none;
-    z-index: 15;
-    ul {
-      font-size: 1em;
-      li {
-        a {
-          border-color: $steel_blue;
-        }
-      }
-    }
-  }
-  #page {
-    margin: 1.5em 0;
-    p {
-      margin: 5px;
-      line-height: 1.5em;
-    }
-    ul {
-      margin: 10px 0;
-    }
-    .row {
-      margin-bottom: 2em;
-    }
-    h1, h2, h3, h4 {
+    strong {
       font-weight: bold;
     }
-    h1, h2 {
-      color: $blue;
-      border-bottom: 1px solid $light_gray;
-    }
-    h1 {
-      font-size: 2em;
-      padding: 15px 0 10px 0;
-    }
-    h2 {
-      font-size: 1.75em;
-      padding: 10px 0 5px 0;
-    }
-    h3 {
-      font-size: 1.5em;
-    }
-    h4 {
-      font-size: 1.25em;
-    }
-    .pagination {
-      margin: 2em 0;
-    }
-    table {
-      text-align: left;
-      tr {
-        border: 1px solid $dark_gray;
-        td, th {
-          padding: 5px;
+    #main {
+      @include red-links;
+      background: -webkit-linear-gradient(top, $gradient_top, $gradient_bottom);
+      background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($gradient_top), to($gradient_bottom));
+      background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
+      background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
+      background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
+      height: 100%;
+      height: auto;
+      min-height: 100%;
+      #header_spacer {
+        padding-top: $header_height;
+        margin-bottom: -1px;
+        font-size: $header_font_size;
+      }
+      #notice {
+        @include shadow-bottom;
+        background-color: $pale_green;
+        color: green;
+        padding: 1em 0;
+        position: relative;
+        z-index: 10;
+        p {
+          text-align: center;
         }
-        th {
+      }
+      #menu_bar {
+        @include shadow-bottom;
+        position: relative;
+        ul {
+          list-style-type: none;
+          float: left;
+          li {
+            float: left;
+          }
+        }
+      }
+      #page {
+        margin: 1.5em 0;
+        p {
+          margin: 5px;
+          line-height: 1.5em;
+        }
+        ul {
+          margin: 1em 0 1em 2em;
+        }
+        .row {
+          margin-bottom: 2em;
+        }
+        h1, h2, h3, h4 {
+          font-weight: bold;
+          padding: .5em 0 0 0;
+          a {
+            color: $black;
+          }
+          a:hover {
+            text-decoration: none;
+            text-shadow: 5px solid;
+            color: $red;
+          }
+        }
+        h1, h2, h3 {
+          color: $blue;
+          border-bottom: 1px solid $light_gray;
+        }
+        h1 {
+          font-size: 2em;
+        }
+        h2 {
+          font-size: 1.6em;
+        }
+        h3 {
+          font-size: 1.2em;
+        }
+        h4 {
+          font-variant: small-caps;
           font-weight: bold;
         }
+        .pagination {
+          margin: 2em 0;
+        }
+        table {
+          text-align: left;
+          tr {
+            border: 1px solid $dark_gray;
+            td, th {
+              padding: 5px;
+            }
+            th {
+              font-weight: bold;
+            }
+          }
+        }
+        form {
+          label {
+            display: inline-block;
+            width: 8em;
+          }
+          .actions {
+            text-align: right;
+          }
+          .field {
+            margin-bottom: 10px;
+          }
+          .field_with_errors {
+            display: inline-block;
+            input {
+              box-shadow: 0 0 5px $panic;
+            }
+            label {
+              text-shadow: 0 0 5px $panic;
+            }
+          }
+          #error_explanation {
+            box-shadow: 0 0 5px $panic;
+            margin: 5px 0 10px 0;
+            padding: 5px;
+            ul {
+              color: $panic;
+              margin-left: 3em;
+            }
+          }
+        }
+        #main_menu_logo {
+          border-radius: 10px;
+        }
+        .row {
+          overflow-y: auto;
+        }
       }
     }
-    form {
-      label {
-        display: inline-block;
-        width: 8em;
-      }
-      .actions {
-        text-align: right;
-      }
-      .field {
-        margin-bottom: 10px;
-      }
-      .field_with_errors {
-        display: inline-block;
-        input {
-          box-shadow: 0 0 5px $panic;
-        }
-        label {
-          text-shadow: 0 0 5px $panic;
-        }
-      }
-      #error_explanation {
-        box-shadow: 0 0 5px $panic;
-        margin: 5px 0 10px 0;
-        padding: 5px;
-        ul {
-          color: $panic;
-          margin-left: 3em;
-        }
-      }
+    #feedback {
+      @include red-links;
+      background-color: $white;
+      padding: 5px;
+      margin: 3px;
+      border-radius: 5px;
+      border: 1px solid $light_gray;
+      position: fixed;
+      bottom: 0;
+      right: 0;
     }
   }
 }
 
-header, #menu_bar, #admin_menu_bar {
-  box-shadow: 0 0 5px $box_shadow;
-  -moz-box-shadow: 0 0 $box_shadow;
-}
-header, div#header_spacing {
-  line-height: 1em;
-}
-footer > div:last-child ul {
-  list-style-type: none;
-}
 
-footer > div:first-child ul {
-  line-height: 1.5em;
-}
-footer > div:last-child ul {
-  float: left;
-}
+@import 'header';
+@import 'context_menu_bar';
+@import 'admin_menu_bar';
+@import 'footer';
+@import 'left_menu';
 
-footer > div:first-child li:first-child {
-  font-weight: bold;
-  border-bottom: 1px solid $footer_underscore;
-}
-
-footer > div:last-child li {
-  float: left;
-  margin: .5em .5em .5em 0;
-  padding: 0 .5em 0 0;
-  border-right: 2px solid $footer_v_spacer;
-}
-
-footer > div:last-child li:last-child {
-  padding: 0;
-  border-right: none;
-  margin-right: 0;
-}
-
-footer > div:first-child {
-  background: $footer_background;
-  border-color: $footer_v_spacer;
-  border-width: 1px 0;
-  border-style: solid;
-}
-
-footer > div {
-  padding: 1em 0;
-}
+/* page-specific */
+@import 'statics';
+@import 'users';

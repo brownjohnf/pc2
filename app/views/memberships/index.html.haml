@@ -11,8 +11,8 @@
 
         <% @memberships.each do |membership| %>
           <tr>
-            <td><%= membership.user.name %></td>
-            <td><%= membership.group.name %></td>
+            <td><%= link_to membership.user.name, membership.user %></td>
+            <td><%= link_to membership.group.name, membership.group %></td>
             <td><%= link_to 'Destroy', membership, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>

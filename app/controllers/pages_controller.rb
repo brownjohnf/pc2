@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     @pages = Page.all
     @title = 'Listing Pages'
-    @context_menu = {'new' => new_page_path}
+    @context_menu = {'new' => new_page_path, 'feed' => feed_pages_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
 
   def feed
-    @pages = Page.paginate(:page => params[:page])
+    @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
     @title = 'Page Feed'
     @context_menu = {'back' => pages_path}
     render 'feed'
@@ -50,7 +50,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @title = @page.title
     @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => page_path}
-    
+
   end
 
   # POST /pages
@@ -60,6 +60,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
+        @page.set_parent
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
       else
@@ -76,6 +77,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.update_attributes(params[:page])
+        @page.set_parent
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }
         format.json { head :ok }
       else

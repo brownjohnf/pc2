@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       # Means our user is signed in. Add the authorization to the user
       User.find(current_user).add_provider(auth_hash)
 
-      redirect_back_or root_path
+      redirect_back_or current_user
       #render :text => "You can now login using #{auth_hash["provider"].capitalize} too!"
     else
       # Log him in or sign him up
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       #session[:user_id] = auth.user.id
       sign_in user
 
-      redirect_back_or root_path
+      redirect_back_or current_user
       #render :text => "Welcome #{auth.user.name}!"
     end
   end

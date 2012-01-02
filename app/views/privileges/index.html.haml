@@ -1,0 +1,21 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @privileges.each do |privilege| %>
+          <tr>
+            <td><%= link_to privilege.name, privilege %></td>
+            <td><%= privilege.description %></td>
+            <td><%= link_to 'Edit', edit_privilege_path(privilege) %></td>
+            <td><%= link_to 'Destroy', privilege, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

@@ -2,26 +2,14 @@ class StaticsController < ApplicationController
 
   def home
     @users = Group.find_by_name('Administrator').users
+    @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
   end
 
-  def about_us
-    @title = 'About us'
+  def splash
   end
 
-  def disclaimer
-    @title = 'Disclaimer'
-  end
-
-  def privacy_policy
-    @title = 'Privacy Policy'
-  end
-
-  def support
-    @title = 'Support'
-  end
-
-  def security
-    @title = 'Security'
+  def feedback
+    @title = 'Feedback'
   end
 
 end
