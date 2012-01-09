@@ -1,5 +1,9 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :contributions
+
+  resources :volunteers
+
   resources :permissions
 
   resources :scopes
@@ -24,7 +28,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :regions
 
-  resources :users, :only => [ :index, :show, :edit, :update, :destroy ]
+  resources :users
 
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'

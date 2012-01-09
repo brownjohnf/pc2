@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
 
-  has_many :authorizations, :dependent => :destroy
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  has_many :permissions
+
+  has_many :permissions, :dependent => :destroy
   has_many :privileges, :through => :permissions
+
+  has_many :authorizations, :dependent => :destroy
+  has_many :volunteers, :dependent => :destroy
+  has_many :contributions, :dependent => :destroy
 
   belongs_to :country
 

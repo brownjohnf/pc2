@@ -24,6 +24,12 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
     @title = @page.title
+    @context_menu = {}
+
+    #@page.ancestors.each do |a|
+    #  @context_menu { a.title => a }#
+    #end
+
     @context_menu = {'back' => pages_path, 'new' => new_page_path, 'edit' => edit_page_path}
 
     respond_to do |format|
@@ -60,7 +66,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        @page.set_parent
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
       else
@@ -77,7 +82,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.update_attributes(params[:page])
-        @page.set_parent
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }
         format.json { head :ok }
       else

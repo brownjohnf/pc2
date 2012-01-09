@@ -5,6 +5,7 @@
         <table>
           <tr>
             <th>Name</th>
+            <th>Title</th>
             <th>Description</th>
             <th></th>
             <th></th>
@@ -14,6 +15,7 @@
         <% @scopes.each do |scope| %>
           <tr>
             <td><%= scope.name %></td>
+            <td><%= scope.title %></td>
             <td><%= scope.description %></td>
             <td><%= link_to 'Show', scope %></td>
             <td><%= link_to 'Edit', edit_scope_path(scope) %></td>

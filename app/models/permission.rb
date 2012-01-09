@@ -9,4 +9,8 @@ class Permission < ActiveRecord::Base
 
   default_scope :order => 'permissions.comment ASC'
 
+  def target_title
+    scope.name.constantize.find_by_id(target_id).title
+  end
+
 end

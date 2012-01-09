@@ -4,7 +4,7 @@ $dark_gray: #222;
 $light_gray: lightgray;
 $very_light_gray: whitesmoke;
 $red: darkred;
-$gradient_top: #e5f4ff;
+$gradient_top: #eee;
 $gradient_bottom: #fff;
 $header_color: #999;
 $box_shadow: #000;
@@ -106,6 +106,7 @@ html {
         p {
           margin: 5px;
           line-height: 1.5em;
+          text-align: justify;
         }
         ul {
           margin: 1em 0 1em 2em;

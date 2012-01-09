@@ -2,6 +2,7 @@ namespace :db do
 	task :populate => :environment do
 		Rake::Task['db:reset'].invoke
 		make_users
+		make_volunteers
 		make_countries
 		make_pcregions
 		make_memberships
@@ -39,4 +40,8 @@ end
 
 def make_regions
 	Region.create!(:name => 'Kaolack', :short => 'KLK', :country_id => 1, :type_id => 1, :parent_id => nil)
+end
+
+def make_volunteers
+  Volunteer.create!(:user_id => 1, :emphasis => 'Fruit Trees', :projects => 'Planting mango trees in local schools.', :stage_id => 1, :local_name => 'Babakar Ndiaye')
 end

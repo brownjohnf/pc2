@@ -6,10 +6,14 @@ class Page < ActiveRecord::Base
 
   validates :title, :description, :content, :presence => true
 
+  after_save :set_parent
+
 #  default_scope :order => 'pages.title ASC'
 
-  def set_parent
-    move_to_child_of(parent_id)
-  end
+  private
+
+    def set_parent
+      move_to_child_of(parent_id) if !parent_id.nil?
+    end
 
 end

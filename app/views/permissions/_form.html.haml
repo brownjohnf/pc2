@@ -13,12 +13,17 @@
         = f.label :group_id
         %br
         = f.collection_select(:group_id, Group.all, :id, :name)
-    .threecol
+    .twocol
       .field
         = f.label :scope_id
         %br
         = f.collection_select(:scope_id, Scope.all, :id, :name)
-    .threecol.last
+    .twocol
+      .field
+        = f.label :target_id
+        %br
+        = f.collection_select(:target_id, Page.all, :id, :title)
+    .twocol.last
       .field
         = f.label :privilege_id
         %br
