@@ -1,5 +1,8 @@
-%h2 Browse
-%ul
-  %li Page 1
-  %li Page 2
-  %li A Very Long Page Title for Testing
+.left_menu
+  = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
+  %h2 Browse
+  = nested_li(fetch_menu) do |item|
+    - link_to item.title, item
+  = render 'menu'
+  = link_to image_tag('donate_w190.png', :width => '260px'), ''
+  = link_to image_tag('google_search.png'), ''

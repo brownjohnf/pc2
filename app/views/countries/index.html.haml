@@ -1,6 +1,10 @@
 .container
   .row
-    .twelvecol.last
+    .threecol
+      .leftcol
+        = render 'layouts/menu'
+        = render 'menu'
+    .ninecol.last
       = will_paginate
       :erb
         <table>

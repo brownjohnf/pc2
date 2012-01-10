@@ -23,13 +23,8 @@ module SessionsHelper
     #session[:user_id] = nil
   end
 
-  def current_user?(user)
+  def current_user?(user = current_user)
     user == current_user
-  end
-
-  def admin_user?
-    signed_in? && current_user.admin?
-    #true
   end
 
   def authenticate
@@ -38,7 +33,7 @@ module SessionsHelper
 
   def deny_access
     store_location
-    redirect_to root_path
+    redirect_to login_path, :notice => 'Please sign in to access this page.'
   end
 
   def redirect_back_or(default)

@@ -11,12 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111224232306) do
+ActiveRecord::Schema.define(:version => 20120109002740) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contributions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "scope_id"
+    t.integer  "target_id"
+    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,6 +54,9 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
   end
 
   create_table "pages", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
     t.string   "title"
     t.string   "description"
     t.text     "content"
@@ -55,6 +67,24 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
   create_table "pcregions", :force => true do |t|
     t.string   "name"
     t.string   "short"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "scope_id"
+    t.integer  "privilege_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "target_id"
+  end
+
+  create_table "privileges", :force => true do |t|
+    t.string   "name"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -78,6 +108,14 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
     t.datetime "updated_at"
   end
 
+  create_table "scopes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -86,6 +124,24 @@ ActiveRecord::Schema.define(:version => 20111224232306) do
     t.datetime "updated_at"
     t.string   "bio"
     t.integer  "country_id"
+    t.string   "email2"
+    t.string   "phone1"
+    t.string   "phone2"
+  end
+
+  create_table "volunteers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pc_id"
+    t.text     "emphasis"
+    t.text     "projects"
+    t.integer  "stage_id"
+    t.integer  "cos_date"
+    t.string   "local_name"
+    t.integer  "site_id"
+    t.integer  "sector_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "start"
   end
 
 end

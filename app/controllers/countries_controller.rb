@@ -1,4 +1,5 @@
 class CountriesController < ApplicationController
+
   # GET /countries
   # GET /countries.json
   def index

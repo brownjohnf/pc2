@@ -1,11 +1,19 @@
 .container#admin_menu_bar
+  %h4 Admin
   %ul
     %li= link_to 'users', users_path
+    %li= link_to 'volunteers', volunteers_path
     %li= link_to 'groups', groups_path
+    %li= link_to 'privileges', privileges_path
+    %li= link_to 'scopes', scopes_path
+    %li= link_to 'permissions', permissions_path
     %li= link_to 'memberships', memberships_path
     %li= link_to 'pc regions', pcregions_path
     %li= link_to 'countries', countries_path
     %li= link_to 'region types', regiontypes_path
     %li= link_to 'regions', regions_path
     %li= link_to 'pages', pages_path
+    %li= link_to 'contributions', contributions_path
   .clearfloat
+  = render 'layouts/moderator_menu_bar' if current_user.moderator?
+  = render 'layouts/user_menu_bar' if signed_in?

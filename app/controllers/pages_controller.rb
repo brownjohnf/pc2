@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     @pages = Page.all
     @title = 'Listing Pages'
-    @context_menu = {'new' => new_page_path}
+    @context_menu = {'new' => new_page_path, 'feed' => feed_pages_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
 
   def feed
-    @pages = Page.paginate(:page => params[:page])
+    @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
     @title = 'Page Feed'
     @context_menu = {'back' => pages_path}
     render 'feed'
@@ -24,6 +24,12 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
     @title = @page.title
+    @context_menu = {}
+
+    #@page.ancestors.each do |a|
+    #  @context_menu { a.title => a }#
+    #end
+
     @context_menu = {'back' => pages_path, 'new' => new_page_path, 'edit' => edit_page_path}
 
     respond_to do |format|
@@ -49,7 +55,8 @@ class PagesController < ApplicationController
   def edit
     @page = Page.find(params[:id])
     @title = @page.title
-    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => pages_path}
+    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => page_path}
+
   end
 
   # POST /pages

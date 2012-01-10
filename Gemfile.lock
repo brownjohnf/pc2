@@ -32,6 +32,8 @@ GEM
     addressable (2.2.6)
     ansi (1.4.1)
     arel (2.2.1)
+    awesome_nested_set (2.0.2)
+      activerecord (>= 3.0.0)
     builder (3.0.0)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -163,6 +165,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_nested_set
   bundler
   coffee-rails (~> 3.1.0)
   factory_girl_rails

@@ -1,0 +1,17 @@
+.statics {
+  &#splash {
+    #main {
+      background: image-url("splash_bg_millet.jpg");
+    }
+    footer {
+      display: none;
+    }
+    #page {
+      .container {
+        background: $black;
+        margin-top: 20%;
+        color: $very_light_gray;
+      }
+    }
+  }
+}

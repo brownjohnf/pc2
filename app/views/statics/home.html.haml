@@ -1,10 +1,13 @@
-.container
+.container.root
   .row
     .twelvecol.last
       %p Welcome to #{organization} #{country}! Check below for the latest updates.
   .row
     .threecol
       %h1 Pages
+      = will_paginate @pages
+      = render :partial => 'shared/feed_item', :collection => @pages
+      = will_paginate @pages
     .threecol
       %h1 Case Studies
     .threecol

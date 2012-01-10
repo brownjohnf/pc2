@@ -1,5 +1,15 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :contributions
+
+  resources :volunteers
+
+  resources :permissions
+
+  resources :scopes
+
+  resources :privileges
+
   resources :pages do
     collection do
       get :feed
@@ -18,7 +28,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :regions
 
-  resources :users, :only => [ :index, :show, :edit, :update, :destroy ]
+  resources :users
 
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'
@@ -30,6 +40,9 @@ OmniauthDemo::Application.routes.draw do
   match 'support', :to => redirect('/pages/3')
   match 'security', :to => redirect('/pages/4')
   match "about_us", :to => redirect("/pages/5")
+
+  match 'splash', :to => 'statics#splash'
+  match 'feedback', :to => 'statics#feedback'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

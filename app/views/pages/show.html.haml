@@ -1,8 +1,14 @@
-.container
+.container.page
   .row
-    .threecol
-      %p= @page.description
-      = render 'menu'
-    .ninecol.last
+    .twocol.menu_col
+      = render 'layouts/menu'
+    .eightcol.show_page
       %h1= @page.title
       = markdown(@page.content)
+    .twocol.last
+      = image_tag('', :width => '200px')
+      %h2 Case Studies
+      %h3 Tags
+      %h3 Authors
+      %h2 Share
+      %h2 Follow us

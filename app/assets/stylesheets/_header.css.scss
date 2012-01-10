@@ -1,0 +1,78 @@
+header {
+  @include shadow;
+  position: fixed;
+  width: 100%;
+  background: $dark_gray;
+  color: $header_color;
+  font-size: $header_font_size;
+  z-index: 20;
+  line-height: 1;
+  #site_title {
+    display: inline-block;
+    float: left;
+    font-size: $header_font_size * 1.5;
+    padding: .3em 20px 0 .3em;
+    #title_organization {
+      color: $blue;
+    }
+    #title_separator {
+      color: $red;
+    }
+    #title_country {
+      color: $light_gray;
+    }
+  }
+  ul {
+    list-style-type: none;
+    li {
+      float: left;
+      border-left: 2px solid $header_border;
+      &:last-child {
+        border-right: 2px solid $header_border;
+      }
+      a {
+        padding: $header_menu_padding .5em;
+        display: inline-block;
+        background-color: $very_dark_gray;
+        letter-spacing: 1px;
+        font-variant: small-caps;
+        border-top: $header_menu_top_border solid transparent;
+        border-bottom: $header_menu_top_border solid transparent;
+        &:hover {
+          background-color: $black;
+          color: $white;
+          border-top-color: $red;
+        }
+        &:active {
+          border-top-color: $green;
+        }
+      }
+      &#gravatar {
+        height: $header_height;
+        width: $header_height;
+        a {
+          height: $header_height;
+          padding: 0;
+          margin: 0;
+          border: none;
+          img {
+            height: $header_height;
+            width: $header_height;
+          }
+        }
+      }
+    }
+  }
+  sub {
+    color: $green;
+    vertical-align: sub;
+    font-size: .5em;
+  }
+  a {
+    text-decoration: none;
+    color: $header_color;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

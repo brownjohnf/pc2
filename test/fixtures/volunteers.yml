@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  pc_id: 1
+  emphasis: MyText
+  projects: MyText
+  stage_id: 1
+  cos_date: 1
+  local_name: MyString
+  site_id: 1
+  sector_id: 1
+
+two:
+  user_id: 1
+  pc_id: 1
+  emphasis: MyText
+  projects: MyText
+  stage_id: 1
+  cos_date: 1
+  local_name: MyString
+  site_id: 1
+  sector_id: 1

@@ -5,4 +5,5 @@ tmp/
 .sass-cache/
 *.komodoedit
 .DS_Store
+omniauth.rb
 

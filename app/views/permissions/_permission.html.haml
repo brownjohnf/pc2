@@ -1,0 +1,7 @@
+%li
+  - if permission.target_id
+    %strong #{permission.privilege.name}
+    #{permission.target_title} #{permission.scope.name}
+  - else
+    %strong #{permission.privilege.name}
+    all #{pluralize(10, permission.scope.name)}

@@ -16,6 +16,8 @@ gem 'omniauth-google-oauth2'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
 gem 'redcarpet'
+gem 'awesome_nested_set'
+#gem 'acts_as_commentable_with_threading'
 
 
 # Gems used only for assets and not required

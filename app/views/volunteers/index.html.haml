@@ -1,0 +1,39 @@
+.container
+  .row
+    .twelvecol.last
+      :erb
+        <table>
+          <tr>
+            <th>User</th>
+            <th>Pc</th>
+            <th>Emphasis</th>
+            <th>Projects</th>
+            <th>Stage</th>
+            <th>Cos date</th>
+            <th>Local name</th>
+            <th>Site</th>
+            <th>Sector</th>
+            <th>Start</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @volunteers.each do |volunteer| %>
+          <tr>
+            <td><%= volunteer.user_id %></td>
+            <td><%= volunteer.pc_id %></td>
+            <td><%= volunteer.emphasis %></td>
+            <td><%= volunteer.projects %></td>
+            <td><%= volunteer.stage_id %></td>
+            <td><%= volunteer.cos_date %></td>
+            <td><%= volunteer.local_name %></td>
+            <td><%= volunteer.site_id %></td>
+            <td><%= volunteer.sector_id %></td>
+            <td><%= volunteer.start %></td>
+            <td><%= link_to 'Show', volunteer %></td>
+            <td><%= link_to 'Edit', edit_volunteer_path(volunteer) %></td>
+            <td><%= link_to 'Destroy', volunteer, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>
