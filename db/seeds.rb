@@ -9,7 +9,7 @@
 
 groups = Group.create([ { :name => 'User' }, { :name => 'Administrator' }, { :name => 'Moderator' } ])
 privileges = Privilege.create([ { name: 'Edit', description: 'Ability to edit.' }, { name: 'Delete', description: 'Ability to delete.' }, { name: 'View', description: 'Ability to view.'} ])
-scopes = Scope.create([ { name: 'Page', title: 'title', description: 'Page-related privileges.' }, { name: 'Module', title: 'title', description: 'Ability to modify modules.' }, { name: 'User', title: 'title', description => 'Ability to modify users' } ])
+scopes = Scope.create([ { name: 'Page', title: 'title', description: 'Page-related privileges.' }, { name: 'Module', title: 'title', description: 'Ability to modify modules.' }, { name: 'User', title: 'title', description: 'Ability to modify users' } ])
 permission = Permission.create([ { group_id: 1, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' } ])
 pcregions = Pcregion.create([ { name: 'none', short: 'none'} ])
 countries = Country.create([{ name: 'United States of America', short: 'USA', pcregion_id: 1 }, { name: 'The Gambia', short: 'GM', pcregion_id: 1 }])
