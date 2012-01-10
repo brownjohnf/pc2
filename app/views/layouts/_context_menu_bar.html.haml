@@ -1,8 +1,10 @@
 #context_menu_bar
-  %ul
-    %li #{@title}
-  %ul
-    - unless @context_menu.nil?
-      - @context_menu.each do |key, val|
-        %li= link_to key, val
-  .clearfloat
+  .container
+    .row
+      .twocol
+      .tencol.last
+        %ul
+          - unless @context_menu.nil?
+            - @context_menu.each do |key, val|
+              %li= link_to key, val
+        .clearfloat

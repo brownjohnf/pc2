@@ -1,14 +1,16 @@
 #context_menu_bar {
+  position: relative;
   font-size: 1.5em;
-  @extend #menu_bar;
-  background-color: $steel_blue;
   z-index: 18;
   line-height: 1;
   ul {
+    list-style-type: none;
+    float: left;
     background: $light_gray;
     border-radius: 10px;
-    margin: .5em;
+    margin: .5em 0;
     li {
+      float: left;
       margin: .50em 0;
       a {
         border-left: 2px solid $steel_blue;
@@ -17,22 +19,6 @@
       &:first-child {
         a {
           border: none;
-        }
-      }
-    }
-    &:first-child {
-      background-color: $red;
-      padding: 0;
-      margin: 0;
-      border-top-right-radius: .5em;
-      border-bottom-right-radius: 3em;
-      border-bottom-left-radius: .5em;
-      border-top-left-radius: 3em;
-      li {
-        padding: 1em 2em;
-        margin: 0;
-        color: $steel_blue;
-        &:first-child {
         }
       }
     }

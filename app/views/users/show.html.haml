@@ -2,7 +2,7 @@
   .row
     .twocol
       = render 'layouts/menu'
-    .eightcol
+    .fourcol
       %h1= @user.name
       - unless @user.volunteers.empty?
         %p
@@ -12,9 +12,9 @@
         %h4 Sector
         = @user.volunteers.first.sector_id
         %h4 Emphasis
-        = @user.volunteers.first.emphasis
+        %p= @user.volunteers.first.emphasis
         %h4 Projects
-        = @user.volunteers.first.projects
+        %p= @user.volunteers.first.projects
       %h3 Contact Info
       %p
         = @user.email
@@ -26,6 +26,7 @@
       - unless @user.contributions.empty?
         %h3 Contributions
         %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
+    .fourcol
       - unless @user.groups.empty?
         %h3 Groups
         %ul
@@ -43,9 +44,7 @@
           %h4= g.name
           %ul= render :partial => 'permissions/permission', :collection => g.permissions
       - if @user.bio
-        %br
-        %br
-        %h5 A little bit about #{@user.name}...
+        %h5.clearfloat A little bit about #{@user.name}...
         = markdown(@user.bio)
     .twocol.last
       = gravatar_for @user, :size => 160

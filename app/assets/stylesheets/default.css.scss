@@ -1,6 +1,7 @@
 $blue: #3F8FBA;
 $very_dark_gray: #1a1a1a;
 $dark_gray: #222;
+$gray: gray;
 $light_gray: lightgray;
 $very_light_gray: whitesmoke;
 $red: darkred;
@@ -129,6 +130,7 @@ html {
         h1, h2, h3 {
           color: $blue;
           border-bottom: 1px solid $light_gray;
+          margin-bottom: .2em;
         }
         h1 {
           font-size: 2em;
@@ -142,6 +144,9 @@ html {
         h4 {
           font-variant: small-caps;
           font-weight: bold;
+          font-size: 1.2em;
+          margin-bottom: .3em;
+          color: $dark_gray * 1.7;
         }
         .pagination {
           margin: 2em 0;

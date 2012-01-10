@@ -1,20 +1,23 @@
 %header
-  %a{:id => "site_title", :href => root_path}
-    %span#title_organization= organization
-    %span#title_separator |&nbsp;
-    %span#title_country= country
-    %sub beta
-  %ul{:style => "float:left;"}
-    %li= link_to 'About us', about_us_path
-    %li= link_to 'Updates', feed_pages_path
-    %li= link_to 'Learning', ''
-    %li= link_to 'Photos', ''
-    %li= link_to 'Videos', ''
-    %li= link_to 'Blogs', ''
-  %ul{:style => "float:right;"}
-    - if signed_in?
-      %li#gravatar= gravatar_for current_user
-      %li= link_to current_user.name, current_user
-    - else
-      %li= link_to 'Sign in', login_path
-  .clearfloat
+  .container
+    .row
+      .twelvecol.last
+        %a{:id => "site_title", :href => root_path}
+          %span#title_organization= organization
+          %span#title_separator |&nbsp;
+          %span#title_country= country
+          %sub beta
+        %ul{:style => "float:left;"}
+          %li= link_to 'About us', about_us_path
+          %li= link_to 'Updates', feed_pages_path
+          %li= link_to 'Learning', ''
+          %li= link_to 'Photos', ''
+          %li= link_to 'Videos', ''
+          %li= link_to 'Blogs', ''
+        %ul{:style => "float:right;"}
+          - if signed_in?
+            %li#gravatar= gravatar_for current_user
+            %li= link_to current_user.name, current_user
+          - else
+            %li= link_to 'Sign in', login_path
+        .clearfloat
