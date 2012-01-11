@@ -2,47 +2,50 @@
   .row
     .twocol
       = render 'layouts/menu'
-    .fourcol
-      %h1= @user.name
-      - unless @user.volunteers.empty?
+    .eightcol
+      .sixcol
+        %h1= @user.name
+      .sixcol.last
+      .sixcol
+        - unless @user.volunteers.empty?
+          %p
+            alias
+            - @user.volunteers.each do |v|
+              #{v.local_name},
+          %h4 Sector
+          = @user.volunteers.first.sector_id
+          %h4 Emphasis
+          %p= @user.volunteers.first.emphasis
+          %h4 Projects
+          %p= @user.volunteers.first.projects
+        %h3 Contact Info
         %p
-          alias
-          - @user.volunteers.each do |v|
-            #{v.local_name},
-        %h4 Sector
-        = @user.volunteers.first.sector_id
-        %h4 Emphasis
-        %p= @user.volunteers.first.emphasis
-        %h4 Projects
-        %p= @user.volunteers.first.projects
-      %h3 Contact Info
-      %p
-        = @user.email
-        = @user.email2 + '<br />' if @user.email2
-      - if @user.phone1 || @user.phone2
-        %p
-          = @user.phone1 if @user.phone1
-          = @user.phone2 + '<br />' if @user.phone2
-      - unless @user.contributions.empty?
-        %h3 Contributions
-        %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
-    .fourcol
-      - unless @user.groups.empty?
-        %h3 Groups
-        %ul
-          = render @user.groups
-      - unless @user.authorizations.empty?
-        %h3 Social Connections
-        %ul
-          = render @user.authorizations
-      - unless @user.permissions.empty?
-        %h3 Specific Permissions
-        %ul= render :partial => 'permissions/permission', :collection => @user.permissions
-      - unless @user.groups.empty?
-        %h3 Group Permissions
-        - @user.groups.each do |g|
-          %h4= g.name
-          %ul= render :partial => 'permissions/permission', :collection => g.permissions
+          = @user.email
+          = @user.email2 + '<br />' if @user.email2
+        - if @user.phone1 || @user.phone2
+          %p
+            = @user.phone1 if @user.phone1
+            = @user.phone2 + '<br />' if @user.phone2
+        - unless @user.contributions.empty?
+          %h3 Contributions
+          %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
+      .sixcol.last
+        - unless @user.groups.empty?
+          %h3 Groups
+          %ul
+            = render @user.groups
+        - unless @user.authorizations.empty?
+          %h3 Social Connections
+          %ul
+            = render @user.authorizations
+        - unless @user.permissions.empty?
+          %h3 Specific Permissions
+          %ul= render :partial => 'permissions/permission', :collection => @user.permissions
+        - unless @user.groups.empty?
+          %h3 Group Permissions
+          - @user.groups.each do |g|
+            %h4= g.name
+            %ul= render :partial => 'permissions/permission', :collection => g.permissions
       - if @user.bio
         %h5.clearfloat A little bit about #{@user.name}...
         = markdown(@user.bio)

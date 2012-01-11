@@ -23,3 +23,12 @@ span.admin, span.moderator {
     }
   }
 }
+
+li.user {
+  clear: both;
+  a {
+    &:first-child {
+      float: left;
+    }
+  }
+}

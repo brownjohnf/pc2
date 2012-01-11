@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates :name, :email, :presence => true
 
+  accepts_nested_attributes_for :memberships
+
   before_save :make_salt
 
   default_scope :order => 'users.name ASC'
