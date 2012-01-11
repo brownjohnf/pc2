@@ -39,7 +39,7 @@ OmniauthDemo::Application.routes.draw do
   match 'privacy_policy', :to => redirect('/pages/2')
   match 'support', :to => redirect('/pages/3')
   match 'security', :to => redirect('/pages/4')
-  match "about_us", :to => redirect("/pages/5")
+  match "about_us", :to => redirect('/pages/5')
 
   match 'splash', :to => 'statics#splash'
   match 'feedback', :to => 'statics#feedback'

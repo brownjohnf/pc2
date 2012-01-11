@@ -1,4 +1,5 @@
-%li
+%li.user
   = gravatar_for user
-  = link_to(user.name, user) + ','
+  = link_to(user.name, user)
+  %br
   = link_to user.country.name, user.country

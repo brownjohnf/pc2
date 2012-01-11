@@ -18,24 +18,28 @@ pages = Page.create(
                      [
                         { title: 'Disclaimer',
                           description: 'Legal stuff.',
-                          content: 'The contents of this web site do not reflect in any way the positions of the U.S. Government or the United States Peace Corps. This web site is managed and supported by Peace Corps Volunteers and our supporters. It is not a U.S. Government web site.' },
+                          content: 'The contents of this web site do not reflect in any way the positions of the U.S. Government or the United States Peace Corps. This web site is managed and supported by Peace Corps Volunteers and our supporters. It is not a U.S. Government web site.',
+                          system: true},
                         { title: 'Privacy Policy',
                           description: 'Your rights.',
-                          content: "We will never give, sell, or in any way communicate any personal information to anyone, save with the owner of said information's express permission." },
+                          content: "We will never give, sell, or in any way communicate any personal information to anyone, save with the owner of said information's express permission.",
+                          system: true },
                         { title: 'Support',
                           description: 'Come get help!',
-                          content: 'Support is here!' },
+                          content: 'Support is here!',
+                          system: true },
                         { title: 'Security',
                           description: 'How we protect our information.',
-                          content: 'All content hosted through this application is safe and secure. For more information please view our Privacy Policy.' },
-                        { id: 5,
-                          title: 'About us',
+                          content: 'All content hosted through this application is safe and secure. For more information please view our Privacy Policy.',
+                          system: true },
+                        { title: 'About us',
                           description: 'A little bit about us.',
-                          content: "This website is running the open source Peace Corps App, currently in pre-alpha release. \nLicense \nPC Web App is copyright John F. Brown, 2011, and files herein are licensed under the Affero General Public License version 3, the text of which can be found in GNU-AGPL-3.0, or any later version of the AGPL, unless otherwise noted. Components of PC Web App, including CodeIgniter, PHP Markdown and JQuery, are licensed separately. All unmodified files from these and other sources retain their original copyright and license notices: see the relevant individual files." },
-                        { id: 10,
-                          title: 'Calendar',
+                          content: "This website is running the open source Peace Corps App, currently in pre-alpha release. \nLicense \nPC Web App is copyright John F. Brown, 2011, and files herein are licensed under the Affero General Public License version 3, the text of which can be found in GNU-AGPL-3.0, or any later version of the AGPL, unless otherwise noted. Components of PC Web App, including CodeIgniter, PHP Markdown and JQuery, are licensed separately. All unmodified files from these and other sources retain their original copyright and license notices: see the relevant individual files.",
+                          system: true },
+                        { title: 'Calendar',
                           description: 'Our calendar.',
-                          content: 'Calender goes here.' }
+                          content: 'Calender goes here.',
+                          system: true }
 ])
 
 User.create!(
