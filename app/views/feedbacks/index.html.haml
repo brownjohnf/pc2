@@ -1,0 +1,24 @@
+.container
+  .row
+    .twocol
+    .tencol.last
+      :erb
+        <table>
+          <tr>
+            <th>Subject</th>
+            <th>Content</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @feedbacks.each do |feedback| %>
+          <tr>
+            <td><%= feedback.subject %></td>
+            <td><%= feedback.content %></td>
+            <td><%= link_to 'Show', feedback %></td>
+            <td><%= link_to 'Edit', edit_feedback_path(feedback) %></td>
+            <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

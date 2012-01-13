@@ -21,11 +21,11 @@
         %h3 Contact Info
         %p
           = @user.email
-          = @user.email2 + '<br />' if @user.email2
+          = @user.email2 + '<br />' unless @user.email2.nil?
         - if @user.phone1 || @user.phone2
           %p
             = @user.phone1 if @user.phone1
-            = @user.phone2 + '<br />' if @user.phone2
+            = @user.phone2 + '<br />' unless @user.phone2.empty?
         - unless @user.contributions.empty?
           %h3 Contributions
           %ul= render :partial => 'contributions/contribution', :collection => @user.contributions

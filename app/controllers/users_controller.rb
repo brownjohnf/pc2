@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :authenticate #sessions helper
+
   def index
     @title = 'Users'
     #@context_menu = {'new' => new_user_path}

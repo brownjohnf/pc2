@@ -1,0 +1,14 @@
+.container
+  .row
+    .twocol
+    .twelvecol.last
+      :erb
+        <p>
+          <b>Subject:</b>
+          <%= @feedback.subject %>
+        </p>
+
+        <p>
+          <b>Content:</b>
+          <%= @feedback.content %>
+        </p>

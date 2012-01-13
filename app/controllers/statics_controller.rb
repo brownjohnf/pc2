@@ -1,15 +1,16 @@
 class StaticsController < ApplicationController
 
   def home
-    @users = Group.find_by_name('Administrator').users
-    @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
+    if signed_in?
+      @users = Group.find_by_name('Administrator').users
+      @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
+    else
+      redirect_to splash_path
+    end
   end
 
   def splash
-  end
-
-  def feedback
-    @title = 'Feedback'
+    @title = 'Splash'
   end
 
 end

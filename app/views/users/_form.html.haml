@@ -1,4 +1,3 @@
-- @user.memberships.build
 = form_for(@user) do |f|
   - if @user.errors.any?
     #error_explanation
@@ -6,35 +5,69 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :email2
-    = f.text_field :email2
-  .field
-    = f.label :phone1
-    = f.text_field :phone1
-  .field
-    = f.label :phone2
-    = f.text_field :phone2
-  .field
-    = f.label :country_id
-    = f.collection_select(:country_id, Country.all, :id, :name)
-  .field
-    = f.label :bio
-    = f.text_area :bio
-  .actions
-    = f.submit
-
-- if current_user.admin?
-  = form_for @user.memberships.build, :remote => true do |f|
-    = f.hidden_field(:user_id, :value => @user.id)
+  .sixcol
+    %h2 User
     .field
-      = f.label :group_id
-      = f.collection_select(:group_id, Group.all, :id, :name)
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :email2
+      = f.text_field :email2
+    .field
+      = f.label :phone1
+      = f.text_field :phone1
+    .field
+      = f.label :phone2
+      = f.text_field :phone2
+    .field
+      = f.label :country_id
+      = f.collection_select(:country_id, Country.all, :id, :name)
+    .field
+      = f.label :bio
+      = f.text_area :bio
     .actions
       = f.submit
+  .sixcol.last
+    %h2 Volunteer
+    - unless @user.volunteers.empty?
+      = f.fields_for :volunteers do |f2|
+        = f2.hidden_field(:user_id, :value => @user.id)
+        .field
+          = f2.label :local_name
+          = f2.text_field :local_name
+        .field
+          = f2.label :pc_id
+          = f2.number_field :pc_id
+        .field
+          = f2.label :emphasis
+          = f2.text_area :emphasis
+        .field
+          = f2.label :projects
+          = f2.text_area :projects
+        .field
+          = f2.label :stage_id
+          = f2.number_field :stage_id
+        .field
+          = f2.label :cos_date
+          = f2.number_field :cos_date
+        .field
+          = f2.label :site_id
+          = f2.number_field :site_id
+        .field
+          = f2.label :sector_id
+          = f2.number_field :sector_id
+        .field
+          = f2.label :start
+          = f2.number_field :start
+
+  - if current_user.admin?
+    = form_for @user.memberships.build, :remote => true do |f|
+      = f.hidden_field(:user_id, :value => @user.id)
+      .field
+        = f.label :group_id
+        = f.collection_select(:group_id, Group.all, :id, :name)
+      .actions
+        = f.submit

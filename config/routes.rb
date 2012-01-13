@@ -1,5 +1,7 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :feedbacks
+
   resources :contributions
 
   resources :volunteers
@@ -42,7 +44,7 @@ OmniauthDemo::Application.routes.draw do
   match "about_us", :to => redirect('/pages/5')
 
   match 'splash', :to => 'statics#splash'
-  match 'feedback', :to => 'statics#feedback'
+  match 'feedback', :to => 'feedbacks#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

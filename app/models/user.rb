@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   validates :name, :email, :presence => true
 
-  accepts_nested_attributes_for :memberships
+  accepts_nested_attributes_for :memberships, :volunteers
 
   before_save :make_salt
 
