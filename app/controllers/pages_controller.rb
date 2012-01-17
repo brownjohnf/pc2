@@ -15,7 +15,14 @@ class PagesController < ApplicationController
     end
   end
 
-  def feed
+  def added
+    @pages = Page.order('created_at DESC').paginate(:page => params[:page])
+    @title = 'Page Feed'
+    @context_menu = {'back' => pages_path}
+    render 'feed'
+  end
+
+  def updated
     @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
     @title = 'Page Feed'
     @context_menu = {'back' => pages_path}
@@ -113,4 +120,3 @@ class PagesController < ApplicationController
       redirect_to(@page, notice: 'You cannot destroy system pages.') if @page.system?
     end
 end
-

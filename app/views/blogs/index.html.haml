@@ -1,0 +1,29 @@
+.container
+  .row
+    .threecol
+      = render 'layouts/menu'
+    .ninecol.last
+      :erb
+        <table>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Url</th>
+            <th>User</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @blogs.each do |blog| %>
+          <tr>
+            <td><%= blog.title %></td>
+            <td><%= blog.description %></td>
+            <td><%= blog.url %></td>
+            <td><%= blog.user_id %></td>
+            <td><%= link_to 'Show', blog %></td>
+            <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+            <td><%= link_to 'Destroy', blog, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

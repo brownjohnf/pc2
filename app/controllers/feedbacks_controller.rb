@@ -25,6 +25,7 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks/new.json
   def new
     @feedback = Feedback.new
+    @title = 'Give Feedback'
 
     respond_to do |format|
       format.html # new.html.erb

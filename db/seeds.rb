@@ -8,11 +8,62 @@
 
 
 groups = Group.create([ { :name => 'User' }, { :name => 'Administrator' }, { :name => 'Moderator' } ])
-privileges = Privilege.create([ { name: 'Edit', description: 'Ability to edit.' }, { name: 'Delete', description: 'Ability to delete.' }, { name: 'View', description: 'Ability to view.'} ])
+privileges = Privilege.create(
+                               [
+                                  { name: 'Edit',
+                                    description: 'Ability to edit.' },
+                                  { name: 'Delete',
+                                    description: 'Ability to delete.' },
+                                  { name: 'View',
+                                    description: 'Ability to view.'}
+                                ]
+                              )
 scopes = Scope.create([ { name: 'Page', title: 'title', description: 'Page-related privileges.' }, { name: 'Module', title: 'title', description: 'Ability to modify modules.' }, { name: 'User', title: 'title', description: 'Ability to modify users' } ])
-permission = Permission.create([ { group_id: 1, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' } ])
-pcregions = Pcregion.create([ { name: 'none', short: 'none'} ])
-countries = Country.create([{ name: 'United States of America', short: 'USA', pcregion_id: 1 }, { name: 'The Gambia', short: 'GM', pcregion_id: 1 }])
+permission = Permission.create(
+                                [
+                                   { group_id: 1, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 3, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 1, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 1, privilege_id: 2, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 3, scope_id: 1, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 1, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 3, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 3, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 2, scope_id: 3, privilege_id: 2, comment: 'Default, base permission. Do not edit.' },
+                                   { group_id: 3, scope_id: 3, privilege_id: 1, comment: 'Default, base permission. Do not edit.' }
+                                ]
+                              )
+pcregions = Pcregion.create(
+                             [
+                                { name: 'N/A', short: 'N/A'},
+                                { name: 'Sub-Saharan Africa', short: 'SSA'},
+                                { name: 'North Africa / Middle East', short: 'NA/ME'}
+                             ]
+                           )
+countries = Country.create(
+                            [
+                               { name: 'None / Unknown',
+                                 short: 'None',
+                                 pcregion_id: 1 },
+                               { name: 'United States of America',
+                                 short: 'USA',
+                                 pcregion_id: 2 },
+                               { name: 'Senegal',
+                                 short: 'SN',
+                                 pcregion_id: 2 },
+                               { name: 'Mali',
+                                 short: 'ML',
+                                 pcregion_id: 2 },
+                               { name: 'The Gambia',
+                                 short: 'GM',
+                                 pcregion_id: 2 },
+                               { name: 'Jordan',
+                                 short: 'JO',
+                                 pcregion_id: 3 }
+                            ]
+                          )
 
 pages = Page.create(
                      [
@@ -42,11 +93,27 @@ pages = Page.create(
                           system: true }
 ])
 
-User.create!(
-             :name => 'Jack Brown',
-             :email => 'jack@brownjohnf.com',
-             :country_id => 1,
-             :bio => '# Bio Here')
+jack = User.create!(
+                    :name => 'Jack Brown',
+                    :email => 'jack@brownjohnf.com',
+                    :country_id => 3,
+                    :bio => '# Bio Here')
+jack.volunteers.create!(
+                        :local_name => 'Babakar Ndiaye',
+                        :emphasis => 'Media',
+                        :projects => 'Website, How-To Videos'
+                       )
+jack.blogs.create!(
+                    :title => 'Senegal et al',
+                    :description => 'Info about my life in Senegal.',
+                    :url => 'http://senegaletal.blogspot.com'
+                  )
+jack.memberships.create!(
+                          [
+                            { :group_id => 2 },
+                            { :group_id => 3 }
+                          ]
+                        )
 
 Page.rebuild!
 Page.last.move_to_child_of(Page.find_by_id(5))

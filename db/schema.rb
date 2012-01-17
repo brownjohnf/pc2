@@ -11,11 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120113150919) do
+ActiveRecord::Schema.define(:version => 20120114133954) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "url"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -135,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20120113150919) do
     t.string   "email2"
     t.string   "phone1"
     t.string   "phone2"
+    t.string   "site"
   end
 
   create_table "volunteers", :force => true do |t|
@@ -150,6 +160,15 @@ ActiveRecord::Schema.define(:version => 20120113150919) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "start"
+  end
+
+  create_table "websites", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "url"
+    t.integer  "language_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

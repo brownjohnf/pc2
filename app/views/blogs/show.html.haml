@@ -1,0 +1,25 @@
+.container
+  .row
+    .threecol
+      = render 'layouts/menu'
+    .ninecol.last
+      :erb
+        <p>
+          <b>Title:</b>
+          <%= @blog.title %>
+        </p>
+
+        <p>
+          <b>Description:</b>
+          <%= @blog.description %>
+        </p>
+
+        <p>
+          <b>Url:</b>
+          <%= @blog.url %>
+        </p>
+
+        <p>
+          <b>User:</b>
+          <%= @blog.user_id %>
+        </p>

@@ -1,6 +1,9 @@
 .container
   .row
     .threecol
+      = render 'layouts/menu'
     .sevencol
+      - @user.volunteers.build
+      - @user.blogs.build
       = render 'form'
     .twocol.last

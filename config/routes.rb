@@ -1,5 +1,9 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :websites
+
+  resources :blogs
+
   resources :feedbacks
 
   resources :contributions
@@ -14,7 +18,9 @@ OmniauthDemo::Application.routes.draw do
 
   resources :pages do
     collection do
-      get :feed
+      get :updated
+      get :added
+      get :popular
     end
   end
 

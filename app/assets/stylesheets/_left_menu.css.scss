@@ -1,5 +1,7 @@
 .left_menu {
   font-size: 2em;
+  border-right: 1px solid $light_gray;
+  padding-right: 2em;
   ul {
     margin: 0 !important;
     font-size: .8em;

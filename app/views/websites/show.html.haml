@@ -1,0 +1,24 @@
+.container
+  .row
+    .threecol
+    .ninecol.last
+      :erb
+        <p>
+          <b>Name:</b>
+          <%= @website.name %>
+        </p>
+
+        <p>
+          <b>Description:</b>
+          <%= @website.description %>
+        </p>
+
+        <p>
+          <b>Url:</b>
+          <%= @website.url %>
+        </p>
+
+        <p>
+          <b>Language:</b>
+          <%= @website.language_id %>
+        </p>

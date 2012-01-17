@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate #sessions helper
+  #before_filter :authenticate #sessions helper
 
   def index
     @title = 'Users'

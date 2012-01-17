@@ -21,7 +21,7 @@
 
         <% @volunteers.each do |volunteer| %>
           <tr>
-            <td><%= volunteer.user_id %></td>
+            <td><%= link_to volunteer.user.name, volunteer.user %></td>
             <td><%= volunteer.pc_id %></td>
             <td><%= volunteer.emphasis %></td>
             <td><%= volunteer.projects %></td>

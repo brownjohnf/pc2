@@ -9,14 +9,18 @@ class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
   has_many :volunteers, :dependent => :destroy
   has_many :contributions, :dependent => :destroy
+  has_many :blogs
 
   belongs_to :country
 
+  before_validation :clear_empty_attrs
   validates :name, :email, :presence => true
 
-  accepts_nested_attributes_for :memberships, :volunteers
+  accepts_nested_attributes_for :memberships, :volunteers, :allow_destroy => true
+  accepts_nested_attributes_for :blogs
 
-  before_save :make_salt
+  before_create :make_salt
+  after_create :add_default_permissions
 
   default_scope :order => 'users.name ASC'
 
@@ -48,6 +52,12 @@ class User < ActiveRecord::Base
 
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
+    end
+
+    def clear_empty_attrs
+      @attributes.each do |key,value|
+        self[key] = nil if value.blank?
+      end
     end
 
 end

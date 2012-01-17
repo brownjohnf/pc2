@@ -75,6 +75,10 @@ html {
       height: 100%;
       height: auto;
       min-height: 100%;
+      hr {
+        width: 99%;
+        border-color: $light_gray;
+      }
       #header_spacer {
         padding-top: $header_height;
         margin-bottom: -1px;
@@ -164,9 +168,16 @@ html {
           }
         }
         form {
+          h1, h2, h3, h4 {
+            margin-bottom: 1em;
+          }
+          textarea {
+            height: 100px;
+          }
           label {
             display: inline-block;
             width: 8em;
+            color: $gray;
           }
           .actions {
             text-align: right;
@@ -225,3 +236,4 @@ html {
 /* page-specific */
 @import 'statics';
 @import 'users';
+@import 'feedbacks'

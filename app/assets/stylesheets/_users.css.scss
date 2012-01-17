@@ -26,7 +26,14 @@ span.admin, span.moderator {
 
 li.user {
   clear: both;
-  a {
+  padding: .5em 0;
+  h4 {
+    padding: 0 !important;
+  }
+  &:hover {
+    background-color: $light_gray;
+  }
+  & > a {
     &:first-child {
       float: left;
     }

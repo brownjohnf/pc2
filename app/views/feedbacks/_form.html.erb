@@ -12,14 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :subject %><br />
+    <%= f.label "What's this about?" %><br />
     <%= f.text_field :subject %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
+    <%= f.label 'Details about the problem:' %><br />
     <%= f.text_area :content %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit Feedback!' %>
   </div>
 <% end %>

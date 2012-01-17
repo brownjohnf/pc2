@@ -1,8 +1,8 @@
 .container.page
   .row
-    .twocol.menu_col
+    .threecol.menu_col
       = render 'layouts/menu'
-    .eightcol.show_page
+    .sevencol.show_page
       %h1= @page.title
       = markdown(@page.content)
     .twocol.last
@@ -12,3 +12,11 @@
       %h3 Authors
       %h2 Share
       %h2 Follow us
+      .spread
+        .twshare.left
+          %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet
+          %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
+        .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}
+          %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
+          %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}
+        .clearfloat

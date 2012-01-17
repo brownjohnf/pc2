@@ -1,14 +1,16 @@
 .container
   .row
-    .twocol
+    .threecol
       = render 'layouts/menu'
-    .eightcol
+    .sevencol
       .sixcol
         %h1= @user.name
       .sixcol.last
       .sixcol
         - unless @user.volunteers.empty?
           %p
+            = @user.country.name
+            %br
             alias
             - @user.volunteers.each do |v|
               #{v.local_name},
@@ -18,14 +20,22 @@
           %p= @user.volunteers.first.emphasis
           %h4 Projects
           %p= @user.volunteers.first.projects
-        %h3 Contact Info
+        %h3 Connect
         %p
           = @user.email
-          = @user.email2 + '<br />' unless @user.email2.nil?
-        - if @user.phone1 || @user.phone2
+          - unless @user.email2.nil?
+            %br
+            = @user.email2
+        - unless @user.phone1.nil?
           %p
-            = @user.phone1 if @user.phone1
-            = @user.phone2 + '<br />' unless @user.phone2.empty?
+            = @user.phone1
+            - unless @user.phone2.nil?
+              %br
+              = @user.phone2
+        - unless @user.blogs.empty?
+          %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
+        - unless @user.site.nil?
+          %p= link_to @user.site
         - unless @user.contributions.empty?
           %h3 Contributions
           %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
@@ -47,7 +57,7 @@
             %h4= g.name
             %ul= render :partial => 'permissions/permission', :collection => g.permissions
       - if @user.bio
-        %h5.clearfloat A little bit about #{@user.name}...
+        %h4.clearfloat A little bit about #{@user.name}...
         = markdown(@user.bio)
     .twocol.last
       = gravatar_for @user, :size => 160

@@ -1,73 +1,97 @@
+%p By adding content to Volunteer or Staff fields, you will create a Volunteer, Staff member, or both.
 = form_for(@user) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@user.errors.count, "error")} prohibited this user from being saved:
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  .sixcol
+  = render :partial => 'shared/form_error', :collection => @user
+  .twelvecol.last
     %h2 User
-    .field
-      = f.label :name
-      = f.text_field :name
-    .field
-      = f.label :email
-      = f.text_field :email
-    .field
-      = f.label :email2
-      = f.text_field :email2
-    .field
-      = f.label :phone1
-      = f.text_field :phone1
-    .field
-      = f.label :phone2
-      = f.text_field :phone2
-    .field
-      = f.label :country_id
-      = f.collection_select(:country_id, Country.all, :id, :name)
-    .field
-      = f.label :bio
-      = f.text_area :bio
+    .sixcol
+      .field
+        = f.label 'Name*'
+        = f.text_field :name
+      .field
+        = f.label 'Primary Email*'
+        = f.text_field :email
+      .field
+        = f.label 'Primary Phone'
+        = f.text_field :phone1
+      .field
+        = f.label 'Personal Website'
+        = f.text_field :site
+    .sixcol.last
+      .field
+        = f.label 'Country of Service/Residence'
+        = f.collection_select(:country_id, Country.all, :id, :name)
+      .field
+        = f.label 'Secondary Email'
+        = f.text_field :email2
+      .field
+        = f.label 'Secondary Phone'
+        = f.text_field :phone2
+    .twelvecol.last
+      .field
+        = f.label 'Bio'
+        = f.text_area :bio
+    = f.fields_for :blogs do |f3|
+      = f3.hidden_field(:user_id, :value => @user.id)
+      .sixcol
+        .field
+          = f3.label 'Blog Title'
+          = f3.text_field :title
+        .field
+          = f3.label 'Blog URL'
+          = f3.text_field :url
+      .sixcol.last
+        .field
+          = f3.label 'Blog Description'
+          = f3.text_area :description
+    - unless @user.volunteers.empty?
+      .twelvecol.last
+        %h2 Volunteer
+        = f.fields_for :volunteers do |f2|
+          = f2.hidden_field(:user_id, :value => @user.id)
+          .sixcol
+            .field
+              = f2.label 'Local Name'
+              = f2.text_field :local_name
+            .field
+              = f2.label 'PC ID Number'
+              = f2.number_field :pc_id
+            .field
+              = f2.label 'Stage'
+              = f2.number_field :stage_id
+            .field
+              = f2.label 'COS Date'
+              = f2.number_field :cos_date
+          .sixcol.last
+            .field
+              = f2.label 'Site'
+              = f2.number_field :site_id
+            .field
+              = f2.label 'Sector'
+              = f2.number_field :sector_id
+            .field
+              = f2.label 'Swear-in Date'
+              = f2.number_field :start
+          .sixcol
+            .field
+              = f2.label 'Emphasis'
+              = f2.text_area :emphasis
+          .sixcol.last
+            .field
+              = f2.label 'Current Projects'
+              = f2.text_area :projects
+  .twelvecol.last
+    %br
+    %hr
+    %br
+    %br
     .actions
       = f.submit
-  .sixcol.last
-    %h2 Volunteer
-    - unless @user.volunteers.empty?
-      = f.fields_for :volunteers do |f2|
-        = f2.hidden_field(:user_id, :value => @user.id)
-        .field
-          = f2.label :local_name
-          = f2.text_field :local_name
-        .field
-          = f2.label :pc_id
-          = f2.number_field :pc_id
-        .field
-          = f2.label :emphasis
-          = f2.text_area :emphasis
-        .field
-          = f2.label :projects
-          = f2.text_area :projects
-        .field
-          = f2.label :stage_id
-          = f2.number_field :stage_id
-        .field
-          = f2.label :cos_date
-          = f2.number_field :cos_date
-        .field
-          = f2.label :site_id
-          = f2.number_field :site_id
-        .field
-          = f2.label :sector_id
-          = f2.number_field :sector_id
-        .field
-          = f2.label :start
-          = f2.number_field :start
 
-  - if current_user.admin?
-    = form_for @user.memberships.build, :remote => true do |f|
-      = f.hidden_field(:user_id, :value => @user.id)
-      .field
-        = f.label :group_id
-        = f.collection_select(:group_id, Group.all, :id, :name)
-      .actions
-        = f.submit
+    - if current_user && current_user.admin?
+      = form_for @user.memberships.build, :remote => true do |f|
+        = f.hidden_field(:user_id, :value => @user.id)
+        .field
+          = f.label :group_id
+          = f.collection_select(:group_id, Group.all, :id, :name)
+        .actions
+          = f.submit
