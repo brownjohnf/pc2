@@ -1,0 +1,31 @@
+.sixcol
+  .field
+    = f.label 'Local Name*'
+    = f.text_field :local_name
+  .field
+    = f.label 'PC ID Number'
+    = f.number_field :pc_id
+  .field
+    = f.label 'Stage'
+    = f.number_field :stage_id
+  .field
+    = f.label 'COS Date'
+    = f.number_field :cos_date
+.sixcol.last
+  .field
+    = f.label 'Site'
+    = f.number_field :site_id
+  .field
+    = f.label 'Sector'
+    = f.collection_select(:sector_id, Sector.all, :id, :name)
+  .field
+    = f.label 'Swear-in Date'
+    = f.number_field :start
+.sixcol
+  .field
+    = f.label 'Emphasis'
+    = f.text_area :emphasis
+.sixcol.last
+  .field
+    = f.label 'Current Projects'
+    = f.text_area :projects

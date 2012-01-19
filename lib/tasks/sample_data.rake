@@ -11,8 +11,9 @@ end
 def make_users
   99.times do |n|
     name = Faker::Name.name
-    email = "example-#{n+1}@railstutorial.org"
-    User.create!(:name => name, :email => email, :country_id => 1, :bio => '# Bio Here')
+    email = "example-#{n+1}@example.org"
+    user = User.create!(:name => name, :email => email, :country_id => 1, :bio => '# Bio Here')
+    user.volunteers.create!(:local_name => Faker::Name.name, :sector_id => 1+rand(7))
   end
 end
 

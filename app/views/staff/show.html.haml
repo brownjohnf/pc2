@@ -1,0 +1,54 @@
+.container
+  .row
+    .threecol
+    .ninecol.last
+      :erb
+        <p>
+          <b>User:</b>
+          <%= link_to @staff.user.name, @staff.user %>
+        </p>
+
+        <p>
+          <b>Site:</b>
+          <%= @staff.site_id %>
+        </p>
+
+        <p>
+          <b>Building:</b>
+          <%= @staff.building %>
+        </p>
+
+        <p>
+          <b>Office:</b>
+          <%= @staff.office %>
+        </p>
+
+        <p>
+          <b>Floor:</b>
+          <%= @staff.floor %>
+        </p>
+
+        <p>
+          <b>Morning open:</b>
+          <%= @staff.morning_open %>
+        </p>
+
+        <p>
+          <b>Morning close:</b>
+          <%= @staff.morning_close %>
+        </p>
+
+        <p>
+          <b>Afternoon open:</b>
+          <%= @staff.afternoon_open %>
+        </p>
+
+        <p>
+          <b>Afternoon close:</b>
+          <%= @staff.afternoon_close %>
+        </p>
+
+        <p>
+          <b>Details:</b>
+          <%= @staff.details %>
+        </p>

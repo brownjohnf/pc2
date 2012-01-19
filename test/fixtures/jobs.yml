@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  staff_id: 1
+  position_id: 1
+  start: 2012-01-18
+  end: 2012-01-18
+  comment: MyString
+
+two:
+  staff_id: 1
+  position_id: 1
+  start: 2012-01-18
+  end: 2012-01-18
+  comment: MyString

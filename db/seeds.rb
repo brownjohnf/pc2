@@ -7,7 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-groups = Group.create([ { :name => 'User' }, { :name => 'Administrator' }, { :name => 'Moderator' } ])
+groups = Group.create(
+                       [
+                          { :name => 'User' },
+                          { :name => 'Administrator' },
+                          { :name => 'Moderator' },
+                          { :name => 'Staff' }
+                        ]
+                      )
 privileges = Privilege.create(
                                [
                                   { name: 'Edit',
@@ -42,6 +49,17 @@ pcregions = Pcregion.create(
                                 { name: 'North Africa / Middle East', short: 'NA/ME'}
                              ]
                            )
+sectors = Sector.create(
+                          [
+                            { name: 'Agroforestry Extension' },
+                            { name: 'Small Enterprise Development' },
+                            { name: 'Urban Agriculture' },
+                            { name: 'Rural Agriculture' },
+                            { name: 'Eco-tourism' },
+                            { name: 'Health Education' },
+                            { name: 'Environmental Education' }
+                          ]
+)
 countries = Country.create(
                             [
                                { name: 'None / Unknown',

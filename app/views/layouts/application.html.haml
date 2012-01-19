@@ -14,7 +14,7 @@
       = render 'layouts/context_menu_bar' unless @title.nil?
       - if signed_in?
         = render 'layouts/admin_menu_bar' if current_user.admin?
-      = render 'layouts/notice_bar' if notice
+      = render 'shared/notice_bar' if notice
       #page
         = yield
         - if Rails.env.development?

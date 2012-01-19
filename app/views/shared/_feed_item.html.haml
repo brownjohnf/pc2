@@ -1,4 +1,7 @@
-.feed.feed_item
-  %h4= link_to feed_item.title, feed_item
-  %p= feed_item.description
-  %p= wrap(feed_item.content, 10)
+%a{:href => feed_item}
+  .feed.feed_item
+    = avatar_for feed_item, :size => '7em'
+    .feed_body
+      %h3= feed_item.title
+      %p= feed_item.description
+      %p= truncate(feed_item.content, :length => 200, :separator => ' ')

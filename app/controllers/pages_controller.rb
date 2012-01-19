@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   def index
     @pages = Page.all
     @title = 'Listing Pages'
-    @context_menu = {'new' => new_page_path, 'feed' => feed_pages_path}
+    @context_menu = {'new' => new_page_path, 'recently updated' => updated_pages_path}
 
     respond_to do |format|
       format.html # index.html.erb

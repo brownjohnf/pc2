@@ -1,10 +1,18 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :sectors
+
+  resources :positions
+
+  resources :jobs
+
+  resources :staff
+
   resources :websites
 
   resources :blogs
 
-  resources :feedbacks
+  resources :feedback
 
   resources :contributions
 
@@ -49,8 +57,8 @@ OmniauthDemo::Application.routes.draw do
   match 'security', :to => redirect('/pages/4')
   match "about_us", :to => redirect('/pages/5')
 
-  match 'splash', :to => 'statics#splash'
-  match 'feedback', :to => 'feedbacks#new'
+  match 'splash', :to => 'static#splash'
+  match 'feedback', :to => 'feedback#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -101,7 +109,7 @@ OmniauthDemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'statics#home'
+  root :to => 'static#home'
 
   # See how all your routes lay out with "rake routes"
 

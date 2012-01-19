@@ -1,0 +1,17 @@
+= form_for(@position) do |f|
+  = render :partial => 'shared/form_error', :collection => @position
+  .twelvecol.last
+    .field
+      = f.label :title
+      = f.text_field :title
+  .sixcol
+    .field
+      = f.label :description
+      = f.text_area :description
+  .sixcol.last
+    .field
+      = f.label :qualifications
+      = f.text_area :qualifications
+  .twelvecol.last
+    .actions
+      = f.submit

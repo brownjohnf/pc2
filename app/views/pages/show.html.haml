@@ -10,13 +10,4 @@
       %h2 Case Studies
       %h3 Tags
       %h3 Authors
-      %h2 Share
-      %h2 Follow us
-      .spread
-        .twshare.left
-          %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet
-          %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
-        .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}
-          %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
-          %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}
-        .clearfloat
+      = render 'shared/social'

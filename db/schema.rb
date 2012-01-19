@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120114133954) do
+ActiveRecord::Schema.define(:version => 20120118175429) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20120114133954) do
     t.datetime "updated_at"
   end
 
-  create_table "feedbacks", :force => true do |t|
+  create_table "feedback", :force => true do |t|
     t.string   "subject"
     t.text     "content"
     t.datetime "created_at"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(:version => 20120114133954) do
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "staff_id"
+    t.integer  "position_id"
+    t.date     "start"
+    t.date     "end"
+    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,6 +110,14 @@ ActiveRecord::Schema.define(:version => 20120114133954) do
     t.integer  "target_id"
   end
 
+  create_table "positions", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "qualifications"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "privileges", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -131,6 +149,28 @@ ActiveRecord::Schema.define(:version => 20120114133954) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+  end
+
+  create_table "sectors", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "staff", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "site_id"
+    t.string   "building"
+    t.string   "office"
+    t.string   "floor"
+    t.time     "morning_open"
+    t.time     "morning_close"
+    t.time     "afternoon_open"
+    t.time     "afternoon_close"
+    t.string   "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

@@ -4,6 +4,7 @@
       = render 'layouts/menu'
     .sevencol
       - @user.volunteers.build if @user.volunteers.empty?
+      - @user.staffs.build if @user.staffs.empty?
       - @user.blogs.build if @user.blogs.empty?
       = render 'form'
     .twocol.last

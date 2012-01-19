@@ -1,4 +1,4 @@
-class StaticsController < ApplicationController
+class StaticController < ApplicationController
 
   def home
     if signed_in?

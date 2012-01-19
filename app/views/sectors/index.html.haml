@@ -1,0 +1,24 @@
+.container
+  .row
+    .threecol
+    .ninecol.last
+      :erb
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @sectors.each do |sector| %>
+          <tr>
+            <td><%= sector.name %></td>
+            <td><%= sector.description %></td>
+            <td><%= link_to 'Show', sector %></td>
+            <td><%= link_to 'Edit', edit_sector_path(sector) %></td>
+            <td><%= link_to 'Destroy', sector, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

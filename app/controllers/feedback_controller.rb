@@ -1,17 +1,17 @@
-class FeedbacksController < ApplicationController
-  # GET /feedbacks
-  # GET /feedbacks.json
+class FeedbackController < ApplicationController
+  # GET /feedback
+  # GET /feedback.json
   def index
-    @feedbacks = Feedback.all
+    @feedback = Feedback.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @feedbacks }
+      format.json { render json: @feedback }
     end
   end
 
-  # GET /feedbacks/1
-  # GET /feedbacks/1.json
+  # GET /feedback/1
+  # GET /feedback/1.json
   def show
     @feedback = Feedback.find(params[:id])
 
@@ -21,8 +21,8 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # GET /feedbacks/new
-  # GET /feedbacks/new.json
+  # GET /feedback/new
+  # GET /feedback/new.json
   def new
     @feedback = Feedback.new
     @title = 'Give Feedback'
@@ -33,13 +33,13 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # GET /feedbacks/1/edit
+  # GET /feedback/1/edit
   def edit
     @feedback = Feedback.find(params[:id])
   end
 
-  # POST /feedbacks
-  # POST /feedbacks.json
+  # POST /feedback
+  # POST /feedback.json
   def create
     @feedback = Feedback.new(params[:feedback])
 
@@ -54,8 +54,8 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # PUT /feedbacks/1
-  # PUT /feedbacks/1.json
+  # PUT /feedback/1
+  # PUT /feedback/1.json
   def update
     @feedback = Feedback.find(params[:id])
 
@@ -70,14 +70,14 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # DELETE /feedbacks/1
-  # DELETE /feedbacks/1.json
+  # DELETE /feedback/1
+  # DELETE /feedback/1.json
   def destroy
     @feedback = Feedback.find(params[:id])
     @feedback.destroy
 
     respond_to do |format|
-      format.html { redirect_to feedbacks_url }
+      format.html { redirect_to feedback_index_url }
       format.json { head :ok }
     end
   end

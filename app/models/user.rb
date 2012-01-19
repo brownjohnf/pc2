@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :authorizations, :dependent => :destroy
   has_many :volunteers, :dependent => :destroy
+  has_many :staffs, :dependent => :destroy
   has_many :contributions, :dependent => :destroy
   has_many :blogs
 
@@ -16,11 +17,10 @@ class User < ActiveRecord::Base
   before_validation :clear_empty_attrs
   validates :name, :email, :presence => true
 
-  accepts_nested_attributes_for :memberships, :volunteers, :allow_destroy => true
+  accepts_nested_attributes_for :memberships, :volunteers, :staffs, :allow_destroy => true
   accepts_nested_attributes_for :blogs
 
   before_create :make_salt
-  after_create :add_default_permissions
 
   default_scope :order => 'users.name ASC'
 

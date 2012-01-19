@@ -1,57 +1,6 @@
-<%= form_for(@volunteer) do |f| %>
-  <% if @volunteer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@volunteer.errors.count, "error") %> prohibited this volunteer from being saved:</h2>
-
-      <ul>
-      <% @volunteer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.collection_select(:user_id, User.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :pc_id %><br />
-    <%= f.number_field :pc_id %>
-  </div>
-  <div class="field">
-    <%= f.label :emphasis %><br />
-    <%= f.text_area :emphasis %>
-  </div>
-  <div class="field">
-    <%= f.label :projects %><br />
-    <%= f.text_area :projects %>
-  </div>
-  <div class="field">
-    <%= f.label :stage_id %><br />
-    <%= f.number_field :stage_id %>
-  </div>
-  <div class="field">
-    <%= f.label :cos_date %><br />
-    <%= f.number_field :cos_date %>
-  </div>
-  <div class="field">
-    <%= f.label :local_name %><br />
-    <%= f.text_field :local_name %>
-  </div>
-  <div class="field">
-    <%= f.label :site_id %><br />
-    <%= f.number_field :site_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sector_id %><br />
-    <%= f.number_field :sector_id %>
-  </div>
-  <div class="field">
-    <%= f.label :start %><br />
-    <%= f.number_field :start %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+= form_for(@volunteer) do |f|
+  = render 'form_error' if @volunteer.errors.any?
+  .field
+    = f.label :user_id
+    = f.collection_select(:user_id, User.all, :id, :name)
+  = render 'fields'

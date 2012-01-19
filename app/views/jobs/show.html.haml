@@ -1,0 +1,29 @@
+.container
+  .row
+    .threecol
+    .twelvecol.last
+      :erb
+        <p>
+          <b>Staff:</b>
+          <%= link_to @job.staff.user.name, @job.staff.user %>
+        </p>
+
+        <p>
+          <b>Position:</b>
+          <%= link_to @job.position.title, @job.position %>
+        </p>
+
+        <p>
+          <b>Start:</b>
+          <%= @job.start %>
+        </p>
+
+        <p>
+          <b>End:</b>
+          <%= @job.end %>
+        </p>
+
+        <p>
+          <b>Comment:</b>
+          <%= @job.comment %>
+        </p>

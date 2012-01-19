@@ -1,0 +1,57 @@
+<%= form_for(@staff, :remote => true) do |f| %>
+  <% if @staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% @staff.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.collection_select(:user_id, User.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :site_id %><br />
+    <%= f.number_field :site_id %>
+  </div>
+  <div class="field">
+    <%= f.label :building %><br />
+    <%= f.text_field :building %>
+  </div>
+  <div class="field">
+    <%= f.label :office %><br />
+    <%= f.text_field :office %>
+  </div>
+  <div class="field">
+    <%= f.label :floor %><br />
+    <%= f.text_field :floor %>
+  </div>
+  <div class="field">
+    <%= f.label :morning_open %><br />
+    <%= f.time_select :morning_open %>
+  </div>
+  <div class="field">
+    <%= f.label :morning_close %><br />
+    <%= f.time_select :morning_close %>
+  </div>
+  <div class="field">
+    <%= f.label :afternoon_open %><br />
+    <%= f.time_select :afternoon_open %>
+  </div>
+  <div class="field">
+    <%= f.label :afternoon_close %><br />
+    <%= f.time_select :afternoon_close %>
+  </div>
+  <div class="field">
+    <%= f.label :details %><br />
+    <%= f.text_area :details %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -22,6 +22,10 @@ module ApplicationHelper
     link_to gravatar_image_tag(user.email.downcase, :alt => user.name, :width => options[:size], :height => options[:size], :gravatar => options), 'http://gravatar.com/emails', :class => 'gravatar', :target => '_blank'
   end
 
+  def avatar_for(object, options = { :photo => 'test.jpg', :size => 50 })
+    link_to image_tag(options[:photo], :width => options[:size], :height => options[:size]), object
+  end
+
   def markdown(text)
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true).render(text).html_safe
   end
@@ -70,10 +74,6 @@ module ApplicationHelper
 
   def fetch_menu
     Page.unscoped.order('lft ASC')
-  end
-
-  def wrap(s, width=78)
-    s.gsub(/(.{1,#{width}})(\s+|\Z)/, "\\1\n")
   end
 
 end

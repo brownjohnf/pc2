@@ -1,0 +1,30 @@
+.sixcol
+  .field
+    = f.label 'Site*'
+    = f.number_field :site_id
+  .field
+    = f.label 'Building*'
+    = f.text_field :building
+  .field
+    = f.label 'Office'
+    = f.text_field :office
+  .field
+    = f.label 'Floor'
+    = f.text_field :floor
+.sixcol.last
+  .field
+    = f.label :morning_open
+    = f.time_select :morning_open
+  .field
+    = f.label :morning_close
+    = f.time_select :morning_close
+  .field
+    = f.label :afternoon_open
+    = f.time_select :afternoon_open
+  .field
+    = f.label :afternoon_close
+    = f.time_select :afternoon_close
+.twelvecol.last
+  .field
+    = f.label :details
+    = f.text_area :details

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  site_id: 1
+  building: MyString
+  office: MyString
+  floor: MyString
+  morning_open: 2012-01-18 10:23:24
+  morning_close: 2012-01-18 10:23:24
+  afternoon_open: 2012-01-18 10:23:24
+  afternoon_close: 2012-01-18 10:23:24
+  details: MyString
+
+two:
+  user_id: 1
+  site_id: 1
+  building: MyString
+  office: MyString
+  floor: MyString
+  morning_open: 2012-01-18 10:23:24
+  morning_close: 2012-01-18 10:23:24
+  afternoon_open: 2012-01-18 10:23:24
+  afternoon_close: 2012-01-18 10:23:24
+  details: MyString
