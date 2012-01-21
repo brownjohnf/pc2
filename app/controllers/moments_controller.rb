@@ -9,33 +9,52 @@ class MomentsController < ApplicationController
     10.times do
       search_set << 1+rand(Moment.count)
     end
-    @moments = Moment.find(search_set)
-    @decades = @moments
+    @moments = Moment.where(:id => search_set).paginate(:page => params[:page], :per_page => 10)
     @title = 'Timeline'
     @context_menu = { 'new' => new_moment_path }
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @moments }
-    end
+    render 'index'
+  end
+
+  # GET /moments
+  # GET /moments.json
+  def all
+    @moments = Moment.paginate(:page => params[:page], :per_page => 50)
+    @title = 'All Timeline Moments'
+    @context_menu = { 'new' => new_moment_path }
+
+    render 'index'
   end
 
   # GET /moments/decade
   def decade
     start = "#{params[:id].to_s}-1-1".to_date
     stop = start.end_of_year.advance(:years => 9)
-    @moments = Moment.where(:datapoint => (start)..(stop))
+    @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
     @title = "Timeline"
     @context_menu = { 'new' => new_moment_path }
+
+    render 'index'
   end
 
   # GET /moments/year
   def year
     start = "#{params[:id].to_s}-1-1".to_date
     stop = start.end_of_year
-    @moments = Moment.where(:datapoint => (start)..(stop))
+    @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
     @title = 'Timeline'
     @context_menu = { 'new' => new_moment_path }
+
+    render 'index'
+  end
+
+  # GET /moments/decade
+  def span
+    @moments = Moment.where(:datapoint => (params[:start])..(params[:stop])).paginate(:page => params[:page], :per_page => 10)
+    @title = "Timeline Span"
+    @context_menu = { 'new' => new_moment_path }
+
+    render 'index'
   end
 
   # GET /moments/1

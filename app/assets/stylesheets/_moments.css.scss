@@ -4,9 +4,9 @@
 
 body.moments {
   #decades, #years {
-    .twocol {
+    .threecol {
       input[type=submit] {
-        width: 100% !important;
+        width: 50% !important;
       }
     }
   }
@@ -15,23 +15,20 @@ body.moments {
       width: 16% !important;
       float: left;
     }
-    .twocol:last-child {
-      margin-right: 0;
-    }
   }
   #years {
     input[type=submit] {
       width: 10% !important;
       float: left;
     }
-    .onecol:last-child {
-      margin-right: 0;
-    }
   }
   &#index {
     #years {
       display: none;
     }
+  }
+  .pagination {
+    text-align: center !important;
   }
 }
 

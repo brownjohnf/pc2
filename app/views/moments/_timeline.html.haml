@@ -1,3 +1,5 @@
+.row
+  .twelvecol.last= will_paginate
 .row#timeline
   .twelvecol.last
     - count = 1
@@ -5,3 +7,5 @@
       - align = (count.odd?) ? 'left' : 'right'
       = render :partial => 'timeline_moment', :locals => { :moment => m, :align => align }
       - count+=1
+.row
+  .twelvecol.last= will_paginate

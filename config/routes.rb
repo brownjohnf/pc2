@@ -5,6 +5,11 @@ OmniauthDemo::Application.routes.draw do
       get 'decade'
       get 'year'
     end
+    collection do
+      get 'all'
+      get 'span'
+      post 'span'
+    end
   end
 
   resources :sites
