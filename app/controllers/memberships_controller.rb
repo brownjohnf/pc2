@@ -1,4 +1,7 @@
 class MembershipsController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /memberships
   # GET /memberships.json
   def index

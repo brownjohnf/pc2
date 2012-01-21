@@ -1,5 +1,14 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :moments do
+    member do
+      get 'decade'
+      get 'year'
+    end
+  end
+
+  resources :sites
+
   resources :sectors
 
   resources :positions
@@ -12,7 +21,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :blogs
 
-  resources :feedback
+  resources :feedback, :except => [:edit, :update]
 
   resources :contributions
 
@@ -46,6 +55,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :users
 
+  get   '/timeline', :to => 'moments#index'
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'
   match '/auth/:provider/callback', :to => 'sessions#create'

@@ -1,8 +1,11 @@
 class VolunteersController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+
   # GET /volunteers
   # GET /volunteers.json
   def index
-    @volunteers = Volunteer.all
+    @volunteers = Volunteer.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

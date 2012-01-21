@@ -11,11 +11,12 @@ class User < ActiveRecord::Base
   has_many :staffs, :dependent => :destroy
   has_many :contributions, :dependent => :destroy
   has_many :blogs
+  has_many :moments
 
   belongs_to :country
 
   before_validation :clear_empty_attrs
-  validates :name, :email, :presence => true
+  validates :name, :email, :country, :presence => true
 
   accepts_nested_attributes_for :memberships, :volunteers, :staffs, :allow_destroy => true
   accepts_nested_attributes_for :blogs
@@ -41,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def moderator?
-    admin = Group.find_by_name('Moderator').users.find_by_id(self)
+    Group.find_by_name('Moderator' || 'Admin').users.find_by_id(self)
   end
 
   private

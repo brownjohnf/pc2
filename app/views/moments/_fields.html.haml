@@ -1,0 +1,18 @@
+.field
+  = f.label :country_id
+  = f.collection_select(:country_id, Country.all, :id, :name)
+.field
+  = f.label :photo_id
+  = f.number_field :photo_id
+.field
+  = f.label :datapoint
+  = f.date_select :datapoint
+.field
+  = f.label :title
+  = f.text_field :title
+.field
+  = f.label :summary
+  = f.text_area :summary
+.field
+  = f.label :content
+  = f.text_area :content

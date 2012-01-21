@@ -1,0 +1,7 @@
+.row#timeline
+  .twelvecol.last
+    - count = 1
+    - @moments.each do |m|
+      - align = (count.odd?) ? 'left' : 'right'
+      = render :partial => 'timeline_moment', :locals => { :moment => m, :align => align }
+      - count+=1

@@ -1,4 +1,7 @@
 class ScopesController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /scopes
   # GET /scopes.json
   def index

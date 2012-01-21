@@ -1,7 +1,7 @@
 .container.feed_pages
   .row
     .threecol
-      = render 'layouts/menu'
+      = render 'shared/menu'
     .sixcol
       = will_paginate @pages
       = render :partial => 'shared/feed_item', :collection => @pages

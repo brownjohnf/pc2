@@ -1,4 +1,7 @@
 class PcregionsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  
   # GET /pcregions
   # GET /pcregions.json
   def index

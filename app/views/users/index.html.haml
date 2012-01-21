@@ -2,9 +2,12 @@
   .row
     .threecol
       = render 'menu'
-      = render 'layouts/menu'
-    .ninecol.last
+      = render 'shared/menu'
+    .sixcol
+      %h1= @title
       = will_paginate
       %ul
         = render @users
       = will_paginate
+    .threecol.last
+      %p Users are people who've signed in to the site. They may not be members of our organization.

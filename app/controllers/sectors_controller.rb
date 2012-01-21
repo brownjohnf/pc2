@@ -1,4 +1,7 @@
 class SectorsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  
   # GET /sectors
   # GET /sectors.json
   def index

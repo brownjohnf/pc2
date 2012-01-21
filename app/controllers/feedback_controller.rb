@@ -1,4 +1,7 @@
 class FeedbackController < ApplicationController
+
+  before_filter :authenticate, :except => [:new, :create] #sessions helper
+
   # GET /feedback
   # GET /feedback.json
   def index
@@ -33,11 +36,6 @@ class FeedbackController < ApplicationController
     end
   end
 
-  # GET /feedback/1/edit
-  def edit
-    @feedback = Feedback.find(params[:id])
-  end
-
   # POST /feedback
   # POST /feedback.json
   def create
@@ -49,22 +47,6 @@ class FeedbackController < ApplicationController
         format.json { render json: @feedback, status: :created, location: @feedback }
       else
         format.html { render action: "new" }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /feedback/1
-  # PUT /feedback/1.json
-  def update
-    @feedback = Feedback.find(params[:id])
-
-    respond_to do |format|
-      if @feedback.update_attributes(params[:feedback])
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @feedback.errors, status: :unprocessable_entity }
       end
     end

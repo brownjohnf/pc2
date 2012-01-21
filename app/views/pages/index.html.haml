@@ -1,4 +1,6 @@
 .container.pages
   .row
-    .twelvecol.last
+    .threecol
+      = render 'shared/menu'
+    .ninecol.last
       %table= render @pages

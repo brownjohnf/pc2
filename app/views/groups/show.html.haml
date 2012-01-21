@@ -1,7 +1,7 @@
 .container
   .row
     .threecol
-      = render 'layouts/menu'
+      = render 'shared/menu'
     .sixcol
       %h1= pluralize(@group.users.count, @group.name)
       = will_paginate @users

@@ -1,25 +1,9 @@
 .container
   .row
-    .twelvecol.last
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Members</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @groups.each do |group| %>
-          <tr>
-            <td><%= group.name %></td>
-            <td><%= group.description %></td>
-            <td><%= link_to group.users.count, group_path(group) %></td>
-            <td><%= link_to 'Show', group %></td>
-            <td><%= link_to 'Edit', edit_group_path(group) %></td>
-            <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+    .threecol
+      = render 'shared/menu'
+    .sixcol
+      = render @groups
+    .threecol.last
+      %h3 About Groups
+      %p Groups control access to things like viewing, creating, editing, and deleting pages and users.

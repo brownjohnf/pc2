@@ -1,4 +1,7 @@
 class ContributionsController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /contributions
   # GET /contributions.json
   def index

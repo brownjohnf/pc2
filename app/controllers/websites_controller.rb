@@ -1,4 +1,7 @@
 class WebsitesController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  
   # GET /websites
   # GET /websites.json
   def index

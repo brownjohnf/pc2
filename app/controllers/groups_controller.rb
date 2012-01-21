@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /groups
   # GET /groups.json
   def index

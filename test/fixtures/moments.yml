@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  country_id: 1
+  photo_id: 1
+  datapoint: 2012-01-19
+  summary: MyText
+  content: MyText
+
+two:
+  user_id: 1
+  country_id: 1
+  photo_id: 1
+  datapoint: 2012-01-19
+  summary: MyText
+  content: MyText

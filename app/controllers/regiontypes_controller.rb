@@ -1,4 +1,7 @@
 class RegiontypesController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /regiontypes
   # GET /regiontypes.json
   def index

@@ -1,4 +1,7 @@
 class StaffController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+
   # GET /staff
   # GET /staff.json
   def index

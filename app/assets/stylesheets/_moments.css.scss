@@ -1,0 +1,103 @@
+// Place all the styles related to the Moments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.moments {
+  #decades, #years {
+    .twocol {
+      input[type=submit] {
+        width: 100% !important;
+      }
+    }
+  }
+  #decades {
+    input[type=submit] {
+      width: 16% !important;
+      float: left;
+    }
+    .twocol:last-child {
+      margin-right: 0;
+    }
+  }
+  #years {
+    input[type=submit] {
+      width: 10% !important;
+      float: left;
+    }
+    .onecol:last-child {
+      margin-right: 0;
+    }
+  }
+  &#index {
+    #years {
+      display: none;
+    }
+  }
+}
+
+#timeline {
+  background-image: image-url("timeline_vertical_bar.png");
+  background-position: top center;
+  background-repeat: repeat-y;
+}
+
+.moment {
+  width: 51%;
+  h2 {
+    padding-top: 0 !important;
+  }
+  .date {
+    width: 10%;
+    span {
+      display: inline-block;
+      line-height: 6em;
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
+  .info {
+    @include gradient;
+    width: 75%;
+    border: 1px solid $white;
+    border-radius: 10px;
+    padding: 1em;
+  }
+  &.left {
+    text-align: left;
+    float: right;
+    .date, .info {
+      float: left;
+    }
+    .date {
+      padding: 0 2% 0 7%;
+    }
+    p {
+      text-align: left;
+    }
+    img {
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+  }
+  &.right {
+    text-align: right;
+    float: left;
+    .date, .info {
+      float: right;
+    }
+    .date {
+      padding: 0 7% 0 2%;
+    }
+    p {
+      text-align: right !important;
+    }
+    img {
+      float: right;
+      margin: 0 0 10px 10px;
+    }
+  }
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}

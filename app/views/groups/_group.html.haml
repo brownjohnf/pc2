@@ -1,1 +1,7 @@
-%li #{link_to group.name, group} (#{group.users.count})
+%li
+  #{link_to group.name, group} (#{group.users.count})
+  - if signed_in? && current_user.admin?
+    |
+    = link_to 'Edit', edit_group_path(group)
+    |
+    = link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete

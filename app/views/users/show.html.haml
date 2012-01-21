@@ -1,7 +1,7 @@
 .container
   .row
     .threecol
-      = render 'layouts/menu'
+      = render 'shared/menu'
     .sevencol
       .sixcol
         %h1= @user.name
@@ -15,11 +15,13 @@
             - @user.volunteers.each do |v|
               #{v.local_name},
           %h4 Sector
-          = @user.volunteers.first.sector_id
-          %h4 Emphasis
-          %p= @user.volunteers.first.emphasis
-          %h4 Projects
-          %p= @user.volunteers.first.projects
+          = @user.volunteers.first.sector.name
+          - if @user.volunteers.first.emphasis
+            %h4 Emphasis
+            %p= @user.volunteers.first.emphasis
+          - if @user.volunteers.first.projects
+            %h4 Projects
+            %p= @user.volunteers.first.projects
         %h3 Connect
         %p
           = @user.email

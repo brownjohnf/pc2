@@ -1,0 +1,13 @@
+-# need to input decades, years
+.row#decades
+  .twocol= button_to 'Timeline Home', moments_path, :method => :get
+  .tencol.last
+    - if decades
+      - decades.each do |d|
+        = decade_button(d)
+- if params[:id]
+  .row#years
+    .twocol= button_to 'Timeline Home', moments_path, :method => :get
+    .tencol.last
+      - years.each do |y|
+        = year_button(params[:id].to_i + y)

@@ -2,11 +2,11 @@ class Volunteer < ActiveRecord::Base
 
   belongs_to :user
 #  belongs_to :stage
-#  belongs_to :site
+  belongs_to :site
   belongs_to :sector
 
-  validates :local_name, :presence => true
+  validates :local_name, :site_id, :presence => true
 
-  default_scope :order => 'volunteers.start DESC'
+  default_scope :order => 'volunteers.id ASC'
 
 end

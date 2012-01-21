@@ -1,1 +1,4 @@
-
+- if signed_in? and current_user.moderator?
+  %h2 Groups
+  %ul
+    %li= link_to 'New', new_group_path

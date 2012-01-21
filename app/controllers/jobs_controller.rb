@@ -1,4 +1,7 @@
 class JobsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  
   # GET /jobs
   # GET /jobs.json
   def index

@@ -1,5 +1,7 @@
 class CountriesController < ApplicationController
 
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+
   # GET /countries
   # GET /countries.json
   def index

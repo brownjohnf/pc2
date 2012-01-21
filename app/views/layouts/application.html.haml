@@ -6,14 +6,12 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
-
+    #fb-root
   %body{:class => "#{params[:controller].parameterize}", :id => "#{params[:action]}"}
     = render 'layouts/header'
     #main
       #header_spacer
-      = render 'layouts/context_menu_bar' unless @title.nil?
-      - if signed_in?
-        = render 'layouts/admin_menu_bar' if current_user.admin?
+      = render 'layouts/menu_bars' if signed_in?
       = render 'shared/notice_bar' if notice
       #page
         = yield

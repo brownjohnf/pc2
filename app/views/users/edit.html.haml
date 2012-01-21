@@ -1,7 +1,7 @@
 .container
   .row
     .threecol
-      = render 'layouts/menu'
+      = render 'shared/menu'
     .sevencol
       - @user.volunteers.build if @user.volunteers.empty?
       - @user.staffs.build if @user.staffs.empty?

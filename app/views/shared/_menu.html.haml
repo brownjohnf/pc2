@@ -3,6 +3,6 @@
   %h2 Browse
   = nested_li(fetch_menu) do |item|
     - link_to item.title, item
-  = render 'menu'
+  = render 'menu' rescue nil
   = link_to image_tag('donate_w190.png', :width => '260px'), ''
   = link_to image_tag('google_search.png'), ''

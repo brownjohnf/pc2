@@ -1,4 +1,7 @@
 class PermissionsController < ApplicationController
+
+  before_filter :authenticate #sessions helper
+
   # GET /permissions
   # GET /permissions.json
   def index

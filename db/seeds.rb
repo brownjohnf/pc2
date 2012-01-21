@@ -45,8 +45,14 @@ permission = Permission.create(
 pcregions = Pcregion.create(
                              [
                                 { name: 'N/A', short: 'N/A'},
-                                { name: 'Sub-Saharan Africa', short: 'SSA'},
-                                { name: 'North Africa / Middle East', short: 'NA/ME'}
+                                { name: 'Africa', short: 'AF'},
+                                { name: 'North Africa & The Middle East', short: 'NA/ME'},
+                                { name: 'Eastern Europe & Central Asia', short: 'EE/CA'},
+                                { name: 'Asia', short: 'AS'},
+                                { name: 'The Pacific Islands', short: 'PAC'},
+                                { name: 'The Caribbean', short: 'CAB'},
+                                { name: 'Central America & Mexico', short: 'CA/M'},
+                                { name: 'South America', short: 'SA'}
                              ]
                            )
 sectors = Sector.create(
@@ -62,7 +68,7 @@ sectors = Sector.create(
 )
 countries = Country.create(
                             [
-                               { name: 'None / Unknown',
+                               { name: 'None / Unknown Country',
                                  short: 'None',
                                  pcregion_id: 1 },
                                { name: 'United States of America',
@@ -82,6 +88,21 @@ countries = Country.create(
                                  pcregion_id: 3 }
                             ]
                           )
+regiontype = Regiontype.create(
+                                [
+                                  { name: 'Unknown Type' }
+                                ]
+)
+regions = Region.create(
+                         [
+                           { name: 'Unknown Region', short: '???', country_id: 1, type_id: 1, parent_id: nil }
+                         ]
+)
+sites = Site.create(
+                       [
+                         { name: 'Unknown Site', region_id: 1 }
+                       ]
+)
 
 pages = Page.create(
                      [
@@ -119,7 +140,9 @@ jack = User.create!(
 jack.volunteers.create!(
                         :local_name => 'Babakar Ndiaye',
                         :emphasis => 'Media',
-                        :projects => 'Website, How-To Videos'
+                        :projects => 'Website, How-To Videos',
+                        :sector_id => 1,
+                        :site_id => 1
                        )
 jack.blogs.create!(
                     :title => 'Senegal et al',

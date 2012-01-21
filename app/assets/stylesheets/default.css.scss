@@ -47,6 +47,14 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   -moz-box-shadow: 0 0 5px $box_shadow;
 }
 
+@mixin gradient {
+  background: -webkit-linear-gradient(top, $gradient_top, $gradient_bottom);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($gradient_top), to($gradient_bottom));
+  background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
+  background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
+  background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
+}
+
 .clearfloat {
   clear: both;
 }
@@ -67,11 +75,7 @@ html {
     }
     #main {
       @include red-links;
-      background: -webkit-linear-gradient(top, $gradient_top, $gradient_bottom);
-      background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($gradient_top), to($gradient_bottom));
-      background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
-      background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
-      background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
+      @include gradient;
       height: 100%;
       height: auto;
       min-height: 100%;
@@ -237,4 +241,5 @@ html {
 @import 'statics';
 @import 'users';
 @import 'feedback';
-@import 'feed'
+@import 'feed';
+@import 'moments';

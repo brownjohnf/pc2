@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118175429) do
+ActiveRecord::Schema.define(:version => 20120119173411) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -75,6 +75,18 @@ ActiveRecord::Schema.define(:version => 20120118175429) do
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "moments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "country_id"
+    t.integer  "photo_id"
+    t.date     "datapoint"
+    t.string   "title"
+    t.text     "summary"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -158,6 +170,14 @@ ActiveRecord::Schema.define(:version => 20120118175429) do
     t.datetime "updated_at"
   end
 
+  create_table "sites", :force => true do |t|
+    t.string   "name"
+    t.integer  "region_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "staff", :force => true do |t|
     t.integer  "user_id"
     t.integer  "site_id"
@@ -199,7 +219,6 @@ ActiveRecord::Schema.define(:version => 20120118175429) do
     t.integer  "sector_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "start"
   end
 
   create_table "websites", :force => true do |t|

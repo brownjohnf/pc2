@@ -13,14 +13,11 @@
     = f.number_field :cos_date
 .sixcol.last
   .field
-    = f.label 'Site'
-    = f.number_field :site_id
+    = f.label 'Site*'
+    = f.collection_select(:site_id, Site.all, :id, :name)
   .field
     = f.label 'Sector'
     = f.collection_select(:sector_id, Sector.all, :id, :name)
-  .field
-    = f.label 'Swear-in Date'
-    = f.number_field :start
 .sixcol
   .field
     = f.label 'Emphasis'

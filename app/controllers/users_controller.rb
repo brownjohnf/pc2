@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
 
+  before_filter :authenticate #sessions helper
+
   #before_filter :authenticate #sessions helper
 
   def index
     @title = 'Users'
-    #@context_menu = {'new' => new_user_path}
+    @context_menu = {'new' => new_user_path}
 
     @users = User.paginate(:page => params[:page])
   end

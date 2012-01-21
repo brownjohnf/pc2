@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
 
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy] #sessions helper
   before_filter :check_system, :only => :destroy
 
   # GET /pages

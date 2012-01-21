@@ -1,4 +1,7 @@
 class PositionsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+
   # GET /positions
   # GET /positions.json
   def index

@@ -1,4 +1,7 @@
 class RegionsController < ApplicationController
+
+  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  
   # GET /regions
   # GET /regions.json
   def index

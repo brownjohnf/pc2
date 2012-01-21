@@ -1,0 +1,11 @@
+.moment{:class => align}
+  .date
+    %span= moment.datapoint.year
+  .info
+    = image_tag(moment.photo_id)
+    %h2= moment.title
+    %p= moment.summary
+    %p
+      = link_to moment.user.name, moment.user
+      ,
+      = link_to moment.datapoint, year_moment_path(moment.datapoint.year)

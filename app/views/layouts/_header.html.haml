@@ -8,12 +8,13 @@
           %span#title_country= country
           %sub beta
         %ul{:style => "float:left;"}
-          %li= link_to 'About us', about_us_path
-          %li= link_to 'Updates', updated_pages_path
+          %li= link_to 'About us', about_us_path, :name => 'pages'
+          %li= link_to 'Updates', updated_pages_path, :name => 'pages'
           %li= link_to 'Learning', ''
           %li= link_to 'Photos', ''
           %li= link_to 'Videos', ''
           %li= link_to 'Blogs', ''
+          %li= link_to '50th', '/timeline', :name => 'timeline'
         %ul{:style => "float:right;"}
           - if signed_in?
             %li#gravatar= gravatar_for current_user
