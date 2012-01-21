@@ -1,8 +1,11 @@
 -# need to input decades, years
 .row#decades
   .threecol
-    = button_to 'Timeline Home', moments_path, :method => :get
     = button_to 'All Events', all_moments_path, :method => :get
+    = button_to 'Span of Years', span_moments_path, :method => :post
+    = text_field 'span', 'start'
+    to
+    = text_field 'span', 'stop'
   .ninecol.last
     - if decades
       - decades.each do |d|
@@ -10,9 +13,7 @@
 - if params[:id]
   .row#years
     .threecol
-      = button_to 'Span of Years', span_moments_path, :method => :post
-      = text_field 'span', 'start'
-      = text_field 'span', 'stop'
+      = button_to 'Timeline Home', moments_path, :method => :get
     .ninecol.last
       - years.each do |y|
         = year_button(params[:id].to_i + y)

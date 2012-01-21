@@ -6,6 +6,7 @@ class PermissionsController < ApplicationController
   # GET /permissions.json
   def index
     @permissions = Permission.all
+    @context_menu = {'new' => new_permission_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/1.json
   def show
     @permission = Permission.find(params[:id])
+    @context_menu = {'back' => permissions_path, 'edit' => edit_permission_path}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +30,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/new.json
   def new
     @permission = Permission.new
+    @context_menu = {'back' => permissions_path}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +41,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/1/edit
   def edit
     @permission = Permission.find(params[:id])
+    @context_menu = {'back' => permissions_path, 'cancel' => permission_path}
   end
 
   # POST /permissions

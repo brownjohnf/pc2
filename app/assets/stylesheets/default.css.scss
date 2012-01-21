@@ -55,6 +55,10 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
 }
 
+@mixin clip-corners {
+  border-radius: 10px;
+}
+
 .clearfloat {
   clear: both;
 }
@@ -208,11 +212,8 @@ html {
             }
           }
         }
-        #main_menu_logo {
-          border-radius: 10px;
-        }
         .row {
-          overflow-y: auto;
+          overflow: visible;
         }
       }
     }
@@ -243,3 +244,4 @@ html {
 @import 'feedback';
 @import 'feed';
 @import 'moments';
+@import 'pages';

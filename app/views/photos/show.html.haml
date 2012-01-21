@@ -1,0 +1,15 @@
+.container
+  .row
+    .ninecol
+      %h1= @photo.title
+      %h4= @photo.description
+    .threecol.last
+  .row
+    .ninecol
+      = image_tag @photo.photo.url(:large)
+    .threecol.last
+      %p= @photo.library_id
+      %p= link_to @photo.user.name, @photo.user
+  .row
+    .ninecol
+      %p Credit: #{(@photo.attribution) ? @photo.attribution : @photo.user.name}

@@ -76,4 +76,8 @@ module ApplicationHelper
     Page.unscoped.order('lft ASC')
   end
 
+  def render_photo(id, size)
+    image_tag((id.nil?) ? 'blank.png' : Photo.find(id).photo.url(size))
+  end
+
 end

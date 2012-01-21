@@ -1,5 +1,7 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :photos
+
   resources :moments do
     member do
       get 'decade'

@@ -1,0 +1,6 @@
+= form_for(@photo, :html => { :multipart => true } ) do |f|
+  = render 'shared/form_error' if @photo.errors.any?
+  = f.hidden_field(:user_id, :value => current_user.id)
+  = render :partial => 'fields', :locals => { :f => f }
+  .actions
+    = f.submit

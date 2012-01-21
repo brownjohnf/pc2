@@ -2,12 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.container.page {
-  ul {
-    margin-left: 2em;
+body.pages {
+  &#show {
+    #page {
+      .twocol {
+        img {
+          @include shadow;
+          @include clip-corners;
+        }
+      }
+      ul {
+        margin-left: 12em;
+      }
+    }
   }
-}
-
-.feed_item {
-  
 }

@@ -8,20 +8,24 @@
       .sixcol.last
       .sixcol
         - unless @user.volunteers.empty?
+          %h3 PCV
           %p
             = @user.country.name
             %br
             alias
             - @user.volunteers.each do |v|
               #{v.local_name},
-          %h4 Sector
-          = @user.volunteers.first.sector.name
-          - if @user.volunteers.first.emphasis
-            %h4 Emphasis
-            %p= @user.volunteers.first.emphasis
-          - if @user.volunteers.first.projects
-            %h4 Projects
-            %p= @user.volunteers.first.projects
+          - @user.volunteers.each do |v|
+            %h4 Sector
+            %p= v.sector.name
+            %h4 Site
+            %p= v.site.name
+            - if v.emphasis
+              %h4 Emphasis
+              %p= v.emphasis
+            - if v.projects
+              %h4 Projects
+              %p= v.projects
         %h3 Connect
         %p
           = @user.email
@@ -42,6 +46,24 @@
           %h3 Contributions
           %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
       .sixcol.last
+        - unless @user.staff.empty?
+          %h3 Staff Member
+          %h4 Location
+          %p= @user.staff.first.site.name
+          %p
+            = @user.staff.first.building
+            = "| #{@user.staff.first.office}" if @user.staff.first.office
+            = "| #{@user.staff.first.floor.to_i.ordinalize} floor" if @user.staff.first.floor
+          -if @user.staff.first.morning_open
+            %p
+              = @user.staff.first.morning_open.to_formatted_s(format = :time)
+              \-
+              = @user.staff.first.morning_close.to_formatted_s(format = :time)
+              %br
+              = @user.staff.first.afternoon_open.to_formatted_s(format = :time)
+              \-
+              = @user.staff.first.afternoon_close.to_formatted_s(format = :time)
+          = markdown(@user.staff.first.details) if @user.staff.first.details
         - unless @user.groups.empty?
           %h3 Groups
           %ul
@@ -50,16 +72,16 @@
           %h3 Social Connections
           %ul
             = render @user.authorizations
-        - unless @user.permissions.empty?
-          %h3 Specific Permissions
-          %ul= render :partial => 'permissions/permission', :collection => @user.permissions
-        - unless @user.groups.empty?
-          %h3 Group Permissions
-          - @user.groups.each do |g|
-            %h4= g.name
-            %ul= render :partial => 'permissions/permission', :collection => g.permissions
       - if @user.bio
         %h4.clearfloat A little bit about #{@user.name}...
         = markdown(@user.bio)
     .twocol.last
       = gravatar_for @user, :size => 160
+      - unless @user.permissions.empty?
+        %h3 Specific Permissions
+        %ul= render :partial => 'permissions/permission', :collection => @user.permissions
+      - unless @user.groups.empty?
+        %h3 Group Permissions
+        - @user.groups.each do |g|
+          %h4= g.name
+          %ul= render :partial => 'permissions/permission', :collection => g.permissions

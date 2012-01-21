@@ -1,7 +1,8 @@
 %li
   - if permission.target_id
-    %strong= permission.privilege.name
-    #{permission.target_title} #{permission.scope.name}
+    %strong= link_to permission.privilege.name, permission.privilege
+    #{link_to permission.target_title, permission.scope.name.constantize.find_by_id(permission.target_id)} #{permission.scope.title}
   - else
-    %strong= permission.privilege.name
-    all #{pluralize(permission.scope.name.constantize.count, permission.scope.name)}
+    %strong= link_to permission.privilege.name, permission.privilege
+    all #{link_to pluralize(permission.scope.name.constantize.count, permission.scope.title), permission.scope.name.constantize}
+  = link_to '>>', permission if current_user? && current_user.admin?

@@ -6,7 +6,10 @@ body.moments {
   #decades, #years {
     .threecol {
       input[type=submit] {
-        width: 50% !important;
+        width: auto !important;
+      }
+      input[type=text] {
+        width: 20%;
       }
     }
   }

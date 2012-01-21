@@ -17,15 +17,21 @@ groups = Group.create(
                       )
 privileges = Privilege.create(
                                [
-                                  { name: 'Edit',
-                                    description: 'Ability to edit.' },
-                                  { name: 'Delete',
-                                    description: 'Ability to delete.' },
-                                  { name: 'View',
-                                    description: 'Ability to view.'}
+                                  { name: 'Edit', description: 'Ability to edit.' },
+                                  { name: 'Delete', description: 'Ability to delete.' },
+                                  { name: 'View', description: 'Ability to view.'},
+                                  { name: 'Create', description: 'Ability to view.'}
                                 ]
                               )
-scopes = Scope.create([ { name: 'Page', title: 'title', description: 'Page-related privileges.' }, { name: 'Module', title: 'title', description: 'Ability to modify modules.' }, { name: 'User', title: 'title', description: 'Ability to modify users' } ])
+scopes = Scope.create(
+                       [
+                         { name: 'Page', title: 'Page', description: 'Page-related privileges.' },
+                         { name: 'Module', title: 'Training Module', description: 'Ability to modify modules.' },
+                         { name: 'User', title: 'User/Volunteer/Staff Profile', description: 'Ability to modify users' },
+                         { name: 'Photo', title: 'Photo', description: 'Ability to modify users' },
+                         { name: 'Library', title: 'Library', description: 'Ability to modify users' }
+                       ]
+                     )
 permission = Permission.create(
                                 [
                                    { group_id: 1, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120119173411) do
+ActiveRecord::Schema.define(:version => 20120121153945) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120119173411) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "system",      :default => false
+    t.integer  "photo_id"
   end
 
   create_table "pcregions", :force => true do |t|
@@ -120,6 +121,20 @@ ActiveRecord::Schema.define(:version => 20120119173411) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "target_id"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.integer  "library_id"
+    t.string   "title"
+    t.string   "description"
+    t.integer  "user_id"
+    t.string   "attribution"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "positions", :force => true do |t|

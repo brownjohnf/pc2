@@ -1,6 +1,5 @@
 - unless @context_menu.nil?
-  - if @title
-    %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
+  %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
   %ul
     - @context_menu.each do |key, val|
       %li= link_to key, val

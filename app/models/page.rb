@@ -1,8 +1,10 @@
 class Page < ActiveRecord::Base
 
-  attr_accessible :title, :description, :content, :parent_id
+  attr_accessible :title, :description, :content, :parent_id, :photo_id
 
   acts_as_nested_set
+
+  belongs_to :photo
 
   validates :title, :description, :content, :presence => true
 

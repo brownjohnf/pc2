@@ -12,10 +12,10 @@
         = f.fields_for :volunteers do |f2|
           = f2.hidden_field(:user_id, :value => @user.id)
           = render :partial => 'volunteers/fields', :locals => { :f => f2 }
-    - unless @user.staffs.empty?
+    - unless @user.staff.empty?
       .twelvecol.last
         %h2 Staff Member
-        = f.fields_for :staffs do |s|
+        = f.fields_for :staff do |s|
           = s.hidden_field(:user_id, :value => @user.id)
           = render :partial => 'staff/fields', :locals => { :f => s }
   .twelvecol.last

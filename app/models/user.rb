@@ -8,17 +8,18 @@ class User < ActiveRecord::Base
 
   has_many :authorizations, :dependent => :destroy
   has_many :volunteers, :dependent => :destroy
-  has_many :staffs, :dependent => :destroy
+  has_many :staff, :dependent => :destroy
   has_many :contributions, :dependent => :destroy
   has_many :blogs
   has_many :moments
+  has_many :photos
 
   belongs_to :country
 
   before_validation :clear_empty_attrs
   validates :name, :email, :country, :presence => true
 
-  accepts_nested_attributes_for :memberships, :volunteers, :staffs, :allow_destroy => true
+  accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs
 
   before_create :make_salt

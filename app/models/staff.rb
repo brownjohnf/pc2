@@ -1,6 +1,7 @@
 class Staff < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :site
 
   has_many :jobs
   has_many :positions, :through => :jobs

@@ -1,12 +1,12 @@
-.container.page
+.container
   .row
-    .threecol.menu_col
+    .threecol
       = render 'shared/menu'
     .sevencol.show_page
       %h1= @page.title
       = markdown(@page.content)
     .twocol.last
-      = image_tag('', :width => '200px')
+      = image_tag((@page.photo.nil?) ? 'blank.png' : @page.photo.photo.url(:small))
       %h2 Case Studies
       %h3 Tags
       %h3 Authors

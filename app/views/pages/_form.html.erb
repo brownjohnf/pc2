@@ -24,6 +24,10 @@
     <%= f.collection_select(:parent_id, Page.all, :id, :title) %>
   </div>
   <div class="field">
+    <%= f.label :photo_id %>
+    <%= f.collection_select(:photo_id, Photo.all, :id, :title) %>
+  </div>
+  <div class="field">
     <%= f.label :content %>
     <%= f.text_area :content %>
   </div>

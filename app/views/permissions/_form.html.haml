@@ -17,7 +17,7 @@
       .field
         = f.label :scope_id
         %br
-        = f.collection_select(:scope_id, Scope.all, :id, :name)
+        = f.collection_select(:scope_id, Scope.all, :id, :title)
     .twocol
       .field
         = f.label :target_id
