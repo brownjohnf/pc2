@@ -14,4 +14,7 @@
       }
     }
   }
+  &#support {
+    @extend body.pages;
+  }
 }

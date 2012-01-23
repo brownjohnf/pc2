@@ -1,6 +1,8 @@
-- unless @context_menu.nil?
-  %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
-  %ul
-    - @context_menu.each do |key, val|
-      %li= link_to key, val
-  .clearfloat
+%h4 #{params[:controller].parameterize.singularize.capitalize} Actions
+%ul
+  %li= link_to 'index', :controller => params[:controller], :action => :index
+  %li= link_to 'new', :controller => params[:controller], :action => :new
+  - if params[:id] && params[:action] == 'show'
+    %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id]
+    %li= link_to 'destroy', params[:controller].parameterize.singularize.capitalize.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete
+.clearfloat

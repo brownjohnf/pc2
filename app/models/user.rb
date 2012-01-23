@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_attached_file :avatar, :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980' }
+
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
 
@@ -13,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :blogs
   has_many :moments
   has_many :photos
+  has_many :stacks
+  has_many :libraries
 
   belongs_to :country
 
@@ -44,6 +48,15 @@ class User < ActiveRecord::Base
 
   def moderator?
     Group.find_by_name('Moderator' || 'Admin').users.find_by_id(self)
+  end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
+  def destroy_avatar
+    self.avatar = nil
+    self.save
   end
 
   private

@@ -9,4 +9,8 @@ class Volunteer < ActiveRecord::Base
 
   default_scope :order => 'volunteers.id ASC'
 
+  def to_param
+    "#{id}-#{user.name.parameterize}"
+  end
+
 end

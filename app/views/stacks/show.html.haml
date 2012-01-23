@@ -1,0 +1,30 @@
+.container
+  .row
+    .threecol
+      = render 'shared/menu'
+    .ninecol.last
+      :erb
+        <p>
+          <b>User:</b>
+          <%= @stack.user.name %>
+        </p>
+
+        <p>
+          <b>Scope:</b>
+          <%= @stack.scope.title %>
+        </p>
+
+        <p>
+          <b>Target:</b>
+          <%= link_to @stack.scope.name.constantize.find(@stack.target_id).inspect, @stack.scope.name.constantize.find(@stack.target_id) %>
+        </p>
+
+        <p>
+          <b>Comment:</b>
+          <%= @stack.comment %>
+        </p>
+
+        <p>
+          <b>Library:</b>
+          <%= @stack.library.name %>
+        </p>

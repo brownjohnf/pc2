@@ -1,5 +1,5 @@
 %p By adding content to Volunteer or Staff fields, you will create a Volunteer, Staff member, or both.
-= form_for(@user) do |f|
+= form_for(@user, :html => { :multipart => true } ) do |f|
   = render :partial => 'shared/form_error', :collection => @user
   = render :partial => 'shared/form_error', :collection => @volunteer
   = render :partial => 'shared/form_error', :collection => @staff

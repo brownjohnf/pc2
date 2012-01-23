@@ -12,8 +12,14 @@ body.pages {
         }
       }
       ul {
-        margin-left: 12em;
+        margin-left: 2em;
       }
+    }
+  }
+  &#map {
+    ul {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
   }
 }

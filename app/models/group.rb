@@ -11,4 +11,8 @@ class Group < ActiveRecord::Base
 
   default_scope :order => 'groups.name ASC'
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
 end

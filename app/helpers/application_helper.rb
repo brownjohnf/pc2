@@ -18,12 +18,15 @@ module ApplicationHelper
     'Senegal'
   end
 
-  def gravatar_for(user, options = { :size => 50 })
-    link_to gravatar_image_tag(user.email.downcase, :alt => user.name, :width => options[:size], :height => options[:size], :gravatar => options), 'http://gravatar.com/emails', :class => 'gravatar', :target => '_blank'
-  end
-
-  def avatar_for(object, options = { :photo => 'test.jpg', :size => 50 })
-    link_to image_tag(options[:photo], :width => options[:size], :height => options[:size]), object
+  def avatar_for(object, options = { :size => nil, :photo => 'blank.png' })
+    if object.photo.nil?
+      options[:size] ||= '100x100'
+      options[:photo] ||= 'blank.png'
+      link_to image_tag(options[:photo], :size => options[:size]), object
+    else
+      options[:size] ||= :icon
+      link_to image_tag(object.photo.photo.url(options[:size])), object
+    end
   end
 
   def markdown(text)

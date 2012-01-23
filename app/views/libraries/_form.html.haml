@@ -1,0 +1,17 @@
+= form_for(@library) do |f|
+  = render 'shared/form_error' if @library.errors.any?
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :country_id
+    = f.collection_select(:country_id, Country.all, :id, :name)
+  .field
+    = f.label :user_id
+    = f.collection_select(:user_id, User.all, :id, :name)
+  .actions
+    = f.submit

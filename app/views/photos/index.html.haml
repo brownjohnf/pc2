@@ -1,31 +1,6 @@
 .container
   .row
     .twelvecol.last
-      :erb
-        <table>
-          <tr>
-            <th></th>
-            <th>Library</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>User</th>
-            <th>Attribution</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @photos.each do |photo| %>
-          <tr>
-            <td><%= image_tag photo.photo.url(:icon) %></td>
-            <td><%= photo.library_id %></td>
-            <td><%= photo.title %></td>
-            <td><%= photo.description %></td>
-            <td><%= photo.user.name %></td>
-            <td><%= photo.attribution %></td>
-            <td><%= link_to 'Show', photo %></td>
-            <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-            <td><%= link_to 'Destroy', photo, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+      = will_paginate
+      = render :partial => @photos, :locals => { :size => :icon }
+      = will_paginate

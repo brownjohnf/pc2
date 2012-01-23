@@ -4,23 +4,23 @@
     = f.text_field :name
   .field
     = f.label 'Primary Email*'
-    = f.text_field :email
+    = f.email_field :email
   .field
     = f.label 'Primary Phone'
     = f.text_field :phone1
-  .field
-    = f.label 'Personal Website'
-    = f.text_field :site
 .sixcol.last
   .field
     = f.label 'Country of Service/Residence*'
     = f.collection_select(:country_id, Country.all, :id, :name)
   .field
     = f.label 'Secondary Email'
-    = f.text_field :email2
+    = f.email_field :email2
   .field
     = f.label 'Secondary Phone'
     = f.text_field :phone2
+  .field
+    = f.label 'Profile Photo'
+    = f.file_field :avatar
 .twelvecol.last
   .field
     = f.label 'Bio'
@@ -34,6 +34,9 @@
     .field
       = f3.label 'Blog URL'
       = f3.text_field :url
+    .field
+      = f.label 'Personal Website'
+      = f.text_field :site
   .sixcol.last
     .field
       = f3.label 'Blog Description'

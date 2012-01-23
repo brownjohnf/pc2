@@ -1,11 +1,18 @@
-.moment{:class => align}
-  .date
-    %span= moment.datapoint.year
-  .info
-    = image_tag(moment.photo_id)
-    %h2= moment.title
-    %p= moment.summary
+.row.moment
+  .onecol
+  .twocol
+    = gravatar_for(moment.user, :size => 200)
+    %h4= moment.datapoint
     %p
       = link_to moment.user.name, moment.user
       ,
       = link_to moment.datapoint, year_moment_path(moment.datapoint.year)
+  .sixcol
+    %h2= moment.title
+    %p
+      = image_tag(moment.user.photos.first.photo.url(:small)) unless moment.user.photos.empty?
+      = moment.summary
+    = markdown(moment.content)
+    %p= link_to 'View full event &rarr;', moment
+  .twocol
+  .threecol.last

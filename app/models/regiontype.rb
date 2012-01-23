@@ -4,4 +4,8 @@ class Regiontype < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  def to_param
+    "#{id}-#{.parameterize}"
+  end
+
 end

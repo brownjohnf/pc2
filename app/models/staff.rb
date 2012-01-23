@@ -14,6 +14,10 @@ class Staff < ActiveRecord::Base
     user.name
   end
 
+  def to_param
+    "#{id}-#{user.name.parameterize}"
+  end
+
   private
 
     def add_default_permissions

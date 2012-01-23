@@ -1,0 +1,31 @@
+.container
+  .row
+    .threecol
+      = render 'shared/menu'
+    .ninecol.last
+      :erb
+        <table>
+          <tr>
+            <th>User</th>
+            <th>Scope</th>
+            <th>Target</th>
+            <th>Comment</th>
+            <th>Library</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @stacks.each do |stack| %>
+          <tr>
+            <td><%= link_to stack.user.name, stack.user %></td>
+            <td><%= link_to stack.scope.title, stack.scope %></td>
+            <td><%= link_to stack.scope.name.constantize.find(stack.target_id).title, stack.scope.name.constantize.find(stack.target_id) %></td>
+            <td><%= stack.comment %></td>
+            <td><%= link_to stack.library.name, stack.library %></td>
+            <td><%= link_to 'Show', stack %></td>
+            <td><%= link_to 'Edit', edit_stack_path(stack) %></td>
+            <td><%= link_to 'Destroy', stack, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>

@@ -8,7 +8,6 @@ class PagesController < ApplicationController
   def index
     @pages = Page.all
     @title = 'Listing Pages'
-    @context_menu = {'new' => new_page_path, 'recently updated' => updated_pages_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,15 +18,17 @@ class PagesController < ApplicationController
   def added
     @pages = Page.order('created_at DESC').paginate(:page => params[:page])
     @title = 'Page Feed'
-    @context_menu = {'back' => pages_path}
     render 'feed'
   end
 
   def updated
     @pages = Page.order('updated_at DESC').paginate(:page => params[:page])
     @title = 'Page Feed'
-    @context_menu = {'back' => pages_path}
     render 'feed'
+  end
+
+  def map
+    @title = 'Page Map'
   end
 
   # GET /pages/1
@@ -54,7 +55,6 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     @title = 'New Page'
-    @context_menu = {'cancel' => pages_path}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,8 +65,7 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
-    @title = @page.title
-    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'cancel' => page_path}
+    @title = "Edit #{@page.title}"
 
   end
 

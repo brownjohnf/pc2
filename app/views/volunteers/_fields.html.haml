@@ -3,6 +3,13 @@
     = f.label 'Local Name*'
     = f.text_field :local_name
   .field
+    = f.label 'Sector'
+    = f.collection_select(:sector_id, Sector.all, :id, :name)
+  .field
+    = f.label 'Site*'
+    = f.collection_select(:site_id, Site.all, :id, :name)
+.sixcol.last
+  .field
     = f.label 'PC ID Number'
     = f.number_field :pc_id
   .field
@@ -11,13 +18,6 @@
   .field
     = f.label 'COS Date'
     = f.number_field :cos_date
-.sixcol.last
-  .field
-    = f.label 'Site*'
-    = f.collection_select(:site_id, Site.all, :id, :name)
-  .field
-    = f.label 'Sector'
-    = f.collection_select(:sector_id, Sector.all, :id, :name)
 .sixcol
   .field
     = f.label 'Emphasis'

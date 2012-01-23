@@ -14,17 +14,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    #@group_permissions = {}
-    #@user.groups.each do |g|
-     # g.permissions.each do |p|
-      #  if p.target_id.nil?
-       #   @group_permissions = { g.name => { p.scope.name => { p.privilege.name => {  :name => 'All', :path => '' } } } }
-       # else
-        #  @group_permissions = { g.name => { p.scope.name => { p.privilege.name => { :name => p.scope.name.constantize.find_by_id(p.target_id).title, :path => '' } } } }
-        #end
-      #end
-    #end
-
     @title = @user.name
     @context_menu = {'back' => users_path, 'edit' => edit_user_path}
   end
@@ -78,6 +67,12 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = 'User destroyed.'
     redirect_to users_path
+  end
+
+  def remove_avatar
+    @user = User.find(params[:id])
+    @user.avatar = nil
+    @user.save
   end
 
 end

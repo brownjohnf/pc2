@@ -1,0 +1,13 @@
+.container
+  .row
+    .threecol
+      = render 'shared/menu'
+    .sevencol
+      %h1= @library.name
+      - @library.stacks.each do |s|
+        = render s.scope.name.constantize.find(s.target_id)
+    .twocol.last
+      %h4= @library.description
+      %p= @library.country.name
+      %p This library is managed by
+      = render @library.user

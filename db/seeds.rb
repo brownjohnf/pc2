@@ -161,6 +161,12 @@ jack.memberships.create!(
                             { :group_id => 3 }
                           ]
                         )
+languages = Language.create(
+                             [
+                               { :name => 'Sereer', :description => 'A lovely little language.' },
+                               { :name => 'English', :description => 'The greatest language in the world.' }
+                              ]
+                           )
 
 Page.rebuild!
 Page.last.move_to_child_of(Page.find_by_id(5))

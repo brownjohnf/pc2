@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = Photo.paginate(:page => params[:page], :per_page => 20)
     @context_menu = {'new' => new_photo_path}
 
     respond_to do |format|
@@ -18,7 +18,9 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo = Photo.find(params[:id])
-    @context_menu = {'back' => photos_path, 'edit' => edit_photo_path}
+    scope = Scope.where(:name => 'Photo')
+    @stacks = Stack.where(:scope_id => scope, :target_id => params[:id])
+    @stack = Stack.new
 
     respond_to do |format|
       format.html # show.html.erb

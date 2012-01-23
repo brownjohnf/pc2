@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  group_id: 1
+  scope_id: 1
+  target_id: 1
+  title: MyString
+  description: MyString
+  country_id: 1
+  library_id: 1
+
+two:
+  user_id: 1
+  group_id: 1
+  scope_id: 1
+  target_id: 1
+  title: MyString
+  description: MyString
+  country_id: 1
+  library_id: 1

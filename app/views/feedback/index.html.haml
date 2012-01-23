@@ -9,7 +9,6 @@
             <th>Content</th>
             <th></th>
             <th></th>
-            <th></th>
           </tr>
 
         <% @feedback.each do |feedback| %>
@@ -17,7 +16,6 @@
             <td><%= feedback.subject %></td>
             <td><%= feedback.content %></td>
             <td><%= link_to 'Show', feedback %></td>
-            <td><%= link_to 'Edit', edit_feedback_path(feedback) %></td>
             <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>

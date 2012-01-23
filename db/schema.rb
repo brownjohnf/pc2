@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121153945) do
+ActiveRecord::Schema.define(:version => 20120123152218) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -68,6 +68,22 @@ ActiveRecord::Schema.define(:version => 20120121153945) do
     t.date     "start"
     t.date     "end"
     t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "languages", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "libraries", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "country_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -193,6 +209,16 @@ ActiveRecord::Schema.define(:version => 20120121153945) do
     t.datetime "updated_at"
   end
 
+  create_table "stacks", :force => true do |t|
+    t.integer  "library_id"
+    t.integer  "user_id"
+    t.integer  "scope_id"
+    t.integer  "target_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "staff", :force => true do |t|
     t.integer  "user_id"
     t.integer  "site_id"
@@ -220,6 +246,11 @@ ActiveRecord::Schema.define(:version => 20120121153945) do
     t.string   "phone1"
     t.string   "phone2"
     t.string   "site"
+    t.integer  "photo_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "volunteers", :force => true do |t|

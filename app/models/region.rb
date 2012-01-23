@@ -7,4 +7,8 @@ class Region < ActiveRecord::Base
 
   validates :name, :short, :country_id, :type_id, :presence => true
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
 end

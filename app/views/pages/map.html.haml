@@ -1,0 +1,9 @@
+.container
+  .row
+    .threecol
+      = render 'shared/menu'
+    .sixcol
+      %h1= @title
+      = nested_li(fetch_menu) do |item|
+        - link_to item.title, item
+    .threecol.last

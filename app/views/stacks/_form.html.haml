@@ -1,0 +1,20 @@
+= form_for(@stack) do |f|
+  = render 'shared/form_error' if @stack.errors.any?
+
+  .field
+    = f.label :user_id
+    = f.collection_select(:user_id, User.all, :id, :name)
+  .field
+    = f.label :scope_id
+    = f.collection_select(:scope_id, Scope.all, :id, :title)
+  .field
+    = f.label :target_id
+    = f.collection_select(:target_id, Photo.all, :id, :title)
+  .field
+    = f.label :comment
+    = f.text_field :comment
+  .field
+    = f.label :library_id
+    = f.collection_select(:library_id, Library.all, :id, :name)
+  .actions
+    = f.submit

@@ -11,7 +11,6 @@ class MomentsController < ApplicationController
     end
     @moments = Moment.where(:id => search_set).paginate(:page => params[:page], :per_page => 10)
     @title = 'Timeline'
-    @context_menu = { 'new' => new_moment_path }
 
     render 'index'
   end
@@ -21,7 +20,6 @@ class MomentsController < ApplicationController
   def all
     @moments = Moment.paginate(:page => params[:page], :per_page => 50)
     @title = 'All Timeline Moments'
-    @context_menu = { 'new' => new_moment_path }
 
     render 'index'
   end
@@ -32,7 +30,6 @@ class MomentsController < ApplicationController
     stop = start.end_of_year.advance(:years => 9)
     @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
     @title = "Timeline"
-    @context_menu = { 'new' => new_moment_path }
 
     render 'index'
   end
@@ -43,16 +40,14 @@ class MomentsController < ApplicationController
     stop = start.end_of_year
     @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
     @title = 'Timeline'
-    @context_menu = { 'new' => new_moment_path }
-
-    render 'index'
   end
 
-  # GET /moments/decade
+  # GET /moments/span
   def span
-    @moments = Moment.where(:datapoint => (params[:start])..(params[:stop])).paginate(:page => params[:page], :per_page => 10)
+    start = "#{params[:start].to_s}-1-1".to_date
+    stop = "#{params[:stop].to_s}-1-1".to_date
+    @moments = Moment.where(:datapoint => (start..stop)).paginate(:page => params[:page], :per_page => 10)
     @title = "Timeline Span"
-    @context_menu = { 'new' => new_moment_path }
 
     render 'index'
   end

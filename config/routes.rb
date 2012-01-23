@@ -1,8 +1,14 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :languages
+
+  resources :libraries
+
+  resources :stacks
+
   resources :photos
 
-  resources :moments do
+  resources :moments, :path => 'timeline' do
     member do
       get 'decade'
       get 'year'
@@ -45,6 +51,7 @@ OmniauthDemo::Application.routes.draw do
       get :updated
       get :added
       get :popular
+      get :map
     end
   end
 
@@ -60,22 +67,25 @@ OmniauthDemo::Application.routes.draw do
 
   resources :regions
 
-  resources :users
+  resources :users do
+    member do
+      put :remove_avatar
+    end
+  end
 
-  get   '/timeline', :to => 'moments#index'
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
-  match 'disclaimer', :to => redirect('/pages/1')
-  match 'privacy_policy', :to => redirect('/pages/2')
-  match 'support', :to => redirect('/pages/3')
-  match 'security', :to => redirect('/pages/4')
-  match "about_us", :to => redirect('/pages/5')
+  match '/disclaimer', :to => 'statics#disclaimer'
+  match '/privacy', :to => 'statics#privacy'
+  match '/support', :to => 'statics#support'
+  match '/security', :to => 'statics#security'
+  match '/about_us', :to => 'statics#about_us'
+  match '/splash', :to => 'statics#splash'
 
-  match 'splash', :to => 'static#splash'
-  match 'feedback', :to => 'feedback#new'
+  match '/feedback', :to => 'feedback#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -126,7 +136,7 @@ OmniauthDemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'static#home'
+  root :to => 'statics#home'
 
   # See how all your routes lay out with "rake routes"
 

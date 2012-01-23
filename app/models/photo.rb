@@ -5,13 +5,14 @@ class Photo < ActiveRecord::Base
   belongs_to :user
 
   has_many :pages
+  has_many :moments
 
   after_destroy :reset_pointers
 
   private
 
   def reset_pointers
-    
+
   end
 
 end

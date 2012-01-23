@@ -1,19 +1,19 @@
 .container
-  = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => [0,1,2,3,4,5,6,7,8,9], :disabled => 'false' }
-  .row
+  = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => nil }
+  .row.box
     .threecol
     .ninecol.last
       %h1
         = @moment.title
         |
         = @moment.datapoint.to_date.year
-  .row
     .threecol
-      = image_tag @moment.photo_id, :width => '100%'
-      = @moment.user.name
+      = image_tag @moment.photo.photo.url(:small), :width => '100%' unless @moment.photo.nil?
+      = link_to @moment.user.name, @moment.user
       %br
-      = @moment.user.volunteers.first.site.region.country.name
-      = @moment.user.volunteers.first.site.name
+      = link_to @moment.user.volunteers.first.site.region.country.name, @moment.user.volunteers.first.site.region.country
+      |
+      = link_to @moment.user.volunteers.first.site.name, @moment.user.volunteers.first.site
     .sixcol
       = markdown(@moment.content)
     .threecol.last

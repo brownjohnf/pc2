@@ -3,5 +3,7 @@
     .threecol.last
       = render 'shared/menu'
     .sixcol
+      %h1= @title
+      - @page.contributions.build if @page.contributions.empty?
       = render 'form'
     .threecol.last

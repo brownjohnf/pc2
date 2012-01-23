@@ -1,0 +1,11 @@
+= form_for(@contribution) do |f|
+  = render 'shared/form_error' if @contribution.errors.any?
+  = render :partial => 'fields', :locals => { :f => f }
+  .field
+    = f.label :scope_id
+    = f.collection_select(:scope_id, Scope.all, :id, :name)
+  .field
+    = f.label :target_id
+    = f.number_field :target_id
+  .actions
+    = f.submit

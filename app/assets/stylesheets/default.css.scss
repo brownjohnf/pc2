@@ -37,9 +37,13 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   }
 }
 
-@mixin shadow {
-  box-shadow: 0 0 5px $box_shadow;
-  -moz-box-shadow: 0 0 5px $box_shadow;
+@mixin shadow($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
+  box-shadow: $hshift $vshift $spread $color;
+  -moz-box-shadow: $hshift $vshift $spread $color;
+}
+@mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
+  box-shadow: $hshift $vshift $spread $color inset;
+  -moz-box-shadow: $hshift $vshift $spread $color inset;
 }
 
 @mixin shadow-bottom {
@@ -47,20 +51,23 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   -moz-box-shadow: 0 0 5px $box_shadow;
 }
 
-@mixin gradient {
-  background: -webkit-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($gradient_top), to($gradient_bottom));
-  background: -moz-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -ms-linear-gradient(top, $gradient_top, $gradient_bottom);
-  background: -o-linear-gradient(top, $gradient_top, $gradient_bottom);
+@mixin gradient($top: $gradient_top, $bottom: $gradient_bottom) {
+  background: -webkit-linear-gradient(top, $top, $bottom);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($top), to($bottom));
+  background: -moz-linear-gradient(top, $top, $bottom);
+  background: -ms-linear-gradient(top, $top, $bottom);
+  background: -o-linear-gradient(top, $top, $bottom);
 }
 
-@mixin clip-corners {
-  border-radius: 10px;
+@mixin clip-corners($radius: 10px) {
+  border-radius: $radius;
 }
 
 .clearfloat {
   clear: both;
+}
+.right {
+  text-align: right !important;
 }
 
 html {
@@ -183,8 +190,7 @@ html {
             height: 100px;
           }
           label {
-            display: inline-block;
-            width: 8em;
+            display: block;
             color: $gray;
           }
           .actions {
@@ -213,7 +219,7 @@ html {
           }
         }
         .row {
-          overflow: visible;
+          padding: 5px 0;
         }
       }
     }
@@ -245,3 +251,4 @@ html {
 @import 'feed';
 @import 'moments';
 @import 'pages';
+@import 'photos';

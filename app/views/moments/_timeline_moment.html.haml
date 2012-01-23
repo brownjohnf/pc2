@@ -1,12 +1,16 @@
-.moment{:class => align}
-  %a{:href => moment_path(moment)}
-    .date
-      %span= moment.datapoint.year
-    .info
-      = image_tag(moment.photo_id)
-      %h2= moment.title
-      %p= moment.summary
-      %p
-        = link_to moment.user.name, moment.user
-        ,
-        = link_to moment.datapoint, year_moment_path(moment.datapoint.year)
+.row{:class => align}
+  .bumper &nbsp;
+  .date
+    %span= moment.datapoint.year
+  .timeline_moment
+    .box
+      .avatar
+        = avatar_for moment, :size => :small
+        = link_to 'View Event', moment
+      .info
+        %h2= moment.title
+        %p= moment.summary
+        %p
+          = link_to moment.user.name, moment.user
+          ,
+          = link_to moment.datapoint, year_moment_path(moment.datapoint.year)

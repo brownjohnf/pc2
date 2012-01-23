@@ -10,7 +10,10 @@ span.admin, span.moderator {
 .users {
   &#show {
     #page {
-      a.gravatar {
+      input[type=submit] {
+        width: 100%;
+      }
+      a.avatar {
         img {
           @include shadow;
           border-radius: 10px;
@@ -27,6 +30,7 @@ span.admin, span.moderator {
 li.user {
   clear: both;
   padding: .5em 0;
+  list-style: none;
   img {
     margin: 0 10px 10px 10px;
   }

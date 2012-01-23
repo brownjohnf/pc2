@@ -1,7 +1,6 @@
-%a{:href => feed_item}
-  .feed.feed_item
-    = avatar_for feed_item, :size => '7em'
-    .feed_body
-      %h3= feed_item.title
-      %p= feed_item.description
-      %p= truncate(feed_item.content, :length => 200, :separator => ' ')
+.twelvecol.last.feed_item
+  .threecol= avatar_for feed_item
+  .ninecol.last
+    %h3= feed_item.title
+    %p= link_to feed_item.description, feed_item
+    %p= truncate(feed_item.content, :length => 200, :separator => ' ')
