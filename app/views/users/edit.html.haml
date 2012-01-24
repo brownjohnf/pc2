@@ -3,8 +3,6 @@
     .threecol
       = render 'shared/menu'
     .sevencol
-      - @user.volunteers.build if @user.volunteers.empty?
-      - @user.staff.build if @user.staff.empty?
       - @user.blogs.build if @user.blogs.empty?
       = render 'form'
     .twocol.last

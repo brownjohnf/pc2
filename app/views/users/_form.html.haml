@@ -33,4 +33,4 @@
           = f.label :group_id
           = f.collection_select(:group_id, Group.all, :id, :name)
         .actions
-          = f.submit
+          = f.submit 'Add user to group'
