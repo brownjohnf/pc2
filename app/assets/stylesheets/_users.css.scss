@@ -13,14 +13,9 @@ span.admin, span.moderator {
       input[type=submit] {
         width: 100%;
       }
-      a.avatar {
-        img {
-          @include shadow;
-          border-radius: 10px;
-        }
-      }
-      ul {
-        li {
+      li.user {
+        &:hover {
+          background-color: $light_gray;
         }
       }
     }
@@ -33,12 +28,11 @@ li.user {
   list-style: none;
   img {
     margin: 0 10px 10px 10px;
+    width: 50px;
+    float: left;
   }
   h4 {
     padding: 0 !important;
-  }
-  &:hover {
-    background-color: $light_gray;
   }
   & > a {
     &:first-child {

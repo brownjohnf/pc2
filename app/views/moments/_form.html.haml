@@ -1,8 +1,11 @@
 = form_for(@moment) do |f|
-  = render 'shared/form_error' if @moment.errors.any?
+  = render :partial => 'shared/form_error', :locals => { :a => @moment } if @moment.errors.any?
   .field
     = f.label :user_id
     = f.collection_select(:user_id, User.all, :id, :name)
   = render :partial => 'fields', :locals => { :f => f }
+  = f.fields_for :photos do |p|
+    = p.hidden_field(:user_id, :value => current_user.id)
+    = render :partial => 'photos/fields', :locals => { :f => p }
   .actions
     = f.submit

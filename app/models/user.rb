@@ -14,11 +14,14 @@ class User < ActiveRecord::Base
   has_many :contributions, :dependent => :destroy
   has_many :blogs
   has_many :moments
-  has_many :photos
-  has_many :stacks
+  has_many :stacks, :as => :stackable
+  has_many :added_stacks, :as => :user
   has_many :libraries
+  has_many :photos, :as => :imageable
+  has_many :uploaded_photos, :as => :user
 
   belongs_to :country
+  belongs_to :photo
 
   before_validation :clear_empty_attrs
   validates :name, :email, :country, :presence => true

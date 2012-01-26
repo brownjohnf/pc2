@@ -9,7 +9,7 @@
           %li= link_to 'Recently added', added_pages_path
           %li= link_to 'Recently updated', updated_pages_path
           %li= link_to 'Most popular', ''
-          %li Site map
+          %li= link_to 'Site map', map_pages_path
       .twocol
         %ul
           %li Blogs
@@ -19,7 +19,7 @@
           %li= link_to 'Recently updated', ''
       .twocol
         %ul
-          %li Modules
+          %li Lessons
           %li= link_to 'View by sector', ''
           %li= link_to 'View by curriculum', ''
           %li= link_to 'Recently added', ''
@@ -29,19 +29,18 @@
         %ul
           %li Profiles &amp; Photos
           %li= link_to 'Search', ''
-          %li= link_to 'All photos', photos_path
-          %li= link_to 'Photo Albums', ''
+          %li= link_to 'Photo Albums', libraries_path
           %li= link_to 'Browse profiles', users_path
     .clearfloat
   .container
     .row
       .sixcol
         %ul
-          %li= link_to 'Disclaimer', disclaimer_path
-          %li= link_to 'Privacy Policy', privacy_path
-          %li= link_to 'Support', support_path
-          %li= link_to 'Security', security_path
-          %li= link_to 'About us', about_us_path
+          %li= link_to 'Disclaimer', '/disclaimer'
+          %li= link_to 'Privacy Policy', '/privacy_path'
+          %li= link_to 'Support', '/support'
+          %li= link_to 'Security', '/security'
+          %li= link_to 'About us', '/about_us'
           %li= (signed_in?) ? link_to('Log out', logout_path) : link_to('Sign in', login_path)
         #legal
           Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 John F. Brown.

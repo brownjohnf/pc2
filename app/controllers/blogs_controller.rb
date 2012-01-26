@@ -1,16 +1,14 @@
 class BlogsController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show] #sessions helper
-  
+
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.paginate(:page => params[:page])
+    @title = 'Peruse Our Pages'
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @blogs }
-    end
+    render 'feed'
   end
 
   # GET /blogs/1

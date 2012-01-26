@@ -83,4 +83,8 @@ module ApplicationHelper
     image_tag((id.nil?) ? 'blank.png' : Photo.find(id).photo.url(size))
   end
 
+  def photobar_selector
+    Photo.limit(20)
+  end
+
 end

@@ -1,5 +1,6 @@
 %tr
   %td= avatar_for(page)
+  %td= page.language.name if page.language
   %td
     %h1= page.title
   %td= page.description

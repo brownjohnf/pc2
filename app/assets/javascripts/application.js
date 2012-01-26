@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.url
 //= require 1140_cssgrid/css3-mediaqueries

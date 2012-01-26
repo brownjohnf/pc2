@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123152218) do
+ActiveRecord::Schema.define(:version => 20120126151332) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
     t.datetime "updated_at"
   end
 
+  create_table "imports", :force => true do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.integer  "scope_id"
+    t.boolean  "processed"
+    t.string   "csv_file_name"
+    t.string   "csv_content_type"
+    t.integer  "csv_file_size"
+    t.datetime "csv_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jobs", :force => true do |t|
     t.integer  "staff_id"
     t.integer  "position_id"
@@ -77,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "libraries", :force => true do |t|
@@ -118,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
     t.datetime "updated_at"
     t.boolean  "system",      :default => false
     t.integer  "photo_id"
+    t.integer  "language_id"
   end
 
   create_table "pcregions", :force => true do |t|
@@ -140,10 +155,8 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
   end
 
   create_table "photos", :force => true do |t|
-    t.integer  "library_id"
     t.string   "title"
     t.string   "description"
-    t.integer  "user_id"
     t.string   "attribution"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -151,6 +164,9 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.integer  "user_id"
   end
 
   create_table "positions", :force => true do |t|
@@ -212,11 +228,11 @@ ActiveRecord::Schema.define(:version => 20120123152218) do
   create_table "stacks", :force => true do |t|
     t.integer  "library_id"
     t.integer  "user_id"
-    t.integer  "scope_id"
-    t.integer  "target_id"
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "stackable_id"
+    t.string   "stackable_type"
   end
 
   create_table "staff", :force => true do |t|

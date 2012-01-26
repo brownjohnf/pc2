@@ -11,6 +11,22 @@ body.photos {
       .row:last-child {
         padding-bottom: 50px;
       }
+      input[type=submit] {
+        width: 100%;
+      }
+      .libraries {
+        input[type=submit] {
+          float: right;
+          width: auto;
+        }
+      }
     }
+  }
+}
+
+a.photo_thumb {
+  img {
+    @include shadow(10px);
+    margin: 10px;
   }
 }

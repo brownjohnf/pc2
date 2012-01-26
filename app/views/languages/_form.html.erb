@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label 'Name*' %><br />
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Two-letter Code*' %><br />
+    <%= f.text_field :code %>
   </div>
   <div class="field">
     <%= f.label :description %><br />

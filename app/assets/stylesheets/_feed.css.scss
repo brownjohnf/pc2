@@ -2,6 +2,9 @@
   padding: 1em 0 !important;
   clear: both;
   @include clip-corners(5px);
+  input[type=submit] {
+    float: right;
+  }
   &:hover {
     background-color: $gradient_top * 2;
   }

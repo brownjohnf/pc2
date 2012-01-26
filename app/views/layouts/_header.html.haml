@@ -8,8 +8,10 @@
           %span#title_country= country
           %sub beta
         %ul{:style => "float:left;"}
-          %li= link_to 'About us', about_us_path, :name => 'pages'
-          %li= link_to 'Updates', updated_pages_path, :name => 'pages'
+          %li= link_to 'Browse', pages_path
+          %li= link_to 'About us', '/about_us'
+          %li= link_to 'Users', users_path if signed_in?
+          %li= link_to 'Updates', updated_pages_path
           %li= link_to 'Learning', ''
           %li= link_to 'Photos', photos_path
           %li= link_to 'Videos', ''

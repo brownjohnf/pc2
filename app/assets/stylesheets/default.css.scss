@@ -13,12 +13,14 @@ $header_border: #2d2d2d;
 $footer_underscore: #bbb;
 $footer_v_spacer: #ccc;
 $footer_background: #eee;
-$green: green;
 $white: #fff;
 $black: #000;
 $steel_blue: #95b4c9;
 $panic: red;
-$pale_green: #a1d1a1;
+
+$green: green;
+$middle_green: #D8E47E;
+$pale_green: #FAFFD7;
 
 $header_font_size: 1em;
 $header_menu_padding: 1em;
@@ -70,6 +72,11 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   text-align: right !important;
 }
 
+hr {
+  border: none;
+  border-bottom: 1px solid $light_gray;
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -90,6 +97,12 @@ html {
       height: 100%;
       height: auto;
       min-height: 100%;
+      a.avatar {
+        img {
+          @include shadow;
+          border-radius: 10px;
+        }
+      }
       hr {
         width: 99%;
         border-color: $light_gray;
@@ -99,10 +112,19 @@ html {
         margin-bottom: -1px;
         font-size: $header_font_size;
       }
+      #photobar {
+        img {
+          padding: 0;
+          margin: 0;
+          float: left;
+          width: 5%;
+        }
+      }
       #notice {
         @include shadow-bottom;
+        border: 1px solid $middle_green;
         background-color: $pale_green;
-        color: green;
+        color: $green;
         padding: 1em 0;
         position: relative;
         z-index: 10;
@@ -122,7 +144,10 @@ html {
         }
       }
       #page {
-        margin: 1.5em 0;
+        padding: 1.5em 0;
+        @include shadow(1px, 0, -1px);
+        position: relative;
+        z-index: 15;
         p {
           margin: 5px;
           line-height: 1.5em;

@@ -6,7 +6,6 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.paginate(:page => params[:page], :per_page => 20)
-    @context_menu = {'new' => new_photo_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,9 +17,8 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo = Photo.find(params[:id])
-    scope = Scope.where(:name => 'Photo')
-    @stacks = Stack.where(:scope_id => scope, :target_id => params[:id])
-    @stack = Stack.new
+    @next = Photo.unscoped.order('photos.id ASC').where("id > #{params[:id]}").limit(1).first
+    @prev = Photo.unscoped.order('photos.id DESC').where("id < #{params[:id]}").limit(1).first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -31,8 +29,7 @@ class PhotosController < ApplicationController
   # GET /photos/new
   # GET /photos/new.json
   def new
-    @photo = Photo.new
-    @context_menu = {'cancel' => photos_path}
+    @photo = current_user.photos.build(:user_id => current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,13 +40,13 @@ class PhotosController < ApplicationController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
-    @context_menu = {'back' => photos_path, 'cancel' => photo_path}
   end
 
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = current_user.photos.build(params[:photo])
+    @photo.user_id = current_user.id
 
     respond_to do |format|
       if @photo.save
@@ -89,4 +86,5 @@ class PhotosController < ApplicationController
       format.json { head :ok }
     end
   end
+
 end

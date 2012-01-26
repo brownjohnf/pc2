@@ -1,0 +1,9 @@
+.container
+  .row
+    .threecol
+      = render 'shared/menu'
+    .sixcol
+      = will_paginate
+      = render @blogs
+      = will_paginate
+    .threecol.last

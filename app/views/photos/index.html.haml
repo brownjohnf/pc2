@@ -1,6 +1,9 @@
 .container
   .row
-    .twelvecol.last
+    .threecol
+      = render 'shared/menu'
+    .ninecol.last
+      %h1 Photo Gallery
       = will_paginate
       = render :partial => @photos, :locals => { :size => :icon }
       = will_paginate

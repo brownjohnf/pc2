@@ -1,20 +1,22 @@
 .container
   = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => nil }
-  .row.box
+  .row.moment
     .threecol
-    .ninecol.last
-      %h1
-        = @moment.title
-        |
-        = @moment.datapoint.to_date.year
-    .threecol
-      = image_tag @moment.photo.photo.url(:small), :width => '100%' unless @moment.photo.nil?
-      = link_to @moment.user.name, @moment.user
-      %br
-      = link_to @moment.user.volunteers.first.site.region.country.name, @moment.user.volunteers.first.site.region.country
-      |
-      = link_to @moment.user.volunteers.first.site.name, @moment.user.volunteers.first.site
+      %h4= @moment.datapoint.strftime('%B %Y')
+      = avatar_for_user(@moment.user, :size => :small)
+      %p
+        = link_to @moment.user.name, @moment.user
+        %br
+        = link_to @moment.user.country.name, @moment.user.country
+        %br
+        = link_to @moment.user.volunteers.first.sector.name, @moment.user.volunteers.first.sector if @moment.user.volunteers.any?
+        %br
+        = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
+        \-
+        = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
     .sixcol
+      %h1= @moment.title
       = markdown(@moment.content)
     .threecol.last
-      = @moment.summary
+      %p= @moment.summary
+      = render @photos if @photos

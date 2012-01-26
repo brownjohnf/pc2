@@ -1,7 +1,7 @@
 class RegionsController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show] #sessions helper
-  
+
   # GET /regions
   # GET /regions.json
   def index
@@ -45,7 +45,6 @@ class RegionsController < ApplicationController
   def edit
     @region = Region.find(params[:id])
     @title = @region.name
-    @context_menu = {'regions' => regions_path, 'new' => new_region_path, 'show' => region_path}
   end
 
   # POST /regions

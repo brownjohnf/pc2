@@ -8,6 +8,8 @@
     = text_field_tag 'start', nil, :maxlength => 4, :size => 4
     to
     = text_field_tag 'stop', nil, :maxlength => 4, :size => 4
+    :erb
+      </form>
   .ninecol.last
     .twelvecol.last#decades
       - if decades
@@ -16,4 +18,4 @@
     - if params[:id] && !years.nil?
       .twelvecol.last#years
         - years.each do |y|
-          = year_button(params[:id].to_i + y)
+          = year_button((truncate(params[:id], :length => 2).to_i * 10).to_i + y)

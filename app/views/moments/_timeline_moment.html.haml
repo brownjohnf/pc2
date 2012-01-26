@@ -10,7 +10,5 @@
       .info
         %h2= moment.title
         %p= moment.summary
-        %p
-          = link_to moment.user.name, moment.user
-          ,
-          = link_to moment.datapoint, year_moment_path(moment.datapoint.year)
+        %ul
+          = render moment.user

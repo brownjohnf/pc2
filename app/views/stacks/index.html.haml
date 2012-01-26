@@ -7,8 +7,8 @@
         <table>
           <tr>
             <th>User</th>
-            <th>Scope</th>
-            <th>Target</th>
+            <th>Stackable_id</th>
+            <th>Stackable_type</th>
             <th>Comment</th>
             <th>Library</th>
             <th></th>
@@ -19,8 +19,8 @@
         <% @stacks.each do |stack| %>
           <tr>
             <td><%= link_to stack.user.name, stack.user %></td>
-            <td><%= link_to stack.scope.title, stack.scope %></td>
-            <td><%= link_to stack.scope.name.constantize.find(stack.target_id).title, stack.scope.name.constantize.find(stack.target_id) %></td>
+            <td><% stack.stackable_id %></td>
+            <td><% stack.stackable_type %></td>
             <td><%= stack.comment %></td>
             <td><%= link_to stack.library.name, stack.library %></td>
             <td><%= link_to 'Show', stack %></td>

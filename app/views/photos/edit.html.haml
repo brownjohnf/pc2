@@ -1,4 +1,6 @@
 .container
   .row
-    .twelvecol.last
+    .threecol
+      = render @photo, :size => :small
+    .ninecol.last
       = render 'form'

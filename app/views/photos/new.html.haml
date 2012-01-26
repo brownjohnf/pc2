@@ -1,4 +1,7 @@
 .container
   .row
-    .twelvecol.last
+    .threecol
+      = @user
+      = current_user.name
+    .ninecol.last
       = render 'form'

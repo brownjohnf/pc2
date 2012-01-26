@@ -4,6 +4,7 @@ tmp/
 .sass-cache/
 *.komodoedit
 .DS_Store
+omniauth.rb.bak
 
 # from github suggested list
 

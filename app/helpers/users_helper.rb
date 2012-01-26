@@ -5,7 +5,7 @@ module UsersHelper
     if user.avatar?
       link_to image_tag(user.avatar.url(options[:size])), user, :class => 'avatar'
     else
-      link_to gravatar_for(user, :size => sizes[options[:size]])
+      gravatar_for(user, :size => sizes[options[:size]])
     end
   end
 

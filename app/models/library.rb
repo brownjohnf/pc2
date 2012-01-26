@@ -5,7 +5,7 @@ class Library < ActiveRecord::Base
   belongs_to :country
   belongs_to :user
 
-  validates :name, :presence => true
+  validates :name, :user, :country, :presence => true
 
   def to_param
     "#{id}-#{name.parameterize}"

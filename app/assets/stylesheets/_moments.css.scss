@@ -3,11 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.moments {
-  &#year {
+  &#year, &#show {
     .row.moment {
-      img {
-        float: left;
+      h1, h4 {
+        padding-top: 0 !important;
       }
+      h4 {
+        font-size: 2.5em !important;
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+  &#year {
+    .twocol.last {
+      text-align: center;
+      margin-top: 2em;
     }
   }
   #buttongroup {
@@ -43,13 +53,6 @@ body.moments {
       display: none;
     }
   }
-  &#show {
-    .box {
-      @include gradient;
-      @include clip-corners;
-      border: 1px solid $white;
-    }
-  }
   .pagination {
     text-align: center !important;
   }
@@ -62,7 +65,7 @@ body.moments {
       }
       .date {
         width: 10%;
-        text-align: center;
+        text-align: center !important;
         span {
           display: inline-block;
           line-height: 6em;
@@ -71,25 +74,27 @@ body.moments {
         }
       }
       .timeline_moment {
-        width: 39%;
+        width: 40%;
         .box {
           @include gradient($white, $steel_blue);
           @include clip-corners(10px);
           padding: 1em;
+          ul {
+            margin: 0 !important;
+          }
           h2 {
             padding-top: 0 !important;
           }
           .info {
             width: 80%;
           }
-          .avatar {
+          & > .avatar {
             width: 20%;
           }
         }
       }
       &.left {
         .timeline_moment {
-          margin-left: 1%;
           .box {
             @include shadow-inset(5px, 1px, -1px);
           }
@@ -100,25 +105,31 @@ body.moments {
             text-align: right !important;
             margin-right: 10px !important;
           }
-          .avatar {
+          div.avatar {
             text-align: right !important;
           }
         }
       }
       &.right {
         .timeline_moment {
-          margin-right: 1%;
           .box {
             @include shadow-inset(5px, -1px, -1px);
           }
         }
         div {
           float: left;
+          text-align: left;
           p, h2 {
-            margin-right: 10px !important;
+            margin-left: 10px !important;
           }
-          .avatar {
+          div.avatar {
             text-align: left !important;
+          }
+          li.user {
+            text-align: right;
+            & > a:first-child {
+              float: right;
+            }
           }
         }
       }
@@ -129,4 +140,3 @@ body.moments {
     background-size: 10px auto;
   }
 }
-

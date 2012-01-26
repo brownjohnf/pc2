@@ -1,0 +1,10 @@
+.twelvecol.last.feed_item
+  .threecol= avatar_for_user blog.user
+  .ninecol.last
+    %h3= blog.title
+    %p= link_to blog.description, blog
+    %p
+      - if current_user && current_user.moderator?
+        = button_to 'edit', edit_blog_path(blog), :method => :get
+        - if current_user.admin?
+          = button_to 'delete', blog, confirm: 'Are you sure?', method: :delete

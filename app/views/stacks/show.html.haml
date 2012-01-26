@@ -10,13 +10,13 @@
         </p>
 
         <p>
-          <b>Scope:</b>
-          <%= @stack.scope.title %>
+          <b>Type:</b>
+          <%= @stack.stackable_type %>
         </p>
 
         <p>
-          <b>Target:</b>
-          <%= link_to @stack.scope.name.constantize.find(@stack.target_id).inspect, @stack.scope.name.constantize.find(@stack.target_id) %>
+          <b>ID:</b>
+          <% link_to @stack.stackable_id %>
         </p>
 
         <p>

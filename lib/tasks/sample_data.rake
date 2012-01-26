@@ -13,7 +13,7 @@ def make_users
   99.times do |n|
     name = Faker::Name.name
     email = Faker::Internet.email
-    user = User.create!(:name => name, :email => email, :country_id => 1, :bio => '# Bio Here')
+    user = User.create!(:name => name, :email => email, :country_id => 1+rand(5), :bio => '# Bio Here')
     user.volunteers.create!(:local_name => Faker::Name.name, :sector_id => 1+rand(7), :site_id => 1)
   end
 end
@@ -46,7 +46,7 @@ end
 
 def make_moments
 	99.times do |n|
-    Moment.create!(
+    moment = Moment.create!(
 	                  [
 		                  { :title => Faker::Company.catch_phrase, :summary => Faker::Lorem.paragraph, :content => Faker::Lorem.paragraphs(8), :photo_id => 1, :user_id => 1+rand(99), :datapoint => (1963+rand(50)).to_s + '-' + (1+rand(12)).to_s + '-' + (1+rand(30)).to_s }
 		                ]

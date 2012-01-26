@@ -6,6 +6,7 @@ class FeedbackController < ApplicationController
   # GET /feedback.json
   def index
     @feedback = Feedback.all
+    @title = 'Feedback'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,7 @@ class FeedbackController < ApplicationController
   # GET /feedback/1.json
   def show
     @feedback = Feedback.find(params[:id])
+    @title = 'View Feedback'
 
     respond_to do |format|
       format.html # show.html.erb

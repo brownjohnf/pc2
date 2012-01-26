@@ -4,8 +4,9 @@
       = render 'shared/menu'
     .sevencol
       %h1= @library.name
+      %h4 Photos
       - @library.stacks.each do |s|
-        = render s.scope.name.constantize.find(s.target_id)
+        = render s.stackable
     .twocol.last
       %h4= @library.description
       %p= @library.country.name

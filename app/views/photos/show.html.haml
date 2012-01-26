@@ -1,37 +1,44 @@
 .container
   .row
     .twelvecol.last
-      %h1= @photo.title
+      %h1= (@photo.title) ? @photo.title : @photo.photo_file_name
       %h4= @photo.description
     .twelvecol.last
       &nbsp;
     .twelvecol.last
       .twocol
-        = button_to '< Previous', photo_path(@photo.id - 1), :method => :get if Photo.where(:id => @photo.id - 1).any?
-        - if @stacks
+        = button_to '< Previous', @prev, :method => :get if @prev
+        = button_to 'Back', pages_path, :method => :get
+        .libraries{:style => (@photo.stacks.any? ? nil : 'display:none;')}
           %h3 Libraries
-          - @stacks.each do |s|
-            %p= link_to s.library.name, s.library
-        = form_for(@stack, :remote => true) do |f|
-          = render 'shared/form_error' if @stack.errors.any?
-          = f.hidden_field(:user_id, :value => current_user.id)
-          = f.hidden_field(:scope_id, :value => Scope.where(:name => 'Photo').first.id)
-          = f.hidden_field(:target_id, :value => @photo.id)
-          .field
-            = f.collection_select(:library_id, Library.all, :id, :name)
-          .actions
-            = f.submit 'Add to a library'
-
+          %ul
+          - if @photo.stacks.any?
+            - @photo.stacks.each do |s|
+              %li
+                = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...'
+                = link_to s.library.name, s.library if s.id
+                .clearfloat
+        - if current_user.libraries.any?
+          %h3 Add to a library
+          - @stack = @photo.stacks.build
+          = form_for @stack, :remote => true do |f|
+            = render 'shared/form_error' if @stack.errors.any?
+            = f.hidden_field(:stackable_id)
+            = f.hidden_field(:stackable_type)
+            .field
+              = f.collection_select(:library_id, current_user.libraries.all, :id, :name)
+            .actions
+              = f.submit 'Add to library', :disable_with => 'adding...'
       .eightcol
         = image_tag @photo.photo.url(:large)
       .twocol.last
-        = button_to 'Next &rarr;', photo_path(@photo.id + 1), :method => :get if Photo.where(:id => @photo.id + 1).any?
+        = button_to 'Next >', @next, :method => :get if @next
     .twelvecol.last
       .twocol
       .twocol
         %p
           Credit:
-          = (@photo.attribution.empty?) ? link_to(@photo.user.name, @photo.user) : @photo.attribution
+          = (@photo.attribution) ? link_to(@photo.user.name, @photo.user) : @photo.attribution
       .twocol
         %p
           Uploaded by
