@@ -2,8 +2,9 @@
   .row
     .threecol
       = render 'shared/menu'
-    .sixcol
+    .sevencol
       = will_paginate @pages
       = render :partial => 'shared/feed_item', :collection => @pages
       = will_paginate @pages
-    .threecol.last
+    .twocol.last
+      = render 'shared/social'

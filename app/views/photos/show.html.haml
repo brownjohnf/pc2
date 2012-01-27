@@ -8,7 +8,8 @@
     .twelvecol.last
       .twocol
         = button_to '< Previous', @prev, :method => :get if @prev
-        = button_to 'Back', pages_path, :method => :get
+        = button_to 'Back to browse', pages_path, :method => :get
+        = button_to 'Delete Photo', @photo, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'deleting...' if signed_in? && (current_user.admin? || current_user.moderator?)
         .libraries{:style => (@photo.stacks.any? ? nil : 'display:none;')}
           %h3 Libraries
           %ul
@@ -18,7 +19,7 @@
                 = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...'
                 = link_to s.library.name, s.library if s.id
                 .clearfloat
-        - if current_user.libraries.any?
+        - if signed_in? && current_user.libraries.any?
           %h3 Add to a library
           - @stack = @photo.stacks.build
           = form_for @stack, :remote => true do |f|

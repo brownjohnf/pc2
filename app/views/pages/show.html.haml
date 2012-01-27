@@ -6,7 +6,7 @@
       %h1= @page.title
       = markdown(@page.content)
     .twocol.last
-      = image_tag((@page.photo.nil?) ? 'blank.png' : @page.photo.photo.url(:small))
+      = avatar_for @page, :size => :thumb
       %h2 Case Studies
       %h3 Tags
       %h3 Authors

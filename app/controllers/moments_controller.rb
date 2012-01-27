@@ -56,7 +56,6 @@ class MomentsController < ApplicationController
   # GET /moments/1.json
   def show
     @moment = Moment.find(params[:id])
-    @photos = @moment.photos
 
     respond_to do |format|
       format.html # show.html.erb

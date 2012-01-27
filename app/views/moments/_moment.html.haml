@@ -14,6 +14,7 @@
       = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
       \-
       = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
+      = button_to 'Edit', edit_moment_path(moment), :method => :get if signed_in? && current_user.admin? || current_user.moderator? || current_user?(moment.user)
   .sixcol
     %h1= moment.title
     %p
@@ -26,5 +27,8 @@
     - else
       = markdown(moment.content)
   .twocol.last
-    = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
-    = render moment.photos if moment.photos
+    - if moment.photos.any?
+      = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
+      = render moment.photos.limit(3)
+      %br
+      = link_to 'view all photos', moment if moment.photos.count > 3

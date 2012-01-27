@@ -248,17 +248,6 @@ html {
         }
       }
     }
-    #feedback {
-      @include red-links;
-      background-color: $white;
-      padding: 5px;
-      margin: 3px;
-      border-radius: 5px;
-      border: 1px solid $light_gray;
-      position: fixed;
-      bottom: 0;
-      right: 0;
-    }
   }
 }
 
