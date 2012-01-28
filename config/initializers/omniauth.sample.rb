@@ -1,5 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   # Create apps with the following providers, and then insert the keys and secrets below.
+  provider :developer unless Rails.env.production?
   provider :facebook, '', ''
   provider :twitter, '', ''
   provider :github, '', ''
