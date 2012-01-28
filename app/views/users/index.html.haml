@@ -1,12 +1,12 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sixcol
+    .span-15
       %h1= @title
       = will_paginate
       %ul
         = render @users
       = will_paginate
-    .threecol.last
+    .span-4.last
       %p Users are people who've signed in to the site. They may not be members of our organization.

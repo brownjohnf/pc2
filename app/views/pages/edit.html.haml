@@ -1,9 +1,9 @@
 .container
   .row
-    .threecol.last
+    .span-5
       = render 'shared/menu'
-    .sixcol
+    .span-15
       %h1= @title
       - @page.contributions.build if @page.contributions.empty?
       = render 'form'
-    .threecol.last
+    .span-4.last

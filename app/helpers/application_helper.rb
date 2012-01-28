@@ -22,10 +22,10 @@ module ApplicationHelper
     if object.photo.nil?
       options[:size] ||= '100x100'
       options[:photo] ||= 'blank.png'
-      link_to image_tag(options[:photo], :size => options[:size]), object
+      link_to image_tag(options[:photo], :size => options[:size]), object, :class => 'avatar'
     else
       options[:size] ||= :icon
-      link_to image_tag(object.photo.photo.url(options[:size])), object
+      link_to image_tag(object.photo.photo.url(options[:size])), object, :class => 'avatar'
     end
   end
 

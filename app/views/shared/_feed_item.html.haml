@@ -1,16 +1,16 @@
-.twelvecol.last.feed_item
-  .threecol= avatar_for feed_item, :size => :thumb
-  .sixcol
+.span-24.last.feed_item
+  .span-6= avatar_for feed_item, :size => :thumb
+  .span-12
     %h3= feed_item.title
     %p= link_to feed_item.description, feed_item
     %p= truncate(feed_item.content, :length => 200, :separator => ' ')
-  .threecol.last
+  .span-6.last
     %p
       #{time_ago_in_words(feed_item.updated_at)} ago
       %br
       = link_to feed_item.language.code.upcase, feed_item.language if feed_item.language
     %p
       - if current_user && current_user.moderator?
-        = button_to 'edit', {:controller => params[:controller], :action => :edit, :id => feed_item.id}, :method => :get
+        = button_to 'edit', "edit_#{feed_item.class.name.downcase}_path", :method => :get
       - if current_user.admin?
         = button_to 'delete', feed_item.class.name.constantize.find(feed_item.id), confirm: 'Are you sure?', method: :delete

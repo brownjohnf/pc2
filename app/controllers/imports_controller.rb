@@ -105,15 +105,48 @@ class ImportsController < ApplicationController
     require 'yaml'
     @import = Import.find(params[:id])
     yaml = YAML.load(File.read(@import.csv.path))
-    yaml.each do |y|
-      case @import.scope.name
-      when 'Page'
-        new_page(y)
-      when 'User'
+    case @import.scope.name
+    when 'Page'
+      yaml.each do |y|
+        if y['case_study'] == 0
+          new_page(y)
+        end
+      end
+      pages = Hash.new
+      yaml.each do |y|
+        pages[y['id']] = y
+      end
+      pages.each do |id, data|
+        unless data['parent_id'] == 0 || data['case_study'] == 1
+          page = Page.where(:title => data['title']).first
+          page.parent_id = Page.where(:title => pages[data['parent_id']]['title']).first.id
+          page.save!
+        end
+      end
+      Page.rebuild!
+    when 'User'
+      yaml.each do |y|
         new_user(y)
       end
+    when 'Site'
+      yaml.each do |y|
+        unless Site.where(:name => y['site_name']).any?
+          new_site(y)
+        end
+      end
+    when 'Stage'
+      yaml.each do |y|
+        unless Stage.where(:name => y['stage_name']).any?
+          new_stage(y)
+        end
+      end
+    when 'Sector'
+      yaml.each do |y|
+        unless Sector.where(:name => y['sector_name']).any?
+          new_sector(y)
+        end
+      end
     end
-    Page.rebuild!
     @import.processed = true
     @import.save
     flash[:notice] = "YAML data processing was successful."
@@ -131,48 +164,6 @@ class ImportsController < ApplicationController
     end
 
     def new_user(people)
-=begin
-  model requires:
-    :name, :email, :country_id
-  function expects:
-    people
-      0  id,
-      01  fb_id,
-      02  group_id,
-      03  fname,
-      04  lname,
-      05  gender,
-      06  project,
-      07  email1,
-      08  email2,
-      09  phone1,
-      10  phone2,
-      11  address,
-      12  blog_address,
-      13  blog_name,
-      14  blog_description,
-      15  is_user,
-      16  is_moderator,
-      17  is_admin,
-      18  created,
-      19  edited,
-      20  last_activity,
-      21  altered_id,
-      22  delete
-    volunteers
-      id: 1
-      user_id: 100537877
-      pc_id: 100568953
-      stage_id: 24
-      cos: 1383541200
-      local_name: "Mariama Diallo"
-      site_id: 1
-      sector_id: 1
-      created: 1320165845
-      edited: 1320488871
-      altered_id: 100537874
-      delete: 0
-=end
       params = Hash.new
       params[:user] = Hash.new
 
@@ -185,43 +176,48 @@ class ImportsController < ApplicationController
       user = User.new(params[:user])
       user.save!
       user.blogs.create!(:title => people['blog_name'], :description => people['blog_description'], :url => people['blog_address'])
-      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :site_id => (people['site_id'] ? people['site_id'] : 1), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => people['stage_id'], :sector_id => people['sector_id'])
+      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => Stage.where(:name => people['stage_name']).first.id, :sector_id => Sector.where(:name => people['sector_name']).first.id, :site_id => Site.where(:name => people['site_name']).first.id)
       user.memberships.create!(:group_id => Group.where(:name => 'User').first.id)
       user.save!
     end
 
     def new_page(y)
-=begin
-  model requires:
-    :title, :description, :content, :language_id
-  function expects:
-    00  id,
-    01  title,
-    02  url,
-    03  group_id,
-    04  parent_id,
-    05  description,
-    06  content,
-    07  tags,
-    08  profile_photo,
-    09  visibility,
-    10  updated,
-    11  edited,
-    12  created,
-    13  altered_id,
-    14  delete,
-    15  case_study
-=end
       params = Hash.new
       params[:page] = Hash.new
 
       params[:page]['title'] = y['title']
       params[:page]['description'] = y['description']
       params[:page]['content'] = y['content']
-      params[:page]['parent_id'] = y['parent_id']
       params[:page]['language_id'] = Language.where(:name => 'English')
       page = Page.new(params[:page])
-      page.save
+      page.save!
+    end
+
+    def new_site(site)
+      params = Hash.new
+      params[:site] = Hash.new
+
+      params[:site]['name'] = site['site_name']
+      new_site = Site.new(params[:site])
+      new_site.save!
+    end
+
+    def new_stage(stage)
+      params = Hash.new
+      params[:stage] = Hash.new
+
+      params[:stage]['name'] = stage['stage_name']
+      new_stage = Stage.new(params[:stage])
+      new_stage.save!
+    end
+
+    def new_sector(sector)
+      params = Hash.new
+      params[:sector] = Hash.new
+
+      params[:sector]['name'] = sector['sector_name']
+      new_sector = Sector.new(params[:sector])
+      new_sector.save
     end
 
 end

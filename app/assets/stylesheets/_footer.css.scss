@@ -27,7 +27,7 @@ footer {
     &:last-child {
       background-color: $gradient_top * 1.04;
       border-top: 1px solid $white;
-      .sixcol:first-child {
+      .left {
         ul {
           float: left;
           list-style-type: none;
@@ -44,7 +44,7 @@ footer {
           }
         }
       }
-      .sixcol:last-child {
+      .right {
         text-align: right;
         p {
           margin: .5em 0;

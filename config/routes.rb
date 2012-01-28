@@ -90,7 +90,6 @@ OmniauthDemo::Application.routes.draw do
   match '/security', :to => 'statics#security'
   match '/about_us', :to => 'statics#about_us'
   match '/splash', :to => 'statics#splash'
- # match '/50th', :to => 'pages/7'
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'

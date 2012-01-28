@@ -1,22 +1,22 @@
 %p By adding content to Volunteer or Staff fields, you will create a Volunteer, Staff member, or both.
 = form_for(@user, :html => { :multipart => true } ) do |f|
   = render :partial => 'shared/form_error', :collection => @user
-  .twelvecol.last
+  .span-24.last
     %h2 User
     = render :partial => 'fields', :locals => { :f => f }
     - unless @user.volunteers.empty?
-      .twelvecol.last
+      .span-24.last
         %h2 Volunteer
         = f.fields_for :volunteers do |f2|
           = f2.hidden_field(:user_id, :value => @user.id)
           = render :partial => 'volunteers/fields', :locals => { :f => f2 }
     - unless @user.staff.empty?
-      .twelvecol.last
+      .span-24.last
         %h2 Staff Member
         = f.fields_for :staff do |s|
           = s.hidden_field(:user_id, :value => @user.id)
           = render :partial => 'staff/fields', :locals => { :f => s }
-  .twelvecol.last
+  .span-24.last
     %br
     %hr
     %br

@@ -113,6 +113,7 @@ html {
         font-size: $header_font_size;
       }
       #photobar {
+        background-color: black;
         img {
           padding: 0;
           margin: 0;
@@ -251,7 +252,7 @@ html {
   }
 }
 
-
+@import 'layout';
 @import 'header';
 @import 'context_menu_bar';
 @import 'admin_menu_bar';

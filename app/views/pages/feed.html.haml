@@ -1,10 +1,10 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sevencol
+    .span-15
       = will_paginate @pages
       = render :partial => 'shared/feed_item', :collection => @pages
       = will_paginate @pages
-    .twocol.last
+    .span-4.last
       = render 'shared/social'

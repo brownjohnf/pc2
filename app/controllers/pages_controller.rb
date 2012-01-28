@@ -6,20 +6,20 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.paginate(:page => params[:page])
+    @pages = Page.paginate(:page => params[:page], :per_page => 10)
     @title = 'Peruse Our Pages'
 
     render 'feed'
   end
 
   def added
-    @pages = Page.unscoped.order('created_at DESC').paginate(:page => params[:page])
+    @pages = Page.unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
     @title = 'Page Feed'
     render 'feed'
   end
 
   def updated
-    @pages = Page.unscoped.order('updated_at DESC').paginate(:page => params[:page])
+    @pages = Page.unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 10)
     @title = 'Page Feed'
     render 'feed'
   end

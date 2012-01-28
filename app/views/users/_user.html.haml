@@ -1,7 +1,8 @@
 %li.user
   = avatar_for_user user
   %h4= link_to user.name, user
-  = link_to user.country.name, user.country
-  %br
-  = link_to user.volunteers.first.sector.name, user.volunteers.first.sector if user.volunteers.any?
+  %p
+    = link_to user.country.name, user.country
+    %br
+    = link_to user.volunteers.first.sector.name, user.volunteers.first.sector if user.volunteers.any?
   .clearfloat
