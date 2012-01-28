@@ -176,7 +176,7 @@ class ImportsController < ApplicationController
       user = User.new(params[:user])
       user.save!
       user.blogs.create!(:title => people['blog_name'], :description => people['blog_description'], :url => people['blog_address'])
-      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => Stage.where(:name => people['stage_name']).first.id, :sector_id => Sector.where(:name => people['sector_name']).first.id, :site_id => Site.where(:name => people['site_name']).first.id)
+      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => (Stage.where(:name => people['stage_name']).any? ? Stage.where(:name => people['stage_name']).first.id : nil), :sector_id => (Sector.where(:name => people['sector_name']).any? ? Sector.where(:name => people['sector_name']).first.id : nil), :site_id => (Site.where(:name => people['site_name']).any? ? Site.where(:name => people['site_name']).first.id : nil))
       user.memberships.create!(:group_id => Group.where(:name => 'User').first.id)
       user.save!
     end

@@ -17,9 +17,9 @@
               #{v.local_name},
           - @user.volunteers.each do |v|
             %h4 Sector
-            %p= v.sector.name
+            %p= v.sector.name if v.sector
             %h4 Site
-            %p= v.site.name
+            %p= v.site.name if v.site
             - if v.emphasis
               %h4 Emphasis
               %p= v.emphasis

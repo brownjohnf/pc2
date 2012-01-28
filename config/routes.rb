@@ -1,5 +1,7 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :stages
+
   resources :imports do
     member do
       get 'process_yaml'
