@@ -1,13 +1,12 @@
 .container
-  .row
-    .threecol
-      = render 'shared/menu'
-    .sevencol.show_page
-      %h1= @page.title
-      = markdown(@page.content)
-    .twocol.last
-      = avatar_for @page, :size => :thumb
-      %h2 Case Studies
-      %h3 Tags
-      %h3 Authors
-      = render 'shared/social'
+  .column.span-5
+    = render 'shared/menu'
+  .column.span-15
+    %h1= @page.title
+    = markdown(@page.content)
+  .column.span-4.last
+    = avatar_for @page, :size => :thumb
+    %h2 Case Studies
+    %h3 Tags
+    %h3 Authors
+    = render 'shared/social'

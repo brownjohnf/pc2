@@ -1,0 +1,8 @@
+- imports = Import.all
+- if imports.count > 0
+  %ul
+  - imports.each do |i|
+    %li
+      = link_to i.name, i
+      %br
+      = i.comment

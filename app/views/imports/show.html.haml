@@ -1,9 +1,16 @@
 .container
   .row
-    .twelvecol.last
+    .threecol
+      = render 'menu'
+    .ninecol.last
+      %h1= @import.name
+      %h4= @import.comment
+      %p= @import.scope.name
       %p
-        Scope:
-        = @import.scope.name
-      %p
-        Processed:
+        Processed?
         = @import.processed
+      %p= @import.csv.path
+      %p
+        - if @import.processed == true
+          Success! This import contained #{@import.processed} records
+      %p= link_to "process", process_yaml_import_path(@import)
