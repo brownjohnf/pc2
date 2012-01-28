@@ -1,6 +1,6 @@
 -# need to input decades, years
 .row
-  .threecol#buttongroup
+  .span-6#buttongroup
     = button_to 'Timeline Home', moments_path, :method => :get
     = button_to 'All Events', all_moments_path, :method => :get
     = form_tag(span_moments_path)
@@ -10,12 +10,13 @@
     = text_field_tag 'stop', nil, :maxlength => 4, :size => 4
     :erb
       </form>
-  .ninecol.last
-    .twelvecol.last#decades
+  .span-18.last
+    .span-24.last#decades
       - if decades
         - decades.each do |d|
           = decade_button(d)
     - if params[:id] && !years.nil?
-      .twelvecol.last#years
+      .span-24.last#years
         - years.each do |y|
           = year_button((truncate(params[:id], :length => 2).to_i * 10).to_i + y)
+    .clearfloat

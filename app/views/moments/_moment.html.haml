@@ -1,8 +1,8 @@
 .row.moment
-  .twocol
+  .span-4
     %h4= moment.datapoint.strftime('%B')
     %h4= moment.datapoint.strftime('%Y')
-  .twocol
+  .span-4
     = avatar_for_user(moment.user, :size => :small)
     %p
       = link_to moment.user.name, moment.user
@@ -15,7 +15,7 @@
       \-
       = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
       = button_to 'Edit', edit_moment_path(moment), :method => :get if signed_in? && current_user.admin? || current_user.moderator? || current_user?(moment.user)
-  .sixcol
+  .span-12
     %h1= moment.title
     %p
       = image_tag(moment.user.photos.first.photo.url(:small)) unless moment.user.photos.empty?
@@ -26,7 +26,7 @@
       %p= link_to 'View full event &rarr;', moment
     - else
       = markdown(moment.content)
-  .twocol.last
+  .span-4.last
     - if moment.photos.any?
       = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
       = render moment.photos.limit(3)

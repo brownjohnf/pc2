@@ -1,9 +1,9 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sixcol
+    .span-15
       = will_paginate
       = render @blogs
       = will_paginate
-    .threecol.last
+    .span-4.last
