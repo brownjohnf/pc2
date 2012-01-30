@@ -5,6 +5,7 @@ tmp/
 *.komodoedit
 .DS_Store
 omniauth.rb.bak
+omniauth.rb
 
 # from github suggested list
 

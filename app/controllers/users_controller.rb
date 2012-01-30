@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     @title = 'Users'
     @context_menu = {'new' => new_user_path}
 
-    @users = User.paginate(:page => params[:page])
+    @users = User.paginate(:page => params[:page], :per_page => 20)
+    @recent = User.unscoped.order('updated_at DESC').limit(20)
   end
 
   def show

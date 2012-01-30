@@ -2,8 +2,12 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-/*
+
 $(function() {
-  $('.accordion').accordion({ header: 'h2' });
+  $('.accordion').accordion({
+    collapsible: true,
+    icons: false,
+    autoHeight: false
+    });
 });
-*/
+

@@ -10,17 +10,19 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-identity'
+gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
 gem 'redcarpet'
 gem 'awesome_nested_set'
-#gem 'acts_as_commentable_with_threading'
+gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails', "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end

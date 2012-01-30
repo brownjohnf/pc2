@@ -1,10 +1,9 @@
-%tr
-  %td= avatar_for(page)
-  %td= page.language.name if page.language
-  %td
-    %h1= page.title
-  %td= page.description
-  %td= truncate(page.content, :length => 200, :separator => ' ')
-  %td= link_to 'show', page
-  %td= link_to 'edit', edit_page_path(page)
-  %td= link_to 'destroy', page, confirm: 'Are you sure?', method: :delete
+.box
+  = avatar_for(page)
+  = page.language.name if page.language
+  = page.title
+  = page.description
+  = truncate(page.content, :length => 200, :separator => ' ')
+  = link_to 'show', page
+  = link_to 'edit', edit_page_path(page)
+  = link_to 'destroy', page, confirm: 'Are you sure?', method: :delete

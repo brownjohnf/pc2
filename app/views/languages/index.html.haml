@@ -1,0 +1,29 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      .box
+        :erb
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Description</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% @languages.each do |language| %>
+            <tr>
+              <td><%= language.name %></td>
+              <td><%= language.code %></td>
+              <td><%= language.description %></td>
+              <td><%= link_to 'Show', language %></td>
+              <td><%= link_to 'Edit', edit_language_path(language) %></td>
+              <td><%= link_to 'Destroy', language, confirm: 'Are you sure?', method: :delete %></td>
+            </tr>
+          <% end %>
+          </table>
+    .span-4.last

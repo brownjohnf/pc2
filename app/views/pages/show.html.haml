@@ -7,7 +7,15 @@
       = markdown(@page.content)
     .span-4.last
       = avatar_for @page, :size => :thumb
-      %h2 Case Studies
-      %h3 Tags
-      %h3 Authors
+      = button_to 'Edit Page', edit_page_path, :method => :get if signed_in? && current_user.admin?
+      .box
+        %h2 Case Studies
+      .box
+        %h3 Tags
+      - if @page.contributions.any?
+        .box
+          %h3 Authors
+          %ul
+          - @page.contributions.each do |c|
+            %li= link_to c.user.name, c.user
       = render 'shared/social'

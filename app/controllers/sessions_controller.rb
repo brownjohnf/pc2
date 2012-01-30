@@ -26,13 +26,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def failure
-    #render :text => "Sorry, but there was a problem with the authorization."
-    auth_hash = request.env['omniauth.auth']
-
-    render :text => auth_hash.inspect
-  end
-
   def destroy
     sign_out
     redirect_to root_path

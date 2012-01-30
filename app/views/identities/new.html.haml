@@ -1,0 +1,26 @@
+.container
+  .row
+    .span-8
+    .span-8
+      .box
+        %h3 Create an account
+        %p If you are a Volunteer or Staff member, your email on record with Peace Corps must match the email you use to register.
+        %p If you would like this email changed, contact admin@pcsenegal.org.
+        %p Changed your mind? Head back to the #{link_to 'sign in page', '/login'}.
+        = form_tag "/auth/identity/register" do
+          = render :partial => 'shared/form_error', :locals => { :a => @identity } if @identity && @identity.errors.any?
+          .field
+            = label_tag :name
+            = text_field_tag :name, @identity.try(:name)
+          .field
+            = label_tag :email
+            = text_field_tag :email, @identity.try(:email)
+          .field
+            = label_tag :password
+            = password_field_tag :password
+          .field
+            = label_tag :password_confirmation
+            = password_field_tag :password_confirmation
+          .actions
+            = submit_tag "Register Now!"
+    .span-8.last

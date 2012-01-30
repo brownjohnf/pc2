@@ -1,9 +1,0 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      %h1= @title
-      = nested_li(fetch_menu) do |item|
-        - link_to item.title, item
-    .span-4.last

@@ -1,17 +1,10 @@
 .left_menu {
-  font-size: 2em;
-  //border-right: 1px solid $light_gray;
-  //padding-right: 1em;
-  //margin-right: 1em;
   #main_menu_logo {
     border-radius: 10px;
+    margin-bottom: 2em;
   }
   ul {
-    margin: 0 !important;
-    font-size: .8em;
     li {
-      &:hover {
-      }
       a {
         border: 1px solid transparent;
         display: block;
@@ -20,33 +13,8 @@
         &:hover {
           text-decoration: none !important;
           background-color: $very_light_gray;
-          border: 1px solid $light_gray;
         }
       }
     }
-    ul {
-      li a {
-      padding-left: 1.5em;
-      }
-      ul {
-        li a {
-          padding-left: 2em;
-        }
-        ul {
-          li a {
-            padding-left: 2.8em;
-          }
-        }
-      }
-    }
-  }
-  & > ul {
-    margin: 0 0 1em 0 !important;
-  }
-  h2 {
-    font-size: 1em !important;
-    color: black !important;
-    border: none !important;
-    font-variant: small-caps;
   }
 }

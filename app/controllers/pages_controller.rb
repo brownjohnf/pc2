@@ -1,15 +1,12 @@
 class PagesController < ApplicationController
 
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy] #sessions helper
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy, :ajax] #sessions helper
   before_filter :check_system, :only => :destroy
 
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.paginate(:page => params[:page], :per_page => 10)
     @title = 'Peruse Our Pages'
-
-    render 'feed'
   end
 
   def added
@@ -24,16 +21,11 @@ class PagesController < ApplicationController
     render 'feed'
   end
 
-  def map
-    @title = 'Page Map'
-  end
-
   # GET /pages/1
   # GET /pages/1.json
   def show
     @page = Page.find(params[:id])
     @title = @page.title
-    @context_menu = {}
 
     #@page.ancestors.each do |a|
     #  @context_menu { a.title => a }#
@@ -108,6 +100,17 @@ class PagesController < ApplicationController
       format.html { redirect_to pages_url }
       format.json { head :ok }
     end
+  end
+
+  def ajax
+    if params[:term]
+      like= "%".concat(params[:term].concat("%"))
+      pages = Page.where("lower(title) like ?", like.downcase)
+    else
+      pages = Page.all
+    end
+    list = pages.map {|u| Hash[ value: u.id, label: u.title]}
+    render json: list
   end
 
   private

@@ -3,21 +3,45 @@
     .span-5
       = render 'shared/menu'
     .span-15
-      .span-12
+      .box
         %h1= @user.name
-      .span-12.last
-      .span-12
-        - unless @user.volunteers.empty?
-          %h3 PCV
+        .span-12
+          %p= @user.country.name
+
+          %h3 Connect
           %p
-            = @user.country.name
-            %br
-            alias
-            - @user.volunteers.each do |v|
-              #{v.local_name},
-          - @user.volunteers.each do |v|
-            %h4 Sector
-            %p= v.sector.name if v.sector
+            = @user.email
+            - unless @user.email2.nil?
+              %br
+              = @user.email2
+          - unless @user.phone1.nil?
+            %p
+              = @user.phone1
+              - unless @user.phone2.nil?
+                %br
+                = @user.phone2
+        .span-12.last
+          - if @user.blogs.any?
+            %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
+          - unless @user.site.nil?
+            %p= link_to @user.site
+          - if @user.contributions.any?
+            %h3 Contributions
+            %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
+          - if @user.libraries.any?
+            %h3 Collections
+            %ul= render @user.libraries
+        .clearfloat
+      - if @user.bio
+        .box
+          %h4 A little bit about #{@user.name}...
+          = markdown(@user.bio)
+
+      - @user.volunteers.each do |v|
+        .box
+          %h1= v.local_name
+          %div
+            %p= "#{v.sector.name} Volunteer" if v.sector
             %h4 Site
             %p= v.site.name if v.site
             - if v.emphasis
@@ -26,58 +50,36 @@
             - if v.projects
               %h4 Projects
               %p= v.projects
-        %h3 Connect
-        %p
-          = @user.email
-          - unless @user.email2.nil?
-            %br
-            = @user.email2
-        - unless @user.phone1.nil?
-          %p
-            = @user.phone1
-            - unless @user.phone2.nil?
-              %br
-              = @user.phone2
-        - if @user.blogs.any?
-          %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
-        - unless @user.site.nil?
-          %p= link_to @user.site
-        - if @user.contributions.any?
-          %h3 Contributions
-          %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
-      .span-12.last
-        - unless @user.staff.empty?
+
+      - @user.staff.each do |s|
+        .box
           %h3 Staff Member
           %h4 Location
-          %p= @user.staff.first.site.name
+          %p= s.site.name
           %p
-            = @user.staff.first.building
-            = "| #{@user.staff.first.office}" if @user.staff.first.office
-            = "| #{@user.staff.first.floor.to_i.ordinalize} floor" if @user.staff.first.floor
-          -if @user.staff.first.morning_open
+            = s.first.building
+            = "| #{s.office}" if s.office
+            = "| #{s.floor.to_i.ordinalize} floor" if s.floor
+          -if s.morning_open
             %p
-              = @user.staff.first.morning_open.to_formatted_s(format = :time)
+              = s.morning_open.to_formatted_s(format = :time)
               \-
-              = @user.staff.first.morning_close.to_formatted_s(format = :time)
+              = s.morning_close.to_formatted_s(format = :time)
               %br
-              = @user.staff.first.afternoon_open.to_formatted_s(format = :time)
+              = s.afternoon_open.to_formatted_s(format = :time)
               \-
-              = @user.staff.first.afternoon_close.to_formatted_s(format = :time)
-          = markdown(@user.staff.first.details) if @user.staff.first.details
-        - if @user.libraries.any?
-          %h3 Collections
-          %ul= render @user.libraries
-      - if @user.bio
-        %h4.clearfloat A little bit about #{@user.name}...
-        = markdown(@user.bio)
+              = s.afternoon_close.to_formatted_s(format = :time)
+          = markdown(s.details) if s.details
+
+
       - if @user.photos.any?
-        .twelvecol.last
+        .box
           %h3 Recently Uploaded Photos
           - @user.photos.limit(5).each do |p|
             = render p
-      .span-24.last
+      .box
         %h3 Recently Uploaded Docs
-      .span-24.last
+      .box
         %h3 Recently Edited Pages
     .span-4.last
       = avatar_for_user @user, :size => :small

@@ -1,0 +1,22 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      .box
+        :erb
+          <p>
+            <b>Name:</b>
+            <%= @language.name %>
+          </p>
+
+          <p>
+            <b>Code:</b>
+            <%= @language.code %>
+          </p>
+
+          <p>
+            <b>Description:</b>
+            <%= @language.description %>
+          </p>
+    .span-4.last

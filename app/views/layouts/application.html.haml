@@ -6,12 +6,11 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
-    #fb-root
-  %body{:class => "#{params[:controller].parameterize}", :id => "#{params[:action]}"}
+  %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
     = render 'layouts/header'
     #main
       #header_spacer
-      = render 'layouts/photobar'
+      = render 'layouts/photobar' if Photo.all.count > 19
       = render 'layouts/menu_bars' if signed_in?
       = render 'shared/notice_bar' if notice
       #page
@@ -22,8 +21,8 @@
               .twelvecol.last
                 = debug(params)
                 -#= find_named_routes.inspect if Rails.env.development?
-                Class: #{params[:controller].parameterize}
+                Class: #{params[:controller]}
                 %br
-                ID: #{params[:action].parameterize}
+                ID: #{params[:action]}
     = render 'layouts/footer'
     = render 'layouts/feedback'

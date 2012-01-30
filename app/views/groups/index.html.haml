@@ -1,9 +1,11 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sixcol
-      = render @groups
-    .threecol.last
+    .span-15
+      .box
+        %ul
+          = render @groups
+    .span-4.last
       %h3 About Groups
       %p Groups control access to things like viewing, creating, editing, and deleting pages and users.
