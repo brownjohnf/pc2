@@ -6,7 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
+settings = Setting.create!(
+                            [
+                              { :property => 'country', :value => 'Senegal' },
+                              { :property => 'organization', :value => 'Peace Corps' }
+                            ]
+                          )
 groups = Group.create!(
                        [
                           { :name => 'User' },
