@@ -2,11 +2,21 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-15
+    .span-19.last
       %h1= @title
       = will_paginate
-      %ul
-        = render @users
-      = will_paginate
-    .span-4.last
-      %p Users are people who've signed in to the site. They may not be members of our organization.
+      .span-9
+        .box
+          %h2 Alphabetical
+          %ul
+            = render @users
+      .span-9
+        .box
+          %h2 Recently Updated
+          %ul
+            = render @recent
+      .span-6.last
+        .box
+          Users are people who've signed in to the site. They may not be members of our organization.
+      .span-24.last
+        = will_paginate

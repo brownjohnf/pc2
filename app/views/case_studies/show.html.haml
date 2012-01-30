@@ -1,0 +1,33 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      .box
+        %div
+          %h1= @case_study.title
+          = markdown @case_study.summary
+          - if @case_study.context
+            %h2 Context
+            = markdown @case_study.context
+          - if @case_study.approach
+            %h2 Approach
+            = markdown @case_study.approach
+          - if @case_study.results
+            %h2 Results
+            = markdown @case_study.results
+          - if @case_study.challenges
+            %h2 Challenges
+            = markdown @case_study.challenges
+          - if @case_study.lessons_learned
+            %h2 Lessons Learned
+            = markdown @case_study.lessons_learned
+          - if @case_study.next_steps
+            %h2 Next Steps
+            = markdown @case_study.next_steps
+    .span-4.last
+      = avatar_for @case_study, :size => :small
+      .box
+        %h2 Editors
+      .box
+        %h2 Authors

@@ -7,6 +7,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
 
   has_many :pages
+  has_many :case_studies
   has_many :moments
   has_many :users
   has_many :stacks, :as => :stackable, :dependent => :destroy

@@ -1,11 +1,11 @@
 .container
   = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => nil }
   .row
-    .threecol
-    .ninecol.last
+    .span-6
+    .span-18.last
       = link_to "back to #{@moment.datapoint.strftime('%Y')}", year_moment_path(@moment.datapoint.year)
   .row.moment
-    .threecol
+    .span-6
       %h4= @moment.datapoint.strftime('%B %Y')
       = avatar_for_user(@moment.user, :size => :small)
       %p
@@ -19,10 +19,10 @@
         \-
         = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
         = button_to 'Edit', edit_moment_path(@moment), :method => :get if signed_in? && current_user.admin? || current_user.moderator? || current_user?(@moment.user)
-    .sixcol
+    .span-12
       %h1= @moment.title
       = markdown(@moment.content)
-    .threecol.last
+    .span-6.last
       %p= @moment.summary
       - if @moment.photos.any?
         %h4 Photos

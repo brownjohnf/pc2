@@ -1,5 +1,13 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :settings
+
+  resources :case_studies
+
+  resources :identities
+
+  resources :stages
+
   resources :imports do
     member do
       get 'process_yaml'
@@ -57,7 +65,7 @@ OmniauthDemo::Application.routes.draw do
       get :updated
       get :added
       get :popular
-      get :map
+      get :ajax
     end
   end
 
@@ -82,7 +90,7 @@ OmniauthDemo::Application.routes.draw do
   get   '/login', :to => 'sessions#new', :as => :login
   get   '/logout', :to => 'sessions#destroy'
   match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/failure', :to => 'sessions#failure'
+  match '/auth/failure', :to => 'sessions#new'
 
   match '/disclaimer', :to => 'statics#disclaimer'
   match '/privacy', :to => 'statics#privacy'

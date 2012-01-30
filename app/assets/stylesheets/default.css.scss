@@ -17,6 +17,7 @@ $white: #fff;
 $black: #000;
 $steel_blue: #95b4c9;
 $panic: red;
+$box_background: #eee;
 
 $green: green;
 $middle_green: #D8E47E;
@@ -39,7 +40,7 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   }
 }
 
-@mixin shadow($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
+@mixin shadow($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
   box-shadow: $hshift $vshift $spread $color;
   -moz-box-shadow: $hshift $vshift $spread $color;
 }
@@ -71,10 +72,92 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 .right {
   text-align: right !important;
 }
+.center {
+  text-align: center !important;
+}
 
 hr {
   border: none;
   border-bottom: 1px solid $light_gray;
+}
+
+h1 > span, h2 > span, h3 > span, h4 > span {
+  color: $gray;
+  font-size: .7em;
+  font-variant: normal;
+  font-weight: normal;
+  text-shadow: none;
+  float: right;
+}
+
+.box {
+  @include shadow(1px, 0, 0, gray, 1px);
+  border-radius: 1em;
+  padding: 1em;
+  border: 1px solid white;
+  background: $box_background;
+  margin: 1px 1px 1em 1px !important;
+  h1, h2, h3, h4 {
+    padding: 0 !important;
+    margin-bottom: .5em !important;
+    border: none !important;
+    text-shadow: white 0 2px 0;
+    clear: none;
+  }
+  & > p {
+    margin: .25em 0 0 0 !important;
+    padding: .25em 0 0 0 !important;
+    border-top: 1px solid $light_gray;
+    clear: left;
+    &:first-of-type {
+      border: none;
+    }
+  }
+  ul {
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    li {
+      margin: .25em 0 0 0 !important;
+      padding: .25em 0 0 0 !important;
+      border-top: 1px solid $light_gray;
+      clear: left;
+      &:first-of-type {
+        border: none;
+      }
+      p {
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        clear: none;
+      }
+    }
+  }
+  form {
+    margin-top: 1em;
+    input {
+      &[type=submit] {
+        color: $green;
+      }
+    }
+  }
+  &.error {
+    @include shadow(1px, 0, 0, $panic, 1px);
+    background: pink;
+    h1, h2, h3, h4 {
+      color: black !important;
+      text-shadow: gray 0 1px 0 !important;
+    }
+  }
+}
+
+.oauth_icons {
+  a {
+    display: inline-block;
+    img {
+      width: 50px;
+    }
+  }
 }
 
 html {
@@ -98,9 +181,10 @@ html {
       height: auto;
       min-height: 100%;
       a.avatar {
+        display: inline-block;
         img {
           @include shadow;
-          border-radius: 10px;
+          border-radius: .5em;
         }
       }
       hr {
@@ -235,12 +319,13 @@ html {
             }
           }
           #error_explanation {
-            box-shadow: 0 0 5px $panic;
+            box-shadow: 0 0 1px 1px $panic;
             margin: 5px 0 10px 0;
+            border: 1px solid white;
+            background-color: pink;
             padding: 5px;
-            ul {
+            p {
               color: $panic;
-              margin-left: 3em;
             }
           }
         }
@@ -267,3 +352,5 @@ html {
 @import 'moments';
 @import 'pages';
 @import 'photos';
+@import 'blogs';
+@import 'sessions';

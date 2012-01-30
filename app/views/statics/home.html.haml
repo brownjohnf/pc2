@@ -3,20 +3,27 @@
     .span-24.last
       %p Welcome to #{organization} #{country}! Check below for the latest updates.
   .row
-    .span-6
-      %h1 Pages
-      = will_paginate @pages
-      - @pages.each do |page|
-        %h4= page.title
-        %p= page.description
-        %hr
-      = will_paginate @pages
-    .span-6
-      %h1 Case Studies
-    .span-6
-      %h1 Documents
-    .span-6.last
-      - if @users
-        %h1 Featured Users
+    .span-8
+      .box
+        %h1 Latest Page Updates
         %ul
-          = render @users
+          - @pages.each do |page|
+            %li.short_page
+              = avatar_for page, :size => :icon
+              %h4
+                = page.title
+                %span #{time_ago_in_words(page.updated_at)} ago
+              %p= page.description
+    .span-8
+      %h1 Case Studies
+    .span-8.last
+      - if @users
+        .box
+          %h1 Featured Users
+          %ul
+            = render @users
+  .row
+    .span-12
+      %h1 Documents
+    .span-12.last
+      %h1 News

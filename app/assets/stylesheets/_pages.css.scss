@@ -23,3 +23,13 @@ body.pages {
     }
   }
 }
+
+li.short_page {
+  a.avatar {
+    float: left;
+    margin-right: 1em;
+    img {
+      width: 50px;
+    }
+  }
+}

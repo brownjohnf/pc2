@@ -12,5 +12,5 @@
     %p
       - if current_user && current_user.moderator?
         = button_to 'edit', "edit_#{feed_item.class.name.downcase}_path", :method => :get
-      - if current_user.admin?
-        = button_to 'delete', feed_item.class.name.constantize.find(feed_item.id), confirm: 'Are you sure?', method: :delete
+        - if current_user.admin?
+          = button_to 'delete', feed_item.class.name.constantize.find(feed_item.id), confirm: 'Are you sure?', method: :delete

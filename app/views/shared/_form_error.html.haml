@@ -1,6 +1,5 @@
 - if a.errors.any?
   #error_explanation
-    %h2= #{pluralize(a.errors.count, "error")} prohibited this privilege from being saved:
-    %ul
-      - a.errors.full_messages.each do |msg|
-        %li= msg
+    %h4= #{pluralize(a.errors.count, "error")} prohibited this privilege from being saved:
+    - a.errors.full_messages.each do |msg|
+      %p= msg

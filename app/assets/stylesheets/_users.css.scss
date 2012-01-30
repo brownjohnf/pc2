@@ -24,22 +24,15 @@ span.admin, span.moderator {
 
 li.user {
   clear: both;
-  padding: .5em 0;
   list-style: none;
   img {
-    margin: 0 10px 10px 10px;
+    margin-right: 10px;
     width: 50px;
-    float: left;
-  }
-  h4, p {
-    margin-left: 70px !important;
   }
   h4 {
     padding: 0 !important;
   }
-  & > a {
-    &:first-child {
-      float: left;
-    }
+  a.avatar {
+    float: left;
   }
 }

@@ -22,7 +22,7 @@ overflow: hidden;
 
 .span-1, .span-2, .span-3, .span-4, .span-5, .span-6,
 .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
-.span-13, .span-14, .span-15, .span-16, .span-17, .span-,
+.span-13, .span-14, .span-15, .span-16, .span-17, .span-18,
 .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {
 margin-right: 1.4%;
 float: left;
@@ -100,7 +100,7 @@ img {
 
 	.row .span-1, .row .span-2, .row .span-3, .row .span-4, .row .span-5, .row .span-6,
 	.row .span-7, .row .span-8, .row .span-9, .row .span-10, .row .span-11, .row .span-12,
-	.row .span-13, .row .span-14, .row .span-15, .row .span-16, .row .span-17, .row .span-,
+	.row .span-13, .row .span-14, .row .span-15, .row .span-16, .row .span-17, .row .span-18,
 	.row .span-19, .row .span-20, .row .span-21, .row .span-22, .row .span-23, .row .span-24 {
 	width: auto;
 	float: none;

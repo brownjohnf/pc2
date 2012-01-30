@@ -1,16 +1,14 @@
 class StaticsController < ApplicationController
 
   def home
-    if signed_in?
-      @users = Group.find_by_name('Administrator').users
-      @pages = Page.order('pages.updated_at DESC').paginate(:page => params[:page])
-    else
-      redirect_to '/splash'
-    end
+    redirect_to '/splash' unless cookies[:splashed] == 'viewed'
+    @users = User.order('users.updated_at DESC').limit(10)
+    @pages = Page.order('pages.updated_at DESC').limit(10)
   end
 
   def splash
     @title = 'Splash'
+    cookies[:splashed] = 'viewed'
   end
 
   def about_us

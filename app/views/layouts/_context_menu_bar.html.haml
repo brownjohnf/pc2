@@ -5,5 +5,5 @@
     %li= link_to 'new', :controller => params[:controller], :action => :new
     - if params[:id] && params[:action] == 'show'
       %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id]
-      %li= link_to 'destroy', params[:controller].parameterize.singularize.capitalize.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete
+      %li= link_to 'destroy', params[:controller].parameterize.singularize.capitalize.camelcase.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete
   .clearfloat

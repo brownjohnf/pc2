@@ -10,5 +10,5 @@
 //= require jquery.url
 //= require 1140_cssgrid/css3-mediaqueries
 //= require jquery.formalize.min
-//= require facebook_sdk
+// require facebook_sdk
 //= require_tree .

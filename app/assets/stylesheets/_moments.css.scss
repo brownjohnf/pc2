@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.moments {
+  &#index {
+    #years {
+      display: none;
+    }
+  }
   &#year, &#show {
     .row.moment {
       h1, h4 {
@@ -15,7 +20,7 @@ body.moments {
     }
   }
   &#year {
-    .twocol.last {
+    .row:last-child {
       text-align: center;
       margin-top: 2em;
     }
@@ -30,15 +35,13 @@ body.moments {
     }
   }
   #decades, #years {
-    .threecol {
-      input[type=submit] {
-        width: auto !important;
-      }
+    input[type=submit] {
+      width: auto !important;
     }
   }
   #decades {
     input[type=submit] {
-      width: 16% !important;
+      width: 16.66% !important;
       float: left;
     }
   }
@@ -46,11 +49,6 @@ body.moments {
     input[type=submit] {
       width: 10% !important;
       float: left;
-    }
-  }
-  &#index {
-    #years {
-      display: none;
     }
   }
   .pagination {
@@ -76,15 +74,6 @@ body.moments {
       .timeline_moment {
         width: 40%;
         .box {
-          @include gradient($white, $steel_blue);
-          @include clip-corners(10px);
-          padding: 1em;
-          ul {
-            margin: 0 !important;
-          }
-          h2 {
-            padding-top: 0 !important;
-          }
           .info {
             width: 80%;
           }
@@ -94,11 +83,6 @@ body.moments {
         }
       }
       &.left {
-        .timeline_moment {
-          .box {
-            @include shadow-inset(5px, 1px, -1px);
-          }
-        }
         div {
           float: right;
           p, h2 {
@@ -111,11 +95,6 @@ body.moments {
         }
       }
       &.right {
-        .timeline_moment {
-          .box {
-            @include shadow-inset(5px, -1px, -1px);
-          }
-        }
         div {
           float: left;
           text-align: left;

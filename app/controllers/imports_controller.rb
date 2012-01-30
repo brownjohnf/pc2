@@ -73,39 +73,18 @@ class ImportsController < ApplicationController
       format.json { head :ok }
     end
   end
-=begin
-  def process_csv
-    require 'csv'
-    @import = Import.find(params[:id])
-    lines = parse_csv_file(@import.csv.path)
-    lines.shift # comment this line out if your CSV file doesn't contain a header row
-    if lines.size > 0
-      @import.processed = true
-      lines.each do |line|
-        case @import.scope.name
-        when "User"
-          new_user(line)
-        when 'Page'
-          if line[15] < 0
-            new_page(line)
-            Page.rebuild!
-          end
-        end
-      end
-      @import.save
-      flash[:notice] = "CSV data processing was successful."
-      redirect_to @import
-    else
-      flash[:error] = "CSV data processing failed."
-      render @import
-    end
-  end
-=end
+
   def process_yaml
     require 'yaml'
     @import = Import.find(params[:id])
     yaml = YAML.load(File.read(@import.csv.path))
     case @import.scope.name
+    when 'CaseStudy'
+      yaml.each do |y|
+        if y['case_study'] == 1
+          new_casestudy(y)
+        end
+      end
     when 'Page'
       yaml.each do |y|
         if y['case_study'] == 0
@@ -176,7 +155,7 @@ class ImportsController < ApplicationController
       user = User.new(params[:user])
       user.save!
       user.blogs.create!(:title => people['blog_name'], :description => people['blog_description'], :url => people['blog_address'])
-      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => Stage.where(:name => people['stage_name']).first.id, :sector_id => Sector.where(:name => people['sector_name']).first.id, :site_id => Site.where(:name => people['site_name']).first.id)
+      user.volunteers.create!(:local_name => (people['local_name'] ? people['local_name'] : 'unknown'), :pc_id => people['pc_id'], :projects => people['project'], :stage_id => (Stage.where(:name => people['stage_name']).any? ? Stage.where(:name => people['stage_name']).first.id : nil), :sector_id => (Sector.where(:name => people['sector_name']).any? ? Sector.where(:name => people['sector_name']).first.id : nil), :site_id => (Site.where(:name => people['site_name']).any? ? Site.where(:name => people['site_name']).first.id : nil))
       user.memberships.create!(:group_id => Group.where(:name => 'User').first.id)
       user.save!
     end
@@ -191,6 +170,17 @@ class ImportsController < ApplicationController
       params[:page]['language_id'] = Language.where(:name => 'English')
       page = Page.new(params[:page])
       page.save!
+    end
+
+    def new_casestudy(y)
+      params = Hash.new
+      params[:cs] = Hash.new
+
+      params[:cs]['title'] = y['title']
+      params[:cs]['summary'] = y['description'] + y['content']
+      params[:cs]['language_id'] = Language.where(:name => 'English')
+      cs = CaseStudy.new(params[:cs])
+      cs.save!
     end
 
     def new_site(site)

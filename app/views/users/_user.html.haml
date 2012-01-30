@@ -4,5 +4,5 @@
   %p
     = link_to user.country.name, user.country
     %br
-    = link_to user.volunteers.first.sector.name, user.volunteers.first.sector if user.volunteers.any?
+    = link_to user.volunteers.first.sector.name, user.volunteers.first.sector if user.volunteers.any? && user.volunteers.first.sector
   .clearfloat

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @stage.name %>
+</p>
+
+<p>
+  <b>Arrival:</b>
+  <%= @stage.arrival %>
+</p>
+
+<p>
+  <b>Swear in:</b>
+  <%= @stage.swear_in %>
+</p>
+
+<p>
+  <b>Cos:</b>
+  <%= @stage.cos %>
+</p>
+
+<p>
+  <b>Pc:</b>
+  <%= @stage.pc_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_stage_path(@stage) %> |
+<%= link_to 'Back', stages_path %>

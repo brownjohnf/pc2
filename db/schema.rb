@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126151332) do
+ActiveRecord::Schema.define(:version => 20120130013628) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(:version => 20120126151332) do
     t.string   "description"
     t.string   "url"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "case_studies", :force => true do |t|
+    t.string   "title"
+    t.integer  "photo_id"
+    t.integer  "language_id"
+    t.text     "summary"
+    t.text     "context"
+    t.text     "approach"
+    t.text     "results"
+    t.text     "challenges"
+    t.text     "lessons_learned"
+    t.text     "next_steps"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,6 +73,14 @@ ActiveRecord::Schema.define(:version => 20120126151332) do
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "identities", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -217,6 +240,16 @@ ActiveRecord::Schema.define(:version => 20120126151332) do
     t.datetime "updated_at"
   end
 
+  create_table "settings", :force => true do |t|
+    t.string   "property"
+    t.string   "value"
+    t.string   "explanation"
+    t.string   "comment"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.integer  "region_id"
@@ -246,6 +279,16 @@ ActiveRecord::Schema.define(:version => 20120126151332) do
     t.time     "afternoon_open"
     t.time     "afternoon_close"
     t.string   "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stages", :force => true do |t|
+    t.string   "name"
+    t.date     "arrival"
+    t.date     "swear_in"
+    t.date     "cos"
+    t.string   "pc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

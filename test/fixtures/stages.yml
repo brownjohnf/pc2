@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  arrival: 2012-01-28
+  swear_in: 2012-01-28
+  cos: 2012-01-28
+  pc_id: MyString
+
+two:
+  name: MyString
+  arrival: 2012-01-28
+  swear_in: 2012-01-28
+  cos: 2012-01-28
+  pc_id: MyString
