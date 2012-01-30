@@ -1,9 +1,11 @@
 .container
   .row
     .span-24.last
-      %p Welcome to #{organization} #{country}! Check below for the latest updates.
+      .box
+        = link_to 'All Pages', pages_path
+        = link_to 'Search Case Studies', case_studies_path
   .row
-    .span-8
+    .span-12
       .box
         %h1 Latest Page Updates
         %ul
@@ -13,17 +15,33 @@
               %h4
                 = page.title
                 %span #{time_ago_in_words(page.updated_at)} ago
-              %p= page.description
-    .span-8
-      %h1 Case Studies
-    .span-8.last
-      - if @users
-        .box
-          %h1 Featured Users
-          %ul
-            = render @users
-  .row
-    .span-12
-      %h1 Documents
+              %p
+                = truncate(page.description, :length => 50, :separator => ' ')
+                = link_to ' read more', page
     .span-12.last
-      %h1 News
+      .box
+        %h1 Case Studies
+        %ul
+          - @case_studies.each do |cs|
+            %li.short_page
+              = avatar_for cs, :size => :icon
+              %h4
+                = cs.title
+                %span #{time_ago_in_words(cs.updated_at)} ago
+              %p
+                = truncate(cs.summary, :length => 50, :separator => ' ')
+                = link_to ' read more', cs
+    .span-6
+      .box
+        %h1 Featured Users
+        %ul
+          = render @users
+    .span-6
+      .box
+        %h1 News
+        - twitter = Twitter::Base.new( 'pc_senegal', 'Pe3ceC04ps' )
+        = twitter.user("sferik").location
+    .span-12.last
+      .box
+        %h1 Latest Photos
+        = render Photo.unscoped.order('updated_at DESC').limit(20).all
