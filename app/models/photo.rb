@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
     :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980>' },
     :storage => :s3,
     :bucket => 'pcsenegal-dev-com',
-    :s3-credentials => {
+    :s3_credentials => {
       :access_key_id => ENV['AKIAJU3H242YEKJKQM2Q'],
       :secret_access_key => ENV['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']
     }
