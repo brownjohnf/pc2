@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title= title
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
+  %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
+    = render 'layouts/header'
+    #main
+      #header_spacer
+      = render 'layouts/menu_bars' if signed_in?
+      = render 'shared/notice_bar' if notice
+      #page
+        = yield
+        - if Rails.env.development?
+          .container
+            .row
+              .twelvecol.last
+                = debug(params)
+                -#= find_named_routes.inspect if Rails.env.development?
+                Class: #{params[:controller]}
+                %br
+                ID: #{params[:action]}
+    = render 'layouts/feedback'

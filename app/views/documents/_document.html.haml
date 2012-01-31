@@ -8,5 +8,5 @@
     = document.description if document.description
     .tags.right= render 'shared/tags', :tags => document.tag_list
   %p.right= link_to 'view details', document
-  = button_to 'download', '', :method => :get
+  = link_to 'download', '', :method => :get
   = document.file_content_type
