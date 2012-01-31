@@ -4,4 +4,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :twitter, 'XhPJ732UpRSSawGZVAh3oQ', 'S4FIZTRCpDWsJNFzmEgdfIa5upRBo74yA28tZbxTo'
   provider :github, '', ''
   provider :google_oauth2, '', ''
+  provider :identity, on_failed_registration: lambda { |env|
+    IdentitiesController.action(:new).call(env)
+  }
 end
