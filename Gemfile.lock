@@ -70,6 +70,8 @@ GEM
     hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
+    icon_links (0.2.4)
+      activesupport (>= 2.3)
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
@@ -189,6 +191,7 @@ DEPENDENCIES
   foreman
   gravatar_image_tag
   haml
+  icon_links (~> 0.2.4)
   jquery-rails
   omniauth-facebook
   omniauth-github

@@ -13,6 +13,20 @@ class CaseStudiesController < ApplicationController
     end
   end
 
+  def added
+    @case_studies = CaseStudy.unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @title = 'Recuntly Added Case Studies'
+
+    render 'index'
+  end
+
+  def updated
+    @case_studies = CaseStudy.unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @title = 'Recently Updated Case Studies'
+
+    render 'index'
+  end
+
   # GET /case_studies/1
   # GET /case_studies/1.json
   def show

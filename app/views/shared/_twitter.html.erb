@@ -1,0 +1,28 @@
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 'auto',
+  height: 300,
+  theme: {
+    shell: {
+      background: '#eeeeee',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#eeeeee',
+      color: '#000000',
+      links: '#c90808'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: true,
+    behavior: 'all'
+  }
+}).render().setUser('pc_senegal').start();
+</script>

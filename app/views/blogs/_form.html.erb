@@ -27,6 +27,7 @@
     <%= f.label :user_id %><br />
     <%= f.collection_select(:user_id, User.all, :id, :name) %>
   </div>
+  <%= render 'shared/tag_field', :f => f %>
   <div class="actions">
     <%= f.submit %>
   </div>

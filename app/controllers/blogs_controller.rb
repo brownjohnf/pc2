@@ -6,9 +6,14 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     @blogs = Blog.paginate(:page => params[:page])
-    @title = 'Peruse Our Pages'
+    @title = 'All Blogs'
+  end
 
-    render 'feed'
+  def updated
+    @blogs = Blog.unscoped.order('updated_at DESC').paginate(:page => params[:page])
+    @title = 'Recently Updated Blogs'
+
+    render 'index'
   end
 
   # GET /blogs/1

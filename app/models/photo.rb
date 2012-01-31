@@ -3,6 +3,8 @@ class Photo < ActiveRecord::Base
   has_attached_file :photo, :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980>' }
   validates_attachment_presence :photo
 
+  acts_as_taggable_on :tags
+
   belongs_to :imageable, :polymorphic => true
   belongs_to :user
 

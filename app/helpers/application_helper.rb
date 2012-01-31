@@ -48,7 +48,6 @@ module ApplicationHelper
 
   def nested_li(objects)
     output = ""
-    output += "<ul>"
     path = [nil]
     objects.each do |o|
       if o.parent_id != path.last
@@ -71,12 +70,11 @@ module ApplicationHelper
       path.pop
       output += "\n</ul>"
     end
-    output += "\n</ul>"
     return output.html_safe
   end
 
   def fetch_menu
-    Page.unscoped.order('lft ASC')
+    Page.unscoped.order('title ASC').where('parent_id IS NULL')
   end
 
   def render_photo(id, size)
@@ -85,6 +83,11 @@ module ApplicationHelper
 
   def photobar_selector
     Photo.limit(20)
+  end
+
+  def cloud_of_tags(model = params[:controller].singularize.camelcase.constantize)
+    tags = model.tag_counts_on(:tags)
+    render 'shared/tag_cloud', :tags => tags
   end
 
 end

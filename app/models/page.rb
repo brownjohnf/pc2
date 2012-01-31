@@ -1,8 +1,10 @@
 class Page < ActiveRecord::Base
 
-  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id
+  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list
 
   acts_as_nested_set
+
+  acts_as_taggable_on :tags
 
   belongs_to :photo
   belongs_to :language

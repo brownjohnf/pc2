@@ -1,10 +1,18 @@
-.span-24.last.feed_item
-  .span-6= avatar_for_user blog.user
-  .span-18.last
-    %h3= blog.title
-    %p= link_to blog.description, blog
-    %p
-      - if current_user && current_user.moderator?
-        = button_to 'edit', edit_blog_path(blog), :method => :get
-        - if current_user.admin?
-          = button_to 'delete', blog, confirm: 'Are you sure?', method: :delete
+%li
+  = avatar_for_user blog.user
+  %h4
+    = blog.title
+    %span
+      = time_ago_in_words(blog.updated_at)
+      ago
+  %p
+    .tags.right.inline= render 'shared/tags', :tags => blog.user.tag_list
+    = blog.user.name
+  %p= blog.description
+  .tags.right= render 'shared/tags', :tags => blog.tag_list
+  %p= link_to 'view blog', blog
+  %p
+    - if current_user && current_user.moderator?
+      = button_to 'edit', edit_blog_path(blog), :method => :get
+      - if current_user.admin?
+        = button_to 'delete', blog, confirm: 'Are you sure?', method: :delete

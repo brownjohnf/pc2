@@ -17,6 +17,17 @@
             = render @recent
       .span-6.last
         .box
-          Users are people who've signed in to the site. They may not be members of our organization.
+          %h3 A bit about us
+          %ul
+            %li= pluralize(User.all.count, 'total user')
+            %li= pluralize(Volunteer.all.count, 'volunteer')
+            %li= pluralize(Staff.all.count, 'staff member')
+            %li= pluralize(Blog.all.count, 'blog')
+        .box
+          %h3 Top User Tags
+          = cloud_of_tags
+        .box
+          %h3 Who are our users?
+          Our primary users are Peace Corps Volunteers (PCVs) and staff. However, anyone can log in, create a profile, and join the Peace Corps community. Every user you see here is not necessarily a PCV.
       .span-24.last
         = will_paginate

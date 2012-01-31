@@ -6,6 +6,7 @@
       .box
         %div
           %h1= @case_study.title
+          .tags.right= render 'shared/tags', :tags => @case_study.tag_list
           = markdown @case_study.summary
           - if @case_study.context
             %h2 Context
@@ -27,6 +28,9 @@
             = markdown @case_study.next_steps
     .span-4.last
       = avatar_for @case_study, :size => :small
+      .box
+        %h2 Popular Tags
+        = cloud_of_tags
       .box
         %h2 Editors
       .box
