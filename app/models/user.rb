@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980' }
+  acts_as_taggable_on :tags
+  acts_as_tagger
 
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships

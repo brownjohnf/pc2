@@ -1,5 +1,7 @@
 class CaseStudy < ActiveRecord::Base
 
+  acts_as_taggable_on :tags
+
   validates :title, :language, :summary, :presence => true
 
   belongs_to :language

@@ -1,5 +1,7 @@
 class Library < ActiveRecord::Base
 
+  acts_as_taggable_on :tags
+
   has_many :stacks, :dependent => :destroy
 
   belongs_to :country

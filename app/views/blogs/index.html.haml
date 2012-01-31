@@ -2,28 +2,10 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-19.last
-      :erb
-        <table>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th>User</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @blogs.each do |blog| %>
-          <tr>
-            <td><%= blog.title %></td>
-            <td><%= blog.description %></td>
-            <td><%= blog.url %></td>
-            <td><%= blog.user_id %></td>
-            <td><%= link_to 'Show', blog %></td>
-            <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-            <td><%= link_to 'Destroy', blog, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+    .span-15
+      = will_paginate
+      .box.feed
+        %ul
+          = render @blogs
+      = will_paginate
+    .span-4.last

@@ -4,7 +4,9 @@
       = render 'shared/menu'
     .span-15
       .box
-        %h1= @user.name
+        %h1
+          = @user.name
+          .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
           %p= @user.country.name
 

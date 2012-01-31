@@ -40,9 +40,9 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   }
 }
 
-@mixin shadow($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
-  box-shadow: $hshift $vshift $spread $color;
-  -moz-box-shadow: $hshift $vshift $spread $color;
+@mixin shadow($width: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
+  box-shadow: $hshift $vshift $width $spread $color;
+  -moz-box-shadow: $hshift $vshift $width $spread $color;
 }
 @mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
   box-shadow: $hshift $vshift $spread $color inset;
@@ -75,6 +75,12 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 .center {
   text-align: center !important;
 }
+.inline {
+  display: inline-block;
+}
+.inline.right {
+  float: right !important;
+}
 
 hr {
   border: none;
@@ -91,7 +97,7 @@ h1 > span, h2 > span, h3 > span, h4 > span {
 }
 
 .box {
-  @include shadow(1px, 0, 0, gray, 1px);
+  @include shadow(1px, 0, 0, gray);
   border-radius: 1em;
   padding: 1em;
   border: 1px solid white;
@@ -105,8 +111,8 @@ h1 > span, h2 > span, h3 > span, h4 > span {
     clear: none;
   }
   & > p {
-    margin: .25em 0 0 0 !important;
-    padding: .25em 0 0 0 !important;
+    margin: .5em 0 0 0 !important;
+    padding: .5em 0 0 0 !important;
     border-top: 1px solid $light_gray;
     clear: left;
     &:first-of-type {
@@ -118,8 +124,8 @@ h1 > span, h2 > span, h3 > span, h4 > span {
     margin: 0 !important;
     padding: 0 !important;
     li {
-      margin: .25em 0 0 0 !important;
-      padding: .25em 0 0 0 !important;
+      margin: .5em 0 0 0 !important;
+      padding: .5em 0 0 0 !important;
       border-top: 1px solid $light_gray;
       clear: left;
       &:first-of-type {
@@ -337,12 +343,12 @@ html {
   }
 }
 
-@import 'layout';
 @import 'header';
 @import 'context_menu_bar';
 @import 'admin_menu_bar';
 @import 'footer';
 @import 'left_menu';
+@import 'tags';
 
 /* page-specific */
 @import 'statics';
@@ -354,3 +360,4 @@ html {
 @import 'photos';
 @import 'blogs';
 @import 'sessions';
+@import 'case_studies';

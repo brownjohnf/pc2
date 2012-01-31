@@ -1,8 +1,15 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :documents
+
   resources :settings
 
-  resources :case_studies
+  resources :case_studies do
+    collection do
+      get :added
+      get :updated
+    end
+  end
 
   resources :identities
 
@@ -46,7 +53,11 @@ OmniauthDemo::Application.routes.draw do
 
   resources :websites
 
-  resources :blogs
+  resources :blogs do
+    collection do
+      get :updated
+    end
+  end
 
   resources :feedback, :except => [:edit, :update]
 

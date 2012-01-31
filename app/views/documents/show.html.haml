@@ -1,0 +1,14 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      .box
+        %h1
+          = @document.name
+          .tags.right.inline= render 'shared/tags', :tags => @document.tag_list
+        %p= @document.description
+    .span-4.last
+      .box
+        %h3 Top Document Tags
+        = cloud_of_tags

@@ -27,6 +27,8 @@
     <%= f.label :language_id %><br />
     <%= f.number_field :language_id %>
   </div>
+
+  <%= render 'shared/tag_field', :f => f %>
   <div class="actions">
     <%= f.submit %>
   </div>

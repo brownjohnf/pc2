@@ -2,41 +2,9 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-15.box
-      :erb
-        <table>
-          <tr>
-            <th>Title</th>
-            <th>Photo</th>
-            <th>Language</th>
-            <th>Summary</th>
-            <th>Context</th>
-            <th>Approach</th>
-            <th>Results</th>
-            <th>Challenges</th>
-            <th>Lessons learned</th>
-            <th>Next steps</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @case_studies.each do |case_study| %>
-          <tr>
-            <td><%= case_study.title %></td>
-            <td><%= case_study.photo_id %></td>
-            <td><%= case_study.language_id %></td>
-            <td><%= case_study.summary %></td>
-            <td><%= case_study.context %></td>
-            <td><%= case_study.approach %></td>
-            <td><%= case_study.results %></td>
-            <td><%= case_study.challenges %></td>
-            <td><%= case_study.lessons_learned %></td>
-            <td><%= case_study.next_steps %></td>
-            <td><%= link_to 'Show', case_study %></td>
-            <td><%= link_to 'Edit', edit_case_study_path(case_study) %></td>
-            <td><%= link_to 'Destroy', case_study, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+    .span-15
+      .box.feed
+        %h1= @title
+        %ul
+          = render @case_studies
     .span-4.last

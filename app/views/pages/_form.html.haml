@@ -19,6 +19,7 @@
   .field
     = f.label 'Content*'
     = f.text_area :content
+  = render 'shared/tag_field', :f => f
   %h3 Set Authors
   = f.fields_for :contributions do |c|
     = c.hidden_field(:scope_id, :value => Scope.where(:name => 'Page').first.id)

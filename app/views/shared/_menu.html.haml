@@ -1,14 +1,16 @@
 .left_menu
   = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
   = render 'menu' rescue nil
-  .box.accordion
+  .accordion
+    - if @page && @page.children.any?
+      %h3= @page.title
+      %div
+        = nested_li(@page.children) do |item|
+          - link_to item.title, item
     %h3 Browse
     %div
-      = nested_li(fetch_menu) do |item|
-        - link_to item.title, item
-    %h3 Test
-    %div
       %ul
-        %li Test
+        = nested_li(fetch_menu) do |item|
+          - link_to item.title, item
   = link_to image_tag('donate_w190.png', :width => '260px'), support_path
   = link_to image_tag('google_search.png'), ''

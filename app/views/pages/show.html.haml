@@ -3,15 +3,29 @@
     .span-5
       = render 'shared/menu'
     .span-15
-      %h1= @page.title
+      .box
+        %h4.inline you are here &rang;
+        = link_to 'Home', root_path
+        - @page.ancestors.each do |a|
+          &rang;
+          = link_to a.title, a
+      .box
+        %h1
+          = @page.title
+          %span
+            last updated
+            = time_ago_in_words(@page.updated_at)
+            ago
+        .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
     .span-4.last
       = avatar_for @page, :size => :thumb
-      = button_to 'Edit Page', edit_page_path, :method => :get if signed_in? && current_user.admin?
+      = button_to 'Edit Page', edit_page_path, :method => :get if signed_in? && params[:controller] == 'pages' && current_user.admin?
       .box
         %h2 Case Studies
       .box
-        %h3 Tags
+        %h3 Tag Cloud
+        = cloud_of_tags(Page)
       - if @page.contributions.any?
         .box
           %h3 Authors

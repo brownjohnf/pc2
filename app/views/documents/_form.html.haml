@@ -1,0 +1,14 @@
+= form_for(@document, :multipart => true) do |f|
+  = render 'shared/form_error', :a => @document if @document.errors.any?
+  .field
+    = f.label :file, 'File to upload*'
+    = f.file_field :file
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  = render 'shared/tag_field', :f => f
+  .actions
+    = f.submit

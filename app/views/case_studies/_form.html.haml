@@ -11,6 +11,7 @@
     .field
       = f.label :language_id
       = f.collection_select(:language_id, Language.all, :id, :name)
+    = render 'shared/tag_field', :f => f
   .box
     %h1 Body of study
     .field
