@@ -12,7 +12,7 @@
     list-style-type: none;
     border: 1px solid black;
     border-top: none;
-    box-shadow: 0 0 1px 1px $steel_blue !important;
+    @include shadow(1px, 0, 0, $steel_blue, 1px);
     li {
       border-top: 1px solid lightgray;
       &:first-child {

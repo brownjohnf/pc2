@@ -11,6 +11,7 @@ class StaticsController < ApplicationController
   def splash
     @title = 'Splash'
     cookies[:splashed] = 'viewed'
+    render 'splash', :layout => 'splash'
   end
 
   def about_us

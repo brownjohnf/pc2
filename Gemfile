@@ -20,6 +20,7 @@ gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'jquery-rails'
 gem 'twitter'
 gem 'icon_links', '~> 0.2.4'
+gem 'aws-s3'
 
 # Gems used only for assets and not required
 # in production environments by default.
