@@ -5,8 +5,8 @@ class Photo < ActiveRecord::Base
     :storage => :s3,
     :bucket => ,
     :s3-credentials => {
-      :access_key_id => ENV[''],
-      :secret_access_key => ENV['']
+      :access_key_id => ENV['AKIAJU3H242YEKJKQM2Q'],
+      :secret_access_key => ENV['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']
     }
   validates_attachment_presence :photo
 
