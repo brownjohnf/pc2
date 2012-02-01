@@ -52,6 +52,7 @@ GEM
       cache_method
       eat
       i18n
+    bson (1.5.2)
     builder (3.0.0)
     cache (0.2.6)
       activesupport (>= 2.3.11)
@@ -129,6 +130,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
+    mongo (1.5.2)
+      bson (= 1.5.2)
     multi_json (1.0.4)
     multi_xml (0.4.1)
     multipart-post (1.1.4)
@@ -252,6 +255,7 @@ DEPENDENCIES
   gravatar_image_tag
   haml
   jquery-rails
+  mongo
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2
