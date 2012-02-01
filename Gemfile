@@ -23,6 +23,7 @@ gem 'asset_sync'
 
 group :production do
   gem 'tronprint'
+  gem 'mongo'
 end
 
 # Gems used only for assets and not required
