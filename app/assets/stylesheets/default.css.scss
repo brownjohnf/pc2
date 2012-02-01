@@ -66,6 +66,11 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   border-radius: $radius;
 }
 
+@mixin fixed_menu {
+  z-index: 21;
+  position: fixed;
+}
+
 .clearfloat {
   clear: both;
 }
@@ -350,10 +355,8 @@ html {
 }
 
 @import 'header';
-@import 'context_menu_bar';
-@import 'admin_menu_bar';
 @import 'footer';
-@import 'left_menu';
+@import 'menu';
 @import 'tags';
 
 /* page-specific */

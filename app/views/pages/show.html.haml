@@ -20,7 +20,7 @@
       = markdown(@page.content)
     .span-4.last
       = avatar_for @page, :size => :thumb
-      = button_to 'Edit Page', edit_page_path, :method => :get if signed_in? && params[:controller] == 'pages' && current_user.admin?
+      = button_to 'Edit Page', edit_page_path(@page), :method => :get
       .box
         %h2 Case Studies
       .box

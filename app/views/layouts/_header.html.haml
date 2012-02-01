@@ -17,11 +17,12 @@
           %li= link_to 'Blogs', blogs_path
           %li= link_to 'Learning', ''
           %li= link_to '50th', moments_path
-          %li= link_to 'Users', users_path if signed_in?
         %ul{:style => "float:right;"}
           - if signed_in?
             %li#gravatar= gravatar_for current_user
             %li= link_to current_user.name, current_user
+            %li= link_to 'SSL', 'https://pcsenegal.com'
+            %li= link_to 'Profiles', users_path
           - else
             %li= link_to 'Sign in', login_path
         .clearfloat

@@ -1,12 +1,10 @@
-%h4 Useful Links
-%ul
-  %li= link_to 'Case Studies', case_studies_path
-  %li= link_to 'Create a group!', new_group_path
-  %li= link_to 'Build a library', new_library_path
-  %li= link_to 'Upload a photo', new_photo_path
-%h4 Taking care of business
-%ul
-  %li= link_to 'Edit your profile', edit_user_path(current_user)
-  %li= link_to 'Give feedback', '/feedback/new'
-  %li= link_to 'Sign out', '/logout'
-.clearfloat
+#user_menu_bar
+  = link_to 'Case Studies', case_studies_path
+  = link_to icon(:user), new_group_path
+  = link_to icon(:library), new_library_path
+  = link_to icon(:photo), new_photo_path
+  = link_to icon(:document), new_document_path
+  %hr
+  = link_to icon(:user_edit), edit_user_path(current_user)
+  = link_to icon(:comment), '/feedback/new'
+  = link_to icon(:exit), '/logout'

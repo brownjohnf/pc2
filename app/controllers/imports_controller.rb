@@ -168,6 +168,7 @@ class ImportsController < ApplicationController
       params[:page]['description'] = y['description']
       params[:page]['content'] = y['content']
       params[:page]['language_id'] = Language.where(:name => 'English')
+      params[:page]['tag_list'] = ''
       page = Page.new(params[:page])
       page.save!
     end

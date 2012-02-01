@@ -53,7 +53,11 @@ class User < ActiveRecord::Base
   end
 
   def moderator?
-    Group.find_by_name('Moderator' || 'Admin').users.find_by_id(self)
+    unless self.admin?
+      Group.find_by_name('Moderator').users.find_by_id(self)
+    else
+      true
+    end
   end
 
   def to_param
