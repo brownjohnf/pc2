@@ -19,12 +19,6 @@ gem 'awesome_nested_set'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'jquery-rails'
 gem 'aws-sdk'
-gem 'asset_sync'
-
-group :production do
-  gem 'tronprint'
-  gem 'mongo'
-end
 
 # Gems used only for assets and not required
 # in production environments by default.
