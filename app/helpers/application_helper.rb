@@ -90,4 +90,9 @@ module ApplicationHelper
     render 'shared/tag_cloud', :tags => tags
   end
 
+  def icon(icon)
+    icons = { :file_download => 'file_down.png' }
+    image_tag("icons/#{icons[icon]}", :class => 'icon')
+  end
+
 end

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :libraries
   has_many :photos, :as => :imageable
   has_many :uploaded_photos, :as => :user
+  has_many :documents
 
   belongs_to :country
   belongs_to :photo

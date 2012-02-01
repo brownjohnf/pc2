@@ -96,6 +96,12 @@ h1 > span, h2 > span, h3 > span, h4 > span {
   float: right;
 }
 
+.icon {
+  &:hover {
+    @include shadow(3px);
+  }
+}
+
 .box {
   @include shadow(1px, 0, 0, gray);
   border-radius: 1em;
