@@ -1,7 +1,13 @@
 class Photo < ActiveRecord::Base
 
   has_attached_file :photo,
-    :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980>' }
+    :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980>' },
+    :storage => :s3,
+    :bucket => 'pcsenegal-dev-com',
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    }
   validates_attachment_presence :photo
 
   acts_as_taggable_on :tags
