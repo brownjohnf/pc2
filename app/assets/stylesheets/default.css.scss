@@ -73,6 +73,16 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   position: fixed;
 }
 
+@mixin rotate($deg: -90deg) {
+  display: block;
+  -webkit-transform: rotate($deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.vertical {
+  @include rotate;
+}
+
 .clearfloat {
   clear: both;
 }
@@ -373,3 +383,4 @@ html {
 @import 'blogs';
 @import 'sessions';
 @import 'case_studies';
+@import 'documents';

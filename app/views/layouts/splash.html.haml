@@ -10,7 +10,6 @@
     = render 'layouts/header'
     #main
       #header_spacer
-      = render 'layouts/menu_bars' if signed_in?
       = render 'shared/notice_bar' if notice
       #page
         = yield
@@ -23,4 +22,9 @@
                 Class: #{params[:controller]}
                 %br
                 ID: #{params[:action]}
-    = render 'layouts/feedback'
+    = render 'layouts/footer'
+    - if signed_in?
+      = render 'layouts/user_menu_bar'
+      = render 'layouts/admin_menu_bar' if current_user.admin?
+      = render 'layouts/moderator_menu_bar' if current_user.moderator? && !current_user.admin?
+    = render 'layouts/feedback' unless signed_in? && current_user.admin?

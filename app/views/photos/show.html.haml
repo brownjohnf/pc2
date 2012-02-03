@@ -34,7 +34,7 @@
         = image_tag @photo.photo.url(:large)
       .span-4.last
         = button_to 'Next >', @next, :method => :get if @next
-        .box
+        .box.tags
           %h3 Tags
           %ul= render 'shared/tags', :tags => @photo.tag_list
     .span-24.last
