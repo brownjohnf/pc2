@@ -1,0 +1,20 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-19.last
+      :erb
+        <p>
+          <b>Title:</b>
+          <%= @position.title %>
+        </p>
+
+        <p>
+          <b>Description:</b>
+          <%= @position.description %>
+        </p>
+
+        <p>
+          <b>Qualifications:</b>
+          <%= @position.qualifications %>
+        </p>

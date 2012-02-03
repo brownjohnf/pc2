@@ -1,10 +1,10 @@
 .sixcol
   .field
-    = f.label 'Local Name*'
+    = f.label 'Local Name'
     = f.text_field :local_name
   .field
     = f.label 'Sector'
-    = f.collection_select(:sector_id, Sector.all, :id, :name)
+    = f.collection_select(:sector_id, Sector.all, :id, :name, :include_blank => true)
   .field
     = f.label 'Site*'
     = f.collection_select(:site_id, Site.all, :id, :name)
@@ -14,15 +14,15 @@
     = f.number_field :pc_id
   .field
     = f.label 'Stage'
-    = f.number_field :stage_id
+    = f.collection_select(:stage_id, Stage.all, :id, :name, :include_blank => true)
   .field
     = f.label 'COS Date'
-    = f.number_field :cos_date
+    = f.date_select :cos_date
 .sixcol
   .field
     = f.label 'Emphasis'
     = f.text_area :emphasis
 .sixcol.last
   .field
-    = f.label 'Current Projects'
+    = f.label 'Projects'
     = f.text_area :projects

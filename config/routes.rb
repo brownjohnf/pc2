@@ -59,7 +59,11 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :feedback, :except => [:edit, :update]
+  resources :feedback, :except => [:edit, :update] do
+    collection do
+      get :volunteer_request
+    end
+  end
 
   resources :contributions
 
@@ -99,7 +103,7 @@ OmniauthDemo::Application.routes.draw do
   end
 
   get   '/login', :to => 'sessions#new', :as => :login
-  get   '/logout', :to => 'sessions#destroy'
+  get   '/logout', :to => 'sessions#destroy', :as => :logout
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#new'
 
@@ -109,6 +113,7 @@ OmniauthDemo::Application.routes.draw do
   match '/security', :to => 'statics#security'
   match '/about_us', :to => 'statics#about_us'
   match '/splash', :to => 'statics#splash'
+  match '/help', :to => 'statics#help'
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'

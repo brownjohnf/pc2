@@ -5,7 +5,7 @@ class Volunteer < ActiveRecord::Base
   belongs_to :site
   belongs_to :sector
 
-#  validates :local_name, :site_id, :presence => true
+  validates :site_id, :presence => true
 
   default_scope :order => 'volunteers.id ASC'
 

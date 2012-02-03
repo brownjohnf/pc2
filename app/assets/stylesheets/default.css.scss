@@ -4,7 +4,7 @@ $dark_gray: #222;
 $gray: gray;
 $light_gray: lightgray;
 $very_light_gray: whitesmoke;
-$red: darkred;
+$red: #8b0000;
 $gradient_top: #eee;
 $gradient_bottom: #fff;
 $header_color: #999;
@@ -34,6 +34,7 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
     color: $red;
     cursor: pointer;
     text-decoration: none;
+    -webkit-transition: text 1s;
     &:hover {
       text-decoration: underline;
     }
@@ -47,6 +48,7 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
   box-shadow: $hshift $vshift $spread $color inset;
   -moz-box-shadow: $hshift $vshift $spread $color inset;
+  -webkit-box-shadow: $hshift $vshift $spread $color inset;
 }
 
 @mixin shadow-bottom {
@@ -193,7 +195,8 @@ html {
     }
     #main {
       @include red-links;
-      @include gradient;
+      background-image: image-url('background.png');
+      //@include gradient;
       height: 100%;
       height: auto;
       min-height: 100%;

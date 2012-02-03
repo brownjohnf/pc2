@@ -1,13 +1,13 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sevencol
+    .span-13
       %h1= @library.name
       %h4 Photos
       - @library.stacks.each do |s|
         = render s.stackable
-    .twocol.last
+    .span-6.last
       %h4= @library.description
       %p= @library.country.name
       %p This library is managed by

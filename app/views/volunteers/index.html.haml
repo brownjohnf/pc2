@@ -1,12 +1,12 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sixcol
+    .span-15
       %h1= @title
       = will_paginate
       %ul
         = render @volunteers
       = will_paginate
-    .threecol.last
+    .span-4.last
       %p Peace Corps Volunteers work closely alongside host-country nationals to assist with development, and exchange culture. Every Volunteer is assigned to a region and a sector.

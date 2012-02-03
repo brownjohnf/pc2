@@ -1,11 +1,11 @@
 %header
   .container
     .row
-      .twelvecol.last
+      .span-24.last
         %a{:id => "site_title", :href => '/splash'}
           %span#title_organization= organization
           %span#title_separator= '|'
-          %span#title_country= signed_in? ? current_user.country.name : country
+          %span#title_country= signed_in? && current_user.volunteers.any? ? current_user.country.name : country
           %sub beta
         %ul{:style => "float:left;"}
           %li= link_to 'Home', root_path

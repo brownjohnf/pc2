@@ -1,0 +1,30 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-19.last
+      :erb
+        <p>
+          <b>Name:</b>
+          <%= @stage.name %>
+        </p>
+
+        <p>
+          <b>Arrival:</b>
+          <%= @stage.arrival %>
+        </p>
+
+        <p>
+          <b>Swear in:</b>
+          <%= @stage.swear_in %>
+        </p>
+
+        <p>
+          <b>Cos:</b>
+          <%= @stage.cos %>
+        </p>
+
+        <p>
+          <b>Pc:</b>
+          <%= @stage.pc_id %>
+        </p>

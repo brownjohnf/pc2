@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   has_many :uploaded_photos, :as => :user
   has_many :documents
 
-  belongs_to :country
   belongs_to :photo
+  belongs_to :country
 
   before_validation :clear_empty_attrs
   validates :name, :email, :country_id, :presence => true

@@ -14,6 +14,11 @@ class FeedbackController < ApplicationController
     end
   end
 
+  def volunteer_request
+    @feedback = Feedback.new
+    @title = 'Add me as a Volunteer'
+  end
+
   # GET /feedback/1
   # GET /feedback/1.json
   def show

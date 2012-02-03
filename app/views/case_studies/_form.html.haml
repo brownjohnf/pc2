@@ -3,19 +3,19 @@
     = render :partial => 'shared/form_error', :locals => {:a => @case_study} if @case_study.errors.any?
     %h1 About the case study
     .field
-      = f.label :title
+      = f.label :title, 'Title*'
       = f.text_field :title
     .field
-      = f.label :photo_id
-      = f.collection_select(:photo_id, Photo.all, :id, :title)
+      = f.label :photo_id, 'Profile Photo'
+      = f.collection_select(:photo_id, Photo.all, :id, :title, :include_blank => true)
     .field
-      = f.label :language_id
+      = f.label :language_id, 'Language*'
       = f.collection_select(:language_id, Language.all, :id, :name)
     = render 'shared/tag_field', :f => f
   .box
     %h1 Body of study
     .field
-      = f.label :summary
+      = f.label :summary, 'Summary*'
       = f.text_area :summary
     .field
       = f.label :context

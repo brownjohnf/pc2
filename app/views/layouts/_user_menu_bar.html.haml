@@ -1,10 +1,12 @@
 #user_menu_bar
-  = link_to 'Case Studies', case_studies_path
-  = link_to icon(:user), new_group_path
-  = link_to icon(:library), new_library_path
+  = link_to icon(:case_study_new), new_case_study_path
   = link_to icon(:photo), new_photo_path
-  = link_to icon(:document), new_document_path
+  = link_to icon(:document_upload), new_document_path
+  = link_to icon(:library), new_library_path
+  = link_to icon(:user), new_group_path
   %hr
   = link_to icon(:user_edit), edit_user_path(current_user)
-  = link_to icon(:comment), '/feedback/new'
+  = link_to icon(:comment), new_feedback_path
+  = link_to icon(:help), '/help', :id => 'help'
+  %hr
   = link_to icon(:exit), '/logout'

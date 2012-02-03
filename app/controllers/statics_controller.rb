@@ -14,6 +14,10 @@ class StaticsController < ApplicationController
     render 'splash', :layout => 'splash'
   end
 
+  def help
+    @title = 'Help'
+  end
+
   def about_us
     @page = Page.where(:title => 'About us').first
     @title = @page.title

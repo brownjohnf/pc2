@@ -1,0 +1,84 @@
+.left_menu {
+  .accordion {
+    margin-bottom: 2em !important;
+  }
+  #main_menu_logo {
+    border-radius: 10px;
+    margin-bottom: 2em;
+  }
+  ul {
+    padding: .5em !important;
+    margin: 0 2px 2px 2px !important;
+    list-style-type: none;
+    border: 1px solid black;
+    border-top: none;
+    @include shadow(1px, 0, 0, $steel_blue, 1px);
+    li {
+      border-top: 1px solid lightgray;
+      &:first-child {
+        border: none;
+      }
+      a {
+        display: block;
+        padding: .5em;
+        &:hover {
+          text-decoration: none !important;
+          background-color: $very_light_gray;
+        }
+      }
+    }
+  }
+  h3 {
+    border: 1px solid $white;
+    padding: .5em 1em !important;
+    margin: .5em 2px 2px 2px !important;
+    @include shadow(1px, 0, 0, $black, 1px);
+    background: gray;
+    color: white !important;
+  }
+}
+
+
+
+#admin_menu_bar, #moderator_menu_bar {
+  @include fixed_menu;
+  right: 0;
+  width: 7%;
+  bottom: 0;
+  padding: 10px;
+  background-color: $white;
+  border: 1px solid $light_gray;
+  border-radius: 5px;
+  ul {
+    list-style-type: none;
+    li {
+      margin: .5em 0;
+      a {
+        border-left: 2px solid $steel_blue;
+        padding: 0 .5em;
+      }
+    }
+  }
+}
+
+#user_menu_bar {
+  @include fixed_menu;
+  left: 0;
+  top: 20%;
+  width: 40px;
+  margin-left: 5px;
+  a {
+    text-align: center;
+    display: block;
+    &#help {
+      img {
+        width: 16px;
+        padding: 5px 12px;
+      }
+    }
+    img {
+      width: 30px;
+      padding: 5px
+    }
+  }
+}

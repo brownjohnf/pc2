@@ -1,0 +1,28 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-19.last
+      :erb
+
+        <table>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Qualifications</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @positions.each do |position| %>
+          <tr>
+            <td><%= position.title %></td>
+            <td><%= position.description %></td>
+            <td><%= position.qualifications %></td>
+            <td><%= link_to 'Show', position %></td>
+            <td><%= link_to 'Edit', edit_position_path(position) %></td>
+            <td><%= link_to 'Destroy', position, confirm: 'Are you sure?', method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>
