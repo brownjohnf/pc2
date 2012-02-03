@@ -2,11 +2,8 @@ class UsersController < ApplicationController
 
   before_filter :authenticate #sessions helper
 
-  #before_filter :authenticate #sessions helper
-
   def index
     @title = 'Users'
-    @context_menu = {'new' => new_user_path}
 
     @users = User.paginate(:page => params[:page], :per_page => 20)
     @recent = User.unscoped.order('updated_at DESC').limit(20)
@@ -16,7 +13,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     @title = @user.name
-    @context_menu = {'back' => users_path, 'edit' => edit_user_path}
   end
 
   def new
@@ -31,7 +27,6 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @title = @user.name
-    @context_menu = {'back' => users_path, 'cancel' => user_path}
   end
 
   def create
@@ -56,8 +51,6 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :ok }
       else
-        @title = 'Error'
-        @context_menu = {'back to all users' => users_path, 'back to user' => user_path}
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -68,12 +61,6 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = 'User destroyed.'
     redirect_to users_path
-  end
-
-  def remove_avatar
-    @user = User.find(params[:id])
-    @user.avatar = nil
-    @user.save
   end
 
 end

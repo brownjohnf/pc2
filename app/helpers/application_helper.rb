@@ -91,7 +91,20 @@ module ApplicationHelper
   end
 
   def icon(icon)
-    icons = { :file_download => 'file_down.png' }
+    icons = {
+      :document_download => 'file_down.png',
+      :document_upload => 'file_up.png',
+      :photo => 'camera.png',
+      :document => 'file_3.png',
+      :user => 'user.png',
+      :user_edit => 'engine.png',
+      :library => 'book.png',
+      :help => 'info.png',
+      :comment => 'comment_2.png',
+      :exit => 'error_1.png',
+      :case_study_new => 'file_plus.png',
+      :case_study => 'file_1.png'
+    }
     image_tag("icons/#{icons[icon]}", :class => 'icon')
   end
 

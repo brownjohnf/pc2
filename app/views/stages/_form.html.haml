@@ -1,0 +1,20 @@
+= form_for(@stage) do |f|
+  = render 'shared/form_error', :error => @stage if @stage.errors.any?
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :arrival
+    = f.date_select :arrival
+  .field
+    = f.label :swear_in
+    = f.date_select :swear_in
+  .field
+    = f.label :cos
+    = f.date_select :cos
+  .field
+    = f.label :pc_id
+    = f.text_field :pc_id
+  .actions
+    = f.submit

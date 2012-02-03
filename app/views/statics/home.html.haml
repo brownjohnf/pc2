@@ -20,6 +20,7 @@
               %p
                 = truncate(page.description, :length => 100, :separator => ' ')
                 = link_to ' read more', page
+              .clearfloat
       .span-12
         .box
           %h1 Featured Users
@@ -42,6 +43,11 @@
               %p
                 = truncate(cs.summary, :length => 100, :separator => ' ')
                 = link_to ' read more', cs
+              .clearfloat
+      .box
+        %h1 Documents
+        %ul
+          = render Document.unscoped.order('updated_at DESC').limit(20).all
       .box
         %h1 Latest Photos
         = render Photo.unscoped.order('updated_at DESC').limit(20).all

@@ -113,9 +113,11 @@ body.moments {
         }
       }
     }
-    background-image: image-url("timeline-bg.png");
+    position: relative;
+    background-image: image-url("timeline_vertical_bar.jpg");
     background-position: top center;
-    background-repeat: repeat-y;
-    background-size: 10px auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    //background-size: 10px auto;
   }
 }

@@ -30,10 +30,13 @@
               = f.collection_select(:library_id, current_user.libraries.all, :id, :name)
             .actions
               = f.submit 'Add to library', :disable_with => 'adding...'
-      .span-16
+      .span-16.center
         = image_tag @photo.photo.url(:large)
       .span-4.last
         = button_to 'Next >', @next, :method => :get if @next
+        .box
+          %h3 Tags
+          %ul= render 'shared/tags', :tags => @photo.tag_list
     .span-24.last
       .span-4
       .span-4

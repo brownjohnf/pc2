@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   has_many :uploaded_photos, :as => :user
   has_many :documents
 
-  belongs_to :country
   belongs_to :photo
+  belongs_to :country
 
   before_validation :clear_empty_attrs
   validates :name, :email, :country_id, :presence => true
@@ -59,7 +59,11 @@ class User < ActiveRecord::Base
   end
 
   def moderator?
-    Group.find_by_name('Moderator' || 'Admin').users.find_by_id(self)
+    unless self.admin?
+      Group.find_by_name('Moderator').users.find_by_id(self)
+    else
+      true
+    end
   end
 
   def to_param

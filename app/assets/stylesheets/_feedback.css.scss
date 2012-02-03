@@ -12,14 +12,8 @@ body.feedback {
 
 
 #feedback {
-  @include red-links;
-  background-color: $white;
-  padding: 5px;
+  @include fixed_menu;
   margin: 3px;
-  border-radius: 5px;
-  border: 1px solid $light_gray;
-  position: fixed;
   bottom: 0;
   right: 0;
-  z-index: 21;
 }

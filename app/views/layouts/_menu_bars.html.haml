@@ -1,5 +1,0 @@
-#admin_menu_bar
-  = render 'layouts/context_menu_bar' if current_user.admin? || current_user.moderator?
-  = render 'layouts/admin_menu_bar' if current_user.admin?
-  = render 'layouts/moderator_menu_bar' if current_user.moderator? && !current_user.admin?
-  = render 'layouts/user_menu_bar' unless current_user.admin?

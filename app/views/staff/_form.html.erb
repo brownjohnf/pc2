@@ -1,4 +1,4 @@
-<%= form_for(@staff, :remote => true) do |f| %>
+<%= form_for(@staff) do |f| %>
   <% if @staff.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this staff from being saved:</h2>

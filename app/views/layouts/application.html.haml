@@ -11,7 +11,6 @@
     #main
       #header_spacer
       = render 'layouts/photobar' if Photo.all.count > 19
-      = render 'layouts/menu_bars' if signed_in?
       = render 'shared/notice_bar' if notice
       #page
         = yield
@@ -25,4 +24,8 @@
                 %br
                 ID: #{params[:action]}
     = render 'layouts/footer'
-    = render 'layouts/feedback'
+    - if signed_in?
+      = render 'layouts/user_menu_bar'
+      = render 'layouts/admin_menu_bar' if current_user.admin?
+      = render 'layouts/moderator_menu_bar' if current_user.moderator? && !current_user.admin?
+    = render 'layouts/feedback' unless signed_in? && current_user.admin?
