@@ -1,14 +1,19 @@
 .container
   .row
-    .span-24.last
-      .slideshow
-  .row
-    .span-8
-      .slideshow
-      %p Testing
-    .span-8
-      .slideshow
-      %p Testing
-    .span-8.last
-      .slideshow
-      %p Testing
+    .span-3
+      %div
+        %span.vertical Peace Corps Senegal
+    .span-21.last
+      .span-24.last
+        = render 'shared/slider', :slides => @slides
+        - count = 1
+        - @spotlights.each do |spotlight|
+          .span-8{:class => "#{'last' if count.multiple_of?(3)}"}
+            .spotlight
+              .photo_container{:style => "background-image: url(#{spotlight[:photo]})"}
+                .caption= spotlight[:title]
+              .text= spotlight[:text]
+              %br
+              = link_to 'read more', spotlight[:path]
+              &rarr;
+          - count += 1

@@ -1,4 +1,5 @@
-%li
+%li.document
+  = document_icon_for document, size = 50
   %h4
     = document.name
     %span
@@ -7,6 +8,9 @@
   %p
     = document.description if document.description
     .tags.right= render 'shared/tags', :tags => document.tag_list
-  %p.right= link_to 'view details', document
-  = link_to 'download', '', :method => :get
-  = document.file_content_type
+  %p.right
+    = link_to 'view details', document
+    = icon(:document_download)
+    = link_to 'download', '', :method => :get
+    = document.file_content_type
+  .clearfloat

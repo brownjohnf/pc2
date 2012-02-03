@@ -1,11 +1,23 @@
 .container
   .row
     .span-24.last
-      .box
-        = link_to 'All Pages', pages_path
-        = link_to 'Search Case Studies', case_studies_path
-        = link_to 'Browse Photos', photos_path
-        = link_to 'Page Tree', pages_path
+      .box.center.top_menu
+        .span-4
+          = link_to icon(:page), pages_path
+          = link_to 'All Pages', pages_path
+        .span-4
+          = link_to icon(:search), case_studies_path
+          = link_to 'Search Case Studies', case_studies_path
+        .span-4
+          = link_to icon(:photo), photos_path
+          = link_to 'Browse Photos', photos_path
+        .span-4
+          = link_to icon(:page), pages_path
+          = link_to 'Page Tree', pages_path
+        .span-4.last
+          = link_to icon(:page), pages_path
+          = link_to 'Weekly food security update', pages_path
+        .clearfloat
   .row
     .span-12
       .box

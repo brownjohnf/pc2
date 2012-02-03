@@ -3,11 +3,59 @@
     #page {
       .container {
         overflow: visible;
-        margin-top: 5em;
-        .slideshow {
-          background-position: 50% 50%;
-          height: 250px;
-          overflow: hidden;
+        margin-top: 1em;
+        div.spotlight {
+          div.photo_container {
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-color: black;
+            background-size: 100% auto;
+            height: 250px;
+            border: 1px solid white;
+            box-shadow: 0 0 1px black;
+            position: relative;
+            .caption {
+              background: black;
+              opacity: .8;
+              color: $steel_blue;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 98%;
+              padding: 1%;
+              font-size: 2em;
+            }
+          }
+          .text {
+            margin-top: 1em;
+            font-size: 1.5em;
+            text-align: justify;
+          }
+
+        }
+        #slider1 {
+          margin: 0;
+          .panel {
+            position: relative;
+          }
+          .slide {
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-color: black;
+            background-size: 100% auto;
+            position: relative;
+            .caption {
+              background: black;
+              opacity: .8;
+              color: white;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 94%;
+              padding: 0 3% 2% 3%;
+              font-size: 2em;
+            }
+          }
         }
       }
     }

@@ -1,0 +1,4 @@
+#slider_container
+  %ul#slider1
+    - slides.each do |slide|
+      = render 'shared/slide', :slide => slide

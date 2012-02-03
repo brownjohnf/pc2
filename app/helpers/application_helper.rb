@@ -103,7 +103,9 @@ module ApplicationHelper
       :comment => 'comment_2.png',
       :exit => 'error_1.png',
       :case_study_new => 'file_plus.png',
-      :case_study => 'file_1.png'
+      :case_study => 'file_1.png',
+      :page => 'file_2.png',
+      :search => 'search.png'
     }
     image_tag("icons/#{icons[icon]}", :class => 'icon')
   end

@@ -16,6 +16,7 @@
             last updated
             = time_ago_in_words(@page.updated_at)
             ago
+        %p= @page.description
         .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
     .span-4.last

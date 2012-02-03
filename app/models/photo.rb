@@ -1,7 +1,9 @@
 class Photo < ActiveRecord::Base
 
+  # small is for span-4
+  # medium is for span-8
   has_attached_file :photo,
-    :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980>' },
+    :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140' },
     :storage => :s3,
     :bucket => 'pcsenegal-dev-com',
     :s3_credentials => {
