@@ -1,7 +1,7 @@
 = form_for(@volunteer) do |f|
   = render 'form_error' if @volunteer.errors.any?
   .field
-    = f.label :user_id
+    = f.label :user_id, 'User*'
     = f.collection_select(:user_id, User.all, :id, :name)
   = render :partial => 'fields', :locals => { :f => f }
   .actions
