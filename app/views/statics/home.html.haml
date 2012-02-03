@@ -57,6 +57,8 @@
                 = link_to ' read more', cs
               .clearfloat
       .box
+        %h1 Top Tags
+      .box
         %h1 Documents
         %ul
           = render Document.unscoped.order('updated_at DESC').limit(20).all
