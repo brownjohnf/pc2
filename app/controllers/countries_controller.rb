@@ -7,7 +7,6 @@ class CountriesController < ApplicationController
   def index
     @countries = Country.paginate(:page => params[:page])
     @title = 'Listing Countries'
-    @context_menu = {'new' => new_country_path}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,7 +19,6 @@ class CountriesController < ApplicationController
   def show
     @country = Country.find(params[:id])
     @title = @country.name
-    @context_menu = {'back' => countries_path, 'new' => new_country_path, 'edit' => edit_country_path}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +31,6 @@ class CountriesController < ApplicationController
   def new
     @country = Country.new
     @title = 'New Country'
-    @context_menu = {'cancel' => countries_path}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +42,6 @@ class CountriesController < ApplicationController
   def edit
     @country = Country.find(params[:id])
     @title = @country.name
-    @context_menu = {'back' => countries_path, 'cancel' => country_path, 'new' => new_country_path}
   end
 
   # POST /countries

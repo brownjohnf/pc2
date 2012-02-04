@@ -20,7 +20,7 @@
         .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
     .span-4.last
-      = avatar_for @page, :size => :thumb
+      = avatar_for @page, :size => :small
       = button_to 'Edit Page', edit_page_path(@page), :method => :get
       .box
         %h2 Case Studies

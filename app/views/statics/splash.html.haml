@@ -1,10 +1,11 @@
 .container
   .row
     .span-3
-      %div
-        %span.vertical Peace Corps Senegal
+      = image_tag 'pc_logo.png', :id => 'patch'
+      = image_tag('pc_big.png', :id => 'pc_big')
     .span-21.last
       .span-24.last
+        #country= country.upcase
         = render 'shared/slider', :slides => @slides
         - count = 1
         - @spotlights.each do |spotlight|
