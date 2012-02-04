@@ -21,6 +21,7 @@ class Photo < ActiveRecord::Base
 
   before_validation :clear_empty_attrs
   validates :title, :imageable_id, :imageable_type, :user_id, :presence => true
+  validates :description, :length => { :maximum => 255 }
 
   after_destroy :reset_pointers
 
