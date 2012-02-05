@@ -3,7 +3,9 @@
 /* ============================== */
 
 	body {
-
+    header {
+      position: fixed;
+    }
 	}
 
 
@@ -14,29 +16,15 @@
 @media handheld, only screen and (max-width: 767px) {
 
 	body {
-
-	}
-
-  header {
-		li {
-			a {
-				padding: .25em !important;
-				background: none !important;
-			}
-			&:last-child {
-				border: none !important;
-			}
-			&:first-child {
-				border: none !important;
-			}
-		}
-
+	  header {
+	     position: relative;
+	  }
+  	#main {
+  		#header_spacing {
+  		}
+  	}
   }
 
-	#main {
-		#header_spacing {
-		}
-	}
 
 }
 

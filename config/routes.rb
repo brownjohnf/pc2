@@ -92,8 +92,6 @@ OmniauthDemo::Application.routes.draw do
 
   resources :pcregions
 
-  resources :countries
-
   resources :regions
 
   resources :users do

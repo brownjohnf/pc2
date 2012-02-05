@@ -11,7 +11,7 @@
       %p
         = link_to @moment.user.name, @moment.user
         %br
-        = link_to @moment.user.country.name, @moment.user.country
+        = @moment.user.country
         %br
         = link_to @moment.user.volunteers.first.sector.name, @moment.user.volunteers.first.sector if @moment.user.volunteers.any?
         %br

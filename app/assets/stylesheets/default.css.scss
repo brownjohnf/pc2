@@ -44,6 +44,10 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin shadow($width: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
   box-shadow: $hshift $vshift $width $spread $color;
   -moz-box-shadow: $hshift $vshift $width $spread $color;
+  /* For IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=$color)";
+  /* For IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=$color);
 }
 @mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
   box-shadow: $hshift $vshift $spread $color inset;
@@ -76,6 +80,8 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin rotate($deg: -90deg) {
   display: block;
   -webkit-transform: rotate($deg);
+  -moz-transform: rotate($deg);
+  transform: rotate($deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
