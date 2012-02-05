@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201205137) do
+ActiveRecord::Schema.define(:version => 20120205023623) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
     t.integer  "scope_id"
     t.integer  "target_id"
     t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "countries", :force => true do |t|
-    t.string   "name"
-    t.string   "short"
-    t.string   "description"
-    t.integer  "pcregion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,10 +122,10 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
   create_table "libraries", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "country_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "memberships", :force => true do |t|
@@ -146,7 +137,6 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
 
   create_table "moments", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "country_id"
     t.integer  "photo_id"
     t.date     "datapoint"
     t.string   "title"
@@ -154,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "pages", :force => true do |t|
@@ -227,7 +218,7 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "country_id"
+    t.string   "country"
   end
 
   create_table "regiontypes", :force => true do |t|
@@ -329,7 +320,6 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bio"
-    t.integer  "country_id"
     t.string   "email2"
     t.string   "phone1"
     t.string   "phone2"
@@ -339,6 +329,7 @@ ActiveRecord::Schema.define(:version => 20120201205137) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "country"
   end
 
   create_table "volunteers", :force => true do |t|

@@ -3,7 +3,6 @@ class Moment < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   belongs_to :user
-  belongs_to :country
   belongs_to :photo
 
   has_many :photos, :as => :imageable
@@ -22,7 +21,7 @@ class Moment < ActiveRecord::Base
   private
 
     def set_values
-      self.country_id = self.user.country.id# if country.nil?
+      self.country = self.user.country# if country.nil?
     end
 
 end

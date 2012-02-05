@@ -24,10 +24,9 @@ class User < ActiveRecord::Base
   has_many :documents
 
   belongs_to :photo
-  belongs_to :country
 
   before_validation :clear_empty_attrs
-  validates :name, :email, :country_id, :presence => true
+  validates :name, :email, :country, :presence => true
 
   accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs

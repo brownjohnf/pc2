@@ -2,7 +2,7 @@
   = gravatar_for volunteer.user
   %h4= link_to volunteer.user.name, volunteer.user
   = link_to volunteer.site.region.name, volunteer.site.region
-  = link_to volunteer.user.country.name, volunteer.user.country
+  = volunteer.user.country
   %br
   = link_to volunteer.sector.name, volunteer.sector
   .clearfloat
