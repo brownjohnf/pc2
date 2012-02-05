@@ -20,13 +20,15 @@
         overflow: visible;
         //margin-top: 1em;
         #country {
-        	font-size: 12em;
+        	font-size: 11em;
         	line-height: .9em;
-        	margin-bottom: .1em;
+        	margin-bottom: .2em;
+        	color: gray;
+        	font-family: 'trebuchet ms'
         }
         #pc_big {
-        	width: 80%;
-        	height: 90%;
+        	width: 75%;
+        	height: 80%;
         }
         #patch {
         	margin-bottom: 1em;
