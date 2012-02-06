@@ -18,7 +18,7 @@ $black: #000;
 $steel_blue: #95b4c9;
 $panic: red;
 $box_background: #eee;
-
+$pink: #ffc0cb;
 $green: green;
 $middle_green: #D8E47E;
 $pale_green: #FAFFD7;
@@ -44,10 +44,6 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin shadow($width: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
   box-shadow: $hshift $vshift $width $spread $color;
   -moz-box-shadow: $hshift $vshift $width $spread $color;
-  /* For IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=$color)";
-  /* For IE 5.5 - 7 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=$color);
 }
 @mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
   box-shadow: $hshift $vshift $spread $color inset;
@@ -82,7 +78,6 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   -webkit-transform: rotate($deg);
   -moz-transform: rotate($deg);
   transform: rotate($deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .vertical {
@@ -178,7 +173,7 @@ h1 > span, h2 > span, h3 > span, h4 > span {
   }
   &.error {
     @include shadow(1px, 0, 0, $panic, 1px);
-    background: pink;
+    background: $pink;
     h1, h2, h3, h4 {
       color: black !important;
       text-shadow: gray 0 1px 0 !important;
@@ -358,7 +353,7 @@ html {
             box-shadow: 0 0 1px 1px $panic;
             margin: 5px 0 10px 0;
             border: 1px solid white;
-            background-color: pink;
+            background-color: $pink;
             padding: 5px;
             p {
               color: $panic;

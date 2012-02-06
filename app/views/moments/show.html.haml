@@ -18,7 +18,7 @@
         = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
         \-
         = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
-        = button_to 'Edit', edit_moment_path(@moment), :method => :get if signed_in? && current_user.admin? || current_user.moderator? || current_user?(@moment.user)
+        = button_to 'Edit', edit_moment_path(@moment), :method => :get if signed_in? && (current_user.admin? || current_user.moderator? || current_user?(@moment.user))
     .span-12
       %h1= @moment.title
       = markdown(@moment.content)
