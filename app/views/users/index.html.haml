@@ -4,7 +4,7 @@
       = render 'shared/menu'
     .span-19.last
       %h1= @title
-      = will_paginate
+      = will_paginate @users
       .span-9
         .box
           %h2 Alphabetical
@@ -25,9 +25,9 @@
             %li= pluralize(Blog.all.count, 'blog')
         .box
           %h3 Top User Tags
-          = cloud_of_tags
+          = cloud_of_tags User
         .box
           %h3 Who are our users?
           Our primary users are Peace Corps Volunteers (PCVs) and staff. However, anyone can log in, create a profile, and join the Peace Corps community. Every user you see here is not necessarily a PCV.
       .span-24.last
-        = will_paginate
+        = will_paginate @users

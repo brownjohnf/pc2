@@ -5,12 +5,12 @@ class VolunteersController < ApplicationController
   # GET /volunteers
   # GET /volunteers.json
   def index
-    @volunteers = Volunteer.paginate(:page => params[:page])
+    @title = 'Volunteers'
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @volunteers }
-    end
+    @users = Volunteer.paginate(:page => params[:page], :per_page => 20)
+    @recent = Volunteer.unscoped.order('updated_at DESC').limit(20)
+    
+    render 'users/index'
   end
 
   # GET /volunteers/1

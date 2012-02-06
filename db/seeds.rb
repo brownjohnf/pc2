@@ -76,40 +76,6 @@ sectors = Sector.create!(
                             { name: 'Environmental Education' }
                           ]
 )
-countries = Country.create!(
-                            [
-                               { name: 'United States of America',
-                                 short: 'USA',
-                                 pcregion_id: 2 },
-                               { name: 'Senegal',
-                                 short: 'SN',
-                                 pcregion_id: 2 },
-                               { name: 'Mali',
-                                 short: 'ML',
-                                 pcregion_id: 2 },
-                               { name: 'The Gambia',
-                                 short: 'GM',
-                                 pcregion_id: 2 },
-                               { name: 'Jordan',
-                                 short: 'JO',
-                                 pcregion_id: 3 }
-                            ]
-                          )
-regiontype = Regiontype.create!(
-                                [
-                                  { name: 'Unknown Type' }
-                                ]
-)
-regions = Region.create!(
-                         [
-                           { name: 'Unknown Region', short: '???', country_id: 1, type_id: 1, parent_id: nil }
-                         ]
-)
-sites = Site.create!(
-                       [
-                         { name: 'Unknown Site', region_id: 1 }
-                       ]
-)
 
 pages = Page.create!(
                      [
@@ -148,7 +114,7 @@ pages = Page.create!(
 jack = User.create!(
                     :name => 'Jack Brown',
                     :email => 'jack@brownjohnf.com',
-                    :country_id => 3,
+                    :country => 'SN',
                     :bio => '# Bio Here')
 jack.volunteers.create!(
                         :local_name => 'Babakar Ndiaye',
