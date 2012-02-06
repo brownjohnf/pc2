@@ -60,5 +60,9 @@ class StaticsController < ApplicationController
     @title = @page.title
     render 'pages/show'
   end
+  
+  def search
+    @title = 'Search'
+  end
 
 end

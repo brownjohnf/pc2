@@ -112,6 +112,7 @@ OmniauthDemo::Application.routes.draw do
   match '/about_us', :to => 'statics#about_us'
   match '/splash', :to => 'statics#splash'
   match '/help', :to => 'statics#help'
+  match '/search', :to => 'statics#search'
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'

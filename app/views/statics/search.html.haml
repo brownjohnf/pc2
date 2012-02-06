@@ -1,0 +1,21 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      .box
+        %h1 Search
+        %p Search our site using google.
+        :erb
+          <div id="google_search" name="google_search"><!-- Google search -->
+            <form method="get" action="http://www.google.com/search">
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input type="hidden" name="oe" value="UTF-8" />
+              <input type="hidden" name="domains" value="http://pcsenegal.org" />
+              <input type="hidden" name="sitesearch" value="http://pcsenegal.org" checked />
+              <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
+              <input type="text" name="q" maxlength="200" value="Search pcsenegal.org using Google Search" />
+              <input type="submit">
+            </form>
+          </div><!--END Search Google -->
+    .span-4.last

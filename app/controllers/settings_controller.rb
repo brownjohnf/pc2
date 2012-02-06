@@ -37,7 +37,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/1/edit
   def edit
-    @setting = Setting.find(params[:id])
+    @settings = Setting.unscoped.order('property ASC').all
   end
 
   # POST /settings

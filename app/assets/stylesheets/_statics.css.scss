@@ -1,4 +1,9 @@
-.statics {
+body.statics {
+  &#search {
+    input[type=text] {
+      width: 70%;
+    }
+  }
   &#splash {
     #page {
       #corner_banner {

@@ -12,5 +12,21 @@
       %ul
         = nested_li(fetch_menu) do |item|
           - link_to item.title, item
-  = link_to image_tag('donate_w190.png', :width => '260px'), support_path
-  = link_to image_tag('google_search.png'), ''
+  .box.search
+    %h1 Google Search
+    :erb
+      <div id="google_search" name="google_search"><!-- Google search -->
+        <form method="get" action="http://www.google.com/search">
+          <input type="hidden" name="ie" value="UTF-8" />
+          <input type="hidden" name="oe" value="UTF-8" />
+          <input type="hidden" name="domains" value="http://pcsenegal.org" />
+          <input type="hidden" name="sitesearch" value="http://pcsenegal.org" checked />
+          <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
+          <input type="text" name="q" maxlength="200" />
+          <input type="submit">
+        </form>
+      </div><!--END Search Google -->
+  :erb
+    <!-- Performable Super Conversion Button -->
+    <script src='//d1nu2rn22elx8m.cloudfront.net/buttons/8nTkT/TKVLd-RsqBruCPMxzR.js'></script>
+    <!-- /Performable Super Conversion Button -->

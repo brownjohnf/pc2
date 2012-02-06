@@ -6,13 +6,13 @@
     = f.text_field :name
   .field
     = f.label :arrival
-    = f.date_select :arrival
+    = f.date_select :arrival, :start_year => 1961, :end_year => Time.now.year + 1
   .field
     = f.label :swear_in
-    = f.date_select :swear_in
+    = f.date_select :swear_in, :start_year => 1961, :end_year => Time.now.year + 1
   .field
     = f.label :cos
-    = f.date_select :cos
+    = f.date_select :cos, :start_year => 1961, :end_year => Time.now.year + 3
   .field
     = f.label :pc_id
     = f.text_field :pc_id

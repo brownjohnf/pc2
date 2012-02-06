@@ -36,6 +36,17 @@
     background: gray;
     color: white !important;
   }
+  .box.search {
+    form {
+      text-align: right;
+      input {
+        margin-bottom: .5em;
+        &[type=text] {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 

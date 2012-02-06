@@ -17,7 +17,7 @@
     = f.collection_select(:stage_id, Stage.all, :id, :name, :include_blank => true)
   .field
     = f.label 'COS Date'
-    = f.date_select :cos_date
+    = f.date_select :cos_date, :start_year => 1961, :end_year => Time.now.year + 3
 .sixcol
   .field
     = f.label 'Emphasis'

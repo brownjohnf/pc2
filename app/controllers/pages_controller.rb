@@ -8,6 +8,7 @@ class PagesController < ApplicationController
   # GET /pages.json
   def index
     @title = 'Peruse Our Pages'
+    @pages = Page.unscoped.order('title ASC')
   end
 
   def added
