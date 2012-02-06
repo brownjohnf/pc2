@@ -7,6 +7,27 @@
     = csrf_meta_tags
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
+    :erb
+      <script type="text/javascript" 
+       src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+    
+      <style>
+       /* 
+        CSS rules to use for styling the overlay:
+          .chromeFrameOverlayContent
+          .chromeFrameOverlayContent iframe
+          .chromeFrameOverlayCloseBar
+          .chromeFrameOverlayUnderlay
+       */
+      </style> 
+    
+      <script>
+       // You may want to place these lines inside an onload handler
+       CFInstall.check({
+         mode: "overlay",
+         destination: "http://www.waikiki.com"
+       });
+      </script>
     = render 'layouts/header'
     #main
       #header_spacer
@@ -23,8 +44,4 @@
                 %br
                 ID: #{params[:action]}
     = render 'layouts/footer'
-    - if signed_in?
-      = render 'layouts/user_menu_bar'
-      = render 'layouts/admin_menu_bar' if current_user.admin?
-      = render 'layouts/moderator_menu_bar' if current_user.moderator? && !current_user.admin?
     = render 'layouts/feedback' unless signed_in? && current_user.admin?

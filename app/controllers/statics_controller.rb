@@ -5,7 +5,8 @@ class StaticsController < ApplicationController
     @users = User.unscoped.order('users.updated_at DESC').limit(5)
     @pages = Page.order('pages.updated_at DESC').limit(10)
     @case_studies = CaseStudy.order('updated_at DESC').limit(10)
-
+    @photos = Photo.unscoped.order('updated_at DESC').limit(20).all
+    @documents = Document.unscoped.order('updated_at DESC').limit(20).all
   end
 
   def splash

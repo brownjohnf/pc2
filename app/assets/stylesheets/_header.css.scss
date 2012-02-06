@@ -1,9 +1,9 @@
-header {
+#header {
   @include shadow;
   position: fixed;
   width: 100%;
   background-color: $dark_gray;
-  background-image: url('header-bg.png');
+  background-image: url("header-bg.png");
   background-size: auto 100%;
   color: $header_color;
   font-size: $header_font_size;

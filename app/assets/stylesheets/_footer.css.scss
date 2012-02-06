@@ -1,4 +1,4 @@
-footer {
+#footer {
   @include red-links;
   div#legal {
     float: left;
@@ -9,7 +9,7 @@ footer {
   }
   & > div {
     padding: 1em 0;
-    &:first-child {
+    &.first {
       background: $footer_background;
       border-color: $footer_v_spacer;
       border-width: 1px 0;
@@ -24,7 +24,7 @@ footer {
         }
       }
     }
-    &:last-child {
+    &.last {
       background-color: $gradient_top * 1.04;
       border-top: 1px solid $white;
       .left {
