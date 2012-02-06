@@ -5,12 +5,12 @@ class StaffController < ApplicationController
   # GET /staff
   # GET /staff.json
   def index
-    @staff = Staff.all
+    @title = 'Staff'
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @staff }
-    end
+    @users = Staff.paginate(:page => params[:page], :per_page => 20)
+    @recent = Staff.unscoped.order('updated_at DESC').limit(20)
+    
+    render 'users/index'
   end
 
   # GET /staff/1
