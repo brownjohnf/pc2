@@ -1,10 +1,10 @@
-<%= form_for(@setting) do |f| %>
-  <% if @setting.errors.any? %>
+<%= form_for(setting) do |f| %>
+  <% if setting.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+      <h2><%= pluralize(setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
 
       <ul>
-      <% @setting.errors.full_messages.each do |msg| %>
+      <% setting.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -14,22 +14,18 @@
   <div class="field">
     <%= f.label :property %><br />
     <%= f.text_field :property %>
-  </div>
-  <div class="field">
     <%= f.label :value %><br />
     <%= f.text_field :value %>
   </div>
   <div class="field">
     <%= f.label :explanation %><br />
     <%= f.text_field :explanation %>
-  </div>
-  <div class="field">
     <%= f.label :comment %><br />
     <%= f.text_field :comment %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.collection_select(:user_id, User.all, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

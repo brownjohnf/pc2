@@ -3,5 +3,6 @@
     .span-5
       = render 'shared/menu'
     .span-15
-      = render 'form'
+      - @settings.each do |setting|
+        = render 'form', :setting => setting
     .span-4.last

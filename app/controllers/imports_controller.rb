@@ -77,7 +77,7 @@ class ImportsController < ApplicationController
   def process_yaml
     require 'yaml'
     @import = Import.find(params[:id])
-    yaml = YAML.load(File.read(@import.csv.url))
+    yaml = YAML.load(File.read(@import.csv.to_file))
     case @import.scope.name
     when 'CaseStudy'
       yaml.each do |y|

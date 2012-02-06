@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :start %><br />
-    <%= f.date_select :start %>
+    <%= f.date_select :start, :start_year => 1961, :end_year => Time.now.year %>
   </div>
   <div class="field">
     <%= f.label :end %><br />
-    <%= f.date_select :end %>
+    <%= f.date_select :end, :start_year => 1961, :end_year => Time.now.year + 1 %>
   </div>
   <div class="field">
     <%= f.label :comment %><br />

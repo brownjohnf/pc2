@@ -228,7 +228,7 @@ html {
         font-size: $header_font_size;
       }
       #photobar {
-        background-color: black;
+        //background-color: black;
         img {
           padding: 0;
           margin: 0;
@@ -261,6 +261,7 @@ html {
       }
       #page {
         padding: 1.5em 0;
+        border-top: 1em solid $steel_blue;
         @include shadow(1px, 0, -1px);
         position: relative;
         z-index: 15;

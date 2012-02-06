@@ -6,7 +6,7 @@
   = f.collection_select(:photo_id, @moment.photos, :id, :title, :include_blank => true)
 .field
   = f.label :datapoint
-  = f.date_select :datapoint
+  = f.date_select :datapoint, :start_year => 1963, :end_year => Time.now.year
 .field
   = f.label :title
   = f.text_field :title
