@@ -6,7 +6,7 @@ class Staff < ActiveRecord::Base
   has_many :jobs
   has_many :positions, :through => :jobs
 
-  validates :building, :site_id, :presence => true
+  validates :user_id, :presence => true
 
   after_create :add_default_permissions
 

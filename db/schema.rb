@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205023623) do
+ActiveRecord::Schema.define(:version => 20120206163904) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.text     "next_steps"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "contributions", :force => true do |t|
@@ -159,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.boolean  "system",      :default => false
     t.integer  "photo_id"
     t.integer  "language_id"
+    t.string   "country"
   end
 
   create_table "pcregions", :force => true do |t|
@@ -284,6 +286,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.string   "details"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "stages", :force => true do |t|
@@ -344,6 +347,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "cos_date"
+    t.string   "country"
   end
 
   create_table "websites", :force => true do |t|

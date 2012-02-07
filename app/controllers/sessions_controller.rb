@@ -19,9 +19,8 @@ class SessionsController < ApplicationController
       # Create the session
       #session[:user_id] = auth.user.id
       sign_in user
-
+      
       redirect_back_or current_user
-      #render :text => "Welcome #{auth.user.name}!"
     end
   end
 

@@ -2,11 +2,6 @@
   = avatar_for case_study, :size => :thumb
   %h4
     = case_study.title
-    #{time_ago_in_words(case_study.updated_at)} ago
+    %span #{time_ago_in_words(case_study.updated_at)} ago
   %p= truncate(case_study.summary, :length => 100, :separator => ' ')
   .tags.right= render 'shared/tags', :tags => case_study.tag_list
-  %p
-    - if current_user && current_user.moderator?
-      = button_to 'edit', edit_case_study_path(case_study), :method => :get
-      - if current_user.admin?
-        = button_to 'delete', case_study, confirm: 'Are you sure?', method: :delete

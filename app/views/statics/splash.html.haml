@@ -13,7 +13,7 @@
             .spotlight
               .photo_container{:style => "background-image: url(#{spotlight[:photo]})"}
                 .caption= spotlight[:title]
-              .text= spotlight[:text]
+              .text= truncate(spotlight[:text], :length => 300, :separator => ' ')
               %br
               = link_to 'read more', spotlight[:path]
               &rarr;

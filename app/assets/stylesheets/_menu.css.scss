@@ -12,9 +12,10 @@
     list-style-type: none;
     border: 1px solid black;
     border-top: none;
+    background-color: $white;
     @include shadow(1px, 0, 0, $steel_blue, 1px);
     li {
-      border-top: 1px solid lightgray;
+      border-top: 1px solid $light_gray;
       &:first-child {
         border: none;
       }

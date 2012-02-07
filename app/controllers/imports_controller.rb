@@ -151,7 +151,7 @@ class ImportsController < ApplicationController
       params[:user]["email2"] = people['email2']
       params[:user]["phone1"] = people['phone1']
       params[:user]["phone2"] = people['phone2']
-      params[:user]["country_id"] = Country.where(:name => 'Senegal').first.id
+      params[:user]["country"] = 'SN'
       user = User.new(params[:user])
       user.save!
       user.blogs.create!(:title => people['blog_name'], :description => people['blog_description'], :url => people['blog_address'])
@@ -168,7 +168,6 @@ class ImportsController < ApplicationController
       params[:page]['description'] = y['description']
       params[:page]['content'] = y['content']
       params[:page]['language_id'] = Language.where(:name => 'English')
-      params[:page]['tag_list'] = ''
       page = Page.new(params[:page])
       page.save!
     end

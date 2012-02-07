@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list
+  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list, :country
 
   acts_as_nested_set
 

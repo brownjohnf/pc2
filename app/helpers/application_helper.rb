@@ -18,11 +18,11 @@ module ApplicationHelper
     Setting.where(:property => 'country').first.value
   end
 
-  def avatar_for(object, options = { :size => nil, :photo => 'blank.png' })
+  def avatar_for(object, options = { :size => :icon, :photo => 'blank.png' })
+    sizes = { :icon => '80', :thumb => 100, :small => '200', :medium => '380', :large => '980', :full => '1140' }
     if object.photo.nil?
-      options[:size] ||= '100x100'
       options[:photo] ||= 'blank.png'
-      link_to image_tag(options[:photo], :size => options[:size]), object, :class => 'avatar'
+      link_to image_tag(options[:photo], :width => sizes[options[:size]]), object, :class => 'avatar'
     else
       options[:size] ||= :icon
       link_to image_tag(object.photo.photo.url(options[:size])), object, :class => 'avatar'
@@ -73,8 +73,8 @@ module ApplicationHelper
     return output.html_safe
   end
 
-  def fetch_menu
-    Page.unscoped.order('title ASC').where('parent_id IS NULL')
+  def fetch_menu(country = 'SN')
+    Page.unscoped.order('title ASC').where("parent_id IS NULL AND country = ?", country)
   end
 
   def render_photo(id, size)

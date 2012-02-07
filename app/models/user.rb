@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   belongs_to :photo
 
   before_validation :clear_empty_attrs
-  validates :name, :email, :country, :presence => true
+  validates :name, :email, :presence => true
 
   accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs

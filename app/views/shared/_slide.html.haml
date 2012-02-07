@@ -2,6 +2,6 @@
   .slide{:style => "background-image: url(#{slide[:photo]})"}
     .caption
       %h1= slide[:title]
-      = slide[:text]
+      = truncate(slide[:text], :length => 100, :separator => ' ')
       = link_to 'read more', slide[:path]
       &rang;

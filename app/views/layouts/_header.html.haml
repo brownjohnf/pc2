@@ -5,17 +5,17 @@
         %a{:id => "site_title", :href => '/splash'}
           %span#title_organization= organization
           %span#title_separator= '|'
-          %span#title_country= signed_in? && current_user.volunteers.any? ? Carmen::country_name(current_user.country) : country
+          %span#title_country= signed_in? && current_user.country? ? Carmen.country_name(current_user.country) : country
           %sub beta
         %ul{:style => "float:left;"}
           %li= link_to 'Home', root_path
           %li= link_to 'Pages', pages_path
-          %li= link_to 'Updates', updated_pages_path
+          %li= link_to 'Case Studies', case_studies_path
           %li= link_to 'Photos', photos_path
-          %li= link_to 'Videos', ''
+          -#%li= link_to 'Videos', ''
           %li= link_to 'Documents', documents_path
-          %li= link_to 'Blogs', blogs_path
-          %li= link_to 'Learning', ''
+          -#%li= link_to 'Blogs', blogs_path
+          -#%li= link_to 'Learning', ''
           %li= link_to '50th', moments_path
         %ul{:style => "float:right;"}
           - if signed_in?

@@ -8,7 +8,7 @@
           = @user.name
           .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
-          -#%p= @user.country.name
+          %p= Carmen.country_name(@user.country) if @user.country
 
           %h3 Connect
           %p
@@ -46,7 +46,7 @@
             %p
               = "#{v.sector.name} Volunteer" if v.sector
               %br
-              -#= v.country.name if v.country
+              = Carmen.country_name(v.country) if v.country
               %br
               = v.stage.name if v.stage
             %h4 Site
@@ -61,7 +61,8 @@
       - @user.staff.each do |s|
         .box
           %h3 Staff Member
-          %h4= s.site.name
+          %h4= s.site.name if s.site
+          %p= Carmen.country_name(s.country) if s.country
           %p
             = s.building
             = "| #{s.office}" if s.office

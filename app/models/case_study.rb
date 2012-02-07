@@ -8,6 +8,8 @@ class CaseStudy < ActiveRecord::Base
   belongs_to :photo
 
   before_save :clear_empty_attrs
+  
+  default_scope :order => 'updated_at DESC'
 
   private
 

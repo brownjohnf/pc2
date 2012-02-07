@@ -107,7 +107,6 @@ OmniauthDemo::Application.routes.draw do
 
   match '/disclaimer', :to => 'statics#disclaimer'
   match '/privacy', :to => 'statics#privacy'
-  match '/support', :to => 'statics#support'
   match '/security', :to => 'statics#security'
   match '/about_us', :to => 'statics#about_us'
   match '/splash', :to => 'statics#splash'

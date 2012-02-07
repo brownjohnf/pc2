@@ -9,4 +9,5 @@ $(function() {
     icons: false,
     autoHeight: false
     });
+  $('#context').accordion('activate', false);
 });

@@ -16,12 +16,21 @@ class StaticsController < ApplicationController
     Photo.order('updated_at DESC').tagged_with('splash').each do |p|
       @slides << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p}
     end
+    Page.order('updated_at DESC').tagged_with('splash').each do |p|
+      @slides << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:large), :path => p}
+    end
+    CaseStudy.order('updated_at DESC').tagged_with('splash').each do |cs|
+      @slides << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:large), :path => cs}
+    end
     @spotlights = []
     Photo.order('updated_at DESC').tagged_with('spotlight').each do |p|
       @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.url(:medium), :path => p}
     end
     Page.order('updated_at DESC').tagged_with('spotlight').each do |p|
       @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:medium), :path => p}
+    end
+    CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight').each do |cs|
+      @spotlights << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:medium), :path => cs}
     end
 
     render 'splash', :layout => 'splash'
@@ -32,33 +41,19 @@ class StaticsController < ApplicationController
   end
 
   def about_us
-    @page = Page.where(:title => 'About us').first
-    @title = @page.title
-    render 'pages/show'
+    @title = 'About us'
   end
 
   def disclaimer
-    @page = Page.where(:title => 'Disclaimer').first
-    @title = @page.title
-    render 'pages/show'
+    @title = 'Disclaimer'
   end
 
   def privacy
-    @page = Page.where(:title => 'Privacy Policy').first
-    @title = @page.title
-    render 'pages/show'
-  end
-
-  def support
-    @page = Page.where(:title => 'Support').first
-    @title = @page.title
-    render 'pages/show'
+    @title = 'Privacy Policy'
   end
 
   def security
-    @page = Page.where(:title => 'Security').first
-    @title = @page.title
-    render 'pages/show'
+    @title = 'Security'
   end
   
   def search

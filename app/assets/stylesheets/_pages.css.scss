@@ -11,7 +11,7 @@ body.pages {
           @include clip-corners;
         }
       }
-      ul {
+      ul, ol {
         margin-left: 2em;
       }
     }
