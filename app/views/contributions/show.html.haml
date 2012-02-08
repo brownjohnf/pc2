@@ -9,15 +9,10 @@
 
         <p>
           <b>Scope:</b>
-          <%= @contribution.scope.name %>
+          <%= @contribution.contributable_type %>
         </p>
 
         <p>
           <b>Target:</b>
-          <%= @contribution.scope.name.constantize.find_by_id(@contribution.target_id).title %>
-        </p>
-
-        <p>
-          <b>Comment:</b>
-          <%= @contribution.comment %>
+          <%= link_to @contribution.contributable_id, @contribution.contributable %>
         </p>

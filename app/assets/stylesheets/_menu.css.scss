@@ -1,41 +1,28 @@
 .left_menu {
   .accordion {
     margin-bottom: 2em !important;
+    ul {
+      padding: .5em !important;
+      margin: 0 2px 2px 2px !important;
+      list-style-type: none;
+      border: 1px solid black;
+      border-top: none;
+      background-color: $white;
+      @include shadow(1px, 0, 0, $steel_blue, 1px);
+      
+    }
+    h3 {
+      border: 1px solid $white;
+      padding: .5em 1em !important;
+      margin: .5em 2px 2px 2px !important;
+      @include shadow(1px, 0, 0, $black, 1px);
+      background: gray;
+      color: white !important;
+    }
   }
   #main_menu_logo {
     border-radius: 10px;
     margin-bottom: 2em;
-  }
-  ul {
-    padding: .5em !important;
-    margin: 0 2px 2px 2px !important;
-    list-style-type: none;
-    border: 1px solid black;
-    border-top: none;
-    background-color: $white;
-    @include shadow(1px, 0, 0, $steel_blue, 1px);
-    li {
-      border-top: 1px solid $light_gray;
-      &:first-child {
-        border: none;
-      }
-      a {
-        display: block;
-        padding: .5em;
-        &:hover {
-          text-decoration: none !important;
-          background-color: $very_light_gray;
-        }
-      }
-    }
-  }
-  h3 {
-    border: 1px solid $white;
-    padding: .5em 1em !important;
-    margin: .5em 2px 2px 2px !important;
-    @include shadow(1px, 0, 0, $black, 1px);
-    background: gray;
-    color: white !important;
   }
   .box.search {
     form {
@@ -45,6 +32,20 @@
         &[type=text] {
           width: 100%;
         }
+      }
+    }
+  }
+  li {
+    border-top: 1px solid $light_gray;
+    &:first-child {
+      border: none;
+    }
+    a {
+      display: block;
+      padding: .5em;
+      &:hover {
+        text-decoration: none !important;
+        background-color: $very_light_gray;
       }
     }
   }

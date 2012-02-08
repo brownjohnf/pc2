@@ -11,6 +11,12 @@ class Page < ActiveRecord::Base
 
   has_many :contributions, :foreign_key => 'target_id'
   has_many :photos, :as => :imageable
+  
+  # first connects each one of this model to all of the contributables which which reference it
+  # then connects to all users attached to all those connections by a renamed tunnel
+  # through the contribution connection
+  has_many :contributions, :as => :contributable, :dependent => :destroy
+  has_many :contributors, :through => :contributions, :source => :user
 
   accepts_nested_attributes_for :contributions, :allow_destroy => true
 

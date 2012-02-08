@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208114809) do
+ActiveRecord::Schema.define(:version => 20120208140440) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -48,11 +48,10 @@ ActiveRecord::Schema.define(:version => 20120208114809) do
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "scope_id"
-    t.integer  "target_id"
-    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "contributable_id"
+    t.string   "contributable_type"
   end
 
   create_table "documents", :force => true do |t|

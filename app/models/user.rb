@@ -13,16 +13,22 @@ class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
   has_many :volunteers, :dependent => :destroy
   has_many :staff, :dependent => :destroy
-  has_many :contributions, :dependent => :destroy
   has_many :blogs
   has_many :moments
+  has_many :libraries
+  has_many :documents
+  
   has_many :stacks, :as => :stackable
   has_many :added_stacks, :as => :user
-  has_many :libraries
+  
+  # all photos directly uploaded by the user, just to upload. all photos are also tagged with the user_id of their uploader, 
+  # even if they were uploaded as part of a timeline moment or something else.
   has_many :photos, :as => :imageable
-  has_many :uploaded_photos, :as => :user
-  has_many :documents
+  
+  # pages, case studies to which this user has contributed/is author
+  has_many :contributions, :dependent => :destroy
 
+  # if the user sets an already uploaded photo as a profile image
   belongs_to :photo
 
   before_validation :clear_empty_attrs

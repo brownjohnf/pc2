@@ -19,10 +19,12 @@
           %li Next Steps
         %p Peruse the menu on the left for more studies; stay tuned for the under-development Case Study Tool, 
         which will allow you to more readily browse and locate specific studies.
+      .center= will_paginate
       .box
         %h1= @title
         %ul.feed
           = render @case_studies
+      .center= will_paginate
     .span-4.last
       .box
         %h2 Top Tags

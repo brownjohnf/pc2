@@ -27,9 +27,6 @@
             %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
           - unless @user.site.nil?
             %p= link_to @user.site
-          - if @user.contributions.any?
-            %h3 Contributions
-            %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
           - if @user.libraries.any?
             %h3 Collections
             %ul= render @user.libraries
@@ -84,17 +81,22 @@
           %h3 Recently Uploaded Photos
           - @user.photos.limit(5).each do |p|
             = render p
-      .box
-        %h3 Recently Uploaded Docs
-        - @user.documents.limit(5).each do |d|
-          %p.inline.center
-            = icon(:document)
-            %br
-            = link_to d.name, d
-            %br
-            = link_to icon(:document_download), d
-      .box
-        %h3 Recently Edited Pages
+      -if @user.documents.any?
+        .box
+          %h3 Recently Uploaded Docs
+          - @user.documents.limit(5).each do |d|
+            %p.inline.center
+              = icon(:document)
+              %br
+              = link_to d.name, d
+              %br
+              = link_to icon(:document_download), d
+      -if @user.contributions.any?
+        .box
+          %h3 Contributions
+          %ul.feed
+            - @user.contributions.each do |c|
+              = render c.contributable
     .span-4.last
       = avatar_for_user @user, :size => :small
       = button_to 'Edit profile', edit_user_path, :method => :get if current_user?(@user)
