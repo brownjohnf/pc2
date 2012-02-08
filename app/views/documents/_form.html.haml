@@ -7,6 +7,9 @@
     = f.label :name
     = f.text_field :name
   .field
+    = f.label :language_id, 'Language'
+    = f.collection_select(:language_id, Language.all, :id, :name, :include_blank => true)
+  .field
     = f.label :description
     = f.text_field :description
   = render 'shared/tag_field', :f => f

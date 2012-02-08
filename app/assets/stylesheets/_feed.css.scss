@@ -1,14 +1,10 @@
-.feed_item {
-  padding: 1em 0 !important;
-  @include clip-corners(5px);
-  input[type=submit] {
-    float: right;
-  }
-  &:hover {
-    background-color: $gradient_top * 2;
-  }
-  h3 {
-    margin: 0 !important;
-    padding: 0 !important;
+.box {
+  ul.feed {
+    li.feed_item {
+      .avatar {
+        float: left !important;
+        margin-right: 1em;
+      }
+    }
   }
 }

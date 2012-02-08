@@ -2,15 +2,14 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-5
-    .span-9
+    .span-15
       = will_paginate
       .box
         %h1 Documents
-        %ul
+        %ul.feed
           = render @documents
       = will_paginate
-    .span-5.last
+    .span-4.last
       .box
         %h3 Top Document Tags
         = cloud_of_tags

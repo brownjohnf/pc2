@@ -5,6 +5,7 @@ class Document < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   belongs_to :user
+  belongs_to :language
   belongs_to :attachable, :polymorphic => true
 
   validates :name, :presence => true

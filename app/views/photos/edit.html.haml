@@ -1,6 +1,10 @@
 .container
   .row
-    .span-6
+    .span-5
+      = render 'shared/menu'
+    .span-5
       = render @photo, :size => :small
-    .span-18.last
-      = render 'form'
+    .span-7
+      .box
+        = render 'form'
+    .span-7

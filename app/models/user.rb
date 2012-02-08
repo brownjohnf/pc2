@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   validates :name, :email, :presence => true
 
   accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
-  accepts_nested_attributes_for :blogs
+  accepts_nested_attributes_for :blogs, :documents, :photos
 
   before_create :make_salt
 

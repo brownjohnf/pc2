@@ -1,16 +1,15 @@
-%li.document
-  = document_icon_for document, size = 50
+%li.feed_item
+  = document_icon_for document, :size => size ||= :thumb
   %h4
     = document.name
     %span
       = time_ago_in_words(document.updated_at)
       ago
+  %p= document.description if document.description
+  %p= document.language.name
   %p
-    = document.description if document.description
-    .tags.right= render 'shared/tags', :tags => document.tag_list
-  %p.right
     = link_to 'view details', document
     = icon(:document_download)
     = link_to 'download', '', :method => :get
     = document.file_content_type
-  .clearfloat
+  .tags.right= render 'shared/tags', :tags => document.tag_list

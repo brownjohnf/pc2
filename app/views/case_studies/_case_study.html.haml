@@ -1,7 +1,8 @@
-%li
-  = avatar_for case_study, :size => :thumb
+%li.feed_item
+  = avatar_for case_study, :size => size ||= :thumb
   %h4
     = case_study.title
     %span #{time_ago_in_words(case_study.updated_at)} ago
   %p= truncate(case_study.summary, :length => 100, :separator => ' ')
+  %p= link_to 'view more', case_study
   .tags.right= render 'shared/tags', :tags => case_study.tag_list

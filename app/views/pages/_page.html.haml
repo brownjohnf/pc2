@@ -1,9 +1,7 @@
-.box
-  = avatar_for(page)
-  = page.language.name if page.language
-  = page.title
-  = page.description
-  = truncate(page.content, :length => 200, :separator => ' ')
-  = link_to 'show', page
-  = link_to 'edit', edit_page_path(page)
-  = link_to 'destroy', page, confirm: 'Are you sure?', method: :delete
+%li.feed_item
+  = avatar_for page, :size => size ||= :thumb
+  %h4
+    = page.title
+    %span #{time_ago_in_words(page.updated_at)} ago
+  %p= truncate(page.description, :length => 100, :separator => ' ')
+  .tags.right= render 'shared/tags', :tags => page.tag_list

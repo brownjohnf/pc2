@@ -2,12 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-li.document {
-  a.avatar {
-    float: left;
-    margin-right: 1em;
-  }
-  img.icon {
-    height: 1em;
+body.documents {
+  .box {
+    ul.feed {
+      li.feed_item {
+        img.icon {
+          height: 1em;
+        }
+      }   
+    }
   }
 }
