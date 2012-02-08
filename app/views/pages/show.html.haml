@@ -5,10 +5,12 @@
     .span-15
       .box
         %h4.inline you are here &rang;
-        = link_to 'Home', root_path
+        = link_to 'Home', pages_path
         - @page.ancestors.each do |a|
-          &rang;
+          %h4.inline &rang;
           = link_to a.title, a
+        &rang;
+        = @page.title
       .box
         %h1
           = @page.title
@@ -19,6 +21,8 @@
         %p= @page.description
         .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
+      .box
+        %h4= Carmen.country_name(@page.country)
     .span-4.last
       = avatar_for @page, :size => :small
       = button_to 'Edit Page', edit_page_path(@page), :method => :get
@@ -34,3 +38,4 @@
           - @page.contributions.each do |c|
             %li= link_to c.user.name, c.user
       = render 'shared/social'
+      = render 'shared/right_user_menu'

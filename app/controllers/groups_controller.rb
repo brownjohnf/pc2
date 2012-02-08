@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  before_filter :authenticate #sessions helper
+  before_filter :authenticate_admin #sessions helper
 
   # GET /groups
   # GET /groups.json

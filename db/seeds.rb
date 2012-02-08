@@ -34,7 +34,8 @@ scopes = Scope.create!(
                          { name: 'Module', title: 'Training Module', description: 'Ability to modify modules.' },
                          { name: 'User', title: 'User/Volunteer/Staff Profile', description: 'Ability to modify users' },
                          { name: 'Photo', title: 'Photo', description: 'Ability to modify users' },
-                         { name: 'Library', title: 'Library', description: 'Ability to modify users' }
+                         { name: 'Library', title: 'Library', description: 'Ability to modify users' },
+                         { name: 'CaseStudy', title: 'Case Study', description: 'Ability to modify case studies' }
                        ]
                      )
 permission = Permission.create!(

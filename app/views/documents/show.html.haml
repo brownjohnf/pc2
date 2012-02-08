@@ -8,7 +8,14 @@
           = @document.name
           .tags.right.inline= render 'shared/tags', :tags => @document.tag_list
         %p= @document.description
+        %p= @document.language.name
+        %p
+          = icon(:document_download)
+          = link_to 'download', '', :method => :get
+          = @document.file_content_type
     .span-4.last
+      = document_icon_for @document, :size => :small
       .box
         %h3 Top Document Tags
         = cloud_of_tags
+      = render 'shared/right_user_menu'

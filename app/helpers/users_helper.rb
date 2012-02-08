@@ -1,7 +1,7 @@
 module UsersHelper
 
   def avatar_for_user(user, options = { :size => :icon } )
-    sizes = { :icon => '100', :thumb => '150', :small => '255', :medium => '350', :large => '980' }
+    sizes = { :icon => '80', :thumb => '100', :small => '200', :medium => '380', :large => '980', :full => '1140' }
     if user.avatar?
       link_to image_tag(user.avatar.url(options[:size])), user, :class => 'avatar'
     else

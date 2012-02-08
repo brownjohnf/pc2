@@ -6,7 +6,7 @@
     = f.label 'Sector'
     = f.collection_select(:sector_id, Sector.all, :id, :name, :include_blank => true)
   .field
-    = f.label :site_id, 'Site*'
+    = f.label :site_id, 'Site'
     = f.collection_select(:site_id, Site.all, :id, :name)
 .sixcol.last
   .field

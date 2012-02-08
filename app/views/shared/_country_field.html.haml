@@ -1,0 +1,7 @@
+- if current_user.admin?
+  .field
+    = f.label :country, 'Country*'
+    = f.country_select(:country, ['SN', 'GM'])
+    -#= f.collection_select(:country, Carmen.countries)
+- else
+  = f.hidden_field(:country, :value => current_user.country)

@@ -7,3 +7,7 @@
       = nested_li(@pages) do |item|
         - link_to item.title, item
     .span-4.last
+      .box
+        %h2 Top Tags
+        = cloud_of_tags Page
+      = render 'shared/right_user_menu'

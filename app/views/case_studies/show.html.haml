@@ -33,5 +33,9 @@
         = cloud_of_tags
       .box
         %h2 Editors
+        
       .box
         %h2 Authors
+        %ul
+          = render @case_study.contributors
+      = render 'shared/right_user_menu'

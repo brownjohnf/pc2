@@ -7,11 +7,16 @@
       %div
         = nested_li(@page.children) do |item|
           - link_to item.title, item
-    %h3 Browse
-    %div
-      %ul
-        = nested_li(fetch_menu) do |item|
-          - link_to item.title, item
+    - Page.find_by_sql("SELECT DISTINCT country FROM pages").each do |country|
+      %h3{:id => country.country}= Carmen.country_name(country.country)
+      %div
+        %ul
+          = nested_li(fetch_menu(country.country)) do |item|
+            - link_to item.title, item
+  .box
+    %h2 Quick Links
+    %ul
+      %li= link_to 'Food Security Weekly Update', Page.where("title LIKE '%food security%'").first
   .box.search
     %h1 Google Search
     :erb

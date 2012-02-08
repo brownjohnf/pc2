@@ -1,0 +1,9 @@
+.container
+  .row
+    .span-5
+      = render 'shared/menu'
+    .span-15
+      %h1= @title
+      %p All content hosted through this application is safe and secure. For more information please view our #{link_to 'privacy policy', '/privacy'}.
+    .span-4.last
+      = render 'shared/right_user_menu'

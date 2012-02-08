@@ -1,0 +1,8 @@
+%li.user
+  = avatar_for_user staff.user
+  %h4= link_to staff.user.name, staff.user
+  %p
+    = staff.user.country
+    %br
+    = link_to staff.jobs.first.position.name, staff.jobs.first.position if staff.jobs.any?
+  .clearfloat

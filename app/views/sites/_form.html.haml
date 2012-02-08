@@ -2,7 +2,7 @@
   = render 'shared/form_error', :error => @site if @site.errors.any?
 
   .field
-    = f.label :name
+    = f.label :name, 'Name*'
     = f.text_field :name
   .field
     = f.label :region_id

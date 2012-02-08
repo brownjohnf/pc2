@@ -1,9 +1,9 @@
 .sixcol
   .field
-    = f.label 'Site*'
+    = f.label 'Site'
     = f.collection_select(:site_id, Site.all, :id, :name)
   .field
-    = f.label 'Building*'
+    = f.label 'Building'
     = f.text_field :building
   .field
     = f.label 'Office'

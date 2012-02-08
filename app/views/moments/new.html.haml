@@ -1,5 +1,12 @@
 .container
   .row
-    .span-6
-    .span-6.last
-      = render 'form'
+    .span-5
+      = render 'shared/menu'
+    .span-2
+    .span-10
+      .box
+        %h1 Create a new Timeline Event
+        = render 'form'
+    .span-3
+    .span-4.last
+      = render 'shared/right_user_menu'

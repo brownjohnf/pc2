@@ -2,10 +2,10 @@
   = render 'shared/form_error' if @contribution.errors.any?
   = render :partial => 'fields', :locals => { :f => f }
   .field
-    = f.label :scope_id
-    = f.collection_select(:scope_id, Scope.all, :id, :name)
+    = f.label :contributable_type, 'To what is this person contributing?'
+    = f.collection_select(:contributable_type, Scope.all, :name, :title)
   .field
-    = f.label :target_id
-    = f.number_field :target_id
+    = f.label :contributable_id, 'More specificall?'
+    = f.collection_select(:contributable_id, Page.all, :id, :title)
   .actions
     = f.submit

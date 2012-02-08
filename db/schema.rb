@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205023623) do
+ActiveRecord::Schema.define(:version => 20120208173806) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -43,15 +43,15 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.text     "next_steps"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "scope_id"
-    t.integer  "target_id"
-    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "contributable_id"
+    t.string   "contributable_type"
   end
 
   create_table "documents", :force => true do |t|
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "language_id"
   end
 
   create_table "feedback", :force => true do |t|
@@ -159,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.boolean  "system",      :default => false
     t.integer  "photo_id"
     t.integer  "language_id"
+    t.string   "country"
   end
 
   create_table "pcregions", :force => true do |t|
@@ -259,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "stacks", :force => true do |t|
@@ -284,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.string   "details"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "stages", :force => true do |t|
@@ -294,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.string   "pc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "taggings", :force => true do |t|
@@ -344,6 +349,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "cos_date"
+    t.string   "country"
   end
 
   create_table "websites", :force => true do |t|
@@ -353,6 +359,7 @@ ActiveRecord::Schema.define(:version => 20120205023623) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end

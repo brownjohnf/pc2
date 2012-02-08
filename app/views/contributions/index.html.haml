@@ -1,27 +1,25 @@
 .container
   .row
-    .twelvecol.last
+    .span-5
+      = render 'shared/menu'
+    .span-15
       :erb
         <table>
           <tr>
             <th>User</th>
             <th>Scope</th>
             <th>Target</th>
-            <th>Comment</th>
-            <th></th>
-            <th></th>
             <th></th>
           </tr>
 
         <% @contributions.each do |contribution| %>
           <tr>
             <td><%= contribution.user.name %></td>
-            <td><%= contribution.scope.name %></td>
-            <td><%= contribution.target_title %></td>
-            <td><%= contribution.comment %></td>
-            <td><%= link_to 'Show', contribution %></td>
-            <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
+            <td><%= contribution.contributable_type %></td>
+            <td><%= link_to contribution.contributable_id, contribution.contributable %></td>
             <td><%= link_to 'Destroy', contribution, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>
         </table>
+    .span-4.last
+      = render 'shared/right_user_menu'

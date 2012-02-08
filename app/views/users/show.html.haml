@@ -8,7 +8,7 @@
           = @user.name
           .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
-          -#%p= @user.country.name
+          %p= Carmen.country_name(@user.country) if @user.country
 
           %h3 Connect
           %p
@@ -27,9 +27,6 @@
             %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
           - unless @user.site.nil?
             %p= link_to @user.site
-          - if @user.contributions.any?
-            %h3 Contributions
-            %ul= render :partial => 'contributions/contribution', :collection => @user.contributions
           - if @user.libraries.any?
             %h3 Collections
             %ul= render @user.libraries
@@ -46,7 +43,7 @@
             %p
               = "#{v.sector.name} Volunteer" if v.sector
               %br
-              -#= v.country.name if v.country
+              = Carmen.country_name(v.country) if v.country
               %br
               = v.stage.name if v.stage
             %h4 Site
@@ -61,7 +58,8 @@
       - @user.staff.each do |s|
         .box
           %h3 Staff Member
-          %h4= s.site.name
+          %h4= s.site.name if s.site
+          %p= Carmen.country_name(s.country) if s.country
           %p
             = s.building
             = "| #{s.office}" if s.office
@@ -83,23 +81,29 @@
           %h3 Recently Uploaded Photos
           - @user.photos.limit(5).each do |p|
             = render p
-      .box
-        %h3 Recently Uploaded Docs
-        - @user.documents.limit(5).each do |d|
-          %p.inline.center
-            = icon(:document)
-            %br
-            = link_to d.name, d
-            %br
-            = link_to icon(:document_download), d
-      .box
-        %h3 Recently Edited Pages
+      -if @user.documents.any?
+        .box
+          %h3 Recently Uploaded Docs
+          - @user.documents.limit(5).each do |d|
+            %p.inline.center
+              = icon(:document)
+              %br
+              = link_to d.name, d
+              %br
+              = link_to icon(:document_download), d
+      -if @user.contributions.any?
+        .box
+          %h3 Contributions
+          %ul.feed
+            - @user.contributions.each do |c|
+              = render c.contributable
     .span-4.last
       = avatar_for_user @user, :size => :small
       = button_to 'Edit profile', edit_user_path, :method => :get if current_user?(@user)
       - if @user.avatar? && current_user?(@user)
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if current_user?(@user) && !@user.volunteers.any?
+      = render 'shared/right_user_menu'
       - if signed_in? && (current_user?(@user) || current_user.admin?)
         - unless @user.groups.empty?
           %h3 Groups

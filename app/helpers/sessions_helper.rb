@@ -30,10 +30,28 @@ module SessionsHelper
   def authenticate
     deny_access unless signed_in?
   end
+  
+  def authenticate_admin
+    if signed_in?
+      unless current_user.admin?
+        deny_admin unless current_user.admin?
+      end
+    else
+      deny_access
+    end
+  end
 
   def deny_access
     store_location
     redirect_to login_path, :notice => 'Please sign in to access this page.'
+  end
+  
+  def deny_owner
+    redirect_to root_path, :notice => 'Please sign in as the owner of this resource to edit it.'
+  end
+  
+  def deny_admin
+    redirect_to root_path, :notice => 'You must be an admin to access these resources.'
   end
 
   def redirect_back_or(default)

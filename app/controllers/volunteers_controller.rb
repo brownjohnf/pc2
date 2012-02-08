@@ -1,6 +1,8 @@
 class VolunteersController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show] #sessions helper
+  before_filter :authorized_user, :only => [ :edit, :update ]
+  before_filter :authenticate_admin, :only => [ :new, :create, :destroy ]
 
   # GET /volunteers
   # GET /volunteers.json
@@ -83,4 +85,11 @@ class VolunteersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+  
+    def authorized_user
+      @volunteer = current_user.volunteers.find_by_id(params[:id])
+      deny_owner unless !@volunteer.nil? || current_user.admin?
+    end
 end

@@ -1,6 +1,6 @@
 = form_for(@page) do |f|
   = render :partial => 'shared/form_error', :locals => { :a => @page } if @page.errors.any?
-
+  = render 'shared/country_field', :f => f
   .field
     = f.label 'Title*'
     = f.text_field :title
@@ -12,7 +12,7 @@
     = f.collection_select(:language_id, Language.all, :id, :name)
   .field
     = f.label :parent_id
-    = f.collection_select(:parent_id, Page.all, :id, :title, :include_blank => true)
+    = f.collection_select(:parent_id, Page.unscoped.order('title ASC').all, :id, :title, :include_blank => true)
   .field
     = f.label 'Page Profile Photo'
     = f.collection_select(:photo_id, Photo.all, :id, :title, :include_blank => true)
