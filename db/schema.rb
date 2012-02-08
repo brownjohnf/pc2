@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208140440) do
+ActiveRecord::Schema.define(:version => 20120208173806) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120208140440) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "stacks", :force => true do |t|
@@ -297,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20120208140440) do
     t.string   "pc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "taggings", :force => true do |t|
@@ -357,6 +359,7 @@ ActiveRecord::Schema.define(:version => 20120208140440) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end

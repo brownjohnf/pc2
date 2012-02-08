@@ -1,6 +1,7 @@
 class CaseStudiesController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show]
+  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
 
   # GET /case_studies
   # GET /case_studies.json
@@ -97,4 +98,11 @@ class CaseStudiesController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+  
+    def authorized_user
+      @contributor = CaseStudy.find_by_id(params[:id]).contributors.find_by_id(current_user.id)
+      deny_owner unless !@contributor.nil? || current_user.admin?
+    end
 end

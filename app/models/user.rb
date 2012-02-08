@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :moments
   has_many :libraries
   has_many :documents
+  has_many :sites
+  has_many :stages
+  has_many :websites
   
   has_many :stacks, :as => :stackable
   has_many :added_stacks, :as => :user

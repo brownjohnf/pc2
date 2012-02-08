@@ -1,4 +1,8 @@
 class StagesController < ApplicationController
+  
+  before_filter :authenticate, :except => [ :index, :show ]
+  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
   # GET /stages
   # GET /stages.json
   def index
@@ -41,6 +45,7 @@ class StagesController < ApplicationController
   # POST /stages.json
   def create
     @stage = Stage.new(params[:stage])
+    @stage.user_id = current_user.id
 
     respond_to do |format|
       if @stage.save
@@ -80,4 +85,11 @@ class StagesController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+  
+    def authorized_user
+      @stage = current_user.stages.find_by_id(params[:id])
+      deny_owner unless !@stage.nil? || current_user.admin?
+    end
 end

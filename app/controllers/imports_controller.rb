@@ -1,6 +1,6 @@
 class ImportsController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authenticate_admin
 
   # GET /imports
   # GET /imports.json

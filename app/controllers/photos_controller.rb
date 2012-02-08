@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
 
-  before_filter :authenticate, :only => [ :new, :edit, :create, :update, :destroy ]
+  before_filter :authenticate, :except => [ :index, :show ]
+  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
 
   # GET /photos
   # GET /photos.json
@@ -86,5 +87,12 @@ class PhotosController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+  
+    def authorized_user
+      @photo = current_user.photos.find_by_id(params[:id])
+      deny_owner unless !@photo.nil? || current_user.admin?
+    end
 
 end

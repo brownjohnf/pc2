@@ -25,7 +25,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :libraries
 
-  resources :stacks
+  resources :stacks, :only => [ :index, :new, :create, :destroy ]
 
   resources :photos
 
@@ -65,7 +65,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :contributions
+  resources :contributions, :only => [ :index, :new, :create, :destroy ]
 
   resources :volunteers
 

@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy, :ajax] #sessions helper
+  before_filter :authenticate, :except => [ :index, :added, :updated, :show ] #sessions helper
+  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
 
   before_filter :check_system, :only => :destroy
 
@@ -120,5 +121,12 @@ class PagesController < ApplicationController
     def check_system
       @page = Page.find(params[:id])
       redirect_to(@page, notice: 'You cannot destroy system pages.') if @page.system?
+    end
+  
+  private
+  
+    def authorized_user
+      @contributor = Page.find_by_id(params[:id]).contributors.find_by_id(current_user.id)
+      deny_owner unless !@contributor.nil? || current_user.admin?
     end
 end

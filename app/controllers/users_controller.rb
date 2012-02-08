@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   before_filter :authenticate #sessions helper
+  before_filter :authorized_user, :only => [ :edit, :update ]
+  before_filter :authenticate_admin, :only => [ :new, :create, :destroy ]
 
   def index
     @title = 'Users'
@@ -62,5 +64,12 @@ class UsersController < ApplicationController
     flash[:success] = 'User destroyed.'
     redirect_to users_path
   end
+  
+  private
+  
+    def authorized_user
+      @user = User.find_by_id(params[:id])
+      deny_owner unless @user == current_user || current_user.admin?
+    end
 
 end

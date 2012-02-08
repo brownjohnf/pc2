@@ -12,8 +12,6 @@
             <th>Comment</th>
             <th>Library</th>
             <th></th>
-            <th></th>
-            <th></th>
           </tr>
 
         <% @stacks.each do |stack| %>
@@ -23,8 +21,6 @@
             <td><% stack.stackable_type %></td>
             <td><%= stack.comment %></td>
             <td><%= link_to stack.library.name, stack.library %></td>
-            <td><%= link_to 'Show', stack %></td>
-            <td><%= link_to 'Edit', edit_stack_path(stack) %></td>
             <td><%= link_to 'Destroy', stack, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>

@@ -1,7 +1,8 @@
 .container
   .row
-    .threecol
-    .ninecol.last
+    .span-5
+      = render 'shared/menu'
+    .span-15
       :erb
         <table>
           <tr>
@@ -22,3 +23,5 @@
           </tr>
         <% end %>
         </table>
+    .span-4.last
+      = render 'shared/right_user_menu'

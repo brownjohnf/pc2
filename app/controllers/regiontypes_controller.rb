@@ -1,6 +1,6 @@
 class RegiontypesController < ApplicationController
 
-  before_filter :authenticate #sessions helper
+  before_filter :authenticate_admin, :except => [ :index, :show ] #sessions helper
 
   # GET /regiontypes
   # GET /regiontypes.json

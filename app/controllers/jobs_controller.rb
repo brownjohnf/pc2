@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 
-  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  before_filter :authenticate_admin #sessions helper
   
   # GET /jobs
   # GET /jobs.json

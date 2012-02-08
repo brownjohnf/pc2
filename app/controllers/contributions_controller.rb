@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
 
-  before_filter :authenticate #sessions helper
+  before_filter :authenticate_admin #sessions helper
 
   # GET /contributions
   # GET /contributions.json
@@ -10,17 +10,6 @@ class ContributionsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @contributions }
-    end
-  end
-
-  # GET /contributions/1
-  # GET /contributions/1.json
-  def show
-    @contribution = Contribution.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @contribution }
     end
   end
 
@@ -35,11 +24,6 @@ class ContributionsController < ApplicationController
     end
   end
 
-  # GET /contributions/1/edit
-  def edit
-    @contribution = Contribution.find(params[:id])
-  end
-
   # POST /contributions
   # POST /contributions.json
   def create
@@ -51,22 +35,6 @@ class ContributionsController < ApplicationController
         format.json { render json: @contribution, status: :created, location: @contribution }
       else
         format.html { render action: "new" }
-        format.json { render json: @contribution.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /contributions/1
-  # PUT /contributions/1.json
-  def update
-    @contribution = Contribution.find(params[:id])
-
-    respond_to do |format|
-      if @contribution.update_attributes(params[:contribution])
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }
       end
     end

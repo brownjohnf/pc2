@@ -1,6 +1,8 @@
 class StaffController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show] #sessions helper
+  before_filter :authenticate_admin, :only => [ :create, :new ]
+  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
 
   # GET /staff
   # GET /staff.json
@@ -84,4 +86,11 @@ class StaffController < ApplicationController
       format.js
     end
   end
+  
+  private
+  
+    def authorized_user
+      @staff = current_user.staff.find_by_id(params[:id])
+      deny_owner unless !@staff.nil? || current_user.admin?
+    end
 end
