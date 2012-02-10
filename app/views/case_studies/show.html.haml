@@ -29,11 +29,18 @@
     .span-4.last
       = avatar_for @case_study, :size => :small
       .box
+        %h2 Case Studies
+        %ul
+          - @case_studies.each do |c|
+            %li= link_to c.title, c
+      .box
         %h2 Popular Tags
         = cloud_of_tags
       .box
-        %h2 Editors
-        
+        %h2 Suggested Reading
+        %ul
+          - @pages.each do |p|
+            %li= link_to p.title, p
       .box
         %h2 Authors
         %ul

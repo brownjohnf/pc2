@@ -3,121 +3,123 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.moments {
-  &#index {
+  #page {
+    &#index {
+      #years {
+        display: none;
+      }
+    }
+    &#year, &#show {
+      .row.moment {
+        h1, h4 {
+          padding-top: 0 !important;
+        }
+        h4 {
+          font-size: 2.5em !important;
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+    &#year {
+      .row:last-child {
+        text-align: center;
+        margin-top: 2em;
+      }
+    }
+    #buttongroup {
+      input[type=submit] {
+        width: 50% !important;
+        float: left;
+      }
+      input[type=text] {
+        width: 20% !important;
+      }
+    }
+    #decades, #years {
+      input[type=submit] {
+        width: auto !important;
+      }
+    }
+    #decades {
+      input[type=submit] {
+        width: 16.66% !important;
+        float: left;
+      }
+    }
     #years {
-      display: none;
-    }
-  }
-  &#year, &#show {
-    .row.moment {
-      h1, h4 {
-        padding-top: 0 !important;
+      input[type=submit] {
+        width: 10% !important;
+        float: left;
       }
-      h4 {
-        font-size: 2.5em !important;
+    }
+    .pagination {
+      text-align: center !important;
+    }
+  
+    #timeline {
+      .row {
         margin-bottom: 0 !important;
-      }
-    }
-  }
-  &#year {
-    .row:last-child {
-      text-align: center;
-      margin-top: 2em;
-    }
-  }
-  #buttongroup {
-    input[type=submit] {
-      width: 50% !important;
-      float: left;
-    }
-    input[type=text] {
-      width: 20% !important;
-    }
-  }
-  #decades, #years {
-    input[type=submit] {
-      width: auto !important;
-    }
-  }
-  #decades {
-    input[type=submit] {
-      width: 16.66% !important;
-      float: left;
-    }
-  }
-  #years {
-    input[type=submit] {
-      width: 10% !important;
-      float: left;
-    }
-  }
-  .pagination {
-    text-align: center !important;
-  }
-
-  #timeline {
-    .row {
-      margin-bottom: 0 !important;
-      .bumper {
-        width: 50%;
-      }
-      .date {
-        width: 10%;
-        text-align: center !important;
-        span {
-          display: inline-block;
-          line-height: 6em;
-          font-weight: bold;
-          font-size: 2em;
+        .bumper {
+          width: 50%;
         }
-      }
-      .timeline_moment {
-        width: 40%;
-        .box {
-          .info {
-            width: 80%;
-          }
-          & > .avatar {
-            width: 20%;
+        .date {
+          width: 10%;
+          text-align: center !important;
+          span {
+            display: inline-block;
+            line-height: 6em;
+            font-weight: bold;
+            font-size: 2em;
           }
         }
-      }
-      &.left {
-        div {
-          float: right;
-          p, h2 {
-            text-align: right !important;
-            margin-right: 10px !important;
-          }
-          div.avatar {
-            text-align: right !important;
+        .timeline_moment {
+          width: 40%;
+          .box {
+            .info {
+              width: 80%;
+            }
+            & > .avatar {
+              width: 20%;
+            }
           }
         }
-      }
-      &.right {
-        div {
-          float: left;
-          text-align: left;
-          p, h2 {
-            margin-left: 10px !important;
+        &.left {
+          div {
+            float: right;
+            p, h2 {
+              text-align: right !important;
+              margin-right: 10px !important;
+            }
+            div.avatar {
+              text-align: right !important;
+            }
           }
-          div.avatar {
-            text-align: left !important;
-          }
-          li.user {
-            text-align: right;
-            & > a:first-child {
-              float: right;
+        }
+        &.right {
+          div {
+            float: left;
+            text-align: left;
+            p, h2 {
+              margin-left: 10px !important;
+            }
+            div.avatar {
+              text-align: left !important;
+            }
+            li.user {
+              text-align: right;
+              & > a:first-child {
+                float: right;
+              }
             }
           }
         }
       }
+      position: relative;
+      background-image: image-url("timeline_vertical_bar.jpg");
+      background-position: top center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      //background-size: 10px auto;
     }
-    position: relative;
-    background-image: image-url("timeline_vertical_bar.jpg");
-    background-position: top center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    //background-size: 10px auto;
   }
 }

@@ -31,10 +31,24 @@ module SessionsHelper
     deny_access unless signed_in?
   end
   
+  def pc?(user)
+    signed_in? && ( user.staff.any? || user.volunteers.any? )
+  end
+  
   def authenticate_admin
     if signed_in?
       unless current_user.admin?
         deny_admin unless current_user.admin?
+      end
+    else
+      deny_access
+    end
+  end
+  
+  def authenticate_pc
+    if signed_in?
+      unless current_user.admin?
+        deny_admin unless current_user.volunteers.any? || current_user.staff.any?
       end
     else
       deny_access

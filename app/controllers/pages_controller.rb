@@ -29,6 +29,8 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
     @title = @page.title
+    @pages = @page.find_related_tags
+    @case_studies = CaseStudy.tagged_with(@page.tag_list, :any => true)
 
     #@page.ancestors.each do |a|
     #  @context_menu { a.title => a }#
@@ -122,8 +124,6 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
       redirect_to(@page, notice: 'You cannot destroy system pages.') if @page.system?
     end
-  
-  private
   
     def authorized_user
       @contributor = Page.find_by_id(params[:id]).contributors.find_by_id(current_user.id)

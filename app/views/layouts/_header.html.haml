@@ -19,10 +19,10 @@
           -#%li= link_to '50th', moments_path
         %ul{:style => "float:right;"}
           - if signed_in?
-            %li#gravatar= gravatar_for current_user
+            %li= link_to 'Profiles', users_path
+            %li#gravatar= avatar_for_user current_user, :size => :icon
             %li= link_to current_user.name, current_user
             %li= link_to 'SSL', 'https://pcsenegal.com'
-            %li= link_to 'Profiles', users_path
           - else
             %li= link_to 'Sign in', login_path
         .clearfloat

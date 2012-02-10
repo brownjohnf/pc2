@@ -19,11 +19,8 @@ class VolunteersController < ApplicationController
   # GET /volunteers/1.json
   def show
     @volunteer = Volunteer.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @volunteer }
-    end
+    @user = @volunteer.user
+    render 'users/show'
   end
 
   # GET /volunteers/new
@@ -78,10 +75,11 @@ class VolunteersController < ApplicationController
   # DELETE /volunteers/1.json
   def destroy
     @volunteer = Volunteer.find(params[:id])
+    @user = @volunteer.user
     @volunteer.destroy
 
     respond_to do |format|
-      format.html { redirect_to volunteers_url }
+      format.html { redirect_to @user }
       format.json { head :ok }
     end
   end

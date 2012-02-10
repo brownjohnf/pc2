@@ -1,6 +1,6 @@
 class StaffController < ApplicationController
 
-  before_filter :authenticate, :except => [:index, :show] #sessions helper
+  before_filter :authenticate_pc #sessions helper
   before_filter :authenticate_admin, :only => [ :create, :new ]
   before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
 
@@ -19,11 +19,8 @@ class StaffController < ApplicationController
   # GET /staff/1.json
   def show
     @staff = Staff.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @staff }
-    end
+    @user = @staff.user
+    render 'users/show'
   end
 
   # GET /staff/new
@@ -79,10 +76,11 @@ class StaffController < ApplicationController
   # DELETE /staff/1.json
   def destroy
     @staff = Staff.find(params[:id])
+    @user = @staff.user
     @staff.destroy
 
     respond_to do |format|
-      format.html { redirect_to staff_index_url }
+      format.html { redirect_to @user }
       format.js
     end
   end
