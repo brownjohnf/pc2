@@ -1,7 +1,4 @@
 .field
-  = f.label :country
-  = f.country_select(:country, 'SN')
-.field
   = f.label :photo_id
   = f.collection_select(:photo_id, @moment.photos, :id, :title, :include_blank => true)
 .field

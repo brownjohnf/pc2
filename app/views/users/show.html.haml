@@ -9,19 +9,21 @@
           .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
           %p= Carmen.country_name(@user.country) if @user.country
-
-          %h3 Connect
-          %p
-            = @user.email
-            - unless @user.email2.nil?
-              %br
-              = @user.email2
-          - unless @user.phone1.nil?
+          - if signed_in? && pc?(current_user)
+            %h3 Connect
             %p
-              = @user.phone1
-              - unless @user.phone2.nil?
+              = @user.email
+              - unless @user.email2.nil?
                 %br
-                = @user.phone2
+                = @user.email2
+            - unless @user.phone1.nil?
+              %p
+                = @user.phone1
+                - unless @user.phone2.nil?
+                  %br
+                  = @user.phone2
+          - else
+            %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
         .span-12.last
           - if @user.blogs.any?
             %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
@@ -35,47 +37,48 @@
         .box
           %h4 A little bit about #{@user.name}...
           = markdown(@user.bio)
-
-      - @user.volunteers.each do |v|
-        .box
-          %h1= v.local_name
-          %div
+      - if pc?(current_user)
+        - @user.volunteers.each do |v|
+          .box
+            %h1
+              = v.local_name
+              = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if current_user.admin?
+            %div
+              %p
+                = "#{v.sector.name} Volunteer" if v.sector
+                %br
+                = Carmen.country_name(v.country) if v.country
+                %br
+                = v.stage.name if v.stage
+              %h4 Site
+              %p= v.site.name if v.site
+              - if v.emphasis
+                %h4 Emphasis
+                %p= v.emphasis
+              - if v.projects
+                %h4 Projects
+                %p= v.projects
+        - @user.staff.each do |s|
+          .box
+            %h3
+              Staff Member
+              = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if current_user.admin?
+            %h4= s.site.name if s.site
+            %p= Carmen.country_name(s.country) if s.country
             %p
-              = "#{v.sector.name} Volunteer" if v.sector
-              %br
-              = Carmen.country_name(v.country) if v.country
-              %br
-              = v.stage.name if v.stage
-            %h4 Site
-            %p= v.site.name if v.site
-            - if v.emphasis
-              %h4 Emphasis
-              %p= v.emphasis
-            - if v.projects
-              %h4 Projects
-              %p= v.projects
-
-      - @user.staff.each do |s|
-        .box
-          %h3 Staff Member
-          %h4= s.site.name if s.site
-          %p= Carmen.country_name(s.country) if s.country
-          %p
-            = s.building
-            = "| #{s.office}" if s.office
-            = "| #{s.floor.to_i.ordinalize} floor" if s.floor
-          -if s.morning_open
-            %p
-              = s.morning_open.to_formatted_s(format = :time)
-              \-
-              = s.morning_close.to_formatted_s(format = :time)
-              %br
-              = s.afternoon_open.to_formatted_s(format = :time)
-              \-
-              = s.afternoon_close.to_formatted_s(format = :time)
-          = markdown(s.details) if s.details
-
-
+              = s.building
+              = "| #{s.office}" if s.office
+              = "| #{s.floor.to_i.ordinalize} floor" if s.floor
+            -if s.morning_open
+              %p
+                = s.morning_open.to_formatted_s(format = :time)
+                \-
+                = s.morning_close.to_formatted_s(format = :time)
+                %br
+                = s.afternoon_open.to_formatted_s(format = :time)
+                \-
+                = s.afternoon_close.to_formatted_s(format = :time)
+            = markdown(s.details) if s.details
       - if @user.photos.any?
         .box
           %h3 Recently Uploaded Photos

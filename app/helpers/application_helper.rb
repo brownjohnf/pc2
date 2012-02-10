@@ -105,7 +105,8 @@ module ApplicationHelper
       :case_study_new => 'file_plus.png',
       :case_study => 'file_1.png',
       :page => 'file_2.png',
-      :search => 'search.png'
+      :search => 'search.png',
+      :clock => 'clock.png'
     }
     image_tag("icons/#{icons[icon]}", :class => 'icon')
   end

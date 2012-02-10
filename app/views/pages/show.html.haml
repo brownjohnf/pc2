@@ -28,9 +28,17 @@
       = button_to 'Edit Page', edit_page_path(@page), :method => :get
       .box
         %h2 Case Studies
+        %ul
+          - @case_studies.each do |c|
+            %li= link_to c.title, c
       .box
         %h3 Tag Cloud
         = cloud_of_tags(Page)
+      .box
+        %h2 Suggested Reading
+        %ul
+          - @pages.each do |p|
+            %li= link_to p.title, p
       - if @page.contributions.any?
         .box
           %h3 Authors
