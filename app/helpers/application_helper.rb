@@ -74,7 +74,7 @@ module ApplicationHelper
   end
 
   def fetch_menu(country = 'SN')
-    Page.unscoped.order('title ASC').where("parent_id IS NULL AND country = ?", country)
+    current_user.viewable_pages.order('title ASC').where("parent_id IS NULL AND country = ?", country)
   end
 
   def render_photo(id, size)

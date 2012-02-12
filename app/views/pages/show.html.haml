@@ -47,3 +47,12 @@
             %li= link_to c.user.name, c.user
       = render 'shared/social'
       = render 'shared/right_user_menu'
+      - if signed_in? && ( current_user.admin? || current_user.moderator? )
+        .box
+          - if @page.permissions.any?
+            %h3 Current Permissions
+            %ul
+              = render @page.permissions
+          %h3 Add Permission
+          - @permission = @page.permissions.build
+          = render 'permissions/form' 

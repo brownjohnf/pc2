@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
   before_filter :authenticate, :except => [ :index, :added, :updated, :show ] #sessions helper
   before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  before_filter :authorized_viewer, :only => [ :show ]
 
   before_filter :check_system, :only => :destroy
 
@@ -126,7 +127,12 @@ class PagesController < ApplicationController
     end
   
     def authorized_user
-      @contributor = Page.find_by_id(params[:id]).contributors.find_by_id(current_user.id)
+      @contributor = Page.find_id(params[:id]).contributors.find_by_id(current_user.id)
       deny_owner unless !@contributor.nil? || current_user.admin?
+    end
+  
+    def authorized_viewer
+      @page = current_user.permissions.where(:privilege_id => 3, :permissable_type => 'Page').find_by_permissable_id(params[:id])
+      deny_owner unless !@page.nil? || current_user.admin?
     end
 end

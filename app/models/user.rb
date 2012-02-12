@@ -6,16 +6,15 @@ class User < ActiveRecord::Base
 
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-
-  has_many :permissions, :dependent => :destroy
+  has_many :permissions, :through => :groups
   has_many :privileges, :through => :permissions
 
   has_many :authorizations, :dependent => :destroy
   has_many :volunteers, :dependent => :destroy
   has_many :staff, :dependent => :destroy
-  has_many :blogs
-  has_many :moments
-  has_many :libraries
+  has_many :blogs, :dependent => :destroy
+  has_many :moments, :dependent => :destroy
+  has_many :libraries, :dependent => :destroy
   has_many :documents
   has_many :sites
   has_many :stages
@@ -75,6 +74,10 @@ class User < ActiveRecord::Base
   def destroy_avatar
     self.avatar = nil
     self.save
+  end
+  
+  def viewable_pages
+    Page.pages_viewable_by(self)
   end
 
   private

@@ -17,15 +17,13 @@ groups = Group.create!(
                           { :name => 'User' },
                           { :name => 'Administrator' },
                           { :name => 'Moderator' },
-                          { :name => 'Staff' }
+                          { :name => 'Staff' },
+                          { :name => 'Public'}
                         ]
                       )
 privileges = Privilege.create!(
                                [
-                                  { name: 'Edit', description: 'Ability to edit.' },
-                                  { name: 'Delete', description: 'Ability to delete.' },
-                                  { name: 'View', description: 'Ability to view.'},
-                                  { name: 'Create', description: 'Ability to view.'}
+                                  { name: 'View', description: 'Ability to view.'}
                                 ]
                               )
 scopes = Scope.create!(
@@ -38,22 +36,6 @@ scopes = Scope.create!(
                          { name: 'CaseStudy', title: 'Case Study', description: 'Ability to modify case studies' }
                        ]
                      )
-permission = Permission.create!(
-                                [
-                                   { group_id: 1, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 3, scope_id: 1, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 1, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 1, privilege_id: 2, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 3, scope_id: 1, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 1, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 3, scope_id: 3, privilege_id: 3, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 3, privilege_id: 1, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 2, scope_id: 3, privilege_id: 2, comment: 'Default, base permission. Do not edit.' },
-                                   { group_id: 3, scope_id: 3, privilege_id: 1, comment: 'Default, base permission. Do not edit.' }
-                                ]
-                              )
 pcregions = Pcregion.create!(
                              [
                                 { name: 'Africa', short: 'AF'},
@@ -77,40 +59,6 @@ sectors = Sector.create!(
                             { name: 'Environmental Education' }
                           ]
 )
-
-pages = Page.create!(
-                     [
-                        { title: 'Disclaimer',
-                          description: 'Legal stuff.',
-                          content: 'The contents of this web site do not reflect in any way the positions of the U.S. Government or the United States Peace Corps. This web site is managed and supported by Peace Corps Volunteers and our supporters. It is not a U.S. Government web site.',
-                          system: true,
-                          language_id: 2 },
-                        { title: 'Privacy Policy',
-                          description: 'Your rights.',
-                          content: "We will never give, sell, or in any way communicate any personal information to anyone, save with the owner of said information's express permission.",
-                          system: true,
-                          language_id: 2 },
-                        { title: 'Support',
-                          description: 'Come get help!',
-                          content: 'Support is here!',
-                          system: true,
-                          language_id: 2 },
-                        { title: 'Security',
-                          description: 'How we protect our information.',
-                          content: 'All content hosted through this application is safe and secure. For more information please view our Privacy Policy.',
-                          system: true,
-                          language_id: 2 },
-                        { title: 'About us',
-                          description: 'A little bit about us.',
-                          content: "This website is running the open source Peace Corps App, currently in pre-alpha release. \nLicense \nPC Web App is copyright John F. Brown, 2011, and files herein are licensed under the Affero General Public License version 3, the text of which can be found in GNU-AGPL-3.0, or any later version of the AGPL, unless otherwise noted. Components of PC Web App, including CodeIgniter, PHP Markdown and JQuery, are licensed separately. All unmodified files from these and other sources retain their original copyright and license notices: see the relevant individual files.",
-                          system: true,
-                          language_id: 2 },
-                        { title: 'Calendar',
-                          description: 'Our calendar.',
-                          content: 'Calender goes here.',
-                          system: true,
-                          language_id: 2 }
-])
 
 jack = User.create!(
                     :name => 'Jack Brown',

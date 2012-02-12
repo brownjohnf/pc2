@@ -4,25 +4,19 @@
       :erb
         <table>
           <tr>
-            <th>User</th>
             <th>Group</th>
-            <th>Scope</th>
+            <th>Type</th>
+            <th>ID</th>
             <th>Privilege</th>
-            <th>Comment</th>
-            <th></th>
-            <th></th>
             <th></th>
           </tr>
 
         <% @permissions.each do |permission| %>
           <tr>
-            <td><%= permission.user.name if permission.user_id %></td>
-            <td><%= permission.group.name if permission.group_id %></td>
-            <td><%= permission.scope.name %></td>
+            <td><%= permission.group.name %></td>
+            <td><%= permission.permissable_type %></td>
+            <td><%= permission.permissable_id %></td>
             <td><%= permission.privilege.name %></td>
-            <td><%= permission.comment %></td>
-            <td><%= link_to 'Show', permission %></td>
-            <td><%= link_to 'Edit', edit_permission_path(permission) %></td>
             <td><%= link_to 'Destroy', permission, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>

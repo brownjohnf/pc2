@@ -62,9 +62,11 @@ class CaseStudiesController < ApplicationController
   # POST /case_studies.json
   def create
     @case_study = CaseStudy.new(params[:case_study])
+    @contribition = @case_study.contributions.build(:user_id => current_user.id)
 
     respond_to do |format|
       if @case_study.save
+        @contribution.save
         format.html { redirect_to @case_study, notice: 'Case study was successfully created.' }
         format.json { render json: @case_study, status: :created, location: @case_study }
       else

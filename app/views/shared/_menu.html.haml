@@ -2,17 +2,18 @@
   = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
   = render 'menu' rescue nil
   .accordion
-    - if @page && @page.children.any?
+    - if @page && Page.viewable_by(current_user).where(:parent_id => @page.id).any?
       %h3= @page.title
       %div
-        = nested_li(@page.children) do |item|
-          - link_to item.title, item
+        %ul
+          - Page.viewable_by(current_user).where(:parent_id => @page.id).each do |item|
+            %li= link_to item.title, item
     - Page.find_by_sql("SELECT DISTINCT country FROM pages").each do |country|
       %h3{:id => country.country}= Carmen.country_name(country.country)
       %div
         %ul
-          = nested_li(fetch_menu(country.country)) do |item|
-            - link_to item.title, item
+          - Page.viewable_by(current_user).order('title ASC').where("parent_id IS NULL AND country = ?", country.country).each do |item|
+            %li= link_to item.title, item
   .box
     %h2 Quick Links
     %ul

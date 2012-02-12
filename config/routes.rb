@@ -69,7 +69,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :volunteers
 
-  resources :permissions
+  resources :permissions, :only => [ :index, :new, :create, :destroy ]
 
   resources :scopes
 

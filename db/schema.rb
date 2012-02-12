@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208173806) do
+ActiveRecord::Schema.define(:version => 20120210110204) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -172,14 +172,12 @@ ActiveRecord::Schema.define(:version => 20120208173806) do
   end
 
   create_table "permissions", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "group_id"
-    t.integer  "scope_id"
     t.integer  "privilege_id"
-    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "target_id"
+    t.integer  "permissable_id"
+    t.string   "permissable_type"
   end
 
   create_table "photos", :force => true do |t|

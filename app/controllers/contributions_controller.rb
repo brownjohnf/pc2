@@ -31,8 +31,7 @@ class ContributionsController < ApplicationController
 
     respond_to do |format|
       if @contribution.save
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
-        format.json { render json: @contribution, status: :created, location: @contribution }
+        format.html { redirect_to contributions_url, notice: 'Contribution was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }
