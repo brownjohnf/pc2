@@ -1,7 +1,6 @@
 class MomentsController < ApplicationController
-
-  before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy] #sessions helper
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
 
   # GET /moments
   # GET /moments.json
@@ -124,11 +123,4 @@ class MomentsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @moment = current_user.moments.find_by_id(params[:id])
-      deny_owner unless !@moment.nil? || current_user.admin?
-    end
 end

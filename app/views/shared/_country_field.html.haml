@@ -1,4 +1,4 @@
-- if current_user.admin?
+- if can? :manage, object
   .field
     = f.label :country, 'Country*'
     = f.country_select(:country, ['SN', 'GM'])

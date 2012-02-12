@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
-
-  before_filter :authenticate_admin, :except => [:new, :create] #sessions helper
+  
+  load_and_authorize_resource
 
   # GET /feedback
   # GET /feedback.json

@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
-
-  before_filter :authenticate_admin, :except => [ :index, :show ] #sessions helper
+  
+  load_and_authorize_resource
 
   # GET /regions
   # GET /regions.json

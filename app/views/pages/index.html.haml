@@ -4,7 +4,7 @@
       = render 'shared/menu'
     .span-15
       %h1= @title
-      = nested_li(current_user.viewable_pages.order('title ASC').where("country = ?", current_user.country)) do |item|
+      = nested_li(@pages) do |item|
         - link_to item.title, item
     .span-4.last
       .box

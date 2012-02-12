@@ -1,7 +1,6 @@
 class StagesController < ApplicationController
   
-  before_filter :authenticate, :except => [ :index, :show ]
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  load_and_authorize_resource
   
   # GET /stages
   # GET /stages.json
@@ -85,11 +84,4 @@ class StagesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @stage = current_user.stages.find_by_id(params[:id])
-      deny_owner unless !@stage.nil? || current_user.admin?
-    end
 end

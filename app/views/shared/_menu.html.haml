@@ -2,17 +2,29 @@
   = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
   = render 'menu' rescue nil
   .accordion
-    - if @page && Page.viewable_by(current_user).where(:parent_id => @page.id).any?
+    - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
       %h3= @page.title
       %div
         %ul
-          - Page.viewable_by(current_user).where(:parent_id => @page.id).each do |item|
+          - if @page.parent && can?(:read, @page.parent)
+            %li= link_to 'Up', @page.parent
+          - @page.children.accessible_by(current_ability).each do |item|
             %li= link_to item.title, item
-    - Page.find_by_sql("SELECT DISTINCT country FROM pages").each do |country|
+    -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
+      %h3= @page.parent.title
+      %div
+        %ul
+          - if @page.parent && can?(:read, @page.parent)
+            %li
+              &#x279A;
+              = link_to 'Up', @page.parent
+          - @page.siblings.accessible_by(current_ability).each do |item|
+            %li= link_to item.title, item
+    - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
       %h3{:id => country.country}= Carmen.country_name(country.country)
       %div
         %ul
-          - Page.viewable_by(current_user).order('title ASC').where("parent_id IS NULL AND country = ?", country.country).each do |item|
+          - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", country.country).each do |item|
             %li= link_to item.title, item
   .box
     %h2 Quick Links

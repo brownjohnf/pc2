@@ -27,8 +27,6 @@ class Page < ActiveRecord::Base
   validates :title, :description, :content, :language_id, :presence => true
 
   after_save :set_parent
-  
-  scope :pages_viewable_by, lambda { |user| viewable_by(user) }
 
   #default_scope :order => 'pages.title ASC'
 
@@ -38,17 +36,19 @@ class Page < ActiveRecord::Base
 
   private
 
-    def self.viewable_by(user)
-      allowed = user.permissions.where(:permissable_type => 'Page')
-      allowed_ids = []
-      allowed.each do |a|
-        allowed_ids << a.permissable.id
-      end
-      where(:id => allowed_ids)
-    end
-
     def set_parent
-      move_to_child_of(parent_id) if !parent_id.nil?
+      if !parent_id.nil?
+        if self.country == self.parent.country
+          move_to_child_of(parent_id)
+        else
+          self.parent_id = nil
+          self.save
+        end
+      end 
+      self.descendants.each do |d|
+        d.country = self.country
+        d.save
+      end
     end
 
     def clear_empty_attrs

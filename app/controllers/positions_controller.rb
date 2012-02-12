@@ -1,6 +1,6 @@
 class PositionsController < ApplicationController
-
-  before_filter :authenticate_admin #sessions helper
+  
+  load_and_authorize_resource
 
   # GET /positions
   # GET /positions.json

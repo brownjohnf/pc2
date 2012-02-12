@@ -28,6 +28,8 @@
             = markdown @case_study.next_steps
     .span-4.last
       = avatar_for @case_study, :size => :small
+      = link_to 'edit', edit_case_study_path(@case_study) if can? :update, @case_study
+      = link_to 'destroy', @case_study, :method => :delete, :confirm => 'you sure?' if can? :destroy, @case_study
       .box
         %h2 Case Studies
         %ul

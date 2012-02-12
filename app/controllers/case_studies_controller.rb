@@ -1,7 +1,6 @@
 class CaseStudiesController < ApplicationController
-
-  before_filter :authenticate, :except => [:index, :show]
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
 
   # GET /case_studies
   # GET /case_studies.json
@@ -62,7 +61,7 @@ class CaseStudiesController < ApplicationController
   # POST /case_studies.json
   def create
     @case_study = CaseStudy.new(params[:case_study])
-    @contribition = @case_study.contributions.build(:user_id => current_user.id)
+    @contribution = @case_study.contributions.build(:user_id => current_user.id)
 
     respond_to do |format|
       if @case_study.save
@@ -103,11 +102,4 @@ class CaseStudiesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @contributor = CaseStudy.find_by_id(params[:id]).contributors.find_by_id(current_user.id)
-      deny_owner unless !@contributor.nil? || current_user.admin?
-    end
 end

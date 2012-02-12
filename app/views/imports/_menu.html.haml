@@ -1,10 +1,10 @@
 - imports = Import.all
 - if imports.count > 0
   .accordion
-    $h3 Imports
+    %h3 Imports
     %ul
-    - imports.each do |i|
-      %li
-        = link_to i.name, i
-        %br
-        = i.comment
+      - imports.each do |i|
+        %li
+          = link_to i.name, i
+          %br
+          = i.comment

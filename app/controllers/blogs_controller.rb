@@ -1,7 +1,6 @@
 class BlogsController < ApplicationController
-
-  before_filter :authenticate, :except => [:index, :show] #sessions helper
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
 
   # GET /blogs
   # GET /blogs.json
@@ -87,11 +86,4 @@ class BlogsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @blog = current_user.blogs.find_by_id(params[:id])
-      deny_owner unless !@blog.nil? || current_user.admin?
-    end
 end
