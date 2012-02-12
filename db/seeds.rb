@@ -66,6 +66,7 @@ sectors = Sector.create!(
 jack = User.create!(
                     :name => 'Jack Brown',
                     :email => 'jack@brownjohnf.com',
+                    :password => 'testing',
                     :country => 'SN',
                     :bio => '# Bio Here')
 jack.volunteers.create!(

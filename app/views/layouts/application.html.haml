@@ -19,13 +19,12 @@
             .row
               .twelvecol.last
                 = debug(params)
-                -#= find_named_routes.inspect if Rails.env.development?
                 Class: #{params[:controller]}
                 %br
                 ID: #{params[:action]}
     = render 'layouts/footer'
-    - if signed_in?
+    - if user_signed_in?
       = render 'layouts/user_menu_bar'
-      = render 'layouts/admin_menu_bar' if current_user.admin?
-      = render 'layouts/moderator_menu_bar' if current_user.moderator? && !current_user.admin?
-    = render 'layouts/feedback' unless signed_in? && current_user.admin?
+      = render 'layouts/admin_menu_bar' if current_user.role? :admin
+      = render 'layouts/moderator_menu_bar' if current_user.role?(:moderator) && !current_user.role?(:admin)
+    = render 'layouts/feedback' unless current_user.role? :admin

@@ -1,7 +1,11 @@
-<<<<<<< HEAD
 OmniauthDemo::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
+  devise_scope :user do
+    get 'login', :to => 'devise/sessions#new'
+    get 'logout', :to => 'devise/sessions#destroy'
+  end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
     member do
@@ -102,11 +106,6 @@ OmniauthDemo::Application.routes.draw do
   resources :pcregions
 
   resources :regions
-
-  get   '/login', :to => 'sessions#new', :as => :login
-  get   '/logout', :to => 'sessions#destroy', :as => :logout
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/failure', :to => 'sessions#new'
 
   match '/disclaimer', :to => 'statics#disclaimer'
   match '/privacy', :to => 'statics#privacy'

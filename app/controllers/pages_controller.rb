@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  
+  load_and_authorize_resource
 
   before_filter :authenticate, :except => [ :index, :added, :updated, :show ] #sessions helper
   before_filter :authorized_user, :only => [ :edit, :update, :destroy ]

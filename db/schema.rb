@@ -11,24 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120210110204) do
-
-  create_table "authorizations", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20120211120217) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
     t.string   "description"
     t.string   "url"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "case_studies", :force => true do |t|
@@ -42,15 +33,15 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.text     "challenges"
     t.text     "lessons_learned"
     t.text     "next_steps"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "country"
   end
 
   create_table "contributions", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "contributable_id"
     t.string   "contributable_type"
   end
@@ -63,31 +54,31 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "language_id"
   end
 
   create_table "feedback", :force => true do |t|
     t.string   "subject"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "identities", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "imports", :force => true do |t|
@@ -99,8 +90,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "csv_content_type"
     t.integer  "csv_file_size"
     t.datetime "csv_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -109,15 +100,15 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.date     "start"
     t.date     "end"
     t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "languages", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "code"
   end
 
@@ -125,16 +116,16 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "name"
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "country"
   end
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "moments", :force => true do |t|
@@ -144,8 +135,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "title"
     t.text     "summary"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "country"
   end
 
@@ -156,8 +147,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "title"
     t.string   "description"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.boolean  "system",      :default => false
     t.integer  "photo_id"
     t.integer  "language_id"
@@ -168,15 +159,15 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "name"
     t.string   "short"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "permissions", :force => true do |t|
     t.integer  "group_id"
     t.integer  "privilege_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "permissable_id"
     t.string   "permissable_type"
   end
@@ -185,8 +176,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "title"
     t.string   "description"
     t.string   "attribution"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -200,15 +191,15 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "title"
     t.text     "description"
     t.text     "qualifications"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "privileges", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "regions", :force => true do |t|
@@ -217,31 +208,42 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.integer  "parent_id"
     t.integer  "type_id"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "country"
   end
 
   create_table "regiontypes", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
   end
 
   create_table "scopes", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "title"
   end
 
   create_table "sectors", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "settings", :force => true do |t|
@@ -250,16 +252,16 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.string   "explanation"
     t.string   "comment"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.integer  "region_id"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
   end
 
@@ -267,8 +269,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.integer  "library_id"
     t.integer  "user_id"
     t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "stackable_id"
     t.string   "stackable_type"
   end
@@ -284,8 +286,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.time     "afternoon_open"
     t.time     "afternoon_close"
     t.string   "details"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "country"
   end
 
@@ -295,8 +297,8 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
     t.date     "swear_in"
     t.date     "cos"
     t.string   "pc_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
 
@@ -318,63 +320,6 @@ ActiveRecord::Schema.define(:version => 20120210110204) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "bio"
-    t.string   "email2"
-    t.string   "phone1"
-    t.string   "phone2"
-    t.string   "site"
-    t.integer  "photo_id"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.string   "country"
-  end
-
-  create_table "volunteers", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "pc_id"
-    t.text     "emphasis"
-    t.text     "projects"
-    t.integer  "stage_id"
-    t.string   "local_name"
-    t.integer  "site_id"
-    t.integer  "sector_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "cos_date"
-    t.string   "country"
-  end
-
-  create_table "websites", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "url"
-    t.integer  "language_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-=======
-ActiveRecord::Schema.define(:version => 20120211132400) do
-
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
-  end
-
-  create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
@@ -387,11 +332,46 @@ ActiveRecord::Schema.define(:version => 20120211132400) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "bio"
     t.string   "name"
+    t.string   "email2"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "site"
+    t.integer  "photo_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "country"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
->>>>>>> devise/master
+
+  create_table "volunteers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pc_id"
+    t.text     "emphasis"
+    t.text     "projects"
+    t.integer  "stage_id"
+    t.string   "local_name"
+    t.integer  "site_id"
+    t.integer  "sector_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.date     "cos_date"
+    t.string   "country"
+  end
+
+  create_table "websites", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "url"
+    t.integer  "language_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+  end
 
 end
