@@ -4,4 +4,7 @@
     = page.title
     %span #{time_ago_in_words(page.updated_at)} ago
   %p= truncate(page.description, :length => 100, :separator => ' ')
+  %p
+    = link_to 'read more', page
+    &rang;
   .tags.right= render 'shared/tags', :tags => page.tag_list

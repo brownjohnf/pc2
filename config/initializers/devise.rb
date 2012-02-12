@@ -213,6 +213,7 @@ Devise.setup do |config|
   require 'omniauth-facebook'
   #config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET']
+  config.omniauth :twitter, ENV['TW_KEY'], ENV['TW_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

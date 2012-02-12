@@ -85,22 +85,30 @@
           %h3 Recently Uploaded Photos
           - @user.photos.limit(5).each do |p|
             = render p
-      -if @user.documents.any?
-        .box
-          %h3 Recently Uploaded Docs
-          - @user.documents.limit(5).each do |d|
-            %p.inline.center
-              = icon(:document)
-              %br
-              = link_to d.name, d
-              %br
-              = link_to icon(:document_download), d
-      -if @user.contributions.any?
-        .box
-          %h3 Contributions
-          %ul.feed
-            - @user.contributions.each do |c|
-              = render c.contributable
+      .span-12
+        - if @user.documents.any?
+          .box
+            %h3 Recently Uploaded Docs
+            - @user.documents.limit(5).each do |d|
+              %p.inline.center
+                = icon(:document)
+                %br
+                = link_to d.name, d
+                %br
+                = link_to icon(:document_download), d
+      .span-12.last
+        - if @user.contributions.any?
+          .box
+            %h3 Contributions
+            %ul.feed
+              - @user.contributions.each do |c|
+                = render c.contributable
+        - if @user.moments.any?
+          .box
+            %h3 Timeline Events
+            %ul
+              - @user.moments.each do |moment|
+                %li= link_to moment.title, moment
     .span-4.last
       = avatar_for_user @user, :size => :small
       = button_to 'Edit profile', edit_user_path, :method => :get if can? :update, @user
@@ -109,10 +117,12 @@
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?
       = render 'shared/right_user_menu'
       .box
+        %h3 Groups
         - if @user.groups.any?
-          %h3 Groups
           %ul
             = render @user.groups
+        - else
+          %p Not a member of any groups.
         - if can? :update, Group
           %h3 Add to group
           %ul

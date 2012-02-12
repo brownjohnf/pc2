@@ -1,6 +1,6 @@
 = form_for(@moment) do |f|
   = render :partial => 'shared/form_error', :locals => { :a => @moment } if @moment.errors.any?
-  - if current_user.admin?
+  - if can? :manage, @moment
     .field
       = f.label :user_id
       = f.collection_select(:user_id, User.all, :id, :name)
