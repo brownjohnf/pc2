@@ -1,7 +1,6 @@
 class LibrariesController < ApplicationController
   
-  before_filter :authenticate, :except => [ :index, :show ]
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  load_and_authorize_resource
   
   # GET /libraries
   # GET /libraries.json
@@ -84,11 +83,4 @@ class LibrariesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @library = current_user.librairies.find_by_id(params[:id])
-      deny_owner unless !@library.nil? || current_user.admin?
-    end
 end

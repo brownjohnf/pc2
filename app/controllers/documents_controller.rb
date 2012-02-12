@@ -1,7 +1,6 @@
 class DocumentsController < ApplicationController
-
-  before_filter :authenticate, :except => [:index, :show]
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
 
   # GET /documents
   # GET /documents.json
@@ -85,11 +84,4 @@ class DocumentsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @document = current_user.documents.find_by_id(params[:id])
-      deny_owner unless !@document.nil? || current_user.admin?
-    end
 end

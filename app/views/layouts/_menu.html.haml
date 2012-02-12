@@ -1,0 +1,25 @@
+- if user_signed_in?
+  %p
+    You are signed in as
+    = current_user.name
+    [
+    = current_user.email
+    ]
+    You are a(n)
+    - current_user.roles.each do |role|
+      |
+      = role.name
+    = link_to 'sign out', destroy_user_session_path, :method => :delete
+    |
+    = link_to 'edit your profile', edit_user_path(current_user)
+    |
+    = link_to 'home', root_path
+    |
+    = link_to 'users', users_path
+- else
+  %p
+    Please
+    = link_to 'sign in', new_user_session_path
+    or
+    = link_to 'sign up', new_user_registration_path
+    \.

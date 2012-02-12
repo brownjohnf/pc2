@@ -1,7 +1,6 @@
 class WebsitesController < ApplicationController
-
-  before_filter :authenticate, :except => [:index, :show] #sessions helper
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
   
   # GET /websites
   # GET /websites.json
@@ -85,11 +84,4 @@ class WebsitesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @website = current_user.websites.find_by_id(params[:id])
-      deny_owner unless !@website.nil? || current_user.admin?
-    end
 end

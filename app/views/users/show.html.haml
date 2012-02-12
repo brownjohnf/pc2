@@ -9,7 +9,7 @@
           .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
           %p= Carmen.country_name(@user.country) if @user.country
-          - if signed_in? && pc?(current_user)
+          - if can? :read, @user
             %h3 Connect
             %p
               = @user.email
@@ -37,12 +37,12 @@
         .box
           %h4 A little bit about #{@user.name}...
           = markdown(@user.bio)
-      - if pc?(current_user)
+      - if can? :read, Volunteer
         - @user.volunteers.each do |v|
           .box
             %h1
               = v.local_name
-              = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if current_user.admin?
+              = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
             %div
               %p
                 = "#{v.sector.name} Volunteer" if v.sector
@@ -58,11 +58,12 @@
               - if v.projects
                 %h4 Projects
                 %p= v.projects
+      - if can? :read, Staff
         - @user.staff.each do |s|
           .box
             %h3
               Staff Member
-              = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if current_user.admin?
+              = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
             %h4= s.site.name if s.site
             %p= Carmen.country_name(s.country) if s.country
             %p
@@ -102,25 +103,18 @@
               = render c.contributable
     .span-4.last
       = avatar_for_user @user, :size => :small
-      = button_to 'Edit profile', edit_user_path, :method => :get if current_user?(@user)
-      - if @user.avatar? && current_user?(@user)
+      = button_to 'Edit profile', edit_user_path, :method => :get if can? :update, @user
+      - if @user.avatar? && can?(:update, @user)
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
-      = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if current_user?(@user) && !@user.volunteers.any?
+      = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?
       = render 'shared/right_user_menu'
-      - if signed_in? && (current_user?(@user) || current_user.admin?)
-        - unless @user.groups.empty?
+      .box
+        - if @user.groups.any?
           %h3 Groups
           %ul
             = render @user.groups
-        - if @user.authorizations.any?
-          %h3 Social Connections
+        - if can? :update, Group
+          %h3 Add to group
           %ul
-            = render @user.authorizations
-        - unless @user.permissions.empty?
-          %h3 Specific Permissions
-          %ul= render :partial => 'permissions/permission', :collection => @user.permissions
-        - unless @user.groups.empty?
-          %h3 Group Permissions
-          - @user.groups.each do |g|
-            %h4= g.name
-            %ul= render :partial => 'permissions/permission', :collection => g.permissions
+            - @membership = @user.memberships.build
+            = render 'memberships/form'

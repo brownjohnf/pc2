@@ -1,7 +1,6 @@
 class SitesController < ApplicationController
   
-  before_filter :authenticate
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  load_and_authorize_resource
   
   # GET /sites
   # GET /sites.json
@@ -85,11 +84,4 @@ class SitesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @site = current_user.sites.find_by_id(params[:id])
-      deny_owner unless !@site.nil? || current_user.admin?
-    end
 end

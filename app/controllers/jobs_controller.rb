@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
-
-  before_filter :authenticate_admin #sessions helper
+  
+  load_and_authorize_resource
   
   # GET /jobs
   # GET /jobs.json

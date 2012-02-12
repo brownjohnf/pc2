@@ -197,6 +197,12 @@ html {
   font: 12px "Helvetica", Arial, sans-serif;
   height: 100%;
   body {
+    ol, ul {
+      list-style-type: none;
+    }
+    li {
+      display: block;
+    }
     @extend html;
     em {
       font-style: italic;

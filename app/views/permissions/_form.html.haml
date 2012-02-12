@@ -1,31 +1,12 @@
 = form_for(@permission) do |f|
   = render :partial => 'shared/form_error', :collection => @permission
-  .box
-    %h1 Who?
-    .span-10
-      .field
-        = f.label :user_id
-        = f.collection_select(:user_id, User.all, :id, :name, :include_blank => true)
-    .span-2
-      %p.center OR
-    .span-10.last
-      .field
-        = f.label :group_id
-        = f.collection_select(:group_id, Group.all, :id, :name, :include_blank => true)
-    .clearfloat
-  .box
-    %h1 What can they do?
-    .field
-      = f.label :scope_id, 'For what sort of resources are you granting permissions?'
-      = f.collection_select(:scope_id, Scope.all, :id, :title)
-    .field
-      = f.label :target_id, 'If this is for a particular resource entity, please specify'
-      = f.collection_select(:target_id, Page.all, :id, :title, :include_blank => true)
-    .field
-      = f.label :privilege_id, 'What can the person/group do?'
-      = f.collection_select(:privilege_id, Privilege.all, :id, :name)
-    .field
-      = f.label :comment, 'Any comment about what you are doing?'
-      = f.text_area :comment
-    .actions
-      = f.submit
+  = f.hidden_field(:permissable_type)
+  = f.hidden_field(:permissable_id)
+  .field
+    = f.label :group_id
+    = f.collection_select(:group_id, Group.all, :id, :name)
+  .field
+    = f.label :privilege_id, 'What can the group do?'
+    = f.collection_select(:privilege_id, Privilege.all, :id, :name)
+  .actions
+    = f.submit

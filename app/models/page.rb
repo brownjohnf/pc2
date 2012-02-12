@@ -9,7 +9,6 @@ class Page < ActiveRecord::Base
   belongs_to :photo
   belongs_to :language
 
-  has_many :contributions, :foreign_key => 'target_id'
   has_many :photos, :as => :imageable
   
   # first connects each one of this model to all of the contributables which which reference it
@@ -17,6 +16,10 @@ class Page < ActiveRecord::Base
   # through the contribution connection
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :contributors, :through => :contributions, :source => :user
+  
+  has_many :permissions, :as => :permissable, :dependent => :destroy
+  has_many :groups, :through => :permissions
+  has_many :users, :through => :groups
 
   accepts_nested_attributes_for :contributions, :allow_destroy => true
 
@@ -34,7 +37,18 @@ class Page < ActiveRecord::Base
   private
 
     def set_parent
-      move_to_child_of(parent_id) if !parent_id.nil?
+      if !parent_id.nil?
+        if self.country == self.parent.country
+          move_to_child_of(parent_id)
+        else
+          self.parent_id = nil
+          self.save
+        end
+      end 
+      self.descendants.each do |d|
+        d.country = self.country
+        d.save
+      end
     end
 
     def clear_empty_attrs

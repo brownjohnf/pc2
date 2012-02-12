@@ -1,34 +1,52 @@
 %p By adding content to Volunteer or Staff fields, you will create a Volunteer, Staff member, or both.
-= form_for(@user, :html => { :multipart => true } ) do |f|
-  = render :partial => 'shared/form_error', :collection => @user
+= semantic_form_for(@user, :html => { :multipart => true } ) do |f|
+  .span-12
+    .box
+      %h3 Basic
+      = f.inputs :name, :country, :tag_list, :avatar
+    .box
+      %h3 Bio
+      = f.input :bio, :as => :text
+    .box
+      %h3 Manage
+      = link_to 'change password', edit_user_registration_path
+      = f.input :roles, :as => :check_boxes if can? :manage, @user
+  .span-12.last
+    .box
+      %h3 Contact Info
+      = f.inputs :email, :phone1, :email2, :phone2, :site
+    .box
+      %h3 Blog Info
+      = f.inputs :title, :url, :for => :blogs
+      = f.inputs :description, :for => :blogs, :as => :text
   .span-24.last
-    %h2 User
-    = render :partial => 'fields', :locals => { :f => f }
-    - unless @user.volunteers.empty?
-      .span-24.last
-        %h2 Volunteer
-        = f.fields_for :volunteers do |f2|
-          = f2.hidden_field(:user_id, :value => @user.id)
-          = render :partial => 'volunteers/fields', :locals => { :f => f2 }
-    - unless @user.staff.empty?
-      .span-24.last
-        %h2 Staff Member
-        = f.fields_for :staff do |s|
-          = s.hidden_field(:user_id, :value => @user.id)
-          = render :partial => 'staff/fields', :locals => { :f => s }
-  .span-24.last
-    %br
-    %hr
-    %br
-    %br
-    .actions
-      = f.submit
+    = f.buttons
+-#  = render :partial => 'shared/form_error', :collection => @user
+-#  .span-24.last
+-#    %h2 User
+-#    = render :partial => 'fields', :locals => { :f => f }
+-#    - unless @user.volunteers.empty?
+-#      .span-24.last
+-#        %h2 Volunteer
+-#        = f.fields_for :volunteers do |f2|
+-#          = f2.hidden_field(:user_id, :value => @user.id)
+-#          = render :partial => 'volunteers/fields', :locals => { :f => f2 }
+-#    - unless @user.staff.empty?
+-#      .span-24.last
+-#        %h2 Staff Member
+-#        = f.fields_for :staff do |s|
+-#          = s.hidden_field(:user_id, :value => @user.id)
+-#          = render :partial => 'staff/fields', :locals => { :f => s }
+-#  .span-24.last
+-#    
+-#    %br
+-#    %hr
+-#    %br
+-#    %br
+-#    .actions
+-#      = f.submit
 
-    - if current_user && current_user.admin?
-      = form_for @user.memberships.build, :remote => true do |f|
-        = f.hidden_field(:user_id, :value => @user.id)
-        .field
-          = f.label :group_id
-          = f.collection_select(:group_id, Group.all, :id, :name)
-        .actions
-          = f.submit 'Add user to group'
+-#= semantic_form_for @user do |f|
+-#  = f.inputs :name
+-#  
+-#  = f.buttons

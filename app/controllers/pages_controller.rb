@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
-
-  before_filter :authenticate, :except => [ :index, :added, :updated, :show ] #sessions helper
-  before_filter :authorized_user, :only => [ :edit, :update, :destroy ]
+  
+  load_and_authorize_resource
 
   before_filter :check_system, :only => :destroy
 
@@ -9,17 +8,17 @@ class PagesController < ApplicationController
   # GET /pages.json
   def index
     @title = 'Peruse Our Pages'
-    @pages = Page.unscoped.order('title ASC')
+    @pages = @pages.order('lft ASC', 'title ASC')
   end
 
   def added
-    @pages = Page.unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @pages = Page.accessible_by(current_ability).unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
     @title = 'Page Feed'
     render 'feed'
   end
 
   def updated
-    @pages = Page.unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @pages = Page.accessible_by(current_ability).unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 10)
     @title = 'Page Feed'
     render 'feed'
   end
@@ -27,7 +26,6 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @page = Page.find(params[:id])
     @title = @page.title
     @pages = @page.find_related_tags
     @case_studies = CaseStudy.tagged_with(@page.tag_list, :any => true)
@@ -47,7 +45,6 @@ class PagesController < ApplicationController
   # GET /pages/new
   # GET /pages/new.json
   def new
-    @page = Page.new
     @title = 'New Page'
 
     respond_to do |format|
@@ -67,9 +64,11 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(params[:page])
+    @contribution = @page.contributions.build(:user_id => current_user.id)
 
     respond_to do |format|
       if @page.save
+        @contribution.save
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
       else
@@ -123,10 +122,5 @@ class PagesController < ApplicationController
     def check_system
       @page = Page.find(params[:id])
       redirect_to(@page, notice: 'You cannot destroy system pages.') if @page.system?
-    end
-  
-    def authorized_user
-      @contributor = Page.find_by_id(params[:id]).contributors.find_by_id(current_user.id)
-      deny_owner unless !@contributor.nil? || current_user.admin?
     end
 end

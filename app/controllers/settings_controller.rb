@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
-
-  before_filter :authenticate_admin
+  
+  load_and_authorize_resource
 
   # GET /settings
   # GET /settings.json

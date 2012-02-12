@@ -1,6 +1,6 @@
 class ImportsController < ApplicationController
-
-  before_filter :authenticate_admin
+  
+  load_and_authorize_resource
 
   # GET /imports
   # GET /imports.json
@@ -168,6 +168,7 @@ class ImportsController < ApplicationController
       params[:page]['description'] = y['description']
       params[:page]['content'] = y['content']
       params[:page]['language_id'] = Language.where(:name => 'English')
+      params[:page]['country'] = 'SN'
       page = Page.new(params[:page])
       page.save!
     end
@@ -179,6 +180,7 @@ class ImportsController < ApplicationController
       params[:cs]['title'] = y['title']
       params[:cs]['summary'] = y['description'] + y['content']
       params[:cs]['language_id'] = Language.where(:name => 'English')
+      params[:cs]['country'] = 'SN'
       cs = CaseStudy.new(params[:cs])
       cs.save!
     end

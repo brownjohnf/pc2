@@ -1,12 +1,13 @@
-.box
-  %h1 User Menu
-  %ul
-    %li= link_to 'Timeline', moments_path
-    %li= link_to 'Peace Corps Regions', pcregions_path
-    %li= link_to 'Regions', regions_path
-    %li= link_to 'Sites', sites_path
-    %li= link_to 'Sectors', sectors_path
-    %li= link_to 'Staff', staff_index_path
-    %li= link_to 'Stages', stages_path
-    %li= link_to 'Volunteers', volunteers_path
-    %li= link_to 'Links', websites_path
+- if user_signed_in?
+  .box
+    %h1 User Menu
+    %ul
+      %li= link_to 'Timeline', moments_path
+      %li= link_to 'Peace Corps Regions', pcregions_path
+      %li= link_to 'Regions', regions_path
+      %li= link_to 'Sites', sites_path
+      %li= link_to 'Sectors', sectors_path
+      %li= link_to 'Staff', staff_index_path
+      %li= link_to 'Stages', stages_path
+      %li= link_to 'Volunteers', volunteers_path
+      %li= link_to 'Links', websites_path

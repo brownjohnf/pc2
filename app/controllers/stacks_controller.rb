@@ -1,8 +1,6 @@
 class StacksController < ApplicationController
   
-  before_filter :authenticate
-  before_filter :authenticate_admin, :only => [ :index ]
-  before_filter :authorized_user, :only => [ :destroy ]
+  load_and_authorize_resource
   
   # GET /stacks
   # GET /stacks.json
@@ -54,11 +52,4 @@ class StacksController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  private
-  
-    def authorized_user
-      @stack = current_user.stacks.find_by_id(params[:id])
-      deny_owner unless !@stack.nil? || current_user.admin?
-    end
 end

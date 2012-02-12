@@ -1,6 +1,6 @@
 class PcregionsController < ApplicationController
-
-  before_filter :authenticate_admin, :except => [:index, :show] #sessions helper
+  
+  load_and_authorize_resource
   
   # GET /pcregions
   # GET /pcregions.json
