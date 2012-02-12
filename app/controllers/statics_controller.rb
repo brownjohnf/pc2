@@ -1,5 +1,7 @@
 class StaticsController < ApplicationController
 
+  skip_authorization_check
+
   def home
     redirect_to '/splash' unless cookies[:splashed] == 'viewed'
     @users = User.unscoped.order('users.updated_at DESC').limit(5)
@@ -59,5 +61,4 @@ class StaticsController < ApplicationController
   def search
     @title = 'Search'
   end
-
 end

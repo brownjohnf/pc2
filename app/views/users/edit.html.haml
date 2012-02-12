@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container
   .row
     .span-5
@@ -6,3 +7,4 @@
       - @user.blogs.build if @user.blogs.empty?
       = render 'form'
     .span-4.last
+      = link_to 'change your password', edit_user_registration_path if can? :update, @user

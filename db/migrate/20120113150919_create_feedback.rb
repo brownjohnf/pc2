@@ -1,6 +1,6 @@
-class CreateFeedbacks < ActiveRecord::Migration
+class CreateFeedback < ActiveRecord::Migration
   def change
-    create_table :feedbacks do |t|
+    create_table :feedback do |t|
       t.string :subject
       t.text :content
 

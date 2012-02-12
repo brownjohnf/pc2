@@ -6,6 +6,8 @@ tmp/
 .DS_Store
 omniauth.rb.bak
 omniauth.rb
+dev_environment.rb
+pro_environment.rb
 
 # from github suggested list
 
@@ -24,3 +26,4 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+

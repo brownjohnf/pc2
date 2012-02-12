@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+roles = Role.create!([{:name => 'User'},{:name => 'Moderator'},{:name => 'Admin'}])
+
 settings = Setting.create!(
                             [
                               { :property => 'country', :value => 'Senegal' },
@@ -91,3 +94,7 @@ languages = Language.create!(
                            )
 
 Page.rebuild!
+admin = jack
+admin.roles << Role.find(1)
+admin.roles << Role.find(2)
+admin.roles << Role.find(3)

@@ -110,5 +110,4 @@ module ApplicationHelper
     }
     image_tag("icons/#{icons[icon]}", :class => 'icon')
   end
-
 end

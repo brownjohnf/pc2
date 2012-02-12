@@ -1,4 +1,19 @@
 class User < ActiveRecord::Base
+  
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :role_ids
+  
+  has_and_belongs_to_many :roles
+  
+  accepts_nested_attributes_for :roles, :allow_destroy => true
+  validates :name, :email, :presence => true
+  
+  after_create :add_user_role
 
   has_attached_file :avatar, :styles => { :icon => '100x100#', :thumb => '150x150', :small => '255x255', :medium => '350x350', :large => '980x980' }
   acts_as_taggable_on :tags
@@ -34,38 +49,11 @@ class User < ActiveRecord::Base
   belongs_to :photo
 
   before_validation :clear_empty_attrs
-  validates :name, :email, :presence => true
 
   accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs, :documents, :photos
 
-  before_create :make_salt
-
   default_scope :order => 'users.name ASC'
-
-  def add_provider(auth_hash)
-    # Check if the provider already exists, so we don't add it twice
-    unless authorizations.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"].to_s)
-      Authorization.create :user => self, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
-    end
-  end
-
-  def self.authenticate_with_salt(id, cookie_salt)
-    user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user : nil
-  end
-
-  def admin?
-    Group.find_by_name('Administrator').users.find_by_id(self)
-  end
-
-  def moderator?
-    unless self.admin?
-      Group.find_by_name('Moderator').users.find_by_id(self)
-    else
-      true
-    end
-  end
 
   def to_param
     "#{id}-#{name.parameterize}"
@@ -76,24 +64,29 @@ class User < ActiveRecord::Base
     self.save
   end
   
-  def viewable_pages
-    Page.pages_viewable_by(self)
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token.extra.raw_info
+    if user = User.where(:email => data.email).first
+      user
+    else # Create a user with a stub password.
+      User.create!(:name => "#{data.first_name} #{data.last_name}", :email => data.email, :password => Devise.friendly_token[0,20])
+    end
+  end
+  
+  def role?(role)
+    return !!self.roles.find_by_name(role.to_s.camelize)
   end
 
   private
-
-    def make_salt
-      self.salt = secure_hash("#{Time.now.utc}--#{self.name}")
-    end
-
-    def secure_hash(string)
-      Digest::SHA2.hexdigest(string)
-    end
 
     def clear_empty_attrs
       @attributes.each do |key,value|
         self[key] = nil if value.blank?
       end
+    end
+  
+    def add_user_role
+      self.roles << Role.find_by_name('User')
     end
 
 end

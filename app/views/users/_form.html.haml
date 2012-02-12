@@ -32,3 +32,8 @@
           = f.collection_select(:group_id, Group.all, :id, :name)
         .actions
           = f.submit 'Add user to group'
+
+-#= semantic_form_for @user do |f|
+-#  = f.inputs :name
+-#  = f.input :roles, :as => :check_boxes if can? :manage, @user
+-#  = f.buttons
