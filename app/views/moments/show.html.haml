@@ -7,18 +7,21 @@
   .row.moment
     .span-6
       %h4= @moment.datapoint.strftime('%B %Y')
-      = avatar_for_user(@moment.user, :size => :small)
+      - if @moment.photo
+        = link_to image_tag(@moment.photo.photo.url(:small)), @moment.user, :class => 'avatar'
+      - else
+        = avatar_for_user(@moment.user, :size => :small)
       %p
         = link_to @moment.user.name, @moment.user
         %br
-        = @moment.user.country
+        = Carmen.country_name(@moment.user.country)
         %br
-        = link_to @moment.user.volunteers.first.sector.name, @moment.user.volunteers.first.sector if @moment.user.volunteers.any?
+        = link_to @moment.user.volunteers.first.sector.name, @moment.user.volunteers.first.sector if @moment.user.volunteers.any? && @moment.user.volunteers.first.sector
         %br
         = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
         \-
         = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
-        = button_to 'Edit', edit_moment_path(@moment), :method => :get if signed_in? && (current_user.admin? || current_user.moderator? || current_user?(@moment.user))
+        = button_to 'Edit', edit_moment_path(@moment), :method => :get if can? :update, @moment
     .span-12
       %h1= @moment.title
       = markdown(@moment.content)

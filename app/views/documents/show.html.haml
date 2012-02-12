@@ -8,7 +8,7 @@
           = @document.name
           .tags.right.inline= render 'shared/tags', :tags => @document.tag_list
         %p= @document.description
-        %p= @document.language.name
+        %p= @document.language.name if @document.language
         %p
           = icon(:document_download)
           = link_to 'download', '', :method => :get

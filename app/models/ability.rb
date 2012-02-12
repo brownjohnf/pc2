@@ -18,6 +18,7 @@ class Ability
       can :read, User
       can [ :update, :destroy ], User, :id => user.id
       if user.volunteers.any? || user.staff.any?
+        can [ :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
         can :create, [ Page, CaseStudy ], :country => user.country
         can [ :update, :destroy ], Page do |page|
           page.contributors.find_by_id(user.id)
@@ -29,29 +30,6 @@ class Ability
       if user.role? :moderator
         #can :manage, [ Page, CaseStudy ], :country => user.country
       end
-    end
-    
-    
-    
-  
-    def authorized_user
-      @contributor = 
-      deny_owner unless !@contributor.nil? || current_user.admin?
-    end
-  
-    def authorized_viewer
-      @page = current_user.permissions.where(:privilege_id => 3, :permissable_type => 'Page').find_by_permissable_id(params[:id])
-      deny_owner unless !@page.nil? || current_user.admin?
-    end
-    
-
-    def self.viewable_by(user)
-      allowed = user.permissions.where(:permissable_type => 'Page')
-      allowed_ids = []
-      allowed.each do |a|
-        allowed_ids << a.permissable.id
-      end
-      where(:id => allowed_ids)
     end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

@@ -1,6 +1,6 @@
 class MomentsController < ApplicationController
   
-  load_and_authorize_resource
+  skip_authorization_check
 
   # GET /moments
   # GET /moments.json
@@ -123,4 +123,5 @@ class MomentsController < ApplicationController
       format.json { head :ok }
     end
   end
+    
 end

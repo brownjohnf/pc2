@@ -217,6 +217,10 @@ html {
       height: 100%;
       height: auto;
       min-height: 100%;
+      a#super-conversion-button {
+        width: 100% !important;
+        text-align: center;
+      }
       a.avatar {
         display: inline-block;
         img {

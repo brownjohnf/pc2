@@ -20,7 +20,7 @@
             ago
         %p= @page.description
         .tags.right= render 'shared/tags', :tags => @page.tag_list
-      = markdown(@page.content)
+        = markdown(@page.content)
       .box
         %h4= Carmen.country_name(@page.country)
     .span-4.last

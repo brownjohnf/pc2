@@ -1,5 +1,5 @@
 .field
-  = f.label :photo_id
+  = f.label :photo_id, 'Profile Photo (you can add photos after creating the event)'
   = f.collection_select(:photo_id, @moment.photos, :id, :title, :include_blank => true)
 .field
   = f.label :datapoint

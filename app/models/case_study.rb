@@ -7,7 +7,7 @@ class CaseStudy < ActiveRecord::Base
   # first connects each one of this model to all of the contributables which which reference it
   # then connects to all users attached to all those connections by a renamed tunnel
   # through the contribution connection
-  has_many :contributions, :as => :contributable
+  has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :contributors, :through => :contributions, :source => :user
 
   belongs_to :language
