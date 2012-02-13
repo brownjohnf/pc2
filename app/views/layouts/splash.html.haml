@@ -44,4 +44,4 @@
                 %br
                 ID: #{params[:action]}
     = render 'layouts/footer'
-    = render 'layouts/feedback' unless signed_in? && current_user.admin?
+    = render 'layouts/feedback' unless can? :create, Feedback

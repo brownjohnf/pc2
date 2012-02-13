@@ -6,7 +6,7 @@
       = time_ago_in_words(document.updated_at)
       ago
   %p= document.description if document.description
-  %p= document.language.name
+  %p= document.language.name if document.language
   %p
     = link_to 'view details', document
     = icon(:document_download)

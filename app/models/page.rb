@@ -27,6 +27,7 @@ class Page < ActiveRecord::Base
   validates :title, :description, :content, :language_id, :presence => true
 
   after_save :set_parent
+  before_destroy :reset_children
 
   #default_scope :order => 'pages.title ASC'
 
@@ -48,6 +49,19 @@ class Page < ActiveRecord::Base
       self.descendants.each do |d|
         d.country = self.country
         d.save
+      end
+    end
+    
+    def reset_children
+      if self.parent_id
+        self.children.each do |child|
+          child.move_to_child_of(self.parent_id)
+        end
+      else
+        self.children.each do |child|
+          child.parent_id = nil
+          child.save
+        end
       end
     end
 
