@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211120217) do
+ActiveRecord::Schema.define(:version => 20120213121232) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(:version => 20120211120217) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+    t.string   "country"
   end
 
   create_table "taggings", :force => true do |t|

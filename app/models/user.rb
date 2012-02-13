@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :role_ids, :country, :bio, :email2, :phone1, :phone2, :tag_list, :blogs_attributes, :site
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :role_ids, :country, :bio, :email2, :phone1, :phone2, :tag_list, :blogs_attributes, :site, :volunteers_attributes, :staff_attributes
   
   has_and_belongs_to_many :roles
   
@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
   has_many :libraries, :dependent => :destroy
   has_many :documents
   has_many :sites
-  has_many :stages
   has_many :websites
   
   has_many :stacks, :as => :stackable
@@ -56,7 +55,8 @@ class User < ActiveRecord::Base
   before_validation :clear_empty_attrs
 
   accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
-  accepts_nested_attributes_for :blogs, :documents, :photos
+  accepts_nested_attributes_for :blogs, :reject_if => lambda { |a| a[:url].blank? } 
+  accepts_nested_attributes_for :documents, :photos
 
   default_scope :order => 'users.name ASC'
 

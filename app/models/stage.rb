@@ -1,7 +1,7 @@
 class Stage < ActiveRecord::Base
 
-  belongs_to :user
+  has_many :volunteers
   
-  validates :user_id, :name, :arrival, :swear_in, :cos, :presence => true
+  validates :country, :name, :arrival, :swear_in, :cos, :presence => true
 
 end
