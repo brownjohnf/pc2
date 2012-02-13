@@ -1,4 +1,4 @@
-- unless params[:controller] == 'statics'
+- unless params[:controller] == 'statics' || params[:controller] == 'users'
   #context_menu_bar
     %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
     %ul
