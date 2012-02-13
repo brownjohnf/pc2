@@ -87,7 +87,7 @@ module ApplicationHelper
 
   def cloud_of_tags(model = params[:controller].singularize.camelcase.constantize)
     tags = model.tag_counts_on(:tags)
-    render 'shared/tag_cloud', :tags => tags
+    render 'shared/tag_cloud', :tags => tags, :model => model
   end
 
   def icon(icon)

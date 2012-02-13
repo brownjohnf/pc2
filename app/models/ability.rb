@@ -15,11 +15,15 @@ class Ability
     if user.role? :admin
       can :manage, :all
     elsif user.role? :user
-      can :read, User
+      can :read, [ User, Region ]
       can [ :update, :destroy ], User, :id => user.id
       if user.volunteers.any? || user.staff.any?
+        can :read, [ Volunteer, Staff ]
         can [ :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
-        can :create, [ Page, CaseStudy ], :country => user.country
+        can :create, [ Page, CaseStudy, Region, Stage ], :country => user.country
+        can :create, Site do |site|
+          site.region.country = user.country
+        end
         can [ :update, :destroy ], Page do |page|
           page.contributors.find_by_id(user.id)
         end

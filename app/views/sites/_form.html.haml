@@ -7,6 +7,7 @@
   .field
     = f.label :region_id
     = f.collection_select(:region_id, Region.all, :id, :name)
+    = link_to 'add a region', new_region_path if can? :create, Region
   .field
     = f.label :description
     = f.text_area :description

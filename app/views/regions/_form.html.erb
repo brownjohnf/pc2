@@ -21,15 +21,16 @@
   </div>
   <div class="field">
     <%= f.label :parent_id %>
-    <%= f.collection_select(:parent_id, Region.all, :id, :name) %>
+    <%= f.collection_select(:parent_id, Region.accessible_by(current_ability, :create), :id, :name, :include_blank => true) %>
   </div>
   <div class="field">
     <%= f.label :country_id %>
-    <%= f.country_select(:country, "SN") %>
+    <%= f.country_select(:country, ['SN', 'GM']) %>
   </div>
   <div class="field">
     <%= f.label :type_id %>
     <%= f.collection_select(:type_id, Regiontype.all, :id, :name) %>
+    <%= link_to 'add a region type', new_regiontype_path if can? :create, Regiontype%>
   </div>
   <div class="field">
     <%= f.label :description %>

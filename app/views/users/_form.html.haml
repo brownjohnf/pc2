@@ -1,24 +1,54 @@
-%p By adding content to Volunteer or Staff fields, you will create a Volunteer, Staff member, or both.
 = semantic_form_for(@user, :html => { :multipart => true } ) do |f|
   .span-12
-    .box
-      %h3 Basic
-      = f.inputs :name, :country, :tag_list, :avatar
-    .box
-      %h3 Bio
-      = f.input :bio, :as => :text
-    .box
-      %h3 Manage
-      = link_to 'change password', edit_user_registration_path
-      = f.input :roles, :as => :check_boxes if can? :manage, @user
+    = f.inputs do
+      .box
+        %h3 Basic
+        = f.input :name
+        = f.input :country
+        = f.input :tag_list
+        = f.input :avatar
+      .box
+        %h3 Bio
+        = f.input :bio, :as => :text
+      .box
+        %h3 Manage
+        = link_to 'change password', edit_user_registration_path
+        = f.input :roles, :as => :check_boxes if can? :manage, @user
   .span-12.last
-    .box
-      %h3 Contact Info
-      = f.inputs :email, :phone1, :email2, :phone2, :site
+    = f.inputs do
+      .box
+        %h3 Contact Info
+        = f.inputs :email, :phone1, :email2, :phone2, :site
     .box
       %h3 Blog Info
-      = f.inputs :title, :url, :for => :blogs
-      = f.inputs :description, :for => :blogs, :as => :text
+      = f.inputs :title, :url, :description, :tag_list, :for => :blogs
+  .span-24.last
+    = f.semantic_fields_for :volunteers do |v|
+      .box
+        %h3 Volunteer Data
+        .span-12
+          = v.inputs :local_name, :country, :sector, :site
+          = link_to 'add a site', new_site_path if can? :create, Site
+        .span-12.last
+          = v.inputs :pc_id, :stage, :cos_date
+          = link_to 'add a stage', new_stage_path if can? :create, Stage
+        .span-12
+          = v.inputs :emphasis
+        .span-12.last
+          = v.inputs :projects
+        .clearfloat
+    = f.semantic_fields_for :staff do |v|
+      .box
+        %h3 Staff Data
+        .span-12
+          = v.inputs :site, :building, :office, :floor
+          = link_to 'add a site', new_site_path if can? :create, Site
+        .span-12.last
+          = v.inputs :morning_open, :morning_close, :afternoon_open, :afternoon_close
+          = link_to 'add a stage', new_stage_path if can? :create, Stage
+        .span-12.last
+          = v.input :details, :as => :text
+        .clearfloat
   .span-24.last
     = f.buttons
 -#  = render :partial => 'shared/form_error', :collection => @user

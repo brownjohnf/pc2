@@ -15,18 +15,23 @@
         </p>
 
         <p>
-          <b>Swear in:</b>
+          <b>Swear-in:</b>
           <%= @stage.swear_in %>
         </p>
 
         <p>
-          <b>Cos:</b>
+          <b>COS:</b>
           <%= @stage.cos %>
         </p>
 
         <p>
-          <b>Pc:</b>
+          <b>PC ID:</b>
           <%= @stage.pc_id %>
+        </p>
+
+        <p>
+          <b>Country:</b>
+          <%= Carmen.country_name(@stage.country) %>
         </p>
     .span-4.last
       = render 'shared/right_user_menu'

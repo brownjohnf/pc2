@@ -16,5 +16,8 @@
   .field
     = f.label :pc_id
     = f.text_field :pc_id
+  .field
+    = f.label :country
+    = f.country_select(:country, ['SN','GM'])
   .actions
     = f.submit
