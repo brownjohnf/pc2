@@ -11,7 +11,7 @@
           = link_to a.title, a
         &rang;
         = @page.title
-      .box
+      .box.longform
         %h1
           = @page.title
           %span
@@ -26,7 +26,6 @@
     .span-4.last
       = avatar_for @page, :size => :small
       = button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page
-      = button_to 'destroy', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
       .box
         %h2 Case Studies
         %ul
@@ -48,6 +47,7 @@
             %li= link_to c.user.name, c.user
       = render 'shared/social'
       = render 'shared/right_user_menu'
+      = button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
       - if can? :update, @page.permissions
         .box
           - if @page.permissions.any?

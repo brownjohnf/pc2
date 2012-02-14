@@ -5,6 +5,7 @@
     %span #{time_ago_in_words(case_study.updated_at)} ago
   %p= truncate(strip_tags(case_study.summary), :length => 100, :separator => ' ')
   %p
+    = link_to 'edit', case_study if can? :update, case_study
     = link_to 'read case study', case_study
     &rang;
   .tags.right= render 'shared/tags', :tags => case_study.tag_list

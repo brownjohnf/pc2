@@ -7,7 +7,7 @@ class Volunteer < ActiveRecord::Base
 
   validates :user_id, :presence => true
 
-  default_scope :order => 'volunteers.id ASC'
+  default_scope :order => 'cos_date DESC'
 
   def to_param
     "#{id}-#{user.name.parameterize}"

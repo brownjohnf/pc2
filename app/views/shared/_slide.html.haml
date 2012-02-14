@@ -1,5 +1,6 @@
 %li
-  .slide{:style => "background-image: url(#{slide[:photo]})"}
+  .slide
+    = image_tag slide[:photo]
     .caption
       %h1= slide[:title]
       = truncate(slide[:text], :length => 100, :separator => ' ')

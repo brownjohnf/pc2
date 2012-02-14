@@ -57,7 +57,7 @@ body.statics {
               left: 0;
               width: 98%;
               padding: 1%;
-              font-size: 2em;
+              font-size: 1.5em;
             }
           }
           .text {
@@ -72,17 +72,21 @@ body.statics {
         	height: 390px;
         	margin-bottom: 50px;
 	        @include shadow(5px);
+          ul.thumbNav, a.start-stop {
+            //display: none !important;
+          }
 	        #slider1 {
 	          margin: 0;
 	          .panel {
 	            position: relative;
 	          }
 	          .slide {
-	            background-position: 50% 50%;
-	            background-repeat: no-repeat;
-	            background-color: black;
-	            background-size: 100% auto;
 	            position: relative;
+	            img {
+	              position: relative;
+	              width: 100%;
+	              top: -50%;
+	            }
 	            .caption {
 	              background: black;
 	              opacity: .8;
@@ -92,7 +96,7 @@ body.statics {
 	              left: 0;
 	              width: 94%;
 	              padding: 0 3% 2% 3%;
-	              font-size: 2em;
+	              font-size: 1.5em;
 	            }
 	          }
 	        }
@@ -103,4 +107,8 @@ body.statics {
   &#support {
     @extend body.pages;
   }
+}
+
+.thumbNav a span {
+  visibility: visible; /* span changed to visibility hidden in v1.7.20 */
 }
