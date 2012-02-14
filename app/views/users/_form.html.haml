@@ -27,7 +27,9 @@
       .box
         %h3 Volunteer Data
         .span-12
-          = v.inputs :local_name, :country, :sector, :site
+          = v.input :local_name
+          = v.input :country
+          = v.inputs :sector, :site
           = link_to 'add a site', new_site_path if can? :create, Site
         .span-12.last
           = v.inputs :pc_id, :stage, :cos_date

@@ -84,6 +84,14 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   @include rotate;
 }
 
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
 .clearfloat {
   clear: both;
 }
@@ -141,6 +149,19 @@ h1 > span, h2 > span, h3 > span, h4 > span {
     clear: left;
     &:first-of-type {
       border: none;
+    }
+  }
+  &.longform {
+    & > p {
+      border: none;
+    }
+    ul {
+      list-style-type: disc;
+      margin-left: 3em !important;
+      li {
+        border: none;
+        margin: 0 !important;
+      }
     }
   }
   ul {
@@ -238,7 +259,7 @@ html {
         font-size: $header_font_size;
       }
       #photobar {
-        //background-color: black;
+        background-color: black;
         img {
           padding: 0;
           margin: 0;
