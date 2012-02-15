@@ -11,6 +11,7 @@ class Ability
     can :read, [ Page, CaseStudy, Photo, Document, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
     can :index, [ User, Volunteer ]
     can :create, Feedback
+    can :download, Document
     
     if user.role? :admin
       can :manage, :all
