@@ -27,21 +27,27 @@
       .span-12
         .box
           %h1 Featured Users
-          %ul
+          %ul.feed
             = render @users
       .span-12.last
         .box
-          %h1 Twitter
-          = render 'shared/twitter'
+          %h1 Top Tags
+          = cloud_of_tags Photo
+          = cloud_of_tags Document
+          = cloud_of_tags Page
+          = cloud_of_tags CaseStudy
+          = cloud_of_tags User
+          = cloud_of_tags Blog
     .span-12.last
-      .box
-        %h1 Top Tags
-        = cloud_of_tags Photo
-        = cloud_of_tags Document
-        = cloud_of_tags Page
-        = cloud_of_tags CaseStudy
-        = cloud_of_tags User
-        = cloud_of_tags Blog
+      .span-12
+        .box
+          = image_tag 'twitter_newbird_blue.png', :class => 'twitter_bird'
+          = render 'shared/twitter', :twitter_user => 'pc_senegal'
+      .span-12.last
+        .box
+          = image_tag 'twitter_newbird_blue.png', :class => 'twitter_bird'
+          = render 'shared/twitter', :twitter_user => 'stompoutmalaria'
+      .clearfloat
       .box
         %h1 Case Studies
         %ul.feed

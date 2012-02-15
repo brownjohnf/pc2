@@ -24,9 +24,7 @@ $(function(){
    toggleArrows	: true,
    autoPlay	: true,
    theme          : 'minimalist-round',
-   navigationFormatter : function(i, panel){ // add thumbnails as navigation links
-    return '<img src="demos/images/th-slide-' + ['civil-1', 'env-1', 'civil-2', 'env-2'][i - 1] + '.jpg">';
-   }
+   delay : 5000
   })
   // target all images inside the current slider
   // replace with 'img.someclass' to target specific images
