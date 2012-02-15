@@ -13,7 +13,11 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :documents
+  resources :documents do
+    member do
+      get :download
+    end
+  end
 
   resources :settings
 
