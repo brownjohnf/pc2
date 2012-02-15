@@ -84,4 +84,9 @@ class DocumentsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def download
+    @document = Document.find(params[:id])
+    send_file @document.file.path, :type => @document.file_content_type 
+  end
 end
