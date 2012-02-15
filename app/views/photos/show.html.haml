@@ -46,7 +46,7 @@
       .span-4
         %p
           Credit:
-          = (@photo.attribution) ? link_to(@photo.user.name, @photo.user) : @photo.attribution
+          = (@photo.attribution) ? @photo.attribution : link_to(@photo.user.name, @photo.user)
       .span-4
         %p
           Uploaded by

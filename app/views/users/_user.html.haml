@@ -1,5 +1,5 @@
-%li.user
-  = avatar_for_user user
+%li.feed_item
+  = avatar_for_user user, :size => :icon
   %h4= link_to user.name, user
   %p
     = user.country

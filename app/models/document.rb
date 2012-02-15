@@ -7,7 +7,11 @@ class Document < ActiveRecord::Base
   belongs_to :user
   belongs_to :language
   belongs_to :attachable, :polymorphic => true
+  
+  has_many :stacks, :as => :stackable, :dependent => :destroy
 
+  accepts_nested_attributes_for :stacks
+  
   validates :name, :presence => true
 
   before_validation :clear_empty_attrs

@@ -17,8 +17,8 @@
         <% @stacks.each do |stack| %>
           <tr>
             <td><%= link_to stack.user.name, stack.user %></td>
-            <td><% stack.stackable_id %></td>
-            <td><% stack.stackable_type %></td>
+            <td><%= stack.stackable_id %></td>
+            <td><%= stack.stackable_type %></td>
             <td><%= stack.comment %></td>
             <td><%= link_to stack.library.name, stack.library %></td>
             <td><%= link_to 'Destroy', stack, confirm: 'Are you sure?', method: :delete %></td>

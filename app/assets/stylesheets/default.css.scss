@@ -296,6 +296,9 @@ html {
         @include shadow(1px, 0, -1px);
         position: relative;
         z-index: 15;
+        .twitter_bird {
+          height: 2em;
+        }
         p {
           margin: 5px;
           line-height: 1.5em;

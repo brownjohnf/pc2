@@ -24,7 +24,7 @@
       .box
         %h4= Carmen.country_name(@page.country)
     .span-4.last
-      = avatar_for @page, :size => :small
+      = avatar_for @page, :size => :medium
       = button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page
       .box
         %h2 Case Studies

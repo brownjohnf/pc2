@@ -15,7 +15,7 @@ new TWTR.Widget({
     tweets: {
       background: '#eeeeee',
       color: '#000000',
-      links: '#c90808'
+      links: '#8b0000'
     }
   },
   features: {
@@ -24,5 +24,5 @@ new TWTR.Widget({
     live: true,
     behavior: 'all'
   }
-}).render().setUser('pc_senegal').start();
+}).render().setUser('<%= twitter_user %>').start();
 </script>
