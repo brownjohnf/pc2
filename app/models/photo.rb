@@ -1,9 +1,8 @@
 class Photo < ActiveRecord::Base
 
-  #
   # small is for span-4
   # medium is for span-8
-  has_attached_file :photo, :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140' }
+  has_attached_file :photo, :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140>' }
   validates_attachment_presence :photo
 
   acts_as_taggable_on :tags
