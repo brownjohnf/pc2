@@ -8,8 +8,10 @@
       - user.volunteers.each do |v|
         - if can? :read, v
           = flag_icon(v.country) if v.country
-          PCV,
-          = link_to v.sector.name, v.sector if v.sector
+          PCV
+          - if v.sector
+            ,
+            = link_to v.sector.name, v.sector
           %br
     - if user.staff.any?
       - user.staff.each do |s|

@@ -1,7 +1,7 @@
 .left_menu
   = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
   = render 'menu' rescue nil
-  #left_context
+  .left_context
     - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
       %h3= @page.title.upcase
       %ul
@@ -14,7 +14,6 @@
       %ul
         - if @page.parent && can?(:read, @page.parent)
           %li
-            
             = link_to @page.parent do
               = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
               go up

@@ -18,6 +18,14 @@ span.admin, span.moderator {
           background-color: $light_gray;
         }
       }
+      .box {
+        &.moments {
+          .avatar {
+            float: left;
+            margin: auto 1em 1em auto;
+          }
+        }
+      }
     }
   }
 }
