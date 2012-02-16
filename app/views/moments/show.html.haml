@@ -5,28 +5,29 @@
     .span-18.last
       = link_to "back to #{@moment.datapoint.strftime('%Y')}", year_moment_path(@moment.datapoint.year)
   .row.moment
-    .span-6
-      %h4= @moment.datapoint.strftime('%B %Y')
-      - if @moment.photo
-        = link_to image_tag(@moment.photo.photo.url(:small)), @moment.user, :class => 'avatar'
-      - else
-        = avatar_for_user(@moment.user, :size => :small)
-      %p
-        = link_to @moment.user.name, @moment.user
-        %br
-        = Carmen.country_name(@moment.user.country)
-        %br
-        = link_to @moment.user.volunteers.first.sector.name, @moment.user.volunteers.first.sector if @moment.user.volunteers.any? && @moment.user.volunteers.first.sector
-        %br
-        = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
-        \-
-        = link_to @moment.datapoint.year, year_moment_path(@moment.datapoint.year)
-        = button_to 'Edit', edit_moment_path(@moment), :method => :get if can? :update, @moment
-    .span-12
-      %h1= @moment.title
-      = markdown(@moment.content)
+    .span-18
+      .box
+        .span-8
+          %h1= @moment.datapoint.strftime('%B %Y')
+          - if @moment.photo
+            = link_to image_tag(@moment.photo.photo.url(:medium)), @moment.user, :class => 'avatar'
+          - else
+            = avatar_for_user(@moment.user, :size => :small)
+          %ul.feed
+            = render @moment.user
+          %p
+            = link_to @moment.user.volunteers.first.stage.swear_in.year, year_moment_path(@moment.user.volunteers.first.stage.swear_in.year) if @moment.user.volunteers.first.stage.swear_in
+            \-
+            = link_to @moment.user.volunteers.first.stage.cos.year, year_moment_path(@moment.user.volunteers.first.stage.cos.year) if @moment.user.volunteers.first.stage.cos
+            = button_to 'Edit', edit_moment_path(@moment), :method => :get if can? :update, @moment
+        .span-16.last
+          %h1= @moment.title
+          = markdown(@moment.content)
+        .clearfloat
     .span-6.last
-      %p= @moment.summary
+      .box
+        %p= @moment.summary
       - if @moment.photos.any?
-        %h4 Photos
-        = render @moment.photos
+        .box
+          %h4 Photos
+          = render @moment.photos

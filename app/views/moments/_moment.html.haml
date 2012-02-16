@@ -1,6 +1,6 @@
 .row.moment
   .box
-    .span-4
+    .span-2
       %h4= moment.datapoint.strftime('%B')
       %h4= moment.datapoint.strftime('%Y')
     .span-4
@@ -15,8 +15,8 @@
         = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
         \-
         = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
-      = button_to 'Edit', edit_moment_path(moment), :method => :get if signed_in? && (current_user.admin? || current_user.moderator? || current_user?(moment.user))
-    .span-12
+      = button_to 'Edit', edit_moment_path(moment), :method => :get if can? :update, moment
+    .span-14
       %h1= moment.title
       %p
         = image_tag(moment.user.photos.first.photo.url(:small)) unless moment.user.photos.empty?

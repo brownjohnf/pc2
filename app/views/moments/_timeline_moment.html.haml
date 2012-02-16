@@ -9,6 +9,8 @@
         = link_to 'View Event', moment
       .info
         %h2= moment.title
-        %p= moment.summary
-        %ul
-          = render moment.user
+        %p
+          = moment.summary
+          %br
+          = moment.user.name
+          = flag_icon(moment.country)

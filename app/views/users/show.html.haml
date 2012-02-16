@@ -104,11 +104,15 @@
               - @user.contributions.each do |c|
                 = render c.contributable
         - if @user.moments.any?
-          .box
+          .box.moments
             %h3 Timeline Events
             %ul
               - @user.moments.each do |moment|
-                %li= link_to moment.title, moment
+                %li
+                  = avatar_for moment
+                  %h4= link_to moment.title, moment
+                  %p= truncate(moment.summary, :length => 100, :separator => ' ')
+                  .clearfloat
     .span-4.last
       = avatar_for_user @user, :size => :small
       = button_to 'Edit profile', edit_user_path, :method => :get if can? :update, @user
