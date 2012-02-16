@@ -43,7 +43,7 @@
       .box
         %h3 Staff Data
         .span-12
-          = v.inputs :site, :building, :office, :floor
+          = v.inputs :country, :site, :building, :office, :floor
           = link_to 'add a site', new_site_path if can? :create, Site
         .span-12.last
           = v.inputs :morning_open, :morning_close, :afternoon_open, :afternoon_close

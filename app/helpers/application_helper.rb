@@ -110,4 +110,16 @@ module ApplicationHelper
     }
     image_tag("icons/#{icons[icon]}", :class => 'icon')
   end
+  
+  def mime_icon(mime)
+    icons = {
+      'application/pdf' => 'pdf.png',
+      'audio/mp3' => 'mp3.png'
+    }
+    image_tag("icons/#{icons[mime]}", :class => 'icon')
+  end
+  
+  def flag_icon(country_code)
+    image_tag "icons/flags/64/#{country_code.downcase}.png", :style => 'height:1em;'
+  end
 end

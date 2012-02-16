@@ -10,8 +10,8 @@
         %p= @document.description
         %p= @document.language.name if @document.language
         %p
-          = icon(:document_download)
           = link_to 'download', download_document_path(@document) if can? :read, @document
+          = mime_icon(@document.file_content_type)
           = @document.file_content_type
       .box
         .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}

@@ -9,7 +9,7 @@
   %p= document.language.name if document.language
   %p
     = link_to 'view details', document
-    = icon(:document_download)
+    |
     = link_to 'download', download_document_path(document) if can? :read, document
-    = document.file_content_type
+    = mime_icon(document.file_content_type)
   .tags.right= render 'shared/tags', :tags => document.tag_list

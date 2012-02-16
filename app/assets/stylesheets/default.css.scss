@@ -155,11 +155,18 @@ h1 > span, h2 > span, h3 > span, h4 > span {
     & > p {
       border: none;
     }
+    h1, h2, h3, h4 {
+      border-bottom: 1px solid $light_gray !important;
+    }
+    h2, h3, h4 {
+      margin-top: 2em;
+    }
     ul {
       list-style-type: disc;
       margin-left: 3em !important;
       li {
         border: none;
+        padding: 0 !important;
         margin: 0 !important;
       }
     }
@@ -305,7 +312,7 @@ html {
           text-align: justify;
         }
         ul {
-          margin: 1em 0 1em 2em;
+          //margin: 1em 0 1em 2em;
         }
         .row {
           margin-bottom: 2em;

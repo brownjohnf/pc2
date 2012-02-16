@@ -16,7 +16,7 @@
       padding: .5em 1em !important;
       margin: .5em 2px 2px 2px !important;
       @include shadow(1px, 0, 0, $black, 1px);
-      background: gray;
+      background-image: url("header-bg.png");
       color: white !important;
     }
   }
