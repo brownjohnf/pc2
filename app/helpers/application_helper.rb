@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def avatar_for(object, options = { :size => :icon, :photo => 'blank.png' })
-    sizes = { :icon => '80', :thumb => 100, :small => '200', :medium => '380', :large => '980', :full => '1140' }
+    sizes = { :icon => '80', :thumb => '100', :small => '200', :medium => '380', :large => '980', :full => '1140' }
     if object.photo.nil?
       options[:photo] ||= 'blank.png'
       link_to image_tag(options[:photo], :width => sizes[options[:size]]), object, :class => 'avatar'

@@ -17,11 +17,12 @@ class StagesController < ApplicationController
   # GET /stages/1.json
   def show
     @stage = Stage.find(params[:id])
+    @title = @stage.name
+    
+    @users = @stage.users.paginate(:page => params[:page], :per_page => 20)
+    @recent = @stage.users.unscoped.order('updated_at DESC').limit(20)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @stage }
-    end
+    render 'users/index'
   end
 
   # GET /stages/new
