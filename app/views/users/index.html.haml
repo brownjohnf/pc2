@@ -7,20 +7,20 @@
       .span-9
         .box
           %h2 Alphabetical
-          %ul
+          %ul.feed
             = render @users
       .span-9
         .box
           %h2 Recently Updated
-          %ul
+          %ul.feed
             = render @recent
       .span-6.last
         .box
           %h3 A bit about us
           %ul
             %li= pluralize(User.all.count, 'total user')
-            %li= pluralize(Volunteer.all.count, 'volunteer')
-            %li= pluralize(Staff.all.count, 'staff member')
+            %li= pluralize(Volunteer.find_by_sql("SELECT DISTINCT user_id FROM volunteers").count, 'volunteer')
+            %li= pluralize(Staff.find_by_sql("SELECT DISTINCT user_id FROM staff").count, 'staff member')
             %li= pluralize(Blog.all.count, 'blog')
         .box
           %h3 Top User Tags

@@ -1,8 +1,24 @@
 %li.feed_item
   = avatar_for_user user, :size => :icon
-  %h4= link_to user.name, user
+  %h4
+    = link_to user.name, user
+    = flag_icon(user.country)
   %p
-    = user.country
-    %br
-    = link_to user.volunteers.first.sector.name, user.volunteers.first.sector if user.volunteers.any? && user.volunteers.first.sector
+    - if user.volunteers.any?
+      - user.volunteers.each do |v|
+        - if can? :read, v
+          = flag_icon(v.country) if v.country
+          PCV,
+          = link_to v.sector.name, v.sector if v.sector
+          %br
+    - if user.staff.any?
+      - user.staff.each do |s|
+        - if can? :read, s
+          = flag_icon(s.country) if s.country
+          Staff
+          - if s.positions.any?
+            - s.positions.each do |p|
+              ,
+              = p.title
+          %br
   .clearfloat

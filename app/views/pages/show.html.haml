@@ -13,6 +13,7 @@
         = @page.title
       .box.longform
         %h1
+          = flag_icon(@page.country.downcase)
           = @page.title
           %span
             last updated
@@ -25,7 +26,7 @@
         %h4= Carmen.country_name(@page.country)
     .span-4.last
       = avatar_for @page, :size => :medium
-      = button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page
+      %p= button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page
       .box
         %h2 Case Studies
         %ul
@@ -47,7 +48,7 @@
             %li= link_to c.user.name, c.user
       = render 'shared/social'
       = render 'shared/right_user_menu'
-      = button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
+      %p= button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
       - if can? :update, @page.permissions
         .box
           - if @page.permissions.any?
