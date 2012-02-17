@@ -14,12 +14,13 @@
           %li= link_to 'Photos', photos_path
           -#%li= link_to 'Videos', ''
           %li= link_to 'Documents', documents_path
+          - if can? :read, User
+            %li= link_to 'Profiles', users_path
           -#%li= link_to 'Blogs', blogs_path
           -#%li= link_to 'Learning', ''
           -#%li= link_to '50th', moments_path
         %ul{:style => "float:right;"}
           - if signed_in?
-            %li= link_to 'Profiles', users_path
             %li#gravatar= avatar_for_user current_user, :size => :icon
             %li= link_to current_user.name, current_user
             %li= link_to 'SSL', 'https://pcsenegal.com'
