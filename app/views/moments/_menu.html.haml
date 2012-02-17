@@ -13,14 +13,14 @@
       .clearfloat
   .span-18.last
     .box#decades
-      %h3 Decades
+      %h3 Decade
       - if decades
         - decades.each do |d|
           = decade_button(d)
       .clearfloat
     - if params[:id] && !years.nil?
       .box#years
-        %h3 Years
+        %h3 Year
         - years.each do |y|
           = year_button((truncate(params[:id], :length => 2).to_i * 10).to_i + y)
         .clearfloat
