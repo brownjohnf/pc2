@@ -20,6 +20,7 @@
             = time_ago_in_words(@page.updated_at)
             ago
         %p= @page.description
+        %h4= @page.created_at.strftime('%d %B %Y')
         .tags.right= render 'shared/tags', :tags => @page.tag_list
         = markdown(@page.content)
       .box

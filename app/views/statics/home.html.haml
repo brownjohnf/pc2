@@ -24,6 +24,9 @@
         %h1 Latest Page Updates
         %ul.feed
           = render @pages, :size => :icon
+      .box
+        %h1 Latest Photos
+        = render @photos
       .span-12
         .box
           %h1 Featured Users
@@ -56,6 +59,3 @@
         %h1 Documents
         %ul.feed
           = render @documents, :size => :icon
-      .box
-        %h1 Latest Photos
-        = render @photos

@@ -2,8 +2,6 @@ class PagesController < ApplicationController
   
   load_and_authorize_resource
 
-  before_filter :check_system, :only => :destroy
-
   # GET /pages
   # GET /pages.json
   def index
@@ -116,11 +114,5 @@ class PagesController < ApplicationController
     list = pages.map {|u| Hash[ value: u.id, label: u.title]}
     render json: list
   end
-
-  private
-
-    def check_system
-      @page = Page.find(params[:id])
-      redirect_to(@page, notice: 'You cannot destroy system pages.') if @page.system?
-    end
+  
 end

@@ -5,7 +5,7 @@ class Volunteer < ActiveRecord::Base
   belongs_to :site
   belongs_to :sector
 
-  validates :user_id, :presence => true
+  validates :user_id, :country, :presence => true
 
   default_scope :order => 'cos_date DESC'
 

@@ -1,24 +1,16 @@
-= form_for(@page) do |f|
-  = render :partial => 'shared/form_error', :locals => { :a => @page } if @page.errors.any?
-  = render 'shared/country_field', :f => f, :object => @page
-  .field
-    = f.label 'Title*'
-    = f.text_field :title
-  .field
-    = f.label 'Description*'
-    = f.text_field :description
-  .field
-    = f.label 'Language*'
-    = f.collection_select(:language_id, Language.all, :id, :name)
-  .field
-    = f.label :parent_id
-    = f.collection_select(:parent_id, Page.unscoped.accessible_by(current_ability, :create).order('title ASC').all, :id, :title, :include_blank => true)
-  .field
-    = f.label 'Page Profile Photo'
-    = f.collection_select(:photo_id, Photo.all, :id, :title, :include_blank => true)
-  .field
-    = f.label 'Content*'
-    = f.text_area :content
-  = render 'shared/tag_field', :f => f
-  .actions
-    = f.submit
+= semantic_form_for(@page) do |f|
+  = f.semantic_errors
+  .box
+    = f.inputs :title, :description
+    - if can? :manage, Page
+      = f.input :country
+    - else
+      = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+    = f.inputs :parent
+    = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
+    = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
+    = f.inputs :language, :photo, :created_at
+  = f.input :content, :as => :ckeditor, :label => 'Content (the editor can only be used for text markup at this point. No linking/photos/videos supported.)'
+  .box
+    = f.input :tag_list
+    = f.buttons

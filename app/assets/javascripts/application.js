@@ -20,4 +20,5 @@
 //= require jquery.formalize.min
 //= require anything_slider/jquery.anythingslider.min.js
 //= require anything_slider/jquery.anythingslider.fx.js
+//= require ckeditor/ckeditor
 //= require_tree .

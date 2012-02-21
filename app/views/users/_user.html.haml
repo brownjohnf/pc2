@@ -3,6 +3,7 @@
   %h4
     = link_to user.name, user
     = flag_icon(user.country) if user.country
+    = link_to 'edit', edit_user_path(user) if can? :update, user
   %p
     - if user.volunteers.any?
       - user.volunteers.each do |v|
@@ -10,7 +11,7 @@
           = flag_icon(v.country) if v.country
           PCV
           - if v.sector
-            ,
+            |
             = link_to v.sector.name, v.sector
           %br
     - if user.staff.any?
@@ -20,7 +21,7 @@
           Staff
           - if s.positions.any?
             - s.positions.each do |p|
-              ,
+              |
               = p.title
           %br
   .clearfloat

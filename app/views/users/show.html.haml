@@ -43,6 +43,7 @@
             %h1
               = v.local_name
               = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
+              = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
             %div
               %p
                 = "#{v.sector.name} Volunteer" if v.sector
@@ -64,6 +65,7 @@
             %h3
               Staff Member
               = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
+              = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
             %h4= s.site.name if s.site
             %p= Carmen.country_name(s.country) if s.country
             %p
@@ -101,7 +103,7 @@
           .box
             %h3 Contributions
             %ul.feed
-              - @user.contributions.each do |c|
+              - @user.contributions.limit(10).each do |c|
                 = render c.contributable
         - if @user.moments.any?
           .box.moments
@@ -115,7 +117,9 @@
                   .clearfloat
     .span-4.last
       = avatar_for_user @user, :size => :small
-      = button_to 'Edit profile', edit_user_path, :method => :get if can? :update, @user
+      - if can? :update, @user
+        %p= button_to 'Edit profile', edit_user_path, :method => :get
+        %p= button_to 'Change password', edit_user_registration_path, :method => :get
       - if @user.avatar? && can?(:update, @user)
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?

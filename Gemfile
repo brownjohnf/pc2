@@ -24,6 +24,7 @@ gem 'will_paginate', '3.0.3'
 gem 'acts-as-taggable-on', '2.2.2'
 gem 'formtastic', '2.0.2'
 gem 'cancan', '1.6.7'
+gem "ckeditor", "3.7.0.rc2"
 
 # Gems used only for assets and not required
 # in production environments by default.

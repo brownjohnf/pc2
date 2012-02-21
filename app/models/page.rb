@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list, :country
+  attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list, :country, :sort_by, :sort_order, :created_at
 
   acts_as_nested_set
 
@@ -28,8 +28,8 @@ class Page < ActiveRecord::Base
 
   after_save :set_parent
   before_destroy :reset_children
-
-  #default_scope :order => 'pages.title ASC'
+  
+  #default_scope :order => 'title ASC'
 
   def to_param
     "#{id}-#{title.parameterize}"
@@ -38,7 +38,7 @@ class Page < ActiveRecord::Base
   private
 
     def set_parent
-      if !parent_id.nil?
+      unless parent_id.nil?
         if self.country == self.parent.country
           move_to_child_of(parent_id)
         else

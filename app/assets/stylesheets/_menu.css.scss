@@ -41,11 +41,23 @@
       border: none;
     }
     a {
+      @include clip-corners(5px);
       display: block;
       padding: .5em;
       &:hover {
         text-decoration: none !important;
-        background-color: $very_light_gray;
+        background-color: #eee;
+      }
+    }
+  }
+  #quicklinks {
+    ul {
+      li {
+        a {
+          &:hover {
+            background-color: #e8e8e8;
+          }
+        }
       }
     }
   }
