@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         @current_ability = nil
         @current_user = nil
-        format.html { redirect_to action: 'index', notice: 'User was successfully updated.' }
+        format.html { redirect_to action: 'show', notice: 'User was successfully updated.' }
       else
         format.html { render action: "edit" }
       end

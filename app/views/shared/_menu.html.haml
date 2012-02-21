@@ -6,11 +6,14 @@
       %h3= @page.title.upcase
       %ul
         - if @page.parent && can?(:read, @page.parent)
-          %li= link_to 'Up', @page.parent
-        - @page.children.accessible_by(current_ability).order('title ASC').each do |item|
           %li
+            = link_to @page.parent do
+              = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
+              go up
+        - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
+          %li
+            = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
             = link_to item.title, item
-            = link_to 'edit', edit_page_path(item) if can? :update, item
     -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
       %h3= @page.parent.title.upcase
       %ul
@@ -19,10 +22,10 @@
             = link_to @page.parent do
               = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
               go up
-        - @page.siblings.accessible_by(current_ability).each do |item|
+        - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
           %li
+            = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
             = link_to item.title, item
-            = link_to 'edit', edit_page_path(item) if can? :update, item
   .accordion
     - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
       %h3{:id => country.country}
@@ -32,16 +35,16 @@
         %ul
           - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", country.country).each do |item|
             %li
+              = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
               = link_to item.title, item
-              = link_to 'edit', edit_page_path(item) if can? :update, item
   - if Page.unscoped.tagged_with('quicklink').order('title').any?
-    .box
+    .box#quicklinks
       %h2 Quick Links
       %ul
         - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
           %li
+            = link_to 'edit', edit_page_path(link), :class => 'floatright' if can? :update, link
             = link_to link.title, link
-            = link_to 'edit', edit_page_path(link) if can? :update, link
   .box.search
     %h1 Google Search
     :erb

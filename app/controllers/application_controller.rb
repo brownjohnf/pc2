@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   include Carmen
+
+  protected
+
+    def ckeditor_filebrowser_scope(options = {})
+      Photo.all
+    end
 end

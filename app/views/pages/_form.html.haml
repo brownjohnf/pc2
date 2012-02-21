@@ -1,4 +1,16 @@
 = semantic_form_for(@page) do |f|
   = f.semantic_errors
-  = f.inputs :country, :title, :sort_by, :sort_order, :description, :language, :parent, :photo, :content
-  = f.buttons
+  .box
+    = f.inputs :title, :description
+    - if can? :manage, Page
+      = f.input :country
+    - else
+      = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+    = f.inputs :parent
+    = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
+    = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
+    = f.inputs :language, :photo, :created_at
+  = f.input :content, :as => :ckeditor, :label => 'Content (the editor can only be used for text markup at this point. No linking/photos/videos supported.)'
+  .box
+    = f.input :tag_list
+    = f.buttons

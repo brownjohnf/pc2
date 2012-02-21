@@ -11,7 +11,7 @@
           = flag_icon(v.country) if v.country
           PCV
           - if v.sector
-            ,
+            |
             = link_to v.sector.name, v.sector
           %br
     - if user.staff.any?
@@ -21,7 +21,7 @@
           Staff
           - if s.positions.any?
             - s.positions.each do |p|
-              ,
+              |
               = p.title
           %br
   .clearfloat

@@ -77,12 +77,12 @@ class User < ActiveRecord::Base
   end
   
   def countries
-    countries = []
+    countries = Hash.new
     volunteers.each do |v|
-      countries << v.country
+      countries[Carmen.country_name(v.country)] = v.country
     end
     staff.each do |s|
-      countries << s.country
+      countries[Carmen.country_name(s.country)] = s.country
     end
     countries
   end
