@@ -28,12 +28,6 @@ class PagesController < ApplicationController
     @pages = @page.find_related_tags
     @case_studies = CaseStudy.tagged_with(@page.tag_list, :any => true)
 
-    #@page.ancestors.each do |a|
-    #  @context_menu { a.title => a }#
-    #end
-
-    @context_menu = {'back' => pages_path, 'new' => new_page_path, 'edit' => edit_page_path}
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @page }
