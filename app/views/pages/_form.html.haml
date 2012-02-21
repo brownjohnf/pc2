@@ -1,24 +1,4 @@
-= form_for(@page) do |f|
-  = render :partial => 'shared/form_error', :locals => { :a => @page } if @page.errors.any?
-  = render 'shared/country_field', :f => f, :object => @page
-  .field
-    = f.label 'Title*'
-    = f.text_field :title
-  .field
-    = f.label 'Description*'
-    = f.text_field :description
-  .field
-    = f.label 'Language*'
-    = f.collection_select(:language_id, Language.all, :id, :name)
-  .field
-    = f.label :parent_id
-    = f.collection_select(:parent_id, Page.unscoped.accessible_by(current_ability, :create).order('title ASC').all, :id, :title, :include_blank => true)
-  .field
-    = f.label 'Page Profile Photo'
-    = f.collection_select(:photo_id, Photo.all, :id, :title, :include_blank => true)
-  .field
-    = f.label 'Content*'
-    = f.text_area :content
-  = render 'shared/tag_field', :f => f
-  .actions
-    = f.submit
+= semantic_form_for(@page) do |f|
+  = f.semantic_errors
+  = f.inputs :country, :title, :sort_by, :sort_order, :description, :language, :parent, :photo, :content
+  = f.buttons

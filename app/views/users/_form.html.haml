@@ -1,4 +1,5 @@
 = semantic_form_for(@user, :html => { :multipart => true } ) do |f|
+  = f.semantic_errors
   .span-12
     = f.inputs do
       .box
@@ -25,10 +26,11 @@
   .span-24.last
     = f.semantic_fields_for :volunteers do |v|
       .box
-        %h3 Volunteer Data
+        %h3
+          Volunteer Data
+          = link_to 'manage', edit_volunteer_path(v) if can? :manage, Volunteer
         .span-12
           = v.input :local_name
-          = v.input :country
           = v.inputs :sector, :site
           = link_to 'add a site', new_site_path if can? :create, Site
         .span-12.last
@@ -41,9 +43,11 @@
         .clearfloat
     = f.semantic_fields_for :staff do |v|
       .box
-        %h3 Staff Data
+        %h3
+          Staff Data
+          = link_to 'manage', edit_staff_path(v) if can? :manage, Staff
         .span-12
-          = v.inputs :country, :site, :building, :office, :floor
+          = v.inputs :site, :building, :office, :floor
           = link_to 'add a site', new_site_path if can? :create, Site
         .span-12.last
           = v.inputs :morning_open, :morning_close, :afternoon_open, :afternoon_close

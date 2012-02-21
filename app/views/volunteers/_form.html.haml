@@ -1,8 +1,4 @@
-= form_for(@volunteer) do |f|
-  = render 'form_error' if @volunteer.errors.any?
-  .field
-    = f.label :user_id, 'User*'
-    = f.collection_select(:user_id, User.all, :id, :name)
-  = render :partial => 'fields', :locals => { :f => f }
-  .actions
-    = f.submit 'Create a Volunteer'
+= semantic_form_for(@volunteer) do |f|
+  = f.semantic_errors :state
+  = f.inputs :user, :country, :local_name, :sector, :site, :pc_id, :stage, :cos_date, :emphasis, :projects
+  = f.buttons

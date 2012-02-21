@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   default_scope :order => 'users.name ASC'
 
   def to_param
-    "#{id}-#{name.parameterize}"
+    name ? "#{id}-#{name.parameterize}" : id
   end
 
   def destroy_avatar
@@ -74,6 +74,17 @@ class User < ActiveRecord::Base
   
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
+  end
+  
+  def countries
+    countries = []
+    volunteers.each do |v|
+      countries << v.country
+    end
+    staff.each do |s|
+      countries << s.country
+    end
+    countries
   end
 
   private

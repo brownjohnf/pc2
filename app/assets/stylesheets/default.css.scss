@@ -162,8 +162,9 @@ h1 > span, h2 > span, h3 > span, h4 > span {
       margin-top: 2em;
     }
     ul {
-      list-style-type: disc;
+      list-style: disc !important;
       margin-left: 3em !important;
+      line-height: 1.5em;
       li {
         border: none;
         padding: 0 !important;
@@ -187,6 +188,7 @@ h1 > span, h2 > span, h3 > span, h4 > span {
         border: none !important;
         margin: 0 !important;
         padding: 0 !important;
+        text-align: left !important;
         clear: none;
       }
     }
@@ -311,8 +313,10 @@ html {
           line-height: 1.5em;
           text-align: justify;
         }
-        ul {
-          //margin: 1em 0 1em 2em;
+        ul, ol {
+          li {
+            display: list-item;
+          }
         }
         .row {
           margin-bottom: 2em;
@@ -366,6 +370,17 @@ html {
           }
         }
         form {
+          .inline-errors {
+            padding: .5em;
+            border: 1px solid red;
+            background-color: $pink;
+          }
+          ol.fragments-group {
+            li.fragment {
+              display: inline-block;
+              margin-right: .5em;
+            }
+          }
           h1, h2, h3, h4 {
             margin-bottom: 1em;
           }
