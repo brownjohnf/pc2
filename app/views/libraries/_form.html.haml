@@ -10,9 +10,12 @@
   .field
     = f.label :country_id, 'Country*'
     = f.country_select(:country, 'SN')
-  .field
-    = f.label :user_id, 'User*'
-    = f.collection_select(:user_id, User.all, :id, :name)
+  - if can? :manage, Library
+    .field
+      = f.label :user_id, 'User*'
+      = f.collection_select(:user_id, User.all, :id, :name)
+  - else
+    = f.hidden_field(:user_id, :value => current_user.id)
   = render 'shared/tag_field', :f => f
   .actions
     = f.submit

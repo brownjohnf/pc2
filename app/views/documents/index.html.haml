@@ -3,12 +3,11 @@
     .span-5
       = render 'shared/menu'
     .span-15
-      = will_paginate
       .box
         %h1 Documents
         %ul.feed
           = render @documents
-      = will_paginate
+      .center= will_paginate
     .span-4.last
       .box
         %h3 Top Document Tags

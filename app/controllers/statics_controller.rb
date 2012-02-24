@@ -8,7 +8,7 @@ class StaticsController < ApplicationController
     @pages = Page.order('pages.updated_at DESC').limit(10)
     @case_studies = CaseStudy.order('updated_at DESC').limit(10)
     @photos = Photo.unscoped.order('updated_at DESC').limit(20).all
-    @documents = Document.unscoped.order('updated_at DESC').limit(20).all
+    @documents = Document.unscoped.order('updated_at DESC').limit(10).all
   end
 
   def splash
@@ -29,7 +29,7 @@ class StaticsController < ApplicationController
       @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.url(:medium), :path => p}
     end
     Page.order('updated_at DESC').tagged_with('spotlight').each do |p|
-      @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:medium), :path => p}
+      @spotlights << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:medium), :path => p}
     end
     CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight').each do |cs|
       @spotlights << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:medium), :path => cs}
