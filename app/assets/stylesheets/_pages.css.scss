@@ -16,6 +16,11 @@ body.pages {
       margin-bottom: 0 !important;
     }
   }
+  &#edit {
+    textarea {
+      height: 400px !important;
+    }
+  }
   .left_context {
     ul, ol {
       margin: 0 !important;

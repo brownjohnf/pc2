@@ -21,4 +21,5 @@
 //= require anything_slider/jquery.anythingslider.min.js
 //= require anything_slider/jquery.anythingslider.fx.js
 //= require ckeditor/ckeditor
+//= require jHtmlArea-0.7.0.min.js
 //= require_tree .
