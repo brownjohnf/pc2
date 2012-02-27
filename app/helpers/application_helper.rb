@@ -116,7 +116,7 @@ module ApplicationHelper
       'application/pdf' => 'pdf.png',
       'audio/mp3' => 'mp3.png'
     }
-    image_tag("icons/#{icons[mime]}", :class => 'icon')
+    image_tag("icons/#{icons[mime] ? icons[mime] : 'file_down.png'}", :class => 'icon')
   end
   
   def flag_icon(country_code)
