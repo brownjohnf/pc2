@@ -5,12 +5,15 @@
     .span-13
       .box
         %h1= @library.name
+        %h4= @library.description
         %ul.feed
           - @library.stacks.each do |s|
             = render s.stackable
     .span-6.last
-      %h4= @library.description
-      %p= @library.country
-      %p This library is managed by
-      = render @library.user
+      .box
+        %h3
+          = flag_icon(@library.country.downcase)
+          This library is managed by
+        %ul.feed
+          = render @library.user
       = render 'shared/right_user_menu'

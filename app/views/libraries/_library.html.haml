@@ -1,1 +1,6 @@
-%li= link_to library.name, library
+%li
+  %h4
+    = flag_icon(library.country.downcase)
+    = link_to library.name, library
+    .tags.right.inline= render 'shared/tags', :tags => library.tag_list
+  .clearfloat

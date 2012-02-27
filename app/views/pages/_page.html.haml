@@ -1,11 +1,9 @@
 %li.feed_item
   = avatar_for page, :size => size ||= :icon
   %h4
-    = page.title
+    = link_to page.title, page
     %span #{time_ago_in_words(page.updated_at)} ago
   %p= truncate(page.description, :length => 100, :separator => ' ')
   %p
     = link_to 'edit', edit_page_path(page) if can? :update, page
-    = link_to 'read more', page
-    &rang;
   .tags.right= render 'shared/tags', :tags => page.tag_list
