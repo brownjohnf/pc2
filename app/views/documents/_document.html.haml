@@ -1,15 +1,14 @@
 %li.feed_item
   = document_icon_for document, :size => size ||= :thumb
   %h4
-    = document.name
+    = link_to document.name, document
     %span
       = time_ago_in_words(document.updated_at)
       ago
   %p= document.description if document.description
   %p= document.language.name if document.language
   %p
-    = link_to 'view details', document
-    |
+    = link_to 'edit', edit_document_path(document) if can? :upadet, document
     = link_to 'download', download_document_path(document) if can? :read, document
     = mime_icon(document.file_content_type)
   .tags.right= render 'shared/tags', :tags => document.tag_list

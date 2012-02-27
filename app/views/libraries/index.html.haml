@@ -2,30 +2,15 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-15
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Country</th>
-            <th>User</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @libraries.each do |library| %>
-          <tr>
-            <td><%= library.name %></td>
-            <td><%= library.description %></td>
-            <td><%= library.country %></td>
-            <td><%= library.user.name %></td>
-            <td><%= link_to 'Show', library %></td>
-            <td><%= link_to 'Edit', edit_library_path(library) %></td>
-            <td><%= link_to 'Destroy', library, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+    .span-5
+      .box
+        %ul.feed
+          = render @libraries
+    .span-5
+      .box
+        %ul.feed
+          = render @libraries2 if @libraries2
+    .span-5
+      .box
+        %ul.feed
+          = render @libraries3 if @libraries3

@@ -10,6 +10,7 @@
         %p= @document.description
         %p= @document.language.name if @document.language
         %p
+          = link_to 'edit', edit_document_path(@document) if can? :update, @document
           = link_to 'download', download_document_path(@document) if can? :read, @document
           = mime_icon(@document.file_content_type)
           = @document.file_content_type
