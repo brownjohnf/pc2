@@ -3,6 +3,12 @@
     .span-5
       = render 'shared/menu'
     .span-15
+      = form_tag '/documents/search', :method => :get do
+        = label_tag :q, 'search for'
+        = text_field_tag :q
+        = label_tag :f, 'in'
+        = text_field_tag :f
+        = submit_tag 'search'
       .box
         %h1 Documents
         %ul.feed

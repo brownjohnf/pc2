@@ -4,8 +4,7 @@
       = render 'shared/menu'
     .span-15
       %h1 Photo Gallery
-      = will_paginate
       = render :partial => @photos, :locals => { :size => :icon }
-      = will_paginate
+      .center= will_paginate
     .span-4.last
       = render 'shared/right_user_menu'

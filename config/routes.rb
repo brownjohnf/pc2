@@ -19,6 +19,9 @@ OmniauthDemo::Application.routes.draw do
     member do
       get :download
     end
+    collection do
+      get :search
+    end
   end
 
   resources :settings

@@ -12,6 +12,12 @@ class DocumentsController < ApplicationController
       format.json { render json: @documents }
     end
   end
+  
+  def search
+    @documents = Document.unscoped.where("#{params[:f]} LIKE ?", "%#{params[:q]}%").paginate(:page => params[:page], :per_page => 20)
+    
+    render 'index'
+  end
 
   # GET /documents/1
   # GET /documents/1.json
