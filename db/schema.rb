@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229130624) do
+ActiveRecord::Schema.define(:version => 20120229174749) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -71,13 +71,6 @@ ActiveRecord::Schema.define(:version => 20120229130624) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "groups", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "identities", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -126,13 +119,6 @@ ActiveRecord::Schema.define(:version => 20120229130624) do
     t.string   "country"
   end
 
-  create_table "memberships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "moments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "photo_id"
@@ -169,15 +155,6 @@ ActiveRecord::Schema.define(:version => 20120229130624) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "permissions", :force => true do |t|
-    t.integer  "group_id"
-    t.integer  "privilege_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.integer  "permissable_id"
-    t.string   "permissable_type"
-  end
-
   create_table "photos", :force => true do |t|
     t.string   "title"
     t.string   "description"
@@ -199,13 +176,6 @@ ActiveRecord::Schema.define(:version => 20120229130624) do
     t.text     "qualifications"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-  end
-
-  create_table "privileges", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "regions", :force => true do |t|
