@@ -6,5 +6,7 @@
       %h1 Photo Gallery
       = render :partial => @photos, :locals => { :size => :icon }
       .center= will_paginate
+      .box
+        = render 'shared/search'
     .span-4.last
       = render 'shared/right_user_menu'

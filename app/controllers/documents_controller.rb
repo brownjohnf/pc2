@@ -14,7 +14,8 @@ class DocumentsController < ApplicationController
   end
   
   def search
-    @documents = Document.unscoped.where("#{params[:f]} LIKE ?", "%#{params[:q]}%").paginate(:page => params[:page], :per_page => 20)
+    @documents = Document.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+    @count = @documents.count
     
     render 'index'
   end

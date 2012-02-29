@@ -8,6 +8,13 @@ class PagesController < ApplicationController
     @title = 'Peruse Our Pages'
     @pages = @pages.order('lft ASC', 'title ASC')
   end
+  
+  def search
+    @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)
+    @count = @pages.count
+    
+    render 'feed'
+  end
 
   def added
     @pages = Page.accessible_by(current_ability).unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)

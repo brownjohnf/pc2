@@ -26,10 +26,10 @@
           - if @case_study.next_steps
             %h2 Next Steps
             = markdown @case_study.next_steps
+      .box= render 'shared/search'
     .span-4.last
       = avatar_for @case_study, :size => :small
-      = link_to 'edit', edit_case_study_path(@case_study) if can? :update, @case_study
-      = link_to 'destroy', @case_study, :method => :delete, :confirm => 'you sure?' if can? :destroy, @case_study
+      %p= button_to 'Edit Case Study', edit_case_study_path(@case_study), :method => :get if can? :update, @case_study
       .box
         %h2 Case Studies
         %ul
@@ -48,3 +48,4 @@
         %ul
           = render @case_study.contributors
       = render 'shared/right_user_menu'
+      %p= button_to 'destroy this case study', @case_study, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @case_study

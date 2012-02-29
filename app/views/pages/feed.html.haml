@@ -4,6 +4,8 @@
       = render 'shared/menu'
     .span-15
       .box
+        = render 'shared/search'
+      .box
         %ul.feed
           = render @pages
       .center= will_paginate @pages

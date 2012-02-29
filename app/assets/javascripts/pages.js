@@ -31,7 +31,7 @@ $(function() {
 });
 */
 $(function(){
-	$('textarea').htmlarea();
+	$('textarea.richtext').htmlarea();
 	
 	$('a#insert_photo').click(function(){
 		$('#insert_photo_dialog').dialog( 'open' );
