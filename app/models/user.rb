@@ -25,11 +25,6 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :tags
   acts_as_tagger
 
-  has_many :memberships, :dependent => :destroy
-  has_many :groups, :through => :memberships
-  has_many :permissions, :through => :groups
-  has_many :privileges, :through => :permissions
-
   has_many :volunteers, :dependent => :destroy
   has_many :staff, :dependent => :destroy
   has_many :blogs, :dependent => :destroy
@@ -54,7 +49,7 @@ class User < ActiveRecord::Base
 
   before_validation :clear_empty_attrs
 
-  accepts_nested_attributes_for :memberships, :volunteers, :staff, :allow_destroy => true
+  accepts_nested_attributes_for :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs, :reject_if => lambda { |a| a[:url].blank? } 
   accepts_nested_attributes_for :documents, :photos
 

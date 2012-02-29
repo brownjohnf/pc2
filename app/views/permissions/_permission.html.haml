@@ -1,5 +1,0 @@
-%li
-  = permission.group.name
-  can
-  = permission.privilege.name
-  = link_to 'destroy', permission, confirm: 'Are you sure?', method: :delete, remote: true if current_user.admin?

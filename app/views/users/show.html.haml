@@ -5,6 +5,7 @@
     .span-15
       .box
         %h1
+          = flag_icon(@user.country)
           = @user.name
           .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
         .span-12
@@ -32,6 +33,9 @@
           - if @user.libraries.any?
             %h3 Collections
             %ul= render @user.libraries
+        .span-24.last
+          %h3 Groups
+          %p= render @user.roles
         .clearfloat
       - if @user.bio
         .box
@@ -41,6 +45,7 @@
         - @user.volunteers.each do |v|
           .box
             %h1
+              = flag_icon(v.country)
               = v.local_name
               = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
               = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
@@ -63,6 +68,7 @@
         - @user.staff.each do |s|
           .box
             %h3
+              = flag_icon(s.country)
               Staff Member
               = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
               = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
@@ -91,13 +97,8 @@
         - if @user.documents.any?
           .box
             %h3 Recently Uploaded Docs
-            - @user.documents.limit(5).each do |d|
-              %p.inline.center
-                = icon(:document)
-                %br
-                = link_to d.name, d
-                %br
-                = link_to icon(:document_download), d
+            %ul.feed
+              = render @user.documents.limit(5)
       .span-12.last
         - if @user.contributions.any?
           .box
@@ -124,15 +125,3 @@
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?
       = render 'shared/right_user_menu'
-      .box
-        %h3 Groups
-        - if @user.groups.any?
-          %ul
-            = render @user.groups
-        - else
-          %p Not a member of any groups.
-        - if can? :update, Group
-          %h3 Add to group
-          %ul
-            - @membership = @user.memberships.build
-            = render 'memberships/form'

@@ -15,6 +15,7 @@
         %h1
           = flag_icon(@page.country.downcase)
           = @page.title
+          = link_to 'edit', edit_page_path(@page) if can? :update, @page
           %span
             last updated
             = time_ago_in_words(@page.updated_at)
@@ -27,7 +28,6 @@
         = render 'shared/search'
     .span-4.last
       = avatar_for @page, :size => :medium
-      %p= button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page
       .box
         %h2 Case Studies
         %ul
@@ -44,18 +44,23 @@
       - if @page.contributions.any?
         .box
           %h3 Authors
-          %ul
-          - @page.contributions.each do |c|
-            %li= link_to c.user.name, c.user
+          %ul.feed
+            - @page.contributions.each do |c|
+              %li.feed_item
+                = link_to c.user.name, c.user
+                |
+                = link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, c
       = render 'shared/social'
       = render 'shared/right_user_menu'
       %p= button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
-      - if can? :update, @page.permissions
+      - if can? :manage, Contribution
         .box
-          - if @page.permissions.any?
-            %h3 Current Permissions
-            %ul
-              = render @page.permissions
-          %h3 Add Permission
-          - @permission = @page.permissions.build
-          = render 'permissions/form' 
+          %h3 Add Contributor
+          - @contribution = @page.contributions.build
+          = semantic_form_for @contribution, :remote => true do |f|
+            = f.inputs do
+              = f.input :user
+              = f.input :contributable_type, :as => :hidden
+              = f.input :contributable_id, :as => :hidden
+            = f.buttons do
+              = f.commit_button :input_html => {:disable_with => 'wait'}

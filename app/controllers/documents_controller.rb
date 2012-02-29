@@ -35,6 +35,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new.json
   def new
     @document = Document.new
+    @document.roles << Role.find_by_name('Public')
 
     respond_to do |format|
       format.html # new.html.erb

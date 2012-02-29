@@ -14,7 +14,11 @@ class Document < ActiveRecord::Base
   belongs_to :language
   belongs_to :attachable, :polymorphic => true
   
+  has_many :permissions, :as => :permissable, :dependent => :destroy
+  
   has_many :stacks, :as => :stackable, :dependent => :destroy
+  
+  has_and_belongs_to_many :roles
 
   accepts_nested_attributes_for :stacks
   
