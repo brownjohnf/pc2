@@ -24,7 +24,7 @@
         .tags.right= render 'shared/tags', :tags => @page.tag_list
         = markdown(@page.content)
       .box
-        %h4= Carmen.country_name(@page.country)
+        = render 'shared/search'
     .span-4.last
       = avatar_for @page, :size => :medium
       %p= button_to 'Edit Page', edit_page_path(@page), :method => :get if can? :update, @page

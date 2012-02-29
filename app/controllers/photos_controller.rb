@@ -12,6 +12,13 @@ class PhotosController < ApplicationController
       format.json { render json: @photos }
     end
   end
+  
+  def search
+    @photos = Photo.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+    @count = @photos.count
+    
+    render 'index'
+  end
 
   # GET /photos/1
   # GET /photos/1.json

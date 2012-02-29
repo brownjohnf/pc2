@@ -12,6 +12,13 @@ class CaseStudiesController < ApplicationController
       format.json { render json: @case_studies }
     end
   end
+  
+  def search
+    @case_studies = CaseStudy.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+    @count = @case_studies.count
+    
+    render 'index'
+  end
 
   def added
     @case_studies = CaseStudy.unscoped.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)

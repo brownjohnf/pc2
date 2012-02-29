@@ -8,6 +8,14 @@ class UsersController < ApplicationController
     @users = @users.paginate(:page => params[:page], :per_page => 20)
     @recent = @users.unscoped.order('updated_at DESC').limit(20)
   end
+  
+  def search
+    @users = User.search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+    @recent = @users.unscoped.search(params[:q]).order('updated_at DESC').limit(20)
+    @count = @users.count
+    
+    render 'index'
+  end
 
   def show
     @title = @user.name

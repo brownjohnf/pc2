@@ -1,7 +1,9 @@
 = form_for(@case_study) do |f|
   .box
     = render :partial => 'shared/form_error', :locals => {:a => @case_study} if @case_study.errors.any?
-    %h1 About the case study
+    %h1
+      About the case study
+      = link_to 'cancel', @case_study
     .field
       = f.label :title, 'Title*'
       = f.text_field :title
@@ -15,26 +17,27 @@
     = render 'shared/country_field', :f => f, :object => @case_study
   .box
     %h1 Body of study
-    .field
-      = f.label :summary, 'Summary*'
-      = f.text_area :summary
-    .field
-      = f.label :context
-      = f.text_area :context
-    .field
-      = f.label :approach
-      = f.text_area :approach
-    .field
-      = f.label :results
-      = f.text_area :results
-    .field
-      = f.label :challenges
-      = f.text_area :challenges
-    .field
-      = f.label :lessons_learned
-      = f.text_area :lessons_learned
-    .field
-      = f.label :next_steps
-      = f.text_area :next_steps
+  .field
+    = f.label :summary, 'Summary*'
+    = f.text_area :summary
+  .field
+    = f.label :context
+    = f.text_area :context
+  .field
+    = f.label :approach
+    = f.text_area :approach
+  .field
+    = f.label :results
+    = f.text_area :results
+  .field
+    = f.label :challenges
+    = f.text_area :challenges
+  .field
+    = f.label :lessons_learned
+    = f.text_area :lessons_learned
+  .field
+    = f.label :next_steps
+    = f.text_area :next_steps
+  .box
     .actions
       = f.submit

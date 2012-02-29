@@ -12,6 +12,13 @@ class DocumentsController < ApplicationController
       format.json { render json: @documents }
     end
   end
+  
+  def search
+    @documents = Document.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+    @count = @documents.count
+    
+    render 'index'
+  end
 
   # GET /documents/1
   # GET /documents/1.json

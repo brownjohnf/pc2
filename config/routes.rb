@@ -13,11 +13,17 @@ OmniauthDemo::Application.routes.draw do
     member do
       put :remove_avatar
     end
+    collection do
+      get :search
+    end
   end
 
   resources :documents do
     member do
       get :download
+    end
+    collection do
+      get :search
     end
   end
 
@@ -27,6 +33,7 @@ OmniauthDemo::Application.routes.draw do
     collection do
       get :added
       get :updated
+      get :search
     end
   end
 
@@ -46,7 +53,11 @@ OmniauthDemo::Application.routes.draw do
 
   resources :stacks, :only => [ :index, :new, :create, :destroy ]
 
-  resources :photos
+  resources :photos do
+    collection do
+      get :search
+    end
+  end
 
   resources :moments, :path => 'timeline' do
     member do
@@ -100,6 +111,7 @@ OmniauthDemo::Application.routes.draw do
       get :added
       get :popular
       get :ajax
+      get :search
     end
   end
 

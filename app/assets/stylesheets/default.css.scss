@@ -44,6 +44,7 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin shadow($width: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow, $spread: 0) {
   box-shadow: $hshift $vshift $width $spread $color;
   -moz-box-shadow: $hshift $vshift $width $spread $color;
+  -webkit-box-shadow: $hshift $vshift $width $spread $color;
 }
 @mixin shadow-inset($spread: 5px, $hshift: 0, $vshift: 0, $color: $box_shadow) {
   box-shadow: $hshift $vshift $spread $color inset;
@@ -54,6 +55,7 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 @mixin shadow-bottom {
   box-shadow: 0 0 5px $box_shadow;
   -moz-box-shadow: 0 0 5px $box_shadow;
+  -webkit-box-shadow: 0 0 5px $box_shadow;
 }
 
 @mixin gradient($top: $gradient_top, $bottom: $gradient_bottom) {
@@ -66,6 +68,8 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
 
 @mixin clip-corners($radius: 10px) {
   border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
 }
 
 @mixin fixed_menu {
@@ -130,7 +134,7 @@ h1 > span, h2 > span, h3 > span, h4 > span {
 
 .box {
   @include shadow(1px, 0, 0, gray);
-  border-radius: 1em;
+  @include clip-corners(1em);
   padding: 1em;
   border: 1px solid white;
   background: $box_background;
@@ -243,7 +247,6 @@ html {
     #main {
       @include red-links;
       background-image: image-url('background.png');
-      //@include gradient;
       height: 100%;
       height: auto;
       min-height: 100%;
@@ -422,6 +425,24 @@ html {
         }
       }
     }
+  }
+}
+
+.ui-dialog {
+  background-color: white;
+  border: 2px solid gray;
+  .ui-dialog-titlebar {
+    padding: .5em;
+  }
+  .ui-dialog-content {
+    padding: 1em;
+    label {
+      display: block;
+    }
+  }
+  .ui-dialog-buttonpane {
+    padding: .5em;
+    text-align: right;
   }
 }
 
