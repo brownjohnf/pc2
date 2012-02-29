@@ -5,12 +5,18 @@ class Ability
     alias_action :updated, :added, :download, :search, :to => :read
     # Define abilities for the passed in user here. For example:
     #
-    user ||= User.new # guest user (not logged in)
+    unless user
+      user = User.new # guest user (not logged in)
+      user.roles << Role.find_by_name('Public')
+    end
     
     # all users, even non-logged in ones
-    can :read, [ Page, CaseStudy, Photo, Document, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
+    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
     can :index, [ User, Volunteer ]
     can :create, Feedback
+    can :read, Document do |item|
+      item.roles.where(:id => user.roles).any?
+    end
     
     if user.role? :admin
       can :manage, :all
@@ -20,7 +26,7 @@ class Ability
       if user.volunteers.any? || user.staff.any?
         can :read, [ Volunteer, Staff ]
         can :create, [ Page, CaseStudy, Region, Stage ], :country => user.volunteers.first.country
-        can [ :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
+        can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack
         can :create, Site do |site|
           site.region.country = user.country

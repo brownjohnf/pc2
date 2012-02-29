@@ -8,7 +8,9 @@
           = @document.name
           .tags.right.inline= render 'shared/tags', :tags => @document.tag_list
         %p= @document.description
-        %p= @document.language.name if @document.language
+        %p
+          = @document.language.name if @document.language
+          = render @document.roles
         %p
           = link_to 'edit', edit_document_path(@document) if can? :update, @document
           = link_to 'download', download_document_path(@document) if can? :read, @document
@@ -17,13 +19,15 @@
       .box
         .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
           %h3 Libraries
-          %ul
-          - if @document.stacks.any?
-            - @document.stacks.each do |s|
-              %li
-                = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...' if can? :destroy, s
-                = link_to s.library.name, s.library if s.id
-                .clearfloat
+          %ul.feed
+            - if @document.stacks.any?
+              - @document.stacks.each do |s|
+                %li.feed_item
+                  = link_to s.library.name, s.library if s.id
+                  |
+                  = link_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, s
+                  .clearfloat
+        %br
         - if can? :create, Stack
           %h3 Add to a library
           - if current_user.libraries.any?

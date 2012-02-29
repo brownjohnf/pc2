@@ -378,6 +378,9 @@ html {
             border: 1px solid red;
             background-color: $pink;
           }
+          ol {
+            margin: 0 !important;
+          }
           ol.fragments-group {
             li.fragment {
               display: inline-block;
@@ -443,6 +446,16 @@ html {
   .ui-dialog-buttonpane {
     padding: .5em;
     text-align: right;
+  }
+}
+
+.role {
+  @include clip-corners(.2em);
+  background-color: $steel_blue;
+  color: $white;
+  padding: .2em;
+  &.role_mismatch {
+    background-color: $panic;
   }
 }
 

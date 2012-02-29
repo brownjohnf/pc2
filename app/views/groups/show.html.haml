@@ -1,15 +1,18 @@
 .container
   .row
-    .threecol
+    .span-5
       = render 'shared/menu'
-    .sixcol
-      %h1= pluralize(@group.users.count, @group.name)
-      = will_paginate @users
-      %ul
-        = render @users if @users
-      = will_paginate @users
-    .threecol.last
-      %p= @group.description
-      %h3 Permissions
-      %p The #{@group.name} group can:
-      %ul= render :partial => 'permissions/permission', :collection => @group.permissions
+    .span-15
+      .box
+        %h1= pluralize(@group.users.count, @group.name)
+        %ul.feed
+          = render @users if @users
+        = will_paginate @users
+    .span-4.last
+      .box
+        %h3 About
+        %p= @group.description
+      .box
+        %h3 Permissions
+        %p The #{@group.name} group can:
+        %ul= render :partial => 'permissions/permission', :collection => @group.permissions

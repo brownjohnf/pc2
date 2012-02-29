@@ -32,6 +32,9 @@
           - if @user.libraries.any?
             %h3 Collections
             %ul= render @user.libraries
+        .span-24.last
+          %h3 Groups
+          %p= render @user.roles
         .clearfloat
       - if @user.bio
         .box
@@ -128,7 +131,7 @@
         %h3 Groups
         - if @user.groups.any?
           %ul
-            = render @user.groups
+            -#= render @user.groups
         - else
           %p Not a member of any groups.
         - if can? :update, Group

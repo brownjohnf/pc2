@@ -5,7 +5,9 @@
     .span-15
       .box
         %div
-          %h1= @case_study.title
+          %h1
+            = @case_study.title
+            = link_to 'edit', edit_case_study_path(@case_study) if can? :update, @case_study
           .tags.right= render 'shared/tags', :tags => @case_study.tag_list
           = markdown @case_study.summary
           - if @case_study.context
@@ -29,7 +31,6 @@
       .box= render 'shared/search'
     .span-4.last
       = avatar_for @case_study, :size => :small
-      %p= button_to 'Edit Case Study', edit_case_study_path(@case_study), :method => :get if can? :update, @case_study
       .box
         %h2 Case Studies
         %ul

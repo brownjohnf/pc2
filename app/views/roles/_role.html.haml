@@ -1,0 +1,1 @@
+%span.role{:class => [ role.name.downcase, (current_user.roles.where(:id => role).any? ? nil : 'role_mismatch') ]}= role.name

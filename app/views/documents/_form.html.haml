@@ -1,17 +1,11 @@
-= form_for(@document, :multipart => true) do |f|
-  = render 'shared/form_error', :a => @document if @document.errors.any?
-  .field
-    = f.label :file, 'File to upload*'
-    = f.file_field :file
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :language_id, 'Language'
-    = f.collection_select(:language_id, Language.all, :id, :name, :include_blank => true)
-  .field
-    = f.label :description
-    = f.text_field :description
-  = render 'shared/tag_field', :f => f
-  .actions
-    = f.submit
+= semantic_form_for(@document, :multipart => true) do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :file, :label => 'File to upload'
+    = f.input :name
+    = f.input :language, :include_blank => true
+    = f.input :description
+    = f.input :tag_list
+    = f.input :roles, :as => :check_boxes
+  = f.buttons do
+    = f.commit_button

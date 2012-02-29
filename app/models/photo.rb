@@ -27,6 +27,10 @@ class Photo < ActiveRecord::Base
 
   default_scope :order => 'photos.created_at DESC'
 
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
   private
 
     def reset_pointers

@@ -11,7 +11,8 @@
     #main
       #header_spacer
       = render 'layouts/photobar' if Photo.all.count > 19
-      = render 'shared/notice_bar' if notice
+      = render 'layouts/notice' if notice
+      = render 'layouts/alert' if alert
       #page
         = yield
         - if Rails.env.development?

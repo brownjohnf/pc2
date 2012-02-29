@@ -1,6 +1,5 @@
 class Permission < ActiveRecord::Base
 
-  belongs_to :group
   belongs_to :privilege
   belongs_to :permissable, :polymorphic => true
 
