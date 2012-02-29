@@ -103,8 +103,6 @@ OmniauthDemo::Application.routes.draw do
 
   resources :scopes
 
-  resources :privileges
-
   resources :pages do
     collection do
       get :updated
@@ -114,10 +112,6 @@ OmniauthDemo::Application.routes.draw do
       get :search
     end
   end
-
-  resources :memberships, :only => [ :index, :new, :create, :destroy ]
-
-  resources :groups
 
   resources :regiontypes
 

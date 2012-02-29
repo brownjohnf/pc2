@@ -53,7 +53,7 @@
       = render 'shared/social'
       = render 'shared/right_user_menu'
       %p= button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
-      - if can? :update, @page.permissions
+      - if can? :manage, Contribution
         .box
           %h3 Add Contributor
           - @contribution = @page.contributions.build
