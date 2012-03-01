@@ -92,6 +92,7 @@ class User < ActiveRecord::Base
   
     def add_user_role
       self.roles << Role.find_by_name('User')
+      self.roles << Role.find_by_name('Public')
     end
 
 end

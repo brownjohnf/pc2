@@ -8,7 +8,8 @@ class Staff < ActiveRecord::Base
 
   validates :user_id, :country, :presence => true
 
-  after_create :add_default_permissions
+  after_create :add_to_staff
+  after_destroy :remove_from_staff
 
   def user_name
     user.name
@@ -19,11 +20,13 @@ class Staff < ActiveRecord::Base
   end
 
   private
-
-    def add_default_permissions
-      membership = self.user.memberships.build
-      membership.group_id = 4
-      membership.save
+    
+    def add_to_staff
+      self.user.roles << Role.find_by_name('Staff')
+    end
+    
+    def remove_from_staff
+      self.user.roles.delete(Role.find_by_name('Staff')) unless self.user.staff.any?
     end
 
 end

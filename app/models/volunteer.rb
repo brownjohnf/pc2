@@ -23,7 +23,7 @@ class Volunteer < ActiveRecord::Base
     end
     
     def remove_from_volunteers
-      
+      self.user.roles.delete(Role.find_by_name('Volunteer')) unless self.user.volunteers.any?
     end
 
 end
