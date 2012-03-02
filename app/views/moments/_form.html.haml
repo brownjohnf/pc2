@@ -1,18 +1,18 @@
-= form_for(@moment) do |f|
-  = render :partial => 'shared/form_error', :locals => { :a => @moment } if @moment.errors.any?
-  - if can? :manage, @moment
-    .field
-      = f.label :user_id
-      = f.collection_select(:user_id, User.all, :id, :name)
-    .field
-      = f.label :country
-      = f.country_select(:country, 'SN')
-  - else
-    = f.hidden_field(:user_id, :value => current_user.id)
-    = f.hidden_field(:country, :value => current_user.country)
-  = render :partial => 'fields', :locals => { :f => f }
-  = f.fields_for :photos do |p|
-    = p.hidden_field(:user_id, :value => current_user.id)
-    = render :partial => 'photos/fields', :locals => { :f => p }
+= semantic_form_for(@moment) do |f|
+  = f.semantic_errors
+  = f.inputs do
+    - if can? :manage, @moment
+      = f.input :user
+      = f.input :country
+    - else
+      = f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
+      = f.input :country, :as => :hidden, :input_html => { :value => current_user.country }
+    = f.input :photo
+    = f.input :title
+    = f.input :summary
+    = f.input :content, :input_html => {:class => 'richtext', :value => (@moment.content ? markdown(@moment.content) : nil)}
+  = f.semantic_fields_for :photos do |p|
+    = p.input :user_id, :input_html => { :value => current_user.id }
+    = p.inputs :photo, :title, :description, :attribution, :tag_list
   .actions
     = f.submit
