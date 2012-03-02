@@ -43,8 +43,13 @@
           %li= link_to 'About us', '/about_us'
           %li= (signed_in?) ? link_to('Log out', logout_path) : link_to('Sign in', login_path)
         #legal
-          Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 John F. Brown.
+          Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 #{link_to 'John F. Brown', 'http://brownjohnf.com'}.
         .clearfloat
       .span-12.last.right
-        %p Powered by Ruby on Rails 3.1
-        %p Hosted by Heroku
+        %p
+          Powered by
+          = link_to 'Ruby on Rails', 'http://rubyonrails.org/'
+          3.1
+        %p
+          Hosted by
+          = link_to 'Heroku', 'http://www.heroku.com/'

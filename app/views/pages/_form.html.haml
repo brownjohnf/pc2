@@ -10,7 +10,7 @@
     = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
     = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
     = f.inputs :language, :photo, :created_at
-  = f.input :content, :label => 'Content', :input_html => {:class => 'richtext', :value => markdown(@page.content)}
+  = f.input :content, :label => 'Content', :input_html => {:class => 'richtext', :value => (@page.content ? markdown(@page.content) : nil) }
   = link_to 'Insert Photo', '#', :id => 'insert_photo'
   .box
     = f.input :tag_list

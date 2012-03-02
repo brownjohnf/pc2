@@ -1,8 +1,8 @@
 .container
   = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => nil }
   .row
-    .span-6
-    .span-18.last
+    .span-24.last
+      &larr;
       = link_to "back to #{@moment.datapoint.strftime('%Y')}", year_moment_path(@moment.datapoint.year)
   .row.moment
     .span-18
