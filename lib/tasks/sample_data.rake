@@ -43,13 +43,3 @@ def make_regions
 									]
 								)
 end
-
-def make_moments
-	99.times do |n|
-    moment = Moment.create!(
-	                  [
-		                  { :title => Faker::Company.catch_phrase, :summary => Faker::Lorem.paragraph, :content => Faker::Lorem.paragraphs(8), :photo_id => 1, :user_id => 1+rand(99), :datapoint => (1963+rand(50)).to_s + '-' + (1+rand(12)).to_s + '-' + (1+rand(30)).to_s }
-		                ]
-	                )
-	end
-end

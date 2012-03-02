@@ -17,6 +17,12 @@ class Moment < ActiveRecord::Base
   def to_param
     "#{id}-#{title.parameterize}"
   end
+    
+  def self.random
+    if (c = count) != 0
+      find(:first, :offset =>rand(c))
+    end
+  end
 
   private
 

@@ -5,14 +5,37 @@ class MomentsController < ApplicationController
   # GET /moments
   # GET /moments.json
   def index
-    search_set = []
-    10.times do
-      search_set << 1+rand(Moment.count)
+    if params[:year]
+      start = "#{params[:year].to_s}-1-1".to_date
+      stop = start.end_of_year
+      @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
+      @title = "Timeline | #{params[:year]}"
+      render 'year'
+    elsif params[:decade]
+      start = "#{params[:decade].to_s}-1-1".to_date
+      stop = start.end_of_year.advance(:years => 9)
+      @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
+      @title = "Timeline | #{params[:decade]}s"
+      render 'index'
+    elsif params[:start] && params[:stop]
+      start = "#{params[:start].to_s}-1-1".to_date
+      stop = "#{params[:stop].to_s}-1-1".to_date
+      @moments = Moment.where(:datapoint => (start..stop)).paginate(:page => params[:page], :per_page => 10)
+      @title = "Timeline | #{params[:start]} to #{params[:stop]}"
+      render 'index'
+    elsif params[:all]
+      @moments = Moment.paginate(:page => params[:page], :per_page => 50)
+      @title = 'All Timeline Moments'
+      render 'index'
+    else
+      search_set = []
+      10.times do
+        search_set << Moment.random
+      end
+      @moments = Moment.where(:id => search_set).paginate(:page => params[:page], :per_page => 10)
+      @title = 'Timeline | Home'
+      render 'index'
     end
-    @moments = Moment.where(:id => search_set).paginate(:page => params[:page], :per_page => 10)
-    @title = 'Timeline'
-
-    render 'index'
   end
 
   # GET /moments
