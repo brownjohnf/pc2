@@ -6,7 +6,7 @@
       = link_to "back to #{@moment.datapoint.strftime('%Y')}", year_moment_path(@moment.datapoint.year)
   .row.moment
     .span-18
-      .box
+      .box.longform
         .span-8
           %h1= @moment.datapoint.strftime('%B %Y')
           - if @moment.photo

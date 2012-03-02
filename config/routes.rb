@@ -67,7 +67,6 @@ OmniauthDemo::Application.routes.draw do
     collection do
       get 'all'
       get 'span'
-      post 'span'
     end
   end
 

@@ -1,27 +1,37 @@
 -# need to input decades, years
 .row
-  .span-6
+  .span-10
+    .box.longform
+      %h1 About the timeline
+      %P Info about the timeline.
+  .span-14.last
     .box#buttongroup
       %h1 Navigation
-      = button_to 'Timeline Home', moments_path, :method => :get
-      = button_to 'All Events', all_moments_path, :method => :get
-      = form_tag(span_moments_path) do
-        = submit_tag 'View span'
-        = text_field_tag 'start', nil, :maxlength => 4, :size => 4
-        to
-        = text_field_tag 'stop', nil, :maxlength => 4, :size => 4
-      .clearfloat
-  .span-18.last
-    .box#decades
+      %table
+        %tr
+          %td
+            = link_to 'Timeline Home', moments_path
+          %td
+            = link_to 'All Events', moments_path(:all => true)
+          %td
+            = form_tag(moments_path, :method => :get) do
+              = submit_tag 'View span'
+              = text_field_tag 'start', nil, :maxlength => 4, :size => 4
+              to
+              = text_field_tag 'stop', nil, :maxlength => 4, :size => 4\
       %h3 Decade
-      - if decades
-        - decades.each do |d|
-          = decade_button(d)
-      .clearfloat
-    - if params[:id] && !years.nil?
-      .box#years
+      %table
+        %tr
+          - if decades
+            - decades.each do |d|
+              %td
+                = decade_button(d)
+      - if params[:decade]
         %h3 Year
-        - years.each do |y|
-          = year_button((truncate(params[:id], :length => 2).to_i * 10).to_i + y)
+        %table
+          %tr
+            - years.each do |y|
+              %td
+                = year_button(truncate(params[:decade], :length => 2).to_i * 10 + y)
         .clearfloat
       .clearfloat
