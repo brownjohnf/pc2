@@ -45,4 +45,11 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def remove_avatar
+    @user = User.find(params[:id])
+    @user.avatar = nil
+    @user.save
+  end
+
 end
