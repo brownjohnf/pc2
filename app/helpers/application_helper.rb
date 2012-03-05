@@ -120,6 +120,6 @@ module ApplicationHelper
   end
   
   def flag_icon(country_code)
-    image_tag "icons/flags/64/#{country_code.downcase}.png", :style => 'height:1em;'
+    image_tag "icons/flags/64/#{country_code.downcase}.png", :style => 'height:1em;' if country_code
   end
 end
