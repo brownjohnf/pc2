@@ -95,6 +95,6 @@ class DocumentsController < ApplicationController
   
   def download
     @document = Document.find(params[:id])
-    send_file @document.file.to_file, :type => @document.file_content_type 
+    send_file @document.file.to_file, :type => @document.file_content_type
   end
 end

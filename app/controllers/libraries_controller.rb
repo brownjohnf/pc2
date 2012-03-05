@@ -85,4 +85,14 @@ class LibrariesController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def download
+    @library = Library.find(params[:id])
+    
+    if @library.bundle
+      send_file "public/system/#{@library.file_name}"
+    end
+    File.delete("public/system/#{@library.file_name}")
+  end
+  
 end

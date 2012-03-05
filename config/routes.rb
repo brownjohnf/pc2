@@ -49,7 +49,11 @@ OmniauthDemo::Application.routes.draw do
 
   resources :languages
 
-  resources :libraries
+  resources :libraries do
+    member do
+      get :download
+    end
+  end
 
   resources :stacks, :only => [ :index, :new, :create, :destroy ]
 

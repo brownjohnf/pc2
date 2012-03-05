@@ -26,6 +26,7 @@ gem 'formtastic', '2.0.2'
 gem 'cancan', '1.6.7'
 gem "ckeditor", "3.7.0.rc2"
 gem 'texticle', '~> 2.0', :require => 'texticle/rails'
+gem 'rubyzip'
 
 # Gems used only for assets and not required
 # in production environments by default.
