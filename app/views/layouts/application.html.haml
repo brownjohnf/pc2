@@ -23,9 +23,6 @@
                 Class: #{params[:controller]}
                 %br
                 ID: #{params[:action]}
-            .row
-              .twelvecol.last
-                = ENV['PWD'].inspect
     = render 'layouts/footer'
     - if user_signed_in?
       = render 'layouts/user_menu_bar'
