@@ -81,6 +81,14 @@ class User < ActiveRecord::Base
     end
     countries
   end
+  
+  def country_list
+    country_list = []
+    self.countries.each do |name, code|
+      country_list << code
+    end
+    country_list
+  end
 
   private
 
