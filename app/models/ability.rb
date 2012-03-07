@@ -39,7 +39,9 @@ class Ability
         end
       end
       if user.role? :moderator
-        #can :manage, [ Page, CaseStudy ], :country => user.country
+        can :manage, Library, :country => user.country
+        can :manage, [ Document, Photo ]
+        can :read, Feedback
       end
     end
     #
