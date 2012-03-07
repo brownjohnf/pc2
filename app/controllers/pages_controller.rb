@@ -9,6 +9,24 @@ class PagesController < ApplicationController
     @pages = @pages.order('lft ASC', 'title ASC')
   end
   
+  def feed
+    # this will be the name of the feed displayed on the feed reader
+    @title = "Page Feed"
+
+    # the news items
+    @pages = Page.unscoped.order("updated_at desc")
+
+    # this will be our Feed's update timestamp
+    @updated = @pages.first.updated_at unless @pages.empty?
+
+    respond_to do |format|
+      format.atom { render :layout => false }
+
+      # we want the RSS feed to redirect permanently to the ATOM feed
+      format.rss { redirect_to feed_pages_path(:format => :atom), :status => :moved_permanently }
+    end
+  end
+  
   def search
     @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)
     @count = @pages.count

@@ -122,4 +122,11 @@ module ApplicationHelper
   def flag_icon(country_code)
     image_tag "icons/flags/64/#{country_code.downcase}.png", :style => 'height:1em;' if country_code
   end
+  
+  def rss_auto_links
+    if params[:controller] == 'pages'
+      auto_discovery_link_tag(:atom, feed_pages_path) + auto_discovery_link_tag(:rss, feed_pages_path)
+    end
+  end
+  
 end

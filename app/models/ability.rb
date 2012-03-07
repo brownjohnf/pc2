@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :updated, :added, :download, :search, :to => :read
+    alias_action :updated, :added, :download, :search, :feed, :to => :read
     # Define abilities for the passed in user here. For example:
     #
     unless user

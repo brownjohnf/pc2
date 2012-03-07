@@ -1,7 +1,8 @@
 .container
   .row
     .span-5
-    .span-15.last
+      = render 'shared/menu'
+    .span-15
       :erb
         <table>
           <tr>
@@ -16,7 +17,7 @@
             <td><%= feedback.subject %></td>
             <td><%= feedback.content %></td>
             <td><%= link_to 'Show', feedback %></td>
-            <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete %></td>
+            <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete if can? :destroy, feedback %></td>
           </tr>
         <% end %>
         </table>
