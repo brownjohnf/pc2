@@ -113,6 +113,7 @@ OmniauthDemo::Application.routes.draw do
       get :popular
       get :ajax
       get :search
+      get :feed, :as => :feed, :defaults => { :format => 'atom' }
     end
   end
 
