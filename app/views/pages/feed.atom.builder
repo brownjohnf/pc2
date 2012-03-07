@@ -4,7 +4,7 @@ atom_feed :language => 'en-US' do |feed|
 
   @pages.each do |item|
     feed.entry( item ) do |entry|
-      entry.url page_path(item)
+      entry.url page_url(item)
       entry.title item.title
       entry.content item.description, :type => 'html'
 
