@@ -3,8 +3,9 @@
     %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
     %ul
       %li= link_to 'index', :controller => params[:controller], :action => :index
-      %li= link_to 'new', :controller => params[:controller], :action => :new
+      %li= link_to 'new', :controller => params[:controller], :action => :new if can? :create, params[:controller].singularize.capitalize.constantize
       - if params[:id] && params[:action] == 'show'
-        %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id]
-        %li= link_to 'destroy', params[:controller].parameterize.singularize.capitalize.camelcase.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete
+        - item = params[:controller].singularize.capitalize.constantize.find(params[:id])
+        %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id] if can? :update, item
+        %li= link_to 'destroy', params[:controller].parameterize.singularize.capitalize.camelcase.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete if can? :destroy, item
     .clearfloat
