@@ -3,7 +3,7 @@
     %h4 #{params[:controller].parameterize.singularize.capitalize} Actions
     %ul
       %li= link_to 'index', :controller => params[:controller], :action => :index
-      %li= link_to 'new', :controller => params[:controller], :action => :new if can? :create, params[:controller].singularize.capitalize.constantize
+      %li= link_to 'new', :controller => params[:controller], :action => :new if can? :create, params[:controller].camelize.singularize.constantize
       - if params[:id] && params[:action] == 'show'
         - item = params[:controller].camelize.singularize.constantize.find(params[:id])
         %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id] if can? :update, item

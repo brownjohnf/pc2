@@ -5,9 +5,7 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = Library.limit(20)
-    @libraries1 = Library.limit(20).offset(20)
-    @libraries2 = Library.limit(20).offset(40)
+    @libraries = Library.limit(20).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

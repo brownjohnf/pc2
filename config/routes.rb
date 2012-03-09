@@ -1,12 +1,14 @@
 OmniauthDemo::Application.routes.draw do
 
-  mount Ckeditor::Engine => '/ckeditor'
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   devise_scope :user do
     get 'login', :to => 'devise/sessions#new'
     get 'logout', :to => 'devise/sessions#destroy'
+  end
+  
+  constraints :subdomain => /.+/ do
+    match '/' => redirect('http://pcsenegal.com')
   end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
@@ -27,8 +29,6 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :settings
-
   resources :case_studies do
     collection do
       get :added
@@ -36,10 +36,6 @@ OmniauthDemo::Application.routes.draw do
       get :search
     end
   end
-
-  resources :identities
-
-  resources :stages
 
   resources :imports do
     member do
@@ -74,17 +70,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :sites
-
-  resources :sectors
-
-  resources :positions
-
-  resources :jobs
-
-  resources :staff
-
-  resources :websites
+  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pcregions, :regions, :volunteers, :settings
 
   resources :blogs do
     collection do
@@ -100,11 +86,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :contributions, :only => [ :index, :new, :create, :destroy ]
 
-  resources :volunteers
-
   resources :permissions, :only => [ :index, :new, :create, :destroy ]
-
-  resources :scopes
 
   resources :pages do
     collection do
@@ -116,12 +98,6 @@ OmniauthDemo::Application.routes.draw do
       get :feed, :as => :feed, :defaults => { :format => 'atom' }
     end
   end
-
-  resources :regiontypes
-
-  resources :pcregions
-
-  resources :regions
 
   match '/disclaimer', :to => 'statics#disclaimer'
   match '/privacy', :to => 'statics#privacy'
@@ -135,7 +111,7 @@ OmniauthDemo::Application.routes.draw do
   match '/feed/pages', :to => 'pages#updated'
   
   match '/facebook' => redirect('https://apps.facebook.com/peacecorps_sn/')
-
+    
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'statics#home'
