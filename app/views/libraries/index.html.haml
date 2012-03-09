@@ -2,15 +2,9 @@
   .row
     .span-5
       = render 'shared/menu'
-    .span-5
+    .span-15
       .box
         %ul.feed
           = render @libraries
-    .span-5
-      .box
-        %ul.feed
-          = render @libraries2 if @libraries2
-    .span-5
-      .box
-        %ul.feed
-          = render @libraries3 if @libraries3
+      .center= will_paginate
+    .span-4.last
