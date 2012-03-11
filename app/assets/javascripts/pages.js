@@ -31,6 +31,12 @@ $(function() {
 });
 */
 $(function(){
+	$('.box.longform p img').attr('rel', 'group').colorbox({
+		title: 'Test title',
+		href: function(){ return $(this).attr('src') + '.jpg'; },
+		rel: 'group'
+	});
+	
 	$('textarea.richtext').htmlarea();
 	
 	$('a#insert_photo').click(function(){

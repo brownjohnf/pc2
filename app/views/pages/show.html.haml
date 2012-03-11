@@ -24,6 +24,7 @@
         %h4= @page.created_at.strftime('%d %B %Y')
         .tags.right= render 'shared/tags', :tags => @page.tag_list
         = markdown(@page.content)
+        .clearfloat
       .box
         = render 'shared/search'
     .span-4.last

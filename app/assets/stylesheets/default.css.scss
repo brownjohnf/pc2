@@ -112,6 +112,15 @@ $header_height: 1em + ( 2 * $header_menu_padding ) + ( 2 * $header_menu_top_bord
   float: right !important;
 }
 
+img {
+  &.floatright {
+    margin: 0 0 .5em .5em;
+  }
+  &.floatleft {
+    margin: 0 .5em .5em 0;
+  }
+}
+
 hr {
   border: none;
   border-bottom: 1px solid $light_gray;
