@@ -8,6 +8,16 @@ body.pages {
       ul, ol {
         margin-left: 3em;
       }
+      .box.longform {
+        p {
+          img {
+            &.floatright, &.floatleft {
+              @include shadow(1px, 0, 0, $dark_gray);
+              border: 1px solid whitesmoke;
+            }
+          }
+        }
+      }
     }
   }
   &#map {
