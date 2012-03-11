@@ -2,5 +2,6 @@
   %h3
     = flag_icon(library.country.downcase)
     = link_to library.name, library
+    %span= library.stacks.count
     .tags.right.inline= render 'shared/tags', :tags => library.tag_list
   .clearfloat

@@ -41,7 +41,7 @@
           %li= link_to 'Help!', '/help'
           %li= link_to 'Security', '/security'
           %li= link_to 'About us', '/about_us'
-          %li= (signed_in?) ? link_to('Log out', logout_path) : link_to('Sign in', login_path)
+          %li= (signed_in?) ? link_to('Sign out', logout_path) : link_to('Sign in', login_path)
         #legal
           Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 #{link_to 'John F. Brown', 'http://brownjohnf.com'}.
         .clearfloat

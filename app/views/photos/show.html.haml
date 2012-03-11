@@ -1,7 +1,9 @@
 .container
   .row
     .span-24.last
-      %h1= (@photo.title) ? @photo.title : @photo.photo_file_name
+      %h1
+        = (@photo.title) ? @photo.title : @photo.photo_file_name
+        = link_to 'edit', edit_photo_path(@photo) if can? :update, @photo
       %h4= @photo.description
     .span-24.last
       &nbsp;
