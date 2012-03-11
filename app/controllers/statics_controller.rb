@@ -16,23 +16,23 @@ class StaticsController < ApplicationController
     cookies[:splashed] = 'viewed'
     @slides = []
     Photo.order('updated_at DESC').tagged_with('splash').each do |p|
-      @slides << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p}
+      @slides << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p} if p.photo
     end
     Page.order('updated_at DESC').tagged_with('splash').each do |p|
-      @slides << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:large), :path => p}
+      @slides << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:large), :path => p} if p.photo
     end
     CaseStudy.order('updated_at DESC').tagged_with('splash').each do |cs|
-      @slides << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:large), :path => cs}
+      @slides << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:large), :path => cs} if cs.photo
     end
     @spotlights = []
     Photo.order('updated_at DESC').tagged_with('spotlight').each do |p|
-      @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.url(:medium), :path => p}
+      @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p} if p.photo
     end
     Page.order('updated_at DESC').tagged_with('spotlight').each do |p|
-      @spotlights << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:medium), :path => p}
+      @spotlights << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:medium), :path => p} if p.photo
     end
     CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight').each do |cs|
-      @spotlights << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:medium), :path => cs}
+      @spotlights << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:medium), :path => cs} if cs.photo
     end
 
     render 'splash', :layout => 'splash'

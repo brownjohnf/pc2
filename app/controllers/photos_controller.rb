@@ -32,6 +32,11 @@ class PhotosController < ApplicationController
       format.json { render json: @photo }
     end
   end
+  
+  def embed
+    @photo = Photo.find(params[:id])
+    redirect_to @photo.photo.url(:small)
+  end
 
   # GET /photos/new
   # GET /photos/new.json
