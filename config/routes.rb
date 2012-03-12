@@ -52,6 +52,7 @@ OmniauthDemo::Application.routes.draw do
   resources :libraries do
     member do
       get :download
+      get :podcast, :as => :podcast, :defaults => { :format => 'xml' }
     end
   end
 

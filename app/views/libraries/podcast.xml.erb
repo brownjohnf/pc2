@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+	<channel>
+		<title><%= @library.name %></title>
+		<link><%= podcast_library_url(@library) %></link>
+		<language>en-us</language>
+		<copyright>2010 - 2012, Peace Corps <%= @library.country %></copyright>
+		<itunes:subtitle>Peace Corps <%= @library.country %> | <%= @library.name %></itunes:subtitle>
+		<itunes:author>Peace Corps <%= @library.country %></itunes:author>
+		<description><%= @library.description %></description>
+		<itunes:owner>
+			<itunes:name>Peace Corps Senegal</itunes:name>
+			<itunes:email>admin@pcsenegal.org</itunes:email>
+		</itunes:owner>
+		<itunes:image href="/pclogo_340.jpg" />
+		<itunes:category text="Education">
+		</itunes:category>
+		<% @mp3s.each do |mp3| %>
+			<% duration = Mp3Info.open(mp3.file.to_file).length.round %>
+			<item>
+				<title><%= mp3.name %></title>
+				<itunes:author>Peace Corps <%= mp3.user.country %></itunes:author>
+				<itunes:subtitle><%= mp3.description %></itunes:subtitle>
+				<itunes:summary><%= mp3.description %></itunes:summary>
+				<enclosure url="<%= mp3.file.url %>" length="<%= mp3.file.size %>" type="<%= mp3.file_content_type %>" />
+				<guid><%= mp3.file.url %></guid>
+				<pubDate><%= mp3.updated_at %></pubDate>
+				<itunes:duration><%= duration / 60 %>:<%= duration - duration / 60 %></itunes:duration>
+				<itunes:keywords><%= mp3.tag_list %></itunes:keywords>
+			</item>
+		<% end %>
+	</channel>
+</rss>
