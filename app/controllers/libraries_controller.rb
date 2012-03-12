@@ -93,4 +93,20 @@ class LibrariesController < ApplicationController
     File.delete("public/system/#{@library.file_name}")
   end
   
+  def podcast
+    @library = Library.find(params[:id])
+
+    # the mp3 files
+    @mp3s = @library.documents.unscoped.order("updated_at desc").where(:file_content_type => 'audio/mp3')
+    
+    if @mp3s.empty?
+      redirect_to @library, notice: 'There is currently no podcast associated with this library.'
+    else
+      require 'mp3info'
+      respond_to do |format|
+        format.xml { render :layout => false }
+      end
+    end
+  end
+  
 end
