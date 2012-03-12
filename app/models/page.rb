@@ -16,10 +16,6 @@ class Page < ActiveRecord::Base
   # through the contribution connection
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :contributors, :through => :contributions, :source => :user
-  
-  has_many :permissions, :as => :permissable, :dependent => :destroy
-  has_many :groups, :through => :permissions
-  has_many :users, :through => :groups
 
   accepts_nested_attributes_for :contributions, :allow_destroy => true
 
