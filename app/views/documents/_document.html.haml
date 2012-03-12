@@ -1,18 +1,22 @@
 - if can? :read, document
   %li.feed_item
     = document_icon_for document, :size => size ||= :thumb
-    %h4
+    %h3
       = link_to document.name, document
+      = link_to 'edit', edit_document_path(document) if can? :update, document
       %span
         = time_ago_in_words(document.updated_at)
         ago by
         = link_to document.user.name, document.user
     %p= document.description if document.description
+    -if document.author
+      %p
+        authored by
+        = document.author
     %p
       = document.language.name if document.language
       = render document.roles
     %p
-      = link_to 'edit', edit_document_path(document) if can? :update, document
       = link_to 'download', download_document_path(document) if can? :read, document
       = mime_icon(document.file_content_type)
     .tags.right= render 'shared/tags', :tags => document.tag_list

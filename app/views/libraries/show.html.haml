@@ -4,7 +4,9 @@
       = render 'shared/menu'
     .span-13
       .box
-        %h1= @library.name
+        %h1
+          = @library.name
+          = link_to 'edit', edit_library_path(@library) if can? :update, @library
         %h4= @library.description
         %ul.feed
           - @library.stacks.each do |s|

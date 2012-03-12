@@ -1,8 +1,9 @@
 = semantic_form_for(@document, :multipart => true) do |f|
   = f.semantic_errors
   = f.inputs do
-    = f.input :file, :label => 'File to upload'
+    = f.input :file, :label => 'File to upload (currently limited to 30Mb)'
     = f.input :name
+    = f.input :author
     = f.input :language, :include_blank => true
     = f.input :description
     = f.input :tag_list

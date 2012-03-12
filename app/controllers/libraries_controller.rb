@@ -5,7 +5,7 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = Library.limit(20).paginate(:page => params[:page])
+    @libraries = @libraries.order('name ASC').limit(20).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -95,6 +95,15 @@ class LibrariesController < ApplicationController
   
   def podcast
     @library = Library.find(params[:id])
+    @title = @library.name
+    @link = podcast_library_url(@library)
+    @language = 'en-us'
+    @copyright = '2010 - 2012, Peace Corps ' + @library.country
+    @subtitle = "Peace Corps #{@library.country} | #{@library.name}"
+    @author = "Peace Corps #{@library.country}"
+    @description = @library.description
+    @itunes_name = 'Peace Corps Senegal'
+    @itunes_email = 'admin@pcsenegal.org'
 
     # the mp3 files
     @mp3s = @library.documents.order("updated_at desc").where(:file_content_type => 'audio/mp3')
