@@ -2,26 +2,42 @@
   = render 'layouts/context_menu_bar'
   %h4 Admin
   %ul
-    %li= link_to 'blogs', blogs_path
-    %li= link_to 'case studies', case_studies_path
+    %li
+      = link_to 'blogs', blogs_path
+      (#{Blog.count})
+    %li
+      = link_to 'case studies', case_studies_path
+      (#{CaseStudy.count})
     %li= link_to 'contributions', contributions_path
-    %li= link_to 'documents', documents_path
-    %li= link_to 'feedback', feedback_index_path
+    %li
+      = link_to 'documents', documents_path
+      (#{Document.count})
+    %li
+      = link_to 'feedback', feedback_index_path
+      (#{Feedback.count})
     %li= link_to 'imports', imports_path
     %li= link_to 'jobs', jobs_path
     %li= link_to 'languages', languages_path
     %li= link_to 'libraries', libraries_path
-    %li= link_to 'moments', moments_path
-    %li= link_to 'pages', pages_path
+    %li
+      = link_to 'moments', moments_path
+      (#{Moment.count})
+    %li
+      = link_to 'pages', pages_path
+      (#{Feedback.count})
     %li= link_to 'pc regions', pcregions_path
     %li= link_to 'photos', photos_path
     %li= link_to 'positions', positions_path
-    %li= link_to 'regions', regions_path
+    %li
+      = link_to 'regions', regions_path
+      (#{Region.count})
     %li= link_to 'region types', regiontypes_path
     %li= link_to 'scopes', scopes_path
     %li= link_to 'sectors', sectors_path
     %li= link_to 'settings', settings_path
-    %li= link_to 'sites', sites_path
+    %li
+      = link_to 'sites', sites_path
+      (#{Site.count})
     %li= link_to 'stacks', stacks_path
     %li= link_to 'staff', staff_index_path
     %li= link_to 'stages', stages_path

@@ -3,7 +3,9 @@
     .span-5
       = render 'shared/menu'
     .span-15
-      %h1 Photo Gallery
+      %h1
+        Photo Gallery
+        %span= pluralize(Photo.count, 'photo')
       = render :partial => @photos, :locals => { :size => :icon }
       .center= will_paginate
       .box

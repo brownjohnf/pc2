@@ -41,6 +41,16 @@
           = cloud_of_tags CaseStudy
           = cloud_of_tags User
           = cloud_of_tags Blog
+        .box
+          %h1 Quick Stats
+          %ul
+            %li= pluralize(User.count, 'user')
+            %li= pluralize(Page.count, 'page')
+            %li= pluralize(CaseStudy.count, 'case study')
+            %li= pluralize(Photo.count, 'photo')
+            %li= pluralize(Document.count, 'file')
+            %li= pluralize(Library.count, 'library')
+            %li= pluralize(Blog.count, 'blog')
     .span-12.last
       .span-12
         .box
