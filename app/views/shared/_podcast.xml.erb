@@ -1,0 +1,14 @@
+<title><%= @title %></title>
+<link><%= @link %></link>
+<language><%= @language %></language>
+<copyright><%= @copyright %></copyright>
+<itunes:subtitle><%= @subtitle %></itunes:subtitle>
+<itunes:author><%= @author %></itunes:author>
+<description><%= @description %></description>
+<itunes:owner>
+	<itunes:name><%= @itunes_name %></itunes:name>
+	<itunes:email><%= @itunes_email %></itunes:email>
+</itunes:owner>
+<itunes:image href="<%= root_url + asset_path('pc_logo.png') %>" />
+<itunes:category text="Education">
+</itunes:category>
