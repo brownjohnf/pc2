@@ -2,7 +2,7 @@
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
 	<channel>
 		<title><%= @library.name %></title>
-		<link><%= podcast_library_url(@library) %></link>
+		<link><%= podcast_library_url(@library) %>.xml</link>
 		<language>en-us</language>
 		<copyright>2010 - 2012, Peace Corps <%= @library.country %></copyright>
 		<itunes:subtitle>Peace Corps <%= @library.country %> | <%= @library.name %></itunes:subtitle>
