@@ -2,8 +2,8 @@
 	<script type="text/javascript">
 	
 	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-30011877-1']);
-	  _gaq.push(['_setDomainName', 'pcsenegal.com']);
+	  _gaq.push(['_setAccount', <%= ENV['G_ANALYTICS_ID'] %>]);
+	  _gaq.push(['_setDomainName', '<% request.domain %>']);
 	  _gaq.push(['_setAllowLinker', true]);
 	  _gaq.push(['_trackPageview']);
 	
