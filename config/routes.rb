@@ -7,10 +7,6 @@ OmniauthDemo::Application.routes.draw do
     get 'logout', :to => 'devise/sessions#destroy'
   end
   
-  constraints :subdomain => 'youtube' do
-    match '/' => redirect('http://youtube.com/pcsenegaladmin')
-  end
-  
   constraints :subdomain => '' do
     match '/' => redirect('http://www.pcsenegal.com')
   end
