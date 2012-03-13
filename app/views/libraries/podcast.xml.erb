@@ -6,7 +6,7 @@
 			<% duration = Mp3Info.open(mp3.file.to_file).length.round %>
 			<item>
 				<title><%= mp3.name %></title>
-				<itunes:author>Peace Corps <%= mp3.user.country %></itunes:author>
+				<itunes:author><%= mp3.author ? mp3.author : "Peace Corps #{mp3.user.country}" %></itunes:author>
 				<itunes:subtitle><%= mp3.description %></itunes:subtitle>
 				<itunes:summary><%= mp3.description %></itunes:summary>
 				<enclosure url="<%= mp3.file.url %>" length="<%= mp3.file.size %>" type="<%= mp3.file_content_type %>" />

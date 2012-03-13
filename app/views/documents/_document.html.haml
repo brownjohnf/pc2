@@ -19,4 +19,6 @@
     %p
       = link_to 'download', download_document_path(document) if can? :read, document
       = mime_icon(document.file_content_type)
+      = document.file.size
+      bytes
     .tags.right= render 'shared/tags', :tags => document.tag_list
