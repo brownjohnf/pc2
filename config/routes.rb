@@ -11,8 +11,8 @@ OmniauthDemo::Application.routes.draw do
     match '/' => redirect('http://youtube.com/pcsenegaladmin')
   end
   
-  constraints :subdomain => /.+/ do
-    match '/' => redirect('http://pcsenegal.com')
+  constraints :subdomain => '' do
+    match '/' => redirect('http://www.pcsenegal.com')
   end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
