@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
   has_attached_file :photo,
     :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140>' },
     :storage => :s3,
-    :bucket => 'pcsenegal-dev-com',
+    :bucket => ENV['S3_BUCKET'],
     :s3_credentials => {
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
