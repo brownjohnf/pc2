@@ -51,6 +51,14 @@
             %li= pluralize(Document.count, 'file')
             %li= pluralize(Library.count, 'library')
             %li= pluralize(Blog.count, 'blog')
+            %li
+              - total_resources = User.count + Page.count + CaseStudy.count + Photo.count + Document.count + Blog.count
+              = pluralize(total_resources, 'resource')
+              and counting!
+              %br
+              that's
+              %strong= pluralize((total_resources - User.count) / User.count, 'resource')
+              per user!
     .span-12.last
       .span-12
         .box
