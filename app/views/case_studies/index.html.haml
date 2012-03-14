@@ -1,32 +1,31 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      .box.longform
-        %h1 Case Studies
-        %p
-          We ask Volunteers who have completed a significant project to write a case study, documenting what they 
-          did and evaluating its impact and chance of long-term success. Case studies
-          should contain the following sections:
-        %ul
-          %li Summary
-          %li Context
-          %li Approach
-          %li Results
-          %li Challenges
-          %li Lessons Learned
-          %li Next Steps
-        %p Peruse the menu on the left for more studies; stay tuned for the under-development Case Study Tool, 
-        which will allow you to more readily browse and locate specific studies.
-        = render 'shared/search'
-      .box
-        %h1= @title
-        %ul.feed
-          = render @case_studies
-      .center= will_paginate
-    .span-4.last
-      .box
-        %h2 Top Tags
-        = cloud_of_tags CaseStudy
-      = render 'shared/right_user_menu'
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    .box.longform
+      %h1 Case Studies
+      %p
+        We ask Volunteers who have completed a significant project to write a case study, documenting what they 
+        did and evaluating its impact and chance of long-term success. Case studies
+        should contain the following sections:
+      %ul
+        %li Summary
+        %li Context
+        %li Approach
+        %li Results
+        %li Challenges
+        %li Lessons Learned
+        %li Next Steps
+      %p Peruse the menu on the left for more studies; stay tuned for the under-development Case Study Tool, 
+      which will allow you to more readily browse and locate specific studies.
+      = render 'shared/search'
+    .box
+      %h1= @title
+      %ul.feed
+        = render @case_studies
+    .center= will_paginate
+  .span2
+    .box
+      %h2 Top Tags
+      = cloud_of_tags CaseStudy
+    = render 'shared/right_user_menu'

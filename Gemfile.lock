@@ -41,6 +41,7 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (2.0.1)
     builder (3.0.0)
     cancan (1.6.7)
     carmen (0.2.8)
@@ -209,6 +210,7 @@ DEPENDENCIES
   awesome_nested_set
   aws-sdk
   bcrypt-ruby (= 3.0.1)
+  bootstrap-sass
   bundler
   cancan (= 1.6.7)
   carmen (= 0.2.8)

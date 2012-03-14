@@ -9,26 +9,24 @@
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
     = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
-    = render 'layouts/header'
-    #main
-      #header_spacer
+    .container
+      = render 'layouts/header'
       = render 'layouts/photobar' if Photo.all.count > 19
       = render 'layouts/notice' if notice
       = render 'layouts/alert' if alert
-      #page
-        = yield
-        - if Rails.env.development?
-          .container
-            .row
-              .twelvecol.last
-                = debug(params)
-                Class: #{params[:controller]}
-                %br
-                ID: #{params[:action]}
-                %br
-                Host:
-                = request.host
-    = render 'layouts/footer'
+      = yield
+      - if Rails.env.development?
+        .row
+          .span12
+            .well
+              = debug(params)
+              Class: #{params[:controller]}
+              %br
+              ID: #{params[:action]}
+              %br
+              Host:
+              = request.host
+      = render 'layouts/footer'
     - if user_signed_in?
       = render 'layouts/user_menu_bar'
       = render 'layouts/admin_menu_bar' if current_user.role? :admin
