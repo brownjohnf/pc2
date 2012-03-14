@@ -25,6 +25,9 @@
                 Class: #{params[:controller]}
                 %br
                 ID: #{params[:action]}
+                %br
+                Host:
+                = request.host
     = render 'layouts/footer'
     - if user_signed_in?
       = render 'layouts/user_menu_bar'

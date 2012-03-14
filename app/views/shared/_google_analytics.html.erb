@@ -3,7 +3,7 @@
 	
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', '<%= ENV['G_ANALYTICS_ID'] %>']);
-	  _gaq.push(['_setDomainName', '<%= request.domain %>']);
+	  _gaq.push(['_setDomainName', '<%= request.host %>']);
 	  _gaq.push(['_setAllowLinker', true]);
 	  _gaq.push(['_trackPageview']);
 	
