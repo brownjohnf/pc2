@@ -11,18 +11,18 @@
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
     .navbar
       .navbar-inner
-        .container
+        .container-fluid
           = render 'layouts/header'
-    .container
+    .container-fluid
       = render 'layouts/photobar' if Photo.count > 19
       = render 'layouts/notice' if notice
       = render 'layouts/alert' if alert
       = yield
       - if Rails.env.development?
-        .row
+        .row-fluid
           .span12
             = debug(params)
-        .row
+        .row-fluid
           .span12
             .well
               Class: #{params[:controller]}

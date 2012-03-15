@@ -1,31 +1,127 @@
-#header
-  .container
-    .row
-      .span-24.last
-        %a{:id => "site_title", :href => '/splash'}
-          %span#title_organization= organization
-          %span#title_separator= '|'
-          %span#title_country= signed_in? && current_user.country? ? Carmen.country_name(current_user.country) : country
-          %sub beta
-        %ul{:style => "float:left;"}
-          %li= link_to 'Home', root_path
-          %li= link_to 'Pages', updated_pages_path
-          %li= link_to 'Case Studies', case_studies_path
-          %li= link_to 'Photos', photos_path
-          -#%li= link_to 'Videos', ''
-          %li= link_to 'Files', documents_path
-          %li= link_to 'Libraries', libraries_path
-          - if can? :read, User
-            %li= link_to 'Users', users_path
-          -#%li= link_to 'Blogs', blogs_path
-          -#%li= link_to 'Learning', ''
-          -#%li= link_to '50th', moments_path
-        %ul{:style => "float:right;"}
-          - if signed_in?
-            %li#gravatar= avatar_for_user current_user, :size => :icon
-            %li= link_to current_user.name, current_user
-            %li= link_to 'SSL', 'https://pcsenegal.com'
-          - else
-            %li= link_to 'Sign in', login_path
-            %li= link_to 'Sign up', new_user_registration_path
-        .clearfloat
+%a.brand{:href => '/splash'}
+  = organization
+  = '|'
+  = Carmen.country_name(cookies[:country])
+  %sub beta
+%ul.nav
+  - if user_signed_in?
+    %li= link_to 'Home', splash_path
+  - else
+    %li= link_to 'Home', '/splash'
+  %ul.nav
+    %li.dropdown
+      %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+        Country
+        %b.caret
+      %ul.dropdown-menu
+        - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
+          %li= link_to Carmen.country_name(country.country), pages_path(:country => country.country)
+  %li.divider-vertical
+  %li= link_to 'Pages', updated_pages_path
+  %li= link_to 'Case Studies', case_studies_path
+  %ul.nav
+    %li.dropdown
+      %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+        Resources
+        %b.caret
+      %ul.dropdown-menu
+        %li= link_to 'Photos', photos_path
+        -#%li= link_to 'Videos', ''
+        %li= link_to 'Files', documents_path
+        %li= link_to 'Libraries', libraries_path
+        - if can? :read, User
+          %li= link_to 'Users', users_path
+  -#%li= link_to '50th', moments_path
+  - if user_signed_in?
+    - if current_user.volunteers.any? || current_user.staff.any?
+      %li.divider-vertical
+      %ul.nav
+        %li.dropdown
+          %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+            Create
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to 'Page', new_case_study_path if can? :create, Page
+            %li= link_to 'Case Study', new_case_study_path if can? :create, CaseStudy
+            %li= link_to 'Library', new_library_path if can? :create, Library
+            %li= link_to 'Timeline Event', new_moment_path if can? :create, Moment
+      %ul.nav
+        %li.dropdown
+          %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+            Upload
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to 'Photo', new_photo_path if can? :create, Photo
+            %li= link_to 'File', new_document_path if can? :create, Document
+    - if current_user.role? :admin
+      %ul.nav
+        %li.dropdown
+          %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+            Manage
+            %b.caret
+          %ul.dropdown-menu
+            - unless params[:controller] == 'statics' || params[:controller] == 'users'
+              %li= link_to 'index', :controller => params[:controller], :action => :index
+              %li= link_to 'new', :controller => params[:controller], :action => :new if can? :create, params[:controller].camelize.singularize.constantize
+              - if params[:id] && params[:action] == 'show'
+                - item = params[:controller].camelize.singularize.constantize.find(params[:id])
+                %li= link_to 'edit', :controller => params[:controller], :action => :edit, :id => params[:id] if can? :update, item
+                %li= link_to 'destroy', params[:controller].camelize.singularize.constantize.find(params[:id]), confirm: 'Are you sure?', method: :delete if can? :destroy, item
+              %li.divider
+            %li= link_to "blogs (#{Blog.count})", blogs_path
+            %li= link_to "case studies (#{CaseStudy.count})", case_studies_path
+            %li= link_to "contributions", contributions_path
+            %li= link_to "documents (#{Document.count})", documents_path
+            %li= link_to "feedback (#{Feedback.count})", feedback_index_path
+            %li= link_to "imports", imports_path
+            %li= link_to "jobs", jobs_path
+            %li= link_to "languages (#{Language.count})", languages_path
+            %li= link_to "libraries (#{Library.count})", libraries_path
+            %li= link_to "moments (#{Moment.count})", moments_path
+            %li= link_to "pages (#{Page.count})", pages_path
+            %li= link_to "pc regions", pcregions_path
+            %li= link_to "photos", photos_path
+            %li= link_to "positions (#{Position.count})", positions_path
+            %li= link_to "regions (#{Region.count})", regions_path
+            %li= link_to "region types", regiontypes_path
+            %li= link_to "scopes", scopes_path
+            %li= link_to "sectors (#{Sector.count})", sectors_path
+            %li= link_to "settings", settings_path
+            %li= link_to "sites (#{Site.count})", sites_path
+            %li= link_to "stacks", stacks_path
+            %li= link_to "staff (#{Staff.count})", staff_index_path
+            %li= link_to "stages (#{Stage.count})", stages_path
+            %li= link_to "users (#{User.count})", users_path
+            %li= link_to "volunteers (#{Volunteer.count})", volunteers_path
+            %li= link_to "websites", websites_path
+%ul.nav.pull-right
+  - if signed_in?
+    -#%li= avatar_for_user current_user, :size => :icon
+    %ul.nav
+      %li.dropdown
+        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+          = current_user.name
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to 'Dashboard', root_path
+          %li= link_to 'Profile', current_user
+          %li= link_to 'Use SSL', 'https://pcsenegal.com'
+          %li= link_to 'Leave Feedback', new_feedback_path
+          %li= link_to 'Help Me!', '/help'
+          %li.divider
+          %li= link_to 'Edit profile', edit_user_path(current_user)
+          %li= link_to 'Change password', edit_user_registration_path(current_user)
+          %li= link_to 'Sign out', '/logout'
+  - else
+    %ul.nav
+      %li.dropdown
+        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+          sign in
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to 'Sign in', login_path
+          %li= link_to 'Sign up', new_user_registration_path
+          %li.divider
+          %li= link_to 'Use SSL', 'https://pcsenegal.com'
+          %li= link_to 'Leave Feedback', new_feedback_path
+          %li= link_to 'Help Me!', '/help'

@@ -1,65 +1,56 @@
-.left_menu
-  = link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '260px'), root_path
-  = render 'menu' rescue nil
-  .left_context
-    - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
-      %h3= @page.title.upcase
-      %ul
-        - if @page.parent && can?(:read, @page.parent)
-          %li
-            = link_to @page.parent do
-              = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
-              go up
-        - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
-          %li
-            = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
-            = link_to item.title, item
-    -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
-      %h3= @page.parent.title.upcase
-      %ul
-        - if @page.parent && can?(:read, @page.parent)
-          %li
-            = link_to @page.parent do
-              = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
-              go up
-        - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
-          %li
-            = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
-            = link_to item.title, item
-  .accordion
-    - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
-      %h3{:id => country.country}
-        = flag_icon(country.country.downcase)
-        = Carmen.country_name(country.country)
-      %div
-        %ul
-          - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", country.country).each do |item|
-            %li
-              = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
-              = link_to item.title, item
+-#= link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
+= render 'menu' rescue nil
+%ul.nav.nav-list
+  - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
+    %li.nav-header= @page.title.upcase
+    - if @page.parent && can?(:read, @page.parent)
+      %li
+        = link_to @page.parent do
+          = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
+          go up
+    - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
+      %li
+        = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
+        = link_to item.title, item
+  -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
+    %li.nav-header= @page.parent.title.upcase
+    - if @page.parent && can?(:read, @page.parent)
+      %li
+        = link_to @page.parent do
+          = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
+          go up
+    - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
+      %li
+        = link_to item.title, item
+%h3
+  = flag_icon(cookies[:country].downcase)
+  = Carmen.country_name(cookies[:country])
+%ul.nav.nav-list
+  - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
+    %li
+      = link_to item.title, item
+.well
   - if Page.unscoped.tagged_with('quicklink').order('title').any?
-    .box#quicklinks
-      %h2 Quick Links
-      %ul
-        - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
-          %li
-            = link_to 'edit', edit_page_path(link), :class => 'floatright' if can? :update, link
-            = link_to link.title, link
-  .box.search
-    %h1 Google Search
-    :erb
-      <div id="google_search" name="google_search"><!-- Google search -->
-        <form method="get" action="http://www.google.com/search">
-          <input type="hidden" name="ie" value="UTF-8" />
-          <input type="hidden" name="oe" value="UTF-8" />
-          <input type="hidden" name="domains" value="http://pcsenegal.org" />
-          <input type="hidden" name="sitesearch" value="http://pcsenegal.org" checked />
-          <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
-          <input type="text" name="q" maxlength="200" />
-          <input type="submit">
-        </form>
-      </div><!--END Search Google -->
+    %ul.nav.nav-list
+      %li.nav-header Quick Links
+      - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
+        %li
+          = link_to 'edit', edit_page_path(link), :class => 'floatright' if can? :update, link
+          = link_to link.title, link
+.well
+  %h1 Google Search
   :erb
+    <div id="google_search" name="google_search"><!-- Google search -->
+      <form method="get" action="http://www.google.com/search">
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="hidden" name="oe" value="UTF-8" />
+        <input type="hidden" name="domains" value="http://pcsenegal.org" />
+        <input type="hidden" name="sitesearch" value="http://pcsenegal.org" checked />
+        <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
+        <input type="text" name="q" maxlength="200" />
+        <input type="submit">
+      </form>
+    </div><!--END Search Google -->
     <!-- Performable Super Conversion Button -->
     <script src='//d1nu2rn22elx8m.cloudfront.net/buttons/3V6NX/smRDw-sPwXkE7jwmUZ.js'></script>
     <!-- /Performable Super Conversion Button -->

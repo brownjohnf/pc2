@@ -1,0 +1,38 @@
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    .row-fluid
+      .span12
+        = render 'menu'
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Last Updated
+          %th Author
+          %th Language
+          %th Size
+          %th Permissions
+          %th
+      %tbody
+        - @documents.each do |document|
+          %tr
+            %td= document.name
+            %td= document.description
+            %td
+              = time_ago_in_words(document.updated_at)
+              ago by
+              = link_to document.user.name, document.user
+            %td= document.author
+            %td= document.language.name if document.language
+            %td
+              = document.file.size
+              bytes
+            %td= render document.roles
+            %td
+              = link_to 'download', download_document_path(document) if can? :read, document
+              = mime_icon(document.file_content_type)
+    = will_paginate
+    = render 'shared/search'

@@ -1,59 +1,86 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-15
-      .box
-        %h4.inline you are here &rang;
-        = link_to 'Home', pages_path
+    .span7
+      %ul.breadcrumb
+        %li you are here
+        %span.divider &rang;
+        %li= link_to 'Home', pages_path
+        %span.divider /
         - @page.ancestors.each do |a|
-          %h4.inline &rang;
-          = link_to a.title, a
-        &rang;
+          %li= link_to a.title, a
+          %span.divider /
+        %li= @page.title
+      %h1
+        = flag_icon(@page.country.downcase)
         = @page.title
-      .box.longform
-        %h1
-          = flag_icon(@page.country.downcase)
-          = @page.title
-          = link_to 'edit', edit_page_path(@page) if can? :update, @page
-          %span
-            last updated
-            = time_ago_in_words(@page.updated_at)
-            ago
+        %small
+          last updated
+          = time_ago_in_words(@page.updated_at)
+          ago
+      %h4
+        %small originally posted
+        = @page.created_at.strftime('%d %B %Y')
+      - if can? :update, @page
+        .tabbable.tabs-right
+          %ul.nav.nav-tabs
+            %li.active= link_to 'view', '#1', 'data-toggle' => 'tab'
+            %li= link_to 'edit', '#2', 'data-toggle' => 'tab'
+            %li= link_to 'destroy', '#3', 'data-toggle' => 'tab' if can? :destroy, @page
+          .tab-content
+            .tab-pane#1.active
+              %p= @page.description
+              .tags.right= render 'shared/tags', :tags => @page.tag_list
+              = markdown(@page.content)
+            .tab-pane#2
+              - @page.contributions.build if @page.contributions.empty?
+              = render 'form'
+            .tab-pane#3
+              .well
+                %h1 You sure?
+                = link_to 'destroy', @page, confirm: 'Are you sure?', method: :delete if can? :destroy, @page
+      - else
         %p= @page.description
-        %h4= @page.created_at.strftime('%d %B %Y')
         .tags.right= render 'shared/tags', :tags => @page.tag_list
         = markdown(@page.content)
-        .clearfloat
-      .box
-        = render 'shared/search'
-    .span-4.last
+      = render 'shared/search'
+    .span2
       = avatar_for @page, :size => :medium
-      .box
-        %h2 Case Studies
-        %ul
-          - @case_studies.each do |c|
-            %li= link_to c.title, c
-      .box
+      .accordion#accordion1
+        .accordion-group
+          .accordion-heading
+            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#pages'} Suggested Reading
+          .accordion-body#pages
+            .accordion-inner
+              %ul.nav.nav-list
+                - @pages.each do |p|
+                  %li= link_to p.title, p
+        .accordion-group
+          .accordion-heading
+            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#case_studies'} Case Studies
+          .accordion-body#case_studies
+            .accordion-inner
+              %ul.nav.nav-list
+                - @case_studies.each do |c|
+                  %li= link_to c.title, c
+        .accordion-group
+          .accordion-heading
+            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#authors'} Authors
+          .accordion-body#authors
+            .accordion-inner
+              %ul.nav.nav-list
+                - @page.contributions.each do |c|
+                  - unless c.new_record?
+                    %li.feed_item
+                      = link_to c.user.name, c.user
+                      |
+                      = link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, c
+      .well
         %h3 Tag Cloud
         = cloud_of_tags(Page)
-      .box
-        %h2 Suggested Reading
-        %ul
-          - @pages.each do |p|
-            %li= link_to p.title, p
-      - if @page.contributions.any?
-        .box
-          %h3 Authors
-          %ul.feed
-            - @page.contributions.each do |c|
-              %li.feed_item
-                = link_to c.user.name, c.user
-                |
-                = link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, c
       = render 'shared/social'
       = render 'shared/right_user_menu'
-      %p= button_to 'destroy this page', @page, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @page
       - if can? :manage, Contribution
         .box
           %h3 Add Contributor

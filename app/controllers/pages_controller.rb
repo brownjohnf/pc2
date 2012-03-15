@@ -5,7 +5,8 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @title = 'Peruse Our Pages'
+    params[:country] ? cookies[:country] = params[:country] : cookies[:country] ||= 'SN'
+    @title = cookies[:country]#'Peruse Our Pages'
     @pages = @pages.order('lft ASC', 'title ASC')
   end
   

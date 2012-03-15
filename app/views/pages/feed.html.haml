@@ -1,14 +1,16 @@
 .container
   .row
-    .span-5
+    .span12
+      = render 'menu'
+  .row
+    .span3
       = render 'shared/menu'
-    .span-15
+    .span7
       .box
         = render 'shared/search'
       .box
         %ul.feed
           = render @pages
       .center= will_paginate @pages
-    .span-4.last
+    .span2
       = render 'shared/social'
-      = render 'shared/right_user_menu'
