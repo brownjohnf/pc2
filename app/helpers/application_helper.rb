@@ -82,12 +82,7 @@ module ApplicationHelper
   end
 
   def photobar_selector
-    #Photo.limit(20)
-    photos = []
-    20.times do
-      photos << Photo.first
-    end
-    photos
+    Photo.limit(20)
   end
 
   def cloud_of_tags(model = params[:controller].singularize.camelcase.constantize)
