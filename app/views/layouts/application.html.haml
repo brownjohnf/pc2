@@ -9,12 +9,12 @@
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
     = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
-    .navbar
+    .navbar.navbar-fixed-top
       .navbar-inner
         .container
           = render 'layouts/header'
+    = render 'layouts/photobar' #if Photo.count > 19
     .container
-      = render 'layouts/photobar' if Photo.count > 19
       = render 'layouts/notice' if notice
       = render 'layouts/alert' if alert
       = yield
