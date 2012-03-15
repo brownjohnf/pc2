@@ -1,10 +1,7 @@
-.navbar
-  .navbar-inner
-    .container
-      %ul.nav
-        %a.brand Pages
-        %li= link_to 'Recently updated', updated_pages_path
-        %li= link_to 'Recently added', added_pages_path
-        -#%li= link_to 'Most popular', ''
-        %li= link_to 'Page map', pages_path
-        %li= link_to 'RSS/Atom Feed', feed_pages_path
+.subnav
+  %ul.nav.nav-pills
+    %li= link_to 'Recently updated', updated_pages_path
+    %li= link_to 'Recently added', added_pages_path
+    -#%li= link_to 'Most popular', ''
+    %li= link_to 'Page map', pages_path
+    %li= link_to 'RSS/Atom Feed', feed_pages_path
