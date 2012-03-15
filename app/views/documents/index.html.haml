@@ -1,19 +1,17 @@
-.container
-  .row
-    .span12
-      = render 'menu'
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      .box
-        = render 'shared/search'
-      .box
-        %h1 Documents
-        %ul.feed
-          = render @documents
+.row
+  .span12
+    = render 'menu'
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    %section
+      %h1 Documents
+      %ul.feed
+        = render @documents
       .center= will_paginate
-    .span2
-      .box
-        %h3 Top Document Tags
-        = cloud_of_tags
+      = render 'shared/search'
+  .span2
+    .box
+      %h3 Top Document Tags
+      = cloud_of_tags

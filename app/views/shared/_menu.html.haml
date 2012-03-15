@@ -1,5 +1,5 @@
 -#= link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
-= render 'menu' rescue nil
+
 %ul.nav.nav-list
   - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
     %li.nav-header= @page.title.upcase
