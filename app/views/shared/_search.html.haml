@@ -1,8 +1,9 @@
-%h3 Search
-%p This searches #{params[:controller]}. To search the entire site, use the Google search box in the right-hand menu.
-= form_tag "/#{params[:controller]}/search", :method => :get do
-  = text_field_tag :q
-  = submit_tag 'search'
-- if @count
-  %p
-    = pluralize(@count, 'result')
+.well
+  %h3 Search
+  %p This searches #{params[:controller]}. To search the entire site, use the Google search box in the right-hand menu.
+  = form_tag "/#{params[:controller]}/search", :method => :get do
+    = text_field_tag :q
+    = submit_tag 'search'
+  - if @count
+    %p
+      = pluralize(@count, 'result')

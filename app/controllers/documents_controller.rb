@@ -13,6 +13,15 @@ class DocumentsController < ApplicationController
     end
   end
   
+  def table
+    @documents = Document.unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 50)
+
+    respond_to do |format|
+      format.html { render :layout => 'layouts/application-fluid' } # index.html.erb
+      format.json { render json: @documents }
+    end
+  end
+  
   def search
     @documents = Document.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
     @count = @documents.count

@@ -1,13 +1,15 @@
 .container
   .row
-    .span-5
+    .span12
+      = render 'menu'
+  .row
+    .span3
       = render 'shared/menu'
-    .span-15
+    .span7
       %h1= @title
       = nested_li(@pages) do |item|
         - link_to item.title, item
-    .span-4.last
+    .span2
       .box
         %h2 Top Tags
         = cloud_of_tags Page
-      = render 'shared/right_user_menu'

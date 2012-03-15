@@ -5,3 +5,10 @@ directive, access to mixins, extensions, and variables is preserved.
 
 @import 'bootstrap';
 @import 'bootstrap-responsive';
+
+#admin_menu_bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+}

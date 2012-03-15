@@ -1,126 +1,145 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-15
+    .span7
       .box
         %h1
           = flag_icon(@user.country)
           = @user.name
-          .tags.right.inline= render 'shared/tags', :tags => @user.tag_list
-        .span-12
-          %p= Carmen.country_name(@user.country) if @user.country
-          - if can? :read, @user
-            %h3 Connect
-            %p
-              = @user.email
-              - unless @user.email2.nil?
-                %br
-                = @user.email2
-            - unless @user.phone1.nil?
+          %small= render 'shared/tags', :tags => @user.tag_list
+        %hr
+      .tabbable.tabs-right
+        %ul.nav.nav-tabs
+          %li.active= link_to 'Basic', '#user', 'data-toggle' => 'tab'
+          %li= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
+          %li= link_to 'Staff Details', '#staff', 'data-toggle' => 'tab'
+          %li= link_to 'photos', '#photos', 'data-toggle' => 'tab'
+          %li= link_to 'files', '#documents', 'data-toggle' => 'tab'
+          %li= link_to 'pages', '#pages', 'data-toggle' => 'tab'
+          %li= link_to 'timeline events', '#moments', 'data-toggle' => 'tab'
+          %li= link_to 'collections', '#libraries', 'data-toggle' => 'tab'
+        .tab-content
+          .tab-pane#user.active
+            %p= Carmen.country_name(@user.country) if @user.country
+            - if can? :read, @user
+              %h3 Connect
               %p
-                = @user.phone1
-                - unless @user.phone2.nil?
+                = @user.email
+                - unless @user.email2.nil?
                   %br
-                  = @user.phone2
-          - else
-            %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
-        .span-12.last
-          - if @user.blogs.any?
-            %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
-          - unless @user.site.nil?
-            %p= link_to @user.site
-          - if @user.libraries.any?
-            %h3 Collections
-            %ul= render @user.libraries
-        .span-24.last
-          %h3 Groups
-          %p= render @user.roles
-        .clearfloat
-      - if @user.bio
-        .box
-          %h4 A little bit about #{@user.name}...
-          = markdown(@user.bio)
-      - if can? :read, Volunteer
-        - @user.volunteers.each do |v|
-          .box
-            %h1
-              = flag_icon(v.country)
-              = v.local_name
-              = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
-              = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
-            %div
-              %p
-                = "#{v.sector.name} Volunteer" if v.sector
-                %br
-                = Carmen.country_name(v.country) if v.country
-                %br
-                = v.stage.name if v.stage
-              %h4 Site
-              %p= v.site.name if v.site
-              - if v.emphasis
-                %h4 Emphasis
-                %p= v.emphasis
-              - if v.projects
-                %h4 Projects
-                %p= v.projects
-      - if can? :read, Staff
-        - @user.staff.each do |s|
-          .box
-            %h3
-              = flag_icon(s.country)
-              Staff Member
-              = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
-              = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
-            %h4= s.site.name if s.site
-            %p= Carmen.country_name(s.country) if s.country
-            %p
-              = s.building
-              = "| #{s.office}" if s.office
-              = "| #{s.floor.to_i.ordinalize} floor" if s.floor
-            -if s.morning_open
-              %p
-                = s.morning_open.to_formatted_s(format = :time)
-                \-
-                = s.morning_close.to_formatted_s(format = :time)
-                %br
-                = s.afternoon_open.to_formatted_s(format = :time)
-                \-
-                = s.afternoon_close.to_formatted_s(format = :time)
-            = markdown(s.details) if s.details
-      - if @user.photos.any?
-        .box
-          %h3 Recently Uploaded Photos
-          - @user.photos.limit(5).each do |p|
-            = render p
-      .span-12
-        - if @user.documents.any?
-          .box
-            %h3 Recently Uploaded Docs
-            %ul.feed
-              = render @user.documents.limit(5)
-      .span-12.last
-        - if @user.contributions.any?
-          .box
-            %h3 Contributions
-            %ul.feed
-              - @user.contributions.limit(10).each do |c|
-                = render c.contributable
-        - if @user.moments.any?
-          .box.moments
-            %h3 Timeline Events
-            %ul
-              - @user.moments.each do |moment|
-                %li
-                  = avatar_for moment
-                  %h4= link_to moment.title, moment
-                  %p= truncate(moment.summary, :length => 100, :separator => ' ')
-                  .clearfloat
-    .span-4.last
+                  = @user.email2
+              - unless @user.phone1.nil?
+                %p
+                  = @user.phone1
+                  - unless @user.phone2.nil?
+                    %br
+                    = @user.phone2
+            - else
+              %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
+            - if @user.blogs.any?
+              %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
+            - unless @user.site.nil?
+              %p= link_to @user.site
+            - if @user.bio
+              .well
+                %h4 A little bit about #{@user.name}...
+                = markdown(@user.bio)
+            %h3 Groups
+            %p= render @user.roles
+          .tab-pane#volunteers
+            - if can? :read, Volunteer
+              - @user.volunteers.each do |v|
+                .well
+                  %h1
+                    = flag_icon(v.country)
+                    = v.local_name
+                    = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
+                    = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
+                  %div
+                    %p
+                      = "#{v.sector.name} Volunteer" if v.sector
+                      %br
+                      = Carmen.country_name(v.country) if v.country
+                      %br
+                      = v.stage.name if v.stage
+                    %h4 Site
+                    %p= v.site.name if v.site
+                    - if v.emphasis
+                      %h4 Emphasis
+                      %p= v.emphasis
+                    - if v.projects
+                      %h4 Projects
+                      %p= v.projects
+            - else
+              .well
+                You do not have permission to view this user's details.
+          .tab-pane#staff
+            - if can? :read, Staff
+              - @user.staff.each do |s|
+                .well
+                  %h3
+                    = flag_icon(s.country)
+                    Staff Member
+                    = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
+                    = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
+                  %h4= s.site.name if s.site
+                  %p= Carmen.country_name(s.country) if s.country
+                  %p
+                    = s.building
+                    = "| #{s.office}" if s.office
+                    = "| #{s.floor.to_i.ordinalize} floor" if s.floor
+                  -if s.morning_open
+                    %p
+                      = s.morning_open.to_formatted_s(format = :time)
+                      \-
+                      = s.morning_close.to_formatted_s(format = :time)
+                      %br
+                      = s.afternoon_open.to_formatted_s(format = :time)
+                      \-
+                      = s.afternoon_close.to_formatted_s(format = :time)
+                  = markdown(s.details) if s.details
+          .tab-pane#photos
+            - if @user.photos.any?
+              .box
+                %h3 Recently Uploaded Photos
+                - @user.photos.limit(5).each do |p|
+                  = render p
+          .tab-pane#documents
+            - if @user.documents.any?
+              .box
+                %h3 Recently Uploaded Docs
+                %ul.feed
+                  = render @user.documents.limit(5)
+          .tab-pane#pages
+            - if @user.contributions.any?
+              .box
+                %h3 Contributions
+                %ul.feed
+                  - @user.contributions.limit(10).each do |c|
+                    = render c.contributable
+          .tab-pane#moments
+            - if @user.moments.any?
+              .box.moments
+                %h3 Timeline Events
+                %ul
+                  - @user.moments.each do |moment|
+                    %li
+                      = avatar_for moment
+                      %h4= link_to moment.title, moment
+                      %p= truncate(moment.summary, :length => 100, :separator => ' ')
+          .tab-pane#libraries
+            - if @user.libraries.any?
+              %ul= render @user.libraries
+    .span2
       = avatar_for_user @user, :size => :small
       - if can? :update, @user
-        %p= button_to 'Edit profile', edit_user_path, :method => :get
-        %p= button_to 'Change password', edit_user_registration_path, :method => :get
+        .btn-group
+          = link_to 'Edit profile', edit_user_path, :method => :get, :class=> 'btn'
+          %a.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+            %span.caret
+          %ul.dropdown-menu
+            = link_to 'Change password', edit_user_registration_path, :method => :get
       - if @user.avatar? && can?(:update, @user)
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?
