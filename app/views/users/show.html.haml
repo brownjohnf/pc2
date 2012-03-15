@@ -143,4 +143,3 @@
       - if @user.avatar? && can?(:update, @user)
         = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?
-      = render 'shared/right_user_menu'
