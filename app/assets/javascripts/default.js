@@ -16,4 +16,8 @@ $(function(){
         $nav.removeClass('subnav-fixed')
       }
     }
+  
+  $('.accordion').collapse();
+  $('.carousel').carousel();
+  $('.dyn-datatable').dataTable();
 });

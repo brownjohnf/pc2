@@ -2,33 +2,72 @@
   .span3
     = render 'shared/menu'
   .span7
-    .box
-      %div
-        %h1
-          = @case_study.title
-        .tags.right= render 'shared/tags', :tags => @case_study.tag_list
-        = markdown @case_study.summary
-        - if @case_study.context
-          %h2 Context
-          = markdown @case_study.context
-        - if @case_study.approach
-          %h2 Approach
-          = markdown @case_study.approach
-        - if @case_study.results
-          %h2 Results
-          = markdown @case_study.results
-        - if @case_study.challenges
-          %h2 Challenges
-          = markdown @case_study.challenges
-        - if @case_study.lessons_learned
-          %h2 Lessons Learned
-          = markdown @case_study.lessons_learned
-        - if @case_study.next_steps
-          %h2 Next Steps
-          = markdown @case_study.next_steps
-    .box= render 'shared/search'
+    %h1
+      = flag_icon @case_study.country.downcase
+      = @case_study.title
+      %small
+        last updated
+        = time_ago_in_words(@case_study.updated_at)
+        ago
+    = render 'shared/tags', :tags => @case_study.tag_list
+    %hr
+    - if can? :update, @page
+      .tabbable.tabs-right
+        %ul.nav.nav-tabs
+          %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
+          %li= link_to 'edit', '#edit', 'data-toggle' => 'tab'
+          %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
+        .tab-content
+          .tab-pane#view.active
+            = markdown @case_study.summary
+            - if @case_study.context
+              %h2 Context
+              = markdown @case_study.context
+            - if @case_study.approach
+              %h2 Approach
+              = markdown @case_study.approach
+            - if @case_study.results
+              %h2 Results
+              = markdown @case_study.results
+            - if @case_study.challenges
+              %h2 Challenges
+              = markdown @case_study.challenges
+            - if @case_study.lessons_learned
+              %h2 Lessons Learned
+              = markdown @case_study.lessons_learned
+            - if @case_study.next_steps
+              %h2 Next Steps
+              = markdown @case_study.next_steps
+          .tab-pane#edit
+            = render 'form'
+          .tab-pane#destroy
+            .well
+              %h1 You sure?
+              = button_to 'Destroy this case study', @case_study, method: :delete, confirm: 'are you sure?', :class => 'btn btn-danger' if can? :destroy, @case_study
+    - else
+      = markdown @case_study.summary
+      - if @case_study.context
+        %h2 Context
+        = markdown @case_study.context
+      - if @case_study.approach
+        %h2 Approach
+        = markdown @case_study.approach
+      - if @case_study.results
+        %h2 Results
+        = markdown @case_study.results
+      - if @case_study.challenges
+        %h2 Challenges
+        = markdown @case_study.challenges
+      - if @case_study.lessons_learned
+        %h2 Lessons Learned
+        = markdown @case_study.lessons_learned
+      - if @case_study.next_steps
+        %h2 Next Steps
+        = markdown @case_study.next_steps
+    = render 'shared/search'
   .span2
     = avatar_for @case_study, :size => :small
+    = render 'shared/social'
     .box
       %h2 Case Studies
       %ul
