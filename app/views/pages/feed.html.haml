@@ -1,11 +1,10 @@
-.container
+.row
   .span3
     = render 'shared/menu'
   .span7
-    .page-header
-      %h1= @title
+    %h1= @title
     = render 'menu'
-    %ul.feed
+    %ul.thumbnails
       = render @pages
     = will_paginate :class => 'pagination pagination-centered'
     = render 'shared/search'

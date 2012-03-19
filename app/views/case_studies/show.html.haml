@@ -6,7 +6,6 @@
       %div
         %h1
           = @case_study.title
-          = link_to 'edit', edit_case_study_path(@case_study) if can? :update, @case_study
         .tags.right= render 'shared/tags', :tags => @case_study.tag_list
         = markdown @case_study.summary
         - if @case_study.context
@@ -47,5 +46,4 @@
       %h2 Authors
       %ul
         = render @case_study.contributors
-    = render 'shared/right_user_menu'
     %p= button_to 'destroy this case study', @case_study, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @case_study

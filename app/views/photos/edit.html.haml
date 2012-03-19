@@ -1,13 +1,11 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-5
+    .span3
       = render @photo, :size => :small
-    .span-7
-      .box
+    .span6
+      .page-header
         %h1 Edit Photo
-        = render 'form'
-    .span-3
-    .span-4.last
-      = render 'shared/right_user_menu'
+      = render 'form'
+

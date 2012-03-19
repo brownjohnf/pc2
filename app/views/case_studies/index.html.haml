@@ -1,7 +1,8 @@
 .row
-  = render 'shared/menu'
+  .span3
+    = render 'shared/menu'
   .span7
-    .box.longform
+    .well
       %h1 Case Studies
       %p
         We ask Volunteers who have completed a significant project to write a case study, documenting what they 
@@ -17,11 +18,9 @@
         %li Next Steps
       %p Peruse the menu on the left for more studies; stay tuned for the under-development Case Study Tool, 
       which will allow you to more readily browse and locate specific studies.
-      = render 'shared/search'
-    .box
-      %h1= @title
-      %ul.feed
-        = render @case_studies
+    = render 'shared/search'
+    %ul.thumbnails
+      = render @case_studies
     .center= will_paginate
   .span2
     .box
