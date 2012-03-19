@@ -1,8 +1,7 @@
-%li
-  .slide
-    = image_tag slide[:photo]
-    .caption
-      %h1= slide[:title]
-      = truncate(slide[:text], :length => 100, :separator => ' ')
-      = link_to 'read more', slide[:path]
-      &rang;
+.item
+  = image_tag slide[:photo]
+  .carousel-caption
+    %h1= slide[:title]
+    = truncate(slide[:text], :length => 100, :separator => ' ')
+    = link_to 'read more', slide[:path]
+    &rang;

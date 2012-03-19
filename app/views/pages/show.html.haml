@@ -1,73 +1,74 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      %ul.breadcrumb
-        %li you are here
-        %span.divider &rang;
-        %li= link_to 'Home', pages_path
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    %ul.breadcrumb
+      %li you are here
+      %span.divider &rang;
+      %li= link_to 'Home', pages_path
+      %span.divider /
+      - @page.ancestors.each do |a|
+        %li= link_to a.title, a
         %span.divider /
-        - @page.ancestors.each do |a|
-          %li= link_to a.title, a
-          %span.divider /
-        %li= @page.title
-      %h1
-        = flag_icon(@page.country.downcase)
-        = @page.title
-        %small
-          last updated
-          = time_ago_in_words(@page.updated_at)
-          ago
-      %h4
-        %small originally posted
-        = @page.created_at.strftime('%d %B %Y')
-      - if can? :update, @page
-        .tabbable.tabs-right
-          %ul.nav.nav-tabs
-            %li.active= link_to 'view', '#1', 'data-toggle' => 'tab'
-            %li= link_to 'edit', '#2', 'data-toggle' => 'tab'
-            %li= link_to 'destroy', '#3', 'data-toggle' => 'tab' if can? :destroy, @page
-          .tab-content
-            .tab-pane#1.active
-              %p= @page.description
-              .tags.right= render 'shared/tags', :tags => @page.tag_list
-              = markdown(@page.content)
-            .tab-pane#2
-              - @page.contributions.build if @page.contributions.empty?
-              = render 'form'
-            .tab-pane#3
-              .well
-                %h1 You sure?
-                = link_to 'destroy', @page, confirm: 'Are you sure?', method: :delete if can? :destroy, @page
-      - else
-        %p= @page.description
-        .tags.right= render 'shared/tags', :tags => @page.tag_list
-        = markdown(@page.content)
-      = render 'shared/search'
-    .span2
-      = avatar_for @page, :size => :medium
-      .accordion#accordion1
-        .accordion-group
-          .accordion-heading
-            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#pages'} Suggested Reading
-          .accordion-body#pages
-            .accordion-inner
-              %ul.nav.nav-list
-                - @pages.each do |p|
-                  %li= link_to p.title, p
-        .accordion-group
-          .accordion-heading
-            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#case_studies'} Case Studies
-          .accordion-body#case_studies
-            .accordion-inner
-              %ul.nav.nav-list
-                - @case_studies.each do |c|
-                  %li= link_to c.title, c
-        .accordion-group
-          .accordion-heading
-            %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#authors'} Authors
-          .accordion-body#authors
+      %li= @page.title
+    %h1
+      = flag_icon(@page.country.downcase)
+      = @page.title
+      %small
+        last updated
+        = time_ago_in_words(@page.updated_at)
+        ago
+    %h4
+      %small originally posted
+      = @page.created_at.strftime('%d %B %Y')
+    %hr
+    - if can? :update, @page
+      .tabbable.tabs-right
+        %ul.nav.nav-tabs
+          %li.active= link_to 'view', '#1', 'data-toggle' => 'tab'
+          %li= link_to 'edit', '#2', 'data-toggle' => 'tab'
+          %li= link_to 'destroy', '#3', 'data-toggle' => 'tab' if can? :destroy, @page
+        .tab-content
+          .tab-pane#1.active
+            %p= @page.description
+            .tags.right= render 'shared/tags', :tags => @page.tag_list
+            = markdown(@page.content)
+          .tab-pane#2
+            - @page.contributions.build if @page.contributions.empty?
+            = render 'form'
+          .tab-pane#3
+            .well
+              %h1 You sure?
+              = button_to 'destroy this page', @page, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' if can? :destroy, @page
+    - else
+      %p= @page.description
+      .tags.right= render 'shared/tags', :tags => @page.tag_list
+      = markdown(@page.content)
+    = render 'shared/search'
+  .span2
+    = avatar_for @page, :size => :medium
+    = render 'shared/social'
+    .accordion#accordion1
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#pages'} Suggested Reading
+        .accordion-body#pages.collapse.in
+          .accordion-inner
+            %ul.nav.nav-list
+              - @pages.each do |p|
+                %li= link_to p.title, p
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#case_studies'} Case Studies
+        .accordion-body#case_studies.collapse
+          .accordion-inner
+            %ul.nav.nav-list
+              - @case_studies.each do |c|
+                %li= link_to c.title, c
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle{'data-toggle' => 'collapse', 'data-parent' => '#accordion1', 'href' => '#authors'} Authors
+          .accordion-body#authors.collapse
             .accordion-inner
               %ul.nav.nav-list
                 - @page.contributions.each do |c|
@@ -79,7 +80,6 @@
       .well
         %h3 Tag Cloud
         = cloud_of_tags(Page)
-      = render 'shared/social'
       - if can? :manage, Contribution
         .box
           %h3 Add Contributor

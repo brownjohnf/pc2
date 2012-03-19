@@ -14,7 +14,7 @@ class DocumentsController < ApplicationController
   end
   
   def table
-    @documents = Document.unscoped.order('updated_at DESC').paginate(:page => params[:page], :per_page => 50)
+    @documents = Document.all
 
     respond_to do |format|
       format.html { render :layout => 'layouts/application-fluid' } # index.html.erb

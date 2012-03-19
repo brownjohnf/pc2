@@ -20,7 +20,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :documents do
+  resources :documents, :path => 'files' do
     member do
       get :download
     end
@@ -30,7 +30,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :case_studies do
+  resources :case_studies, :except => [:edit] do
     collection do
       get :added
       get :updated

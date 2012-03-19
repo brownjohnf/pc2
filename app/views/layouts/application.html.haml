@@ -4,6 +4,7 @@
     %title= title
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
+    = render 'layouts/head_scripts'
     = rss_auto_links
     = csrf_meta_tags
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
