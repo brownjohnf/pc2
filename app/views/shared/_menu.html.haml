@@ -10,7 +10,6 @@
           go up
     - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
       %li
-        = link_to 'edit', edit_page_path(item), :class => 'floatright' if can? :update, item
         = link_to item.title, item
   -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
     %li.nav-header= @page.parent.title.upcase
@@ -34,9 +33,7 @@
     %ul.nav.nav-list
       %li.nav-header Quick Links
       - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
-        %li
-          = link_to 'edit', edit_page_path(link), :class => 'floatright' if can? :update, link
-          = link_to link.title, link
+        %li= link_to link.title, link
 .well
   %h1 Google Search
   :erb

@@ -1,23 +1,17 @@
 = semantic_form_for(@page) do |f|
   = f.semantic_errors
-  .box
-    = f.inputs :title, :description
-    - if can? :manage, Page
-      = f.input :country
-    - else
-      = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
-    = f.inputs :parent
-    = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
-    = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
-    = f.inputs :language, :photo, :created_at
+  = f.inputs :title, :description
+  - if can? :manage, Page
+    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+  - else
+    = f.input :country_id, :as => :select, :collection => current_user.countries, :include_blank => false
+  = f.inputs :parent
+  = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
+  = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
+  = f.inputs :language, :photo
+  = f.input :created_at, :as => :text
   = f.input :content, :label => 'Content', :input_html => {:class => 'richtext', :value => (@page.content ? markdown(@page.content) : nil) }
   = link_to 'Insert Photo', '#', :id => 'insert_photo'
   .box
     = f.input :tag_list
     = f.buttons
-#insert_photo_dialog.dialog
-  %label{:for => 'photo_id'} Photo ID
-  %input#photo_id{:type => 'text', :name => 'photo_id'}
-  %label Align
-  %select#align{:name => 'name'}
-    %option{:name => 'left'} Left

@@ -21,6 +21,7 @@ body {
 #photobar {
   background-color: black;
   border-bottom: 1em solid $dark_blue;
+  margin-bottom: 2em;
   a {
     img {
       width: 5%;
@@ -53,6 +54,7 @@ section {
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
+  margin-bottom: 20px;
 }
 .subnav .nav {
   margin-bottom: 0;
