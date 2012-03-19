@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+
+  before_filter :handle_cookies
   
   protect_from_forgery
   
@@ -10,5 +12,9 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   include Carmen
-  
+
+  def handle_cookies
+    cookies[:country] ||= 'SN'
+  end
+
 end

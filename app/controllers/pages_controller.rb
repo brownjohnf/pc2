@@ -5,7 +5,6 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    params[:country] ? cookies[:country] = params[:country] : cookies[:country] ||= 'SN'
     @title = cookies[:country]#'Peruse Our Pages'
     @pages = @pages.order('lft ASC', 'title ASC')
   end
@@ -69,13 +68,6 @@ class PagesController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @page }
     end
-  end
-
-  # GET /pages/1/edit
-  def edit
-    @page = Page.find(params[:id])
-    @title = "Edit #{@page.title}"
-
   end
 
   # POST /pages

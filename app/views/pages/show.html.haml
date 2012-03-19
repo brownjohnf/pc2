@@ -80,7 +80,6 @@
         %h3 Tag Cloud
         = cloud_of_tags(Page)
       = render 'shared/social'
-      = render 'shared/right_user_menu'
       - if can? :manage, Contribution
         .box
           %h3 Add Contributor

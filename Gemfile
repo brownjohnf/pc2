@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails', '3.2.1'
 gem 'bundler'
-gem 'haml'
-gem 'pg'
+gem 'haml', '3.1.4'
+gem 'pg', '0.13.0'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
@@ -20,14 +20,14 @@ gem 'thin', '1.3.1'
 gem 'paperclip', '2.5.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'gravatar_image_tag', '1.0.0'
-gem 'will_paginate', '3.0.3'
+gem 'bootstrap-will_paginate', '0.0.6'
 gem 'acts-as-taggable-on', '2.2.2'
-gem 'formtastic', '2.0.2'
+gem 'formtastic-bootstrap', '1.1.1'
 gem 'cancan', '1.6.7'
 gem "ckeditor", "3.7.0.rc2"
 gem 'texticle', '~> 2.0', :require => 'texticle/rails'
-gem 'rubyzip'
-gem 'ruby-mp3info'
+gem 'rubyzip', '0.9.5'
+gem 'ruby-mp3info', '0.7'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -41,7 +41,7 @@ end
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '1.6.0'
 end
 
 group :development do

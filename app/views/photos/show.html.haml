@@ -1,64 +1,56 @@
 .container
   .row
-    .span-24.last
+    .span10.offset2
       %h1
         = (@photo.title) ? @photo.title : @photo.photo_file_name
         = link_to 'edit', edit_photo_path(@photo) if can? :update, @photo
       %h4= @photo.description
-    .span-24.last
-      &nbsp;
-    .span-24.last
-      .span-4
-        = button_to '< Previous', @prev, :method => :get if @prev
-        = link_to 'Back to pages', pages_path
-        = button_to 'Delete Photo', @photo, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'deleting...' if can? :destroy, @photo
-        .libraries{:style => (@photo.stacks.any? ? nil : 'display:none;')}
-          %h3 Libraries
-          %ul
-          - if @photo.stacks.any?
-            - @photo.stacks.each do |s|
-              %li
-                = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...' if can? :destroy, s
-                = link_to s.library.name, s.library if s.id
-                .clearfloat
-        - if can? :create, Stack
-          %h3 Add to a library
-          - if current_user.libraries.any?
-            - @stack = @photo.stacks.build
-            = form_for @stack, :remote => true do |f|
-              = render 'shared/form_error' if @stack.errors.any?
-              = f.hidden_field(:stackable_id)
-              = f.hidden_field(:stackable_type)
-              .field
-                = f.collection_select(:library_id, current_user.libraries.all, :id, :name)
-              .actions
-                = f.submit 'Add to library', :disable_with => 'adding...'
-          - elsif can? :create, Library
-            = link_to 'create a library', new_library_path
-      .span-16.center
-        = image_tag @photo.photo.url(:large)
-      .span-4.last
-        = button_to 'Next >', @next, :method => :get if @next
-        .box.tags
-          %h3 Tags
-          %ul= render 'shared/tags', :tags => @photo.tag_list
-        = render 'shared/right_user_menu'
-    .span-24.last
-      .span-4
-      .span-4
-        %p
-          Credit:
-          = (@photo.attribution) ? @photo.attribution : 'Peace Corps Senegal'
-      .span-4
-        %p
-          Uploaded by
-          = link_to @photo.user.name, @photo.user
-      .span-4
-      .span-4
-        %p.right= link_to 'View full size', @photo.photo.url, :target => '_blank'
-      .span-4.last
-    .span-24.last
-      .span-4
-      .span-16
-        .box= render 'shared/search'
-      .span-4.last
+  .row
+    .span2
+      = button_to '< Previous', @prev, :method => :get if @prev
+      = link_to 'Back to pages', pages_path
+      = button_to 'Delete Photo', @photo, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'deleting...' if can? :destroy, @photo
+      .libraries{:style => (@photo.stacks.any? ? nil : 'display:none;')}
+        %h3 Libraries
+        %ul
+        - if @photo.stacks.any?
+          - @photo.stacks.each do |s|
+            %li
+              = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...' if can? :destroy, s
+              = link_to s.library.name, s.library if s.id
+              .clearfloat
+      - if can? :create, Stack
+        %h3 Add to a library
+        - if current_user.libraries.any?
+          - @stack = @photo.stacks.build
+          = form_for @stack, :remote => true do |f|
+            = render 'shared/form_error' if @stack.errors.any?
+            = f.hidden_field(:stackable_id)
+            = f.hidden_field(:stackable_type)
+            .field
+              = f.collection_select(:library_id, current_user.libraries.all, :id, :name)
+            .actions
+              = f.submit 'Add to library', :disable_with => 'adding...'
+        - elsif can? :create, Library
+          = link_to 'create a library', new_library_path
+    .span8
+      = image_tag @photo.photo.url(:large)
+    .span2
+      = button_to 'Next >', @next, :method => :get if @next
+      .box.tags
+        %h3 Tags
+        %ul= render 'shared/tags', :tags => @photo.tag_list
+  .row
+    .span4.offset2
+      %p
+        Credit:
+        = (@photo.attribution) ? @photo.attribution : 'Peace Corps Senegal'
+    .span4
+      %p
+        Uploaded by
+        = link_to @photo.user.name, @photo.user
+    .span2
+      = link_to 'View full size', @photo.photo.url, :target => '_blank'
+  .row
+    .span8.offset2= render 'shared/search'
+    .span2

@@ -1,16 +1,13 @@
 .container
-  .row
-    .span12
-      = render 'menu'
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      .box
-        = render 'shared/search'
-      .box
-        %ul.feed
-          = render @pages
-      .center= will_paginate @pages
-    .span2
-      = render 'shared/social'
+  .span3
+    = render 'shared/menu'
+  .span7
+    .page-header
+      %h1= @title
+    = render 'menu'
+    %ul.feed
+      = render @pages
+    = will_paginate :class => 'pagination pagination-centered'
+    = render 'shared/search'
+  .span2
+    = render 'shared/social'

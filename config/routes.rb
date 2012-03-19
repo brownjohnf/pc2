@@ -8,7 +8,7 @@ OmniauthDemo::Application.routes.draw do
   end
   
   constraints :subdomain => '' do
-    match '/' => redirect('http://www.pcsenegal.com')
+    match '/' => redirect("http://www.pcsenegal.com")
   end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
@@ -93,7 +93,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :permissions, :only => [ :index, :new, :create, :destroy ]
 
-  resources :pages do
+  resources :pages, :except => [:edit] do
     collection do
       get :updated
       get :added
