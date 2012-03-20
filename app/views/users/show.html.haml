@@ -14,11 +14,12 @@
           %li.active= link_to 'Basic', '#user', 'data-toggle' => 'tab'
           %li= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
           %li= link_to 'Staff Details', '#staff', 'data-toggle' => 'tab'
-          %li= link_to 'photos', '#photos', 'data-toggle' => 'tab'
-          %li= link_to 'files', '#documents', 'data-toggle' => 'tab'
-          %li= link_to 'pages', '#pages', 'data-toggle' => 'tab'
-          %li= link_to 'timeline events', '#moments', 'data-toggle' => 'tab'
-          %li= link_to 'collections', '#libraries', 'data-toggle' => 'tab'
+          %li= link_to 'Groups', '#groups', 'data-toggle' => 'tab'
+          %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
+          %li= link_to 'Files', '#documents', 'data-toggle' => 'tab'
+          %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
+          %li= link_to 'Timeline events', '#moments', 'data-toggle' => 'tab'
+          %li= link_to 'Collections', '#libraries', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#user.active
             %p= Carmen.country_name(@user.country) if @user.country
@@ -45,10 +46,8 @@
               .well
                 %h4 A little bit about #{@user.name}...
                 = markdown(@user.bio)
-            %h3 Groups
-            %p= render @user.roles
           .tab-pane#volunteers
-            - if can? :read, Volunteer
+            - if can? :read, Volunteer && @user.volunteers.any?
               - @user.volunteers.each do |v|
                 .well
                   %h1
@@ -71,11 +70,14 @@
                     - if v.projects
                       %h4 Projects
                       %p= v.projects
+            - elsif can? :read, Volunteer
+              .well
+                %p This user is not currently registered as a Peace Corps Volunteer. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
             - else
               .well
                 You do not have permission to view this user's details.
           .tab-pane#staff
-            - if can? :read, Staff
+            - if can? :read, Staff && @user.staff.any?
               - @user.staff.each do |s|
                 .well
                   %h3
@@ -99,18 +101,31 @@
                       \-
                       = s.afternoon_close.to_formatted_s(format = :time)
                   = markdown(s.details) if s.details
+            - elsif can? :read, Staff
+              %p This user is not currently registered as a Peace Corps Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
+            - else
+              %p You do not have permission to view this user's details. Most likely, this means that you are neither a Peace Corps Volunter nor Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
+          .tab-pane#groups
+            %h3 Groups
+            %ul
+              - @user.roles.each do |role|
+                %li= role.name
           .tab-pane#photos
             - if @user.photos.any?
               .box
                 %h3 Recently Uploaded Photos
                 - @user.photos.limit(5).each do |p|
                   = render p
+            - else
+              %p This user has not uploaded any photos.
           .tab-pane#documents
             - if @user.documents.any?
               .box
-                %h3 Recently Uploaded Docs
+                %h3 Recently Uploaded Files
                 %ul.feed
                   = render @user.documents.limit(5)
+            - else
+              %p This user has not uploaded any files.
           .tab-pane#pages
             - if @user.contributions.any?
               .box
@@ -118,6 +133,8 @@
                 %ul.feed
                   - @user.contributions.limit(10).each do |c|
                     = render c.contributable
+            - else
+              %p This user has not created nor contributed to any pages.
           .tab-pane#moments
             - if @user.moments.any?
               .box.moments
@@ -128,6 +145,8 @@
                       = avatar_for moment
                       %h4= link_to moment.title, moment
                       %p= truncate(moment.summary, :length => 100, :separator => ' ')
+            - else
+              %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
           .tab-pane#libraries
             - if @user.libraries.any?
               %ul= render @user.libraries

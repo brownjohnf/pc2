@@ -1,27 +1,25 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <p>
-          <b>Name:</b>
-          <%= @website.name %>
-        </p>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Name:</b>
+        <%= @website.name %>
+      </p>
 
-        <p>
-          <b>Description:</b>
-          <%= @website.description %>
-        </p>
+      <p>
+        <b>Description:</b>
+        <%= @website.description %>
+      </p>
 
-        <p>
-          <b>Url:</b>
-          <%= @website.url %>
-        </p>
+      <p>
+        <b>Url:</b>
+        <%= @website.url %>
+      </p>
 
-        <p>
-          <b>Language:</b>
-          <%= @website.language_id %>
-        </p>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <p>
+        <b>Language:</b>
+        <%= @website.language_id %>
+      </p>
+  .span2

@@ -1,24 +1,22 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      .box
-        %h1
-          = @blog.title
-          %span
-            = time_ago_in_words(@blog.updated_at)
-            ago
-        %h4
-          = @blog.user.name
-          .tags.right.inline= render 'shared/tags', :tags => @blog.user.tag_list
-        %p
-          = @blog.description
-          %br
-          = link_to @blog.url
-        .tags.right= render 'shared/tags', :tags => @blog.tag_list
-    .span-4.last
-      .box
-        %h2 Top Blog Tags
-        = cloud_of_tags
-      = render 'shared/right_user_menu'
+.row
+  .span2
+    = render 'shared/menu'
+  .span7
+    .box
+      %h1
+        = @blog.title
+        %span
+          = time_ago_in_words(@blog.updated_at)
+          ago
+      %h4
+        = @blog.user.name
+        .tags.right.inline= render 'shared/tags', :tags => @blog.user.tag_list
+      %p
+        = @blog.description
+        %br
+        = link_to @blog.url
+      .tags.right= render 'shared/tags', :tags => @blog.tag_list
+  .span2
+    .box
+      %h2 Top Blog Tags
+      = cloud_of_tags
