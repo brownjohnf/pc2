@@ -75,8 +75,9 @@
                   - unless c.new_record?
                     %li.feed_item
                       = link_to c.user.name, c.user
-                      |
-                      = link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, c
+                      - if can? :destroy, c
+                        |
+                        = link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...'
       .well
         %h3 Tag Cloud
         = cloud_of_tags(Page)

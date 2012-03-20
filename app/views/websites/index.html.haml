@@ -1,31 +1,29 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th>Language</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Url</th>
+          <th>Language</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @websites.each do |website| %>
-          <tr>
-            <td><%= website.name %></td>
-            <td><%= website.description %></td>
-            <td><%= website.url %></td>
-            <td><%= website.language_id %></td>
-            <td><%= link_to 'Show', website %></td>
-            <td><%= link_to 'Edit', edit_website_path(website) %></td>
-            <td><%= link_to 'Destroy', website, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <% @websites.each do |website| %>
+        <tr>
+          <td><%= website.name %></td>
+          <td><%= website.description %></td>
+          <td><%= website.url %></td>
+          <td><%= website.language_id %></td>
+          <td><%= link_to 'Show', website %></td>
+          <td><%= link_to 'Edit', edit_website_path(website) %></td>
+          <td><%= link_to 'Destroy', website, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+  .span2

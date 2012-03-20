@@ -1,27 +1,25 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @sectors.each do |sector| %>
-          <tr>
-            <td><%= sector.name %></td>
-            <td><%= sector.description %></td>
-            <td><%= link_to 'Show', sector %></td>
-            <td><%= link_to 'Edit', edit_sector_path(sector) %></td>
-            <td><%= link_to 'Destroy', sector, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <% @sectors.each do |sector| %>
+        <tr>
+          <td><%= sector.name %></td>
+          <td><%= sector.description %></td>
+          <td><%= link_to 'Show', sector %></td>
+          <td><%= link_to 'Edit', edit_sector_path(sector) %></td>
+          <td><%= link_to 'Destroy', sector, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+  .span2
