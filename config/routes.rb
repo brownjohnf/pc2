@@ -17,6 +17,7 @@ OmniauthDemo::Application.routes.draw do
     end
     collection do
       get :search
+      get :table
     end
   end
 

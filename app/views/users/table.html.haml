@@ -1,0 +1,16 @@
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    %table.table.table-striped.table-compact.dyn-datatable
+      %thead
+        %th Name
+        %th Joined
+        %th Last updated
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.name
+            %td= user.created_at
+            %td= user.updated_at
+

@@ -28,6 +28,7 @@ gem "ckeditor", "3.7.0.rc2"
 gem 'texticle', '~> 2.0', :require => 'texticle/rails'
 gem 'rubyzip', '0.9.5'
 gem 'ruby-mp3info', '0.7'
+gem 'tabulous', '1.2.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

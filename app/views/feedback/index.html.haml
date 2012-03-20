@@ -1,24 +1,24 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      :erb
-        <table>
-          <tr>
-            <th>Subject</th>
-            <th>Content</th>
-            <th></th>
-            <th></th>
-          </tr>
-
-        <% @feedback.each do |feedback| %>
-          <tr>
-            <td><%= feedback.subject %></td>
-            <td><%= feedback.content %></td>
-            <td><%= link_to 'Show', feedback %></td>
-            <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete if can? :destroy, feedback %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span2
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    :erb
+      <table class="table table-striped table-condensed dyn-datatable">
+        <thead>
+          <th>Subject</th>
+          <th>Content</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @feedback.each do |feedback| %>
+            <tr>
+              <td><%= feedback.subject %></td>
+              <td><%= feedback.content %></td>
+              <td><%= link_to 'Show', feedback %></td>
+              <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete if can? :destroy, feedback %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    .clearfloat
