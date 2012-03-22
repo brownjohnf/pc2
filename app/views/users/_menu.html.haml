@@ -1,0 +1,5 @@
+.subnav
+  %ul.nav.nav-pills
+    %li= link_to 'Recently updated', users_path(:sort => 'updated_at')
+    %li= link_to 'All Users', users_path(:sort => 'name')
+    %li= link_to 'Table View', table_users_path

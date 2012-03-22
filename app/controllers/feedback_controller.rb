@@ -9,7 +9,7 @@ class FeedbackController < ApplicationController
     @title = 'Feedback'
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => 'layouts/application-fluid' } # index.html.erb
       format.json { render json: @feedback }
     end
   end

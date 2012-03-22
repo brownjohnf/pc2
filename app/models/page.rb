@@ -31,6 +31,10 @@ class Page < ActiveRecord::Base
     "#{id}-#{title.parameterize}"
   end
 
+  def canonical_title
+    self.title
+  end
+
   private
 
     def set_parent

@@ -3,7 +3,7 @@
     = render 'shared/menu'
   .span7
     :erb
-      <table>
+      <table class="table">
         <tr>
           <th>Name</th>
           <th>Arrival</th>
@@ -13,18 +13,16 @@
           <th>Country</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
 
       <% @stages.each do |stage| %>
         <tr>
-          <td><%= stage.name %></td>
+          <td><%= link_to stage.name, stage %></td>
           <td><%= stage.arrival %></td>
           <td><%= stage.swear_in %></td>
           <td><%= stage.cos %></td>
           <td><%= stage.pc_id %></td>
           <td><%= Carmen.country_name(stage.country) %></td>
-          <td><%= link_to 'Show', stage %></td>
           <td><%= link_to 'Edit', edit_stage_path(stage) %></td>
           <td><%= link_to 'Destroy', stage, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

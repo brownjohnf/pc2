@@ -1,34 +1,33 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Short</th>
-            <th>Parent</th>
-            <th>Country</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Short</th>
+          <th>Parent</th>
+          <th>Country</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @regions.each do |region| %>
-          <tr>
-            <td><%= region.name %></td>
-            <td><%= region.short %></td>
-            <td><%= region.parent_id %></td>
-            <td><%= region.country %></td>
-            <td><%= region.type.name %></td>
-            <td><%= region.description %></td>
-            <td><%= link_to 'Show', region %></td>
-            <td><%= link_to 'Edit', edit_region_path(region) %></td>
-            <td><%= link_to 'Destroy', region, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span2
+      <% @regions.each do |region| %>
+        <tr>
+          <td><%= region.name %></td>
+          <td><%= region.short %></td>
+          <td><%= region.parent_id %></td>
+          <td><%= region.country %></td>
+          <td><%= region.type.name %></td>
+          <td><%= region.description %></td>
+          <td><%= link_to 'Show', region %></td>
+          <td><%= link_to 'Edit', edit_region_path(region) %></td>
+          <td><%= link_to 'Destroy', region, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+  .span2

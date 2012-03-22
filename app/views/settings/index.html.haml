@@ -4,7 +4,7 @@
       = render 'shared/menu'
     .span-15
       :erb
-        <table>
+        <table class="table">
           <tr>
             <th>Property</th>
             <th>Value</th>
@@ -13,17 +13,15 @@
             <th>User</th>
             <th></th>
             <th></th>
-            <th></th>
           </tr>
 
         <% @settings.each do |setting| %>
           <tr>
-            <td><%= setting.property %></td>
+            <td><%= link_to setting.property, setting %></td>
             <td><%= setting.value %></td>
             <td><%= setting.explanation %></td>
             <td><%= setting.comment %></td>
             <td><%= setting.user_id %></td>
-            <td><%= link_to 'Show', setting %></td>
             <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
             <td><%= link_to 'Destroy', setting, confirm: 'Are you sure?', method: :delete %></td>
           </tr>

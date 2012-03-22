@@ -1,21 +1,19 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-13
-      .box
-        %h1
-          = @library.name
-          = link_to 'edit', edit_library_path(@library) if can? :update, @library
-        %h4= @library.description
-        %ul.feed
-          - @library.stacks.each do |s|
-            = render s.stackable
-    .span-6.last
-      .box
-        %h3
-          = flag_icon(@library.country.downcase)
-          This library is managed by
-        %ul.feed
-          = render @library.user
-      = render 'shared/right_user_menu'
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    .box
+      %h1
+        = @library.name
+        = link_to 'edit', edit_library_path(@library) if can? :update, @library
+      %h4= @library.description
+      %ul.feed
+        - @library.stacks.each do |s|
+          = render s.stackable
+  .span2
+    .box
+      %h3
+        = flag_icon(@library.country.downcase)
+        This library is managed by
+      %ul.feed
+        = render @library.user

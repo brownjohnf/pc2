@@ -34,6 +34,10 @@ class Photo < ActiveRecord::Base
 
   default_scope :order => 'photos.created_at DESC'
 
+  def canonical_title
+    self.title
+  end
+
   private
 
     def reset_pointers

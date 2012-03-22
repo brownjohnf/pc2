@@ -1,27 +1,28 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-19.last
-      :erb
-        <table>
-          <tr>
-            <th>User</th>
-            <th>Stackable_id</th>
-            <th>Stackable_type</th>
-            <th>Comment</th>
-            <th>Library</th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>User</th>
+          <th>Stackable_id</th>
+          <th>Stackable_type</th>
+          <th>Title</th>
+          <th>Comment</th>
+          <th>Library</th>
+          <th></th>
+        </tr>
 
-        <% @stacks.each do |stack| %>
-          <tr>
-            <td><%= link_to stack.user.name, stack.user %></td>
-            <td><%= stack.stackable_id %></td>
-            <td><%= stack.stackable_type %></td>
-            <td><%= stack.comment %></td>
-            <td><%= link_to stack.library.name, stack.library %></td>
-            <td><%= link_to 'Destroy', stack, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+      <% @stacks.each do |stack| %>
+        <tr>
+          <td><%= link_to stack.user.name, stack.user %></td>
+          <td><%= stack.stackable_id %></td>
+          <td><%= stack.stackable_type %></td>
+          <td><%= stack.stackable_type.constantize.find(stack.stackable_id).canonical_title %>
+          <td><%= stack.comment %></td>
+          <td><%= link_to stack.library.name, stack.library %></td>
+          <td><%= link_to 'Destroy', stack, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
