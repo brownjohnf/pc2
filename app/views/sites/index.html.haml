@@ -3,22 +3,20 @@
     = render 'shared/menu'
   .span7
     :erb
-      <table>
+      <table class="table">
         <tr>
           <th>Name</th>
           <th>Region</th>
           <th>Description</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
 
       <% @sites.each do |site| %>
         <tr>
-          <td><%= site.name %></td>
+          <td><%= link_to site.name, site %></td>
           <td><%= site.region.name if site.region %></td>
           <td><%= site.description %></td>
-          <td><%= link_to 'Show', site %></td>
           <td><%= link_to 'Edit', edit_site_path(site) %></td>
           <td><%= link_to 'Destroy', site, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

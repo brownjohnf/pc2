@@ -1,31 +1,30 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <p>
-          <b>Property:</b>
-          <%= @setting.property %>
-        </p>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Property:</b>
+        <%= @setting.property %>
+      </p>
 
-        <p>
-          <b>Value:</b>
-          <%= @setting.value %>
-        </p>
+      <p>
+        <b>Value:</b>
+        <%= @setting.value %>
+      </p>
 
-        <p>
-          <b>Explanation:</b>
-          <%= @setting.explanation %>
-        </p>
+      <p>
+        <b>Explanation:</b>
+        <%= @setting.explanation %>
+      </p>
 
-        <p>
-          <b>Comment:</b>
-          <%= @setting.comment %>
-        </p>
+      <p>
+        <b>Comment:</b>
+        <%= @setting.comment %>
+      </p>
 
-        <p>
-          <b>User:</b>
-          <%= @setting.user_id %>
-        </p>
-    .span-4.last
+      <p>
+        <b>User:</b>
+        <%= @setting.user_id %>
+      </p>
+  .span2

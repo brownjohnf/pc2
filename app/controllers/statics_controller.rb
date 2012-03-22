@@ -2,8 +2,8 @@ class StaticsController < ApplicationController
 
   skip_authorization_check
 
-  def home
-    redirect_to '/splash' unless cookies[:splashed] == 'viewed'
+  def dashboard
+    redirect_to root_path unless cookies[:splashed] == 'viewed'
     @users = User.unscoped.order('users.updated_at DESC').limit(5)
     @pages = Page.order('pages.updated_at DESC').limit(10)
     @case_studies = CaseStudy.order('updated_at DESC').limit(10)

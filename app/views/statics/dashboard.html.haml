@@ -1,0 +1,67 @@
+.row
+  .span12
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
+        %li= link_to 'Files', '#files', 'data-toggle' => 'tab'
+        %li= link_to 'Users', '#users', 'data-toggle' => 'tab'
+        %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
+        %li= link_to 'News', '#news', 'data-toggle' => 'tab'
+        %li= link_to 'Stats', '#stats', 'data-toggle' => 'tab'
+        %li= link_to 'Tags', '#tags', 'data-toggle' => 'tab'
+        %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
+      .tab-content
+        .tab-pane#pages.active
+          %h1 Latest Page Updates
+          %ul.feed
+            = render @pages, :size => :icon
+        .tab-pane#files
+          %h1 Files
+          %ul.feed
+            = render @documents, :size => :icon
+        .tab-pane#users
+          %h1 Users
+          %ul.feed
+            = render @users, :size => :icon
+        .tab-pane#case_studies
+          %h1 Case Studies
+          %ul.feed
+            = render @case_studies, :size => :icon
+        .tab-pane#news
+          .row-fluid
+            .span6
+              = image_tag 'twitter_newbird_blue.png', :class => 'twitter_bird'
+              = render 'shared/twitter', :twitter_user => 'pc_senegal'
+            .span6
+              = image_tag 'twitter_newbird_blue.png', :class => 'twitter_bird'
+              = render 'shared/twitter', :twitter_user => 'stompoutmalaria'
+        .tab-pane#stats
+          %h1 Quick Stats
+          %ul
+            %li= pluralize(User.count, 'user')
+            %li= pluralize(Page.count, 'page')
+            %li= pluralize(CaseStudy.count, 'case study')
+            %li= pluralize(Photo.count, 'photo')
+            %li= pluralize(Document.count, 'file')
+            %li= pluralize(Library.count, 'library')
+            %li= pluralize(Blog.count, 'blog')
+            %li
+              - total_resources = User.count + Page.count + CaseStudy.count + Photo.count + Document.count + Blog.count
+              = pluralize(total_resources, 'resource')
+              and counting!
+              %br
+              that's
+              %strong= pluralize((total_resources - User.count) / User.count, 'resource')
+              per user!
+        .tab-pane#tags
+          %h1 Top Tags
+          = cloud_of_tags Photo
+          = cloud_of_tags Document
+          = cloud_of_tags Page
+          = cloud_of_tags CaseStudy
+          = cloud_of_tags User
+          = cloud_of_tags Blog
+        .tab-pane#photos
+          %h1 Latest Photos
+          = render @photos
+

@@ -17,8 +17,8 @@
 
       <% @jobs.each do |job| %>
         <tr>
-          <td><%= job.staff_id %></td>
-          <td><%= job.position_id %></td>
+          <td><%= job.staff.user.name %></td>
+          <td><%= job.position.title %></td>
           <td><%= job.start %></td>
           <td><%= job.end %></td>
           <td><%= job.comment %></td>

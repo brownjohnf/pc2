@@ -114,6 +114,7 @@ OmniauthDemo::Application.routes.draw do
   match '/search', :to => 'statics#search'
   match '/welcome', :to => 'statics#welcome', :as => :entry
   match '/goodbye', :to => 'statics#goodbye', :as => :exit
+  match '/dashboard', :to => 'statics#dashboard', :as => :dashboard
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'
@@ -123,7 +124,7 @@ OmniauthDemo::Application.routes.draw do
     
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'statics#home'
+  root :to => 'statics#splash'
 
   # See how all your routes lay out with "rake routes"
 

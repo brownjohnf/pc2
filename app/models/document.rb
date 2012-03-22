@@ -18,6 +18,10 @@ class Document < ActiveRecord::Base
 
   before_validation :clear_empty_attrs
 
+  def canonical_title
+    self.name
+  end
+
   private
 
     def clear_empty_attrs
