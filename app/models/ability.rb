@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :updated, :added, :download, :search, :feed, :podcast, :to => :read
+    alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :to => :read
     # Define abilities for the passed in user here. For example:
     #
     unless user
@@ -23,14 +23,20 @@ class Ability
     elsif user.role? :user
       can :read, [ User, Region ]
       can [ :update, :destroy ], User, :id => user.id
-      if user.volunteers.any? || user.staff.any?
+      if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ Volunteer, Staff ]
-        can :create, [ Page, CaseStudy, Region, Stage ], :country => user.volunteers.first.country
+
+        can :create, [ Page, CaseStudy, Region, Stage ] do |item|
+          item.where(:country => user.country_list)
+        end
+
         can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack
+
         can :create, Site do |site|
           site.region.country = user.country
         end
+
         can [ :update, :destroy ], Page do |page|
           page.contributors.find_by_id(user.id)
         end
