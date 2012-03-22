@@ -1,30 +1,30 @@
-.container
-  .row
-    .threecol
-    .twelvecol.last
-      :erb
-        <table>
-          <tr>
-            <th>Staff</th>
-            <th>Position</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Comment</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>Staff</th>
+          <th>Position</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Comment</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @jobs.each do |job| %>
-          <tr>
-            <td><%= job.staff_id %></td>
-            <td><%= job.position_id %></td>
-            <td><%= job.start %></td>
-            <td><%= job.end %></td>
-            <td><%= job.comment %></td>
-            <td><%= link_to 'Show', job %></td>
-            <td><%= link_to 'Edit', edit_job_path(job) %></td>
-            <td><%= link_to 'Destroy', job, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+      <% @jobs.each do |job| %>
+        <tr>
+          <td><%= job.staff_id %></td>
+          <td><%= job.position_id %></td>
+          <td><%= job.start %></td>
+          <td><%= job.end %></td>
+          <td><%= job.comment %></td>
+          <td><%= link_to 'Show', job %></td>
+          <td><%= link_to 'Edit', edit_job_path(job) %></td>
+          <td><%= link_to 'Destroy', job, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>

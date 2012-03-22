@@ -61,4 +61,12 @@ class StaticsController < ApplicationController
   def search
     @title = 'Search'
   end
+
+  def welcome
+    authorize! :read, :welcome
+  end
+
+  def goodbye
+    
+  end
 end

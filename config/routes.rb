@@ -112,6 +112,8 @@ OmniauthDemo::Application.routes.draw do
   match '/splash', :to => 'statics#splash'
   match '/help', :to => 'statics#help'
   match '/search', :to => 'statics#search'
+  match '/welcome', :to => 'statics#welcome', :as => :entry
+  match '/goodbye', :to => 'statics#goodbye', :as => :exit
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'
