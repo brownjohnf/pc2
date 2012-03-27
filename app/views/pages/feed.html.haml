@@ -4,8 +4,7 @@
   .span7
     %h1= @title
     = render 'menu'
-    %ul.thumbnails
-      = render @pages
+    = render @pages
     = will_paginate :class => 'pagination pagination-centered'
     = render 'shared/search'
   .span2

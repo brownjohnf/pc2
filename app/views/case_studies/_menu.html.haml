@@ -1,6 +1,6 @@
-.well
-  %ul.nav.nav-list
-    %li.nav-header Case Studies
+.subnav
+  %ul.nav.nav-pills
     %li= link_to 'All Case Studies', case_studies_path
     %li= link_to 'Recently Added', added_case_studies_path
     %li= link_to 'Recently Updated', updated_case_studies_path
+    = render 'shared/search'
