@@ -3,7 +3,7 @@
   = f.inputs do
     - if can? :manage, @moment
       = f.input :user
-      = f.input :country
+      = f.input :country, :as => :text
     - else
       = f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
       = f.input :country, :as => :hidden, :input_html => { :value => current_user.country }

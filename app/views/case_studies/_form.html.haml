@@ -1,7 +1,7 @@
 = form_for(@case_study) do |f|
   .box
     = render :partial => 'shared/form_error', :locals => {:a => @case_study} if @case_study.errors.any?
-    %h1
+    %h3
       About the case study
       = link_to 'cancel', @case_study
     .field
@@ -16,7 +16,7 @@
     = render 'shared/tag_field', :f => f
     = render 'shared/country_field', :f => f, :object => @case_study
   .box
-    %h1 Body of study
+    %h3 Body of study
   .field
     = f.label :summary, 'Summary*'
     = f.text_area :summary

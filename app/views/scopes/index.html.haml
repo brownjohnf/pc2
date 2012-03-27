@@ -1,25 +1,25 @@
-.container
-  .row
-    .twelvecol.last
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @scopes.each do |scope| %>
-          <tr>
-            <td><%= scope.name %></td>
-            <td><%= scope.title %></td>
-            <td><%= scope.description %></td>
-            <td><%= link_to 'Show', scope %></td>
-            <td><%= link_to 'Edit', edit_scope_path(scope) %></td>
-            <td><%= link_to 'Destroy', scope, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+      <% @scopes.each do |scope| %>
+        <tr>
+          <td><%= link_to scope.name, scope %></td>
+          <td><%= scope.title %></td>
+          <td><%= scope.description %></td>
+          <td><%= link_to 'Edit', edit_scope_path(scope) %></td>
+          <td><%= link_to 'Destroy', scope, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+  .span2

@@ -1,0 +1,9 @@
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    %h1 Welcome!
+    %p Hey #{current_user.name}. Thanks for signing in. Our records indicate that you ARE #{(current_user.role?(:volunteer) ? nil : 'NOT')} a Volunteer, and ARE #{(current_user.role?(:staff) ? nil : 'NOT')} a Staff member. For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
+    %h2 Where to go from here?
+    %p Take off, explore the site!
+  .span2

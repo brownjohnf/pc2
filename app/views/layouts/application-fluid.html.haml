@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title= title
+    = stylesheet_link_tag "application"
+    = render 'layouts/head_styles'
+    = javascript_include_tag "application"
+    = render 'layouts/head_scripts'
+    = rss_auto_links
+    = csrf_meta_tags
+    %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
+    = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
+  %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          = render 'layouts/header'
+    = render 'layouts/photobar'# if Photo.count > 19
+    .container-fluid
+      = render 'layouts/notice' if notice
+      = render 'layouts/alert' if alert
+      = yield
+      - if Rails.env.development?
+        .row-fluid
+          .span12
+            = debug(params)
+        .row-fluid
+          .span12
+            .well
+              Class: #{params[:controller]}
+              %br
+              ID: #{params[:action]}
+              %br
+              Host:
+              = request.host
+    = render 'layouts/footer'
+    = render 'layouts/feedback' unless user_signed_in? && (current_user.role?(:admin) || current_user.role?(:moderator))
+    = render 'shared/zopim' unless Rails.env.development?

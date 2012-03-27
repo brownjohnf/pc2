@@ -8,7 +8,7 @@ class ContributionsController < ApplicationController
     @contributions = Contribution.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => 'layouts/application-fluid' } # index.html.erb
       format.json { render json: @contributions }
     end
   end
@@ -19,7 +19,7 @@ class ContributionsController < ApplicationController
     @contribution = Contribution.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html  # new.html.erb
       format.json { render json: @contribution }
     end
   end

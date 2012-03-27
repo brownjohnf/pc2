@@ -4,5 +4,5 @@
   %p
     = staff.user.country
     %br
-    = link_to staff.jobs.first.position.name, staff.jobs.first.position if staff.jobs.any?
+    = link_to staff.jobs.first.position.title, staff.jobs.first.position if staff.jobs.any?
   .clearfloat

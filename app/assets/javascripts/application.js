@@ -11,15 +11,16 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery-ui
-//= require jquery_ujs
-//= require jquery.url
-//= require anything_slider/jquery.easing.1.2.js
-//= require jquery.colorbox-min.js
-//= require 1140_cssgrid/css3-mediaqueries
-//= require jquery.formalize.min
-//= require anything_slider/jquery.anythingslider.min.js
-//= require anything_slider/jquery.anythingslider.fx.js
-//= require ckeditor/ckeditor
-//= require jHtmlArea-0.7.0.min.js
+// require jquery-ui
+// require jquery_ujs
+// require jquery.url
+// require anything_slider/jquery.easing.1.2.js
+// require jquery.colorbox-min.js
+// require 1140_cssgrid/css3-mediaqueries
+// require jquery.formalize.min
+// require anything_slider/jquery.anythingslider.min.js
+// require anything_slider/jquery.anythingslider.fx.js
+// require ckeditor/ckeditor
+// require jHtmlArea-0.7.0.min.js
+//= require bootstrap
 //= require_tree .

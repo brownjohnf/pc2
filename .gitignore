@@ -9,6 +9,8 @@ omniauth.rb
 dev_environment.rb
 pro_environment.rb
 *.swp
+
+
 # from github suggested list
 
 *.rbc

@@ -4,14 +4,17 @@ class UsersController < ApplicationController
 
   def index
     @title = 'Users'
+    @users = @users.unscoped.order("#{(params[:sort] ? params[:sort] : 'name')} ASC").paginate(:page => params[:page])
+  end
 
-    @users = @users.paginate(:page => params[:page], :per_page => 20)
-    @recent = @users.unscoped.order('updated_at DESC').limit(20)
+  def table
+    respond_to do |format|
+      format.html { render :layout => 'layouts/application-fluid' }
+    end
   end
   
   def search
     @users = User.search(params[:q]).paginate(:page => params[:page], :per_page => 20)
-    @recent = @users.unscoped.search(params[:q]).order('updated_at DESC').limit(20)
     @count = @users.count
     
     render 'index'

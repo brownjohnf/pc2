@@ -21,6 +21,7 @@ class Ability
     if user.role? :admin
       can :manage, :all
     elsif user.role? :user
+      can :read, :welcome
       can :read, [ User, Region ]
       can [ :update, :destroy ], User, :id => user.id
       if user.role?(:volunteer) || user.role?(:staff)

@@ -1,22 +1,20 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <p>
-          <b>Name:</b>
-          <%= @pcregion.name %>
-        </p>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Name:</b>
+        <%= @pcregion.name %>
+      </p>
 
-        <p>
-          <b>Short:</b>
-          <%= @pcregion.short %>
-        </p>
+      <p>
+        <b>Short:</b>
+        <%= @pcregion.short %>
+      </p>
 
-        <p>
-          <b>Description:</b>
-          <%= @pcregion.description %>
-        </p>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <p>
+        <b>Description:</b>
+        <%= @pcregion.description %>
+      </p>
+  .span2

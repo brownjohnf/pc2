@@ -1,17 +1,7 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <p>
-          <b>Name:</b>
-          <%= @sector.name %>
-        </p>
-
-        <p>
-          <b>Description:</b>
-          <%= @sector.description %>
-        </p>
-    .span-4.last
-      = render 'shared/right_user_menu'
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    %h1= @sector.name
+    %p= @sector.description
+  .span2

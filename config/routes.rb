@@ -8,7 +8,7 @@ OmniauthDemo::Application.routes.draw do
   end
   
   constraints :subdomain => '' do
-    match '/' => redirect('http://www.pcsenegal.com')
+    match '/' => redirect("http://www.pcsenegal.com")
   end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
@@ -17,19 +17,21 @@ OmniauthDemo::Application.routes.draw do
     end
     collection do
       get :search
+      get :table
     end
   end
 
-  resources :documents do
+  resources :documents, :path => 'files' do
     member do
       get :download
     end
     collection do
       get :search
+      get :table
     end
   end
 
-  resources :case_studies do
+  resources :case_studies, :except => [:edit] do
     collection do
       get :added
       get :updated
@@ -92,7 +94,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :permissions, :only => [ :index, :new, :create, :destroy ]
 
-  resources :pages do
+  resources :pages, :except => [:edit] do
     collection do
       get :updated
       get :added
@@ -110,6 +112,9 @@ OmniauthDemo::Application.routes.draw do
   match '/splash', :to => 'statics#splash'
   match '/help', :to => 'statics#help'
   match '/search', :to => 'statics#search'
+  match '/welcome', :to => 'statics#welcome', :as => :entry
+  match '/goodbye', :to => 'statics#goodbye', :as => :exit
+  match '/dashboard', :to => 'statics#dashboard', :as => :dashboard
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'
@@ -119,7 +124,7 @@ OmniauthDemo::Application.routes.draw do
     
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'statics#home'
+  root :to => 'statics#splash'
 
   # See how all your routes lay out with "rake routes"
 

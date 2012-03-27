@@ -1,13 +1,15 @@
-.container
-  .row
-    .twelvecol.last
-      :erb
-        <p>
-          <b>Name:</b>
-          <%= @regiontype.name %>
-        </p>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Name:</b>
+        <%= @regiontype.name %>
+      </p>
 
-        <p>
-          <b>Description:</b>
-          <%= @regiontype.description %>
-        </p>
+      <p>
+        <b>Description:</b>
+        <%= @regiontype.description %>
+      </p>
+  .span2

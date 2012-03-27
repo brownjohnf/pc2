@@ -1,25 +1,22 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    %table.table.table-striped.table-condensed.dyn-datatable
       :erb
-        <table>
-          <tr>
-            <th>User</th>
-            <th>Scope</th>
-            <th>Target</th>
-            <th></th>
-          </tr>
-
-        <% @contributions.each do |contribution| %>
-          <tr>
-            <td><%= contribution.user.name %></td>
-            <td><%= contribution.contributable_type %></td>
-            <td><%= link_to contribution.contributable_id, contribution.contributable %></td>
-            <td><%= link_to 'Destroy', contribution, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+        <thead>
+          <th>User</th>
+          <th>Scope</th>
+          <th>Target</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @contributions.each do |contribution| %>
+            <tr>
+              <td><%= contribution.user.name %></td>
+              <td><%= contribution.contributable_type %></td>
+              <td><%= link_to contribution.contributable_id, contribution.contributable %></td>
+              <td><%= link_to 'Destroy', contribution, confirm: 'Are you sure?', method: :delete %></td>
+            </tr>
+          <% end %>
+        </tbody>

@@ -1,22 +1,25 @@
-.container
-  .row
-    .span-3
-      = image_tag 'pc_logo.png', :id => 'patch'
-      = image_tag 'pc_big.png', :id => 'pc_big'
-    .span-21.last
-      .span-24.last
-        #country= country.upcase
-        = render 'shared/slider', :slides => @slides
-        - count = 1
-        - @spotlights.each do |spotlight|
-          .span-8{:class => "#{'last' if count.multiple_of?(3)}"}
-            .spotlight
-              .photo_container{:style => "background-image: url(#{spotlight[:photo]})"}
-                .caption= spotlight[:title]
-              .text= truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
-              %br
-              = link_to 'read more', spotlight[:path]
-              &rarr;
-          - count += 1
+.row
+  .span2
+    = image_tag 'pc_logo.png', :id => 'patch', :width => '100%', :style => 'margin: 20px 0;'
+    = image_tag 'pc_big.png', :id => 'pc_big', :width => '100%'
+  .span10
+    %span{:style => 'font-size:200px;line-height:200px;display:block;'}= country.upcase
+  .span10
+    = render 'shared/slider', :slides => @slides
+    .carousel#testc.slide
+      .carousel-inner
+        .item.active
+          .img{'src' => '/assets/pc_logo.png'}
+          .carousel-caption
+            %p test
+    %ul.thumbnails 
+      - @spotlights.each do |spotlight|
+        %li.span3
+          .thumbnail
+            = image_tag spotlight[:photo]
+            %h4= spotlight[:title]
+            %p= truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
+            = link_to 'read more', spotlight[:path]
+            &rarr;
 -##corner_banner
 -#  We're turning 50!

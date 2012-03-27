@@ -1,4 +1,6 @@
-#slider_container
-  %ul#slider1
+.carousel#splash_carousel
+  .carousel-inner
     - slides.each do |slide|
       = render 'shared/slide', :slide => slide
+  %a.carousel-control.left{'href' => '#splash_carousel', 'data-slide' => 'prev'} &lsaquo;
+  %a.carousel-control.right{'href' => '#splash_carousel', 'data-slide' => 'next'} &lsaquo;

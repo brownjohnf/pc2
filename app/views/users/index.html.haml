@@ -1,33 +1,27 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      .span-12
-        .box
-          %h2 Alphabetical
-          %ul.feed
-            = render @users
-        .center= will_paginate @users
-      .span-12.last
-        .box
-          %h2 Recently Updated
-          %ul.feed
-            = render @recent
-      .span-24.last
-        .box= render 'shared/search'
-    .span-4.last
-      .box
-        %h3 A bit about us
-        %ul
-          %li= pluralize(User.all.count, 'total user')
-          %li= pluralize(Volunteer.find_by_sql("SELECT DISTINCT user_id FROM volunteers").count, 'volunteer')
-          %li= pluralize(Staff.find_by_sql("SELECT DISTINCT user_id FROM staff").count, 'staff member')
-          %li= pluralize(Blog.all.count, 'blog')
-      .box
-        %h3 Top User Tags
-        = cloud_of_tags User
-      .box
-        %h3 Who are our users?
-        Our primary users are Peace Corps Volunteers (PCVs) and staff. However, anyone can log in, create a profile, and join the Peace Corps community. Every user you see here is not necessarily a PCV.
-      = render 'shared/right_user_menu'
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    = render 'menu'
+    .row
+      .span4
+        %h2 Alphabetical
+        %ul.feed
+          = render @users
+        = will_paginate @users
+      .span3
+        = render 'shared/search'
+  .span2
+    .box
+      %h3 A bit about us
+      %ul
+        %li= pluralize(User.all.count, 'total user')
+        %li= pluralize(Volunteer.find_by_sql("SELECT DISTINCT user_id FROM volunteers").count, 'volunteer')
+        %li= pluralize(Staff.find_by_sql("SELECT DISTINCT user_id FROM staff").count, 'staff member')
+        %li= pluralize(Blog.all.count, 'blog')
+    .box
+      %h3 Top User Tags
+      = cloud_of_tags User
+    .box
+      %h3 Who are our users?
+      Our primary users are Peace Corps Volunteers (PCVs) and staff. However, anyone can log in, create a profile, and join the Peace Corps community. Every user you see here is not necessarily a PCV.

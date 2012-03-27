@@ -1,0 +1,19 @@
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    = render 'menu'
+    %table.table.table-striped.table-compact.dyn-datatable
+      %thead
+        %th Name
+        %th Country
+        %th Joined
+        %th Last updated
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.name
+            %td= Carmen.country_name(user.country) if user.country
+            %td= user.created_at
+            %td= user.updated_at
+

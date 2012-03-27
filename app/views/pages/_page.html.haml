@@ -1,8 +1,8 @@
-%li.feed_item
-  = avatar_for page, :size => size ||= :icon
+.feed_item
+  .floatleft= avatar_for page, :size => size ||= :icon
   %h4
-    = link_to page.title, page
-    = link_to 'edit', edit_page_path(page) if can? :update, page
-    %span #{time_ago_in_words(page.updated_at)} ago
+    = link_to page.title, page, :rel => 'popover', 'title' => 'Info', 'data-content' => "authored by #{page.contributors.last.name if page.contributors.any?}<br>created #{page.created_at}"
+    %small #{time_ago_in_words(page.updated_at)} ago
   %p= truncate(page.description, :length => 100, :separator => ' ')
   .tags.right= render 'shared/tags', :tags => page.tag_list
+  %hr

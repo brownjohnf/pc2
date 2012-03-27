@@ -1,29 +1,24 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-19.last
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Comment</th>
-            <th>Scope</th>
-            <th>Processed</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Comment</th>
+          <th>Scope</th>
+          <th>Processed</th>
+          <th></th>
+        </tr>
 
-        <% @imports.each do |import| %>
-          <tr>
-            <td><%= import.name %></td>
-            <td><%= import.comment %></td>
-            <td><%= import.scope.name %></td>
-            <td><%= import.processed %></td>
-            <td><%= link_to 'Show', import %></td>
-            <td><%= link_to 'Edit', edit_import_path(import) %></td>
-            <td><%= link_to 'Destroy', import, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
+      <% @imports.each do |import| %>
+        <tr>
+          <td><%= link_to import.name, import %></td>
+          <td><%= import.comment %></td>
+          <td><%= import.scope.name %></td>
+          <td><%= import.processed %></td>
+          <td><%= link_to 'Destroy', import, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+        </tr>
+      <% end %>
+      </table>

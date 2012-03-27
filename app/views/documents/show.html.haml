@@ -1,29 +1,43 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-15
+    .span7
       .box
         %h1
           = @document.name
-          = link_to 'edit', edit_document_path(@document) if can? :update, @document
-          .tags.right.inline= render 'shared/tags', :tags => @document.tag_list
-        %p= @document.description
-        %p
-          - if @document.author
-            author:
-            = @document.author
-            %br
-          - if @document.language
-            language:
-            = @document.language.name
-        %p
-          = link_to 'download', download_document_path(@document) if can? :read, @document
-          = mime_icon(@document.file_content_type)
-          = @document.file_content_type
-          = @document.file.size
-          bytes
-          = render @document.roles
+          %p= render 'shared/tags', :tags => @document.tag_list
+        %hr
+        .tabbable.tabs-right
+          %ul.nav.nav-tabs
+            %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
+            %li= link_to 'edit', '#edit', 'data-toggle' => 'tab'
+            %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
+          .tab-content
+            .tab-pane#view.active
+              %p= @document.description
+              %p
+                - if @document.author
+                  author:
+                  = @document.author
+                  %br
+                - if @document.language
+                  language:
+                  = @document.language.name
+              %p
+                = link_to 'download', download_document_path(@document) if can? :read, @document
+                = mime_icon(@document.file_content_type)
+                = @document.file_content_type
+                = @document.file.size
+                bytes
+                = render @document.roles
+            .tab-pane#edit
+              %h1 Edit Document
+              = render 'form'
+            .tab-pane#destroy
+              .well
+                %h1 Are you sure?
+                = button_to 'destroy this document', @document, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' if can? :destroy, @document
       .box
         .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
           %h3 Libraries
@@ -50,9 +64,8 @@
                 = f.submit 'Add to library', :disable_with => 'adding...'
         - elsif can? :create, Library
           = link_to 'create a library', new_library_path
-    .span-4.last
+    .span2
       = document_icon_for @document, :size => :small
       .box
         %h3 Top Document Tags
         = cloud_of_tags
-      = render 'shared/right_user_menu'

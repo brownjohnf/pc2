@@ -1,55 +1,59 @@
-#footer
-  .container.first
+.well
+  .container
     .row
-      .span-8
+      .span4
         = link_to image_tag('baskets.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
-      .span-4
-        %ul
-          %li Pages
+      .span2
+        %ul.nav.nav-list
+          %li.nav-header Pages
+          %li.divider
           %li= link_to 'Recently added', added_pages_path
           %li= link_to 'Recently updated', updated_pages_path
           %li= link_to 'Most popular', ''
           %li= link_to 'Site map', pages_path
-      .span-4
-        %ul
-          %li Blogs
+      .span2
+        %ul.nav.nav-list
+          %li.nav-header Blogs
           %li= link_to 'View by region', ''
+          %li.divider
           %li= link_to 'View by sector', ''
           %li= link_to 'Most popular', ''
           %li= link_to 'Recently updated', ''
-      .span-4
-        %ul
-          %li Lessons
+      .span2
+        %ul.nav.nav-list
+          %li.nav-header Lessons
           %li= link_to 'View by sector', ''
           %li= link_to 'View by curriculum', ''
           %li= link_to 'Recently added', ''
           %li= link_to 'Recently updated', ''
           %li= link_to 'Search', ''
-      .span-4.last
-        %ul
-          %li Profiles &amp; Photos
+      .span2
+        %ul.nav.nav-list
+          %li.nav-header Profiles &amp; Photos
           %li= link_to 'Search', ''
           %li= link_to 'Photo Albums', libraries_path
           %li= link_to 'Browse profiles', users_path
-    .clearfloat
-  .container.last
-    .row
-      .span-12.left
-        %ul
-          %li= link_to 'Disclaimer', '/disclaimer'
-          %li= link_to 'Privacy Policy', '/privacy'
-          %li= link_to 'Help!', '/help'
-          %li= link_to 'Security', '/security'
-          %li= link_to 'About us', '/about_us'
-          %li= (signed_in?) ? link_to('Sign out', logout_path) : link_to('Sign in', login_path)
-        #legal
-          Content &copy; 2009-2012 #{organization} #{country}. Design &copy; 2011-2012 #{link_to 'John F. Brown', 'http://brownjohnf.com'}.
-        .clearfloat
-      .span-12.last.right
-        %p
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+        %li Content &copy; 2009-2012 #{organization} #{country}. Developed by #{link_to 'John F. Brown', 'http://brownjohnf.com'}.
+        %span.divider &rang;
+        %li= link_to 'Disclaimer', '/disclaimer'
+        %span.divider /
+        %li= link_to 'Privacy Policy', '/privacy'
+        %span.divider /
+        %li= link_to 'Help!', '/help'
+        %span.divider /
+        %li= link_to 'Security', '/security'
+        %span.divider /
+        %li= link_to 'About us', '/about_us'
+        %span.divider &lang;
+        %li
           Powered by
-          = link_to 'Ruby on Rails', 'http://rubyonrails.org/'
-          3.1
-        %p
+          = link_to 'Rails', 'http://rubyonrails.org/'
+          3.2
+        %span.divider /
+        %li
           Hosted by
           = link_to 'Heroku', 'http://www.heroku.com/'

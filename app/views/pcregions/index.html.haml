@@ -1,29 +1,27 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <table>
-        <tr>
-          <th>Name</th>
-          <th>Short</th>
-          <th>Description</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Short</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-        <% @pcregions.each do |pcregion| %>
-        <tr>
-          <td><%= pcregion.name %></td>
-          <td><%= pcregion.short %></td>
-          <td><%= pcregion.description %></td>
-          <td><%= link_to 'Show', pcregion %></td>
-          <td><%= link_to 'Edit', edit_pcregion_path(pcregion) %></td>
-          <td><%= link_to 'Destroy', pcregion, confirm: 'Are you sure?', method: :delete %></td>
-        </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <% @pcregions.each do |pcregion| %>
+      <tr>
+        <td><%= pcregion.name %></td>
+        <td><%= pcregion.short %></td>
+        <td><%= pcregion.description %></td>
+        <td><%= link_to 'Show', pcregion %></td>
+        <td><%= link_to 'Edit', edit_pcregion_path(pcregion) %></td>
+        <td><%= link_to 'Destroy', pcregion, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+      <% end %>
+      </table>
+  .span2

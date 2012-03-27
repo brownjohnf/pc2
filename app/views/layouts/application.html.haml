@@ -4,34 +4,34 @@
     %title= title
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
+    = render 'layouts/head_scripts'
     = rss_auto_links
     = csrf_meta_tags
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
     = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
-    = render 'layouts/header'
-    #main
-      #header_spacer
-      = render 'layouts/photobar' if Photo.all.count > 19
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = render 'layouts/header'
+    = render 'layouts/photobar' #if Photo.count > 19
+    .container
       = render 'layouts/notice' if notice
       = render 'layouts/alert' if alert
-      #page
-        = yield
-        - if Rails.env.development?
-          .container
-            .row
-              .twelvecol.last
-                = debug(params)
-                Class: #{params[:controller]}
-                %br
-                ID: #{params[:action]}
-                %br
-                Host:
-                = request.host
+      = yield
+      - if Rails.env.development?
+        .row
+          .span12
+            = debug(params)
+        .row
+          .span12
+            .well
+              Class: #{params[:controller]}
+              %br
+              ID: #{params[:action]}
+              %br
+              Host:
+              = request.host
     = render 'layouts/footer'
-    - if user_signed_in?
-      = render 'layouts/user_menu_bar'
-      = render 'layouts/admin_menu_bar' if current_user.role? :admin
-      = render 'layouts/moderator_menu_bar' if current_user.role?(:moderator) && !current_user.role?(:admin)
     = render 'layouts/feedback' unless user_signed_in? && (current_user.role?(:admin) || current_user.role?(:moderator))
-    = render 'shared/zopim'
+    = render 'shared/zopim' unless Rails.env.development?

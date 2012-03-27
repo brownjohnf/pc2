@@ -1,17 +1,15 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <p>
-          <b>Subject:</b>
-          <%= @feedback.subject %>
-        </p>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Subject:</b>
+        <%= @feedback.subject %>
+      </p>
 
-        <p>
-          <b>Content:</b>
-          <%= @feedback.content %>
-        </p>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <p>
+        <b>Content:</b>
+        <%= @feedback.content %>
+      </p>
+  .span2

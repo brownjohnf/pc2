@@ -1,8 +1,6 @@
-%h3 Search
-%p This searches #{params[:controller]}. To search the entire site, use the Google search box in the right-hand menu.
-= form_tag "/#{params[:controller]}/search", :method => :get do
+= form_tag "/#{params[:controller]}/search", :method => :get, :class => 'navbar-form pull-right' do
   = text_field_tag :q
-  = submit_tag 'search'
+  = submit_tag 'search', :class => 'btn btn-success'
 - if @count
   %p
     = pluralize(@count, 'result')

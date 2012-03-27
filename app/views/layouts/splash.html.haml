@@ -29,20 +29,24 @@
          destination: "http://www.waikiki.com"
        });
       </script>
-    = render 'layouts/header'
-    #main
-      #header_spacer
-      = render 'shared/notice_bar' if notice
-      #page
-        = yield
-        - if Rails.env.development?
-          .container
-            .row
-              .twelvecol.last
-                = debug(params)
-                -#= find_named_routes.inspect if Rails.env.development?
-                Class: #{params[:controller]}
-                %br
-                ID: #{params[:action]}
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = render 'layouts/header'
+    .container
+      = render 'layouts/notice' if notice
+      = render 'layouts/alert' if alert
+      = yield
+      .row
+        .span12
+          - if Rails.env.development?
+            .container
+              .row
+                .twelvecol.last
+                  = debug(params)
+                  -#= find_named_routes.inspect if Rails.env.development?
+                  Class: #{params[:controller]}
+                  %br
+                  ID: #{params[:action]}
     = render 'layouts/footer'
     = render 'layouts/feedback' unless can? :create, Feedback

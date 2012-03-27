@@ -1,29 +1,25 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      :erb
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Region</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Region</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </tr>
 
-        <% @sites.each do |site| %>
-          <tr>
-            <td><%= site.name %></td>
-            <td><%= site.region.name if site.region %></td>
-            <td><%= site.description %></td>
-            <td><%= link_to 'Show', site %></td>
-            <td><%= link_to 'Edit', edit_site_path(site) %></td>
-            <td><%= link_to 'Destroy', site, confirm: 'Are you sure?', method: :delete %></td>
-          </tr>
-        <% end %>
-        </table>
-    .span-4.last
-      = render 'shared/right_user_menu'
+      <% @sites.each do |site| %>
+        <tr>
+          <td><%= link_to site.name, site %></td>
+          <td><%= site.region.name if site.region %></td>
+          <td><%= site.description %></td>
+          <td><%= link_to 'Edit', edit_site_path(site) %></td>
+          <td><%= link_to 'Destroy', site, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+  .span2
