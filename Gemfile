@@ -24,10 +24,10 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'acts-as-taggable-on', '2.2.2'
 gem 'formtastic-bootstrap', '1.1.1'
 gem 'cancan', '1.6.7'
-gem "ckeditor", "3.7.0.rc2"
 gem 'texticle', '~> 2.0', :require => 'texticle/rails'
 gem 'rubyzip', '0.9.5'
 gem 'ruby-mp3info', '0.7'
+gem 'mercury-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -104,6 +104,16 @@ class PagesController < ApplicationController
     end
   end
 
+  def mercury_update
+    page = Page.find(params[:id])
+
+    #update page
+    page.content = params[:content][:page_content][:value]
+    page.save!
+    
+    render text: ""
+  end
+
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
