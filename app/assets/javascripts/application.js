@@ -22,5 +22,5 @@
 // require anything_slider/jquery.anythingslider.fx.js
 // require ckeditor/ckeditor
 // require jHtmlArea-0.7.0.min.js
-// require bootstrap
+//= require bootstrap
 //= require_tree .
