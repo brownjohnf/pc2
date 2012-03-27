@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :to => :read
+    alias_action :mercury_update, :to => :update
     # Define abilities for the passed in user here. For example:
     #
     unless user
