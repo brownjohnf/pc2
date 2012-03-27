@@ -1,5 +1,7 @@
 OmniauthDemo::Application.routes.draw do
 
+  Mercury::Engine.routes
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   devise_scope :user do
@@ -102,6 +104,9 @@ OmniauthDemo::Application.routes.draw do
       get :ajax
       get :search
       get :feed, :as => :feed, :defaults => { :format => 'atom' }
+    end
+    member do
+      post :mercury_update
     end
   end
 
