@@ -32,6 +32,16 @@ body {
 .clearfloat {
   clear: both;
 }
+.floatleft {
+  float: left;
+}
+.floatright {
+  float: right;
+}
+.avatar {
+  padding: 0 10px 10px 0;
+  display: block;
+}
 
 section {
   margin-top: 20px;

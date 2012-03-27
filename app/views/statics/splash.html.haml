@@ -12,16 +12,14 @@
           .img{'src' => '/assets/pc_logo.png'}
           .carousel-caption
             %p test
-    .row-fluid
-      %ul.thumbnails 
-        - @spotlights.each do |spotlight|
-          %li.span3
-            .thumbnail
-              = image_tag spotlight[:photo]
-              %h5= spotlight[:title]
-              %p= truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
-              %br
-              = link_to 'read more', spotlight[:path]
-              &rarr;
+    %ul.thumbnails 
+      - @spotlights.each do |spotlight|
+        %li.span3
+          .thumbnail
+            = image_tag spotlight[:photo]
+            %h4= spotlight[:title]
+            %p= truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
+            = link_to 'read more', spotlight[:path]
+            &rarr;
 -##corner_banner
 -#  We're turning 50!

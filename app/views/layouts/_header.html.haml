@@ -8,6 +8,8 @@
     %li= link_to 'Home', splash_path
   - else
     %li= link_to 'Home', '/splash'
+  %li= link_to 'About us', '/pages/97'
+  %li= link_to 'Initiatives', '/pages/96'
   %ul.nav
     %li.dropdown
       %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
@@ -17,14 +19,14 @@
         - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
           %li= link_to Carmen.country_name(country.country), pages_path(:country => country.country)
   %li.divider-vertical
-  %li= link_to 'Pages', updated_pages_path
-  %li= link_to 'Case Studies', case_studies_path
   %ul.nav
     %li.dropdown
       %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
         Resources
         %b.caret
       %ul.dropdown-menu
+        %li= link_to 'Pages', updated_pages_path
+        %li= link_to 'Case Studies', case_studies_path
         %li= link_to 'Photos', photos_path
         -#%li= link_to 'Videos', ''
         %li= link_to 'Files', documents_path

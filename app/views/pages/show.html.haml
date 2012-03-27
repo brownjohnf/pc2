@@ -4,12 +4,12 @@
   .span7
     %ul.breadcrumb
       %li you are here
-      %span.divider &rang;
+      %span.divider &rang;&rang;
       %li= link_to 'Home', pages_path
-      %span.divider /
+      %span.divider &rang;
       - @page.ancestors.each do |a|
         %li= link_to a.title, a
-        %span.divider /
+        %span.divider &rang;
       %li= @page.title
     %h1
       = flag_icon(@page.country.downcase)
