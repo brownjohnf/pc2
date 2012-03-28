@@ -17,7 +17,6 @@ $(function(){
       }
     }
   
-  $('.accordion').collapse();
   $('.carousel').carousel();
   $('.dyn-datatable').dataTable();
   $('[rel=popover]').popover();
