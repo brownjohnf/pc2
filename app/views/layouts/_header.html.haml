@@ -8,8 +8,8 @@
     %li= link_to 'Home', splash_path
   - else
     %li= link_to 'Home', '/splash'
-  %li= link_to 'About us', '/pages/97'
-  %li= link_to 'Initiatives', '/pages/96'
+  %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
+  %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
   %ul.nav
     %li.dropdown
       %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}

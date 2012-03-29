@@ -24,6 +24,7 @@
 %h3
   = flag_icon(cookies[:country].downcase)
   = Carmen.country_name(cookies[:country])
+%hr
 %ul.nav.nav-list
   - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
     %li

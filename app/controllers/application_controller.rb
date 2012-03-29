@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
   include Carmen
 
   def handle_cookies
-    cookies[:country] ||= 'SN'
+    if params[:country]
+      cookies[:country] = params[:country]
+    else
+      cookies[:country] ||= 'SN'
+    end
   end
 
   def after_sign_in_path_for(resource)
