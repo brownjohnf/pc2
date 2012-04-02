@@ -28,10 +28,14 @@ class PagesController < ApplicationController
   end
   
   def search
-    @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)
-    @count = @pages.count
+    if params[:q]
+      @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)
+      @count = @pages.count
     
-    render 'feed'
+      render 'feed'
+    else
+      redirect_to pages_path
+    end
   end
 
   def added

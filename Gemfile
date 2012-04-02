@@ -42,9 +42,13 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'factory_girl_rails', '1.6.0'
+  gem 'rspec-rails', '2.9.0'
+  gem 'webrat', '0.7.3'
+  gem 'spork', '0.9.0'
 end
 
 group :development do
   gem 'foreman'
   gem 'faker'
+  gem 'rspec-rails', '2.9.0'
 end
