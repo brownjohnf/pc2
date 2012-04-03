@@ -5,8 +5,8 @@ OmniauthDemo::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   devise_scope :user do
-    get 'login', :to => 'devise/sessions#new'
-    get 'logout', :to => 'devise/sessions#destroy'
+    get 'login', :to => 'devise/sessions#new', :as => :login
+    get 'logout', :to => 'devise/sessions#destroy', :as => :logout
   end
   
   constraints :subdomain => '' do

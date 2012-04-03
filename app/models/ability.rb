@@ -28,9 +28,7 @@ class Ability
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ Volunteer, Staff ]
 
-        can :create, [ Page, CaseStudy, Region, Stage ] do |item|
-          item.where(:country => user.country_list)
-        end
+        can :create, [ Page, CaseStudy, Region, Stage ]
 
         can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack
