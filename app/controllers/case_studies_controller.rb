@@ -14,10 +14,13 @@ class CaseStudiesController < ApplicationController
   end
   
   def search
-    @case_studies = CaseStudy.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
-    @count = @case_studies.count
-    
-    render 'index'
+    if params[:q]
+      @case_studies = CaseStudy.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+      @count = @case_studies.count
+      render 'index'
+    else
+      redirect_to case_studies_path
+    end
   end
 
   def added
@@ -68,10 +71,10 @@ class CaseStudiesController < ApplicationController
   # POST /case_studies.json
   def create
     @case_study = CaseStudy.new(params[:case_study])
-    @contribution = @case_study.contributions.build(:user_id => current_user.id)
 
     respond_to do |format|
       if @case_study.save
+        @contribution = @case_study.contributions.build(:user_id => current_user.id)
         @contribution.save
         format.html { redirect_to @case_study, notice: 'Case study was successfully created.' }
         format.json { render json: @case_study, status: :created, location: @case_study }
@@ -96,6 +99,17 @@ class CaseStudiesController < ApplicationController
         format.json { render json: @case_study.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # POST mercury_update
+  def mercury_update
+    case_study = CaseStudy.find(params[:id])
+
+    #update case study
+    case_study.summary = params[:content][:cs_summary][:value]
+    case_study.save!
+    
+    render text: ""
   end
 
   # DELETE /case_studies/1

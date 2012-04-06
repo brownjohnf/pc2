@@ -288,7 +288,7 @@ window.Mercury = {
     // The handler function should take the response from the server and return an object that matches:
     // `{image: {url: '[your provided url]'}`
     uploading: {
-      enabled: true,
+      enabled: false,
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',

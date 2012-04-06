@@ -2,7 +2,7 @@ class CaseStudy < ActiveRecord::Base
 
   acts_as_taggable_on :tags
 
-  validates :title, :language, :summary, :country, :presence => true
+  validates :title, :language_id, :summary, :country, :presence => true
   
   # first connects each one of this model to all of the contributables which which reference it
   # then connects to all users attached to all those connections by a renamed tunnel

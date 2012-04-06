@@ -1,4 +1,8 @@
 = semantic_form_for(@volunteer) do |f|
   = f.semantic_errors :state
-  = f.inputs :user, :country, :local_name, :sector, :site, :pc_id, :stage, :cos_date, :emphasis, :projects
+  = f.inputs :user
+  = f.input :country, :as => :text
+  = f.inputs :local_name, :sector, :site, :pc_id, :stage
+  = f.input :cos_date, :as => :text
+  = f.inputs :emphasis, :projects
   = f.buttons

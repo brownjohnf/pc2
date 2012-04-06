@@ -30,8 +30,7 @@ class PagesController < ApplicationController
   def search
     if params[:q]
       @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)
-      @count = @pages.count
-    
+      @count = @pages.count 
       render 'feed'
     else
       redirect_to pages_path
@@ -80,7 +79,7 @@ class PagesController < ApplicationController
     @page = Page.new(params[:page])
 
     respond_to do |format|
-      if @page.save!
+      if @page.save
         @contribution = @page.contributions.build(:user_id => current_user.id)
         @contribution.save
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
@@ -108,6 +107,7 @@ class PagesController < ApplicationController
     end
   end
 
+  # POST mercury_update
   def mercury_update
     page = Page.find(params[:id])
 

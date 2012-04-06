@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :to => :read
+    alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :ajax, :to => :read
     alias_action :mercury_update, :to => :update
     # Define abilities for the passed in user here. For example:
     #
@@ -14,6 +14,7 @@ class Ability
     # all users, even non-logged in ones
     can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
     can :index, [ User, Volunteer ]
+    
     can :create, Feedback
     can :read, Document do |item|
       item.roles.where(:id => user.roles).any?
