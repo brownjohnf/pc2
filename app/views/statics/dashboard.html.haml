@@ -51,7 +51,7 @@
               and counting!
               %br
               that's
-              %strong= pluralize((total_resources - User.count) / User.count, 'resource')
+              %strong= pluralize((total_resources - User.count) / (User.count > 0 ? User.count : 1), 'resource')
               per user!
         .tab-pane#tags
           %h1 Top Tags

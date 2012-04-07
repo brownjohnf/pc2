@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe CaseStudiesController do
-  include Devise::TestHelpers
   
   render_views
 
   # GET index
   describe "GET 'index'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'index'
         response.should be_success
@@ -19,7 +17,6 @@ describe CaseStudiesController do
   # GET search
   describe "GET 'search'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful with a query present' do
         get :search, {:q => 'test'}
         response.should be_success
@@ -34,7 +31,6 @@ describe CaseStudiesController do
   # GET added
   describe "GET 'added'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'added'
         response.should be_success
@@ -45,7 +41,6 @@ describe CaseStudiesController do
   # GET updated
   describe "GET 'updated'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'updated'
         response.should be_success
@@ -59,7 +54,6 @@ describe CaseStudiesController do
       @case_study = Factory.create(:case_study)
     end
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get :show, :id => @case_study
         response.should be_success
@@ -74,7 +68,6 @@ describe CaseStudiesController do
   # GET new
   describe "GET 'new'" do
     context 'as guest' do
-      login_guest
       it 'should redirect to login' do
         get :new
         response.should redirect_to login_path
@@ -106,7 +99,6 @@ describe CaseStudiesController do
   # POST create
   describe "POST 'create'" do
     context 'as guest' do
-      login_guest
       it 'should redirect to login path' do
         post :create
         response.should redirect_to login_path
@@ -181,7 +173,6 @@ describe CaseStudiesController do
   # PUT update
   describe "PUT 'update'" do
     context 'as guest' do
-      login_guest
       it 'should redirect to login path' do
         put :update
         response.should redirect_to login_path
@@ -269,7 +260,6 @@ describe CaseStudiesController do
       }
     end
     context 'as guest' do
-      login_guest
       it 'should not change case study attributes' do
         post :mercury_update, :id => @case_study, :content => @attr
         @case_study.reload
@@ -346,7 +336,6 @@ describe CaseStudiesController do
       @case_study = Factory.create(:case_study)
     end
     context 'as guest' do
-      login_guest
       it 'should not destroy the case study' do
         lambda do
           delete :destroy, :id => @case_study

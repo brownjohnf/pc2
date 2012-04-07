@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe StaticsController do
 
+  render_views
+
   describe "GET 'dashboard'" do
     it 'should be successful with a splashed=viewed cookie' do
       @request.cookies[:splashed] = 'viewed'

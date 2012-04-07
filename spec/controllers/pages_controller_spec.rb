@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe PagesController do
-  include Devise::TestHelpers
   
   render_views
 
   # GET index
   describe "GET 'index'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'index'
         response.should be_success
@@ -19,7 +17,6 @@ describe PagesController do
   # GET feed
   describe "GET 'feed'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful on atom request' do 
         get :feed, :format => 'atom'
         response.should be_success
@@ -34,7 +31,6 @@ describe PagesController do
   # GET search
   describe "GET 'search'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful with a query present' do
         get :search, {:q => 'test'}
         response.should be_success
@@ -49,7 +45,6 @@ describe PagesController do
   # GET added
   describe "GET 'added'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'added'
         response.should be_success
@@ -60,7 +55,6 @@ describe PagesController do
   # GET updated
   describe "GET 'updated'" do
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'updated'
         response.should be_success
@@ -74,7 +68,6 @@ describe PagesController do
       @page = Factory.create(:page)
     end
     context 'as anyone' do
-      login_guest
       it 'should be successful' do
         get 'show', :id => @page
         response.should be_success
@@ -110,7 +103,6 @@ describe PagesController do
       end
     end
     context 'as guest' do
-      login_guest
       it 'should redirect to login' do
         get 'new'
         response.should redirect_to login_path
@@ -121,7 +113,6 @@ describe PagesController do
   # POST create
   describe "POST 'create'" do
     context 'as guest' do
-      login_guest
       it 'should redirect to login' do
         post :create
         response.should redirect_to login_path
@@ -289,7 +280,6 @@ describe PagesController do
         end
       end
       context 'as guest' do
-        login_guest
         describe 'non-contributor' do
           it 'should redirect to login' do
             put :update, :id => @page, :page => @attr
@@ -311,7 +301,6 @@ describe PagesController do
       }
     end
     context 'as guest' do
-      login_guest
       it 'should not change page attributes' do
         post :mercury_update, :id => @page, :content => @attr
         @page.reload
@@ -388,7 +377,6 @@ describe PagesController do
       @page = Factory.create(:page)
     end
     context 'as guest' do
-      login_guest
       it 'should not destroy the page' do
         lambda do
           delete :destroy, :id => @page

@@ -15,6 +15,7 @@ Spork.prefork do
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
     config.extend ControllerMacros, :type => :controller
+    config.extend ModelMacros, :type => :model
 
     # ## Mock Framework
     #

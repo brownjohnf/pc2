@@ -11,6 +11,7 @@
     - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
       %li
         = link_to item.title, item
+    %hr
   -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
     %li.nav-header= @page.parent.title.upcase
     - if @page.parent && can?(:read, @page.parent)
@@ -21,7 +22,7 @@
     - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
       %li
         = link_to item.title, item
-%hr
+    %hr
 %h3
   = flag_icon(cookies[:country].downcase)
   = Carmen.country_name(cookies[:country])
