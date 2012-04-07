@@ -2,12 +2,6 @@ module ControllerMacros
 
   # user login management
 
-  def login_guest
-    before (:each) do
-      @user = User.new
-      @user.roles << Role.find_or_create_by_name('Public')
-    end
-  end    
   def login_user
     before(:each) do
       @request.env["devise_mapping"] = Devise.mappings[:user]
