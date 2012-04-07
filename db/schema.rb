@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120315233647) do
+ActiveRecord::Schema.define(:version => 20120406233138) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20120315233647) do
     t.string   "sort_order"
   end
 
-  create_table "pcregions", :force => true do |t|
+  create_table "pc_regions", :force => true do |t|
     t.string   "name"
     t.string   "short"
     t.string   "description"
@@ -219,16 +219,6 @@ ActiveRecord::Schema.define(:version => 20120315233647) do
   create_table "sectors", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "settings", :force => true do |t|
-    t.string   "property"
-    t.string   "value"
-    t.string   "explanation"
-    t.string   "comment"
-    t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PcregionsControllerTest < ActionController::TestCase
+class PcRegionsControllerTest < ActionController::TestCase
   setup do
     @pcregion = pcregions(:one)
   end

@@ -22,14 +22,14 @@ describe StaticsController do
   end
 
   describe "GET 'welcome'" do
-    describe 'if signed in' do
+    context 'as user' do
       login_user
       it 'should be successful' do
         get :welcome
         response.should be_success
       end
     end
-    describe 'if not signed in' do
+    context 'as guest' do
       it 'should redirect to root path' do
         get :welcome
         response.should redirect_to login_path

@@ -7,39 +7,25 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-roles = Role.create!([{:name => 'User'},{:name => 'Moderator'},{:name => 'Admin'}])
+Role.create!([
+  {:name => 'Public'},
+  {:name => 'User'},
+  {:name => 'Volunteer'},
+  {:name => 'Staff'},
+  {:name => 'Moderator'},
+  {:name => 'Admin'}
+])
 
-settings = Setting.create!(
-                            [
-                              { :property => 'country', :value => 'Senegal' },
-                              { :property => 'organization', :value => 'Peace Corps' }
-                            ]
-                          )
-groups = Group.create!(
-                       [
-                          { :name => 'User' },
-                          { :name => 'Administrator' },
-                          { :name => 'Moderator' },
-                          { :name => 'Staff' },
-                          { :name => 'Public'}
-                        ]
-                      )
-privileges = Privilege.create!(
-                               [
-                                  { name: 'View', description: 'Ability to view.'}
-                                ]
-                              )
 scopes = Scope.create!(
                        [
                          { name: 'Page', title: 'Page', description: 'Page-related privileges.' },
-                         { name: 'Module', title: 'Training Module', description: 'Ability to modify modules.' },
                          { name: 'User', title: 'User/Volunteer/Staff Profile', description: 'Ability to modify users' },
                          { name: 'Photo', title: 'Photo', description: 'Ability to modify users' },
                          { name: 'Library', title: 'Library', description: 'Ability to modify users' },
                          { name: 'CaseStudy', title: 'Case Study', description: 'Ability to modify case studies' }
                        ]
                      )
-pcregions = Pcregion.create!(
+pc_regions = PcRegion.create!(
                              [
                                 { name: 'Africa', short: 'AF'},
                                 { name: 'North Africa & The Middle East', short: 'NA/ME'},

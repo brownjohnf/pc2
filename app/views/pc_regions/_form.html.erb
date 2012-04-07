@@ -1,10 +1,10 @@
-<%= form_for(@pcregion) do |f| %>
-  <% if @pcregion.errors.any? %>
+<%= form_for(@pc_region) do |f| %>
+  <% if @pc_region.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@pcregion.errors.count, "error") %> prohibited this pcregion from being saved:</h2>
+      <h2><%= pluralize(@pc_region.errors.count, "error") %> prohibited this pc_region from being saved:</h2>
 
       <ul>
-      <% @pcregion.errors.full_messages.each do |msg| %>
+      <% @pc_region.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

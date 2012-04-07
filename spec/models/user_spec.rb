@@ -88,9 +88,6 @@ describe User do
       it 'should not be able to read scopes' do
         @ability.should_not be_able_to(:read, Scope)
       end
-      it 'should not be able to read settings' do
-        @ability.should_not be_able_to(:read, Setting)
-      end
       it 'should not be able to read sites' do
         @ability.should_not be_able_to(:read, Site)
       end

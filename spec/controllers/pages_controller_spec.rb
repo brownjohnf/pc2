@@ -185,6 +185,15 @@ describe PagesController do
       @page = Factory.create(:page)
     end
     describe 'without content' do
+      context 'as admin' do
+        login_admin
+        it 'should fail?' do
+          put :update, :id => @page
+          response.should_not be_successful
+        end
+      end
+    end
+    describe 'with bad content' do
       bad_page_attributes
       context 'as admin' do
         login_admin
@@ -386,7 +395,7 @@ describe PagesController do
         end.should_not change(Page, :count).by(-1)
       end
       it 'should redirect to login path' do
-        delete :destroy, :id => @case_study
+        delete :destroy, :id => @page
         response.should redirect_to login_path
       end
     end
@@ -414,7 +423,7 @@ describe PagesController do
           end.should change(Page, :count).by(-1)
         end
         it 'should redirect to pages index' do
-          delete 'destroy', {:id => @page.id}
+          delete 'destroy', :id => @page
           response.should redirect_to pages_url
         end
       end
@@ -443,7 +452,7 @@ describe PagesController do
           end.should change(Page, :count).by(-1)
         end
         it 'should redirect to pages index' do
-          delete 'destroy', {:id => @page.id}
+          delete 'destroy', :id => @page
           response.should redirect_to pages_url
         end
       end
@@ -472,13 +481,14 @@ describe PagesController do
           end.should_not change(Page, :count).by(-1)
         end
         it 'should redirect to login' do
-          delete 'destroy', {:id => @page.id}
+          delete 'destroy', :id => @page.id
           response.should redirect_to login_path
         end
       end
     end
   end
 
+  # GET ajax
   describe "GET 'ajax'" do
     it 'should be successful' do
       get 'ajax'

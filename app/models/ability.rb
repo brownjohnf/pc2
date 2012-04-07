@@ -12,7 +12,7 @@ class Ability
     end
     
     # all users, even non-logged in ones
-    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
+    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, PcRegion, Position, Sector, Staff, Stage ]
     can :index, [ User, Volunteer ]
     
     can :create, Feedback

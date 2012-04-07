@@ -81,7 +81,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pcregions, :regions, :volunteers, :settings
+  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pc_regions, :regions, :volunteers
 
   resources :blogs do
     collection do

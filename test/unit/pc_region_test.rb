@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SettingTest < ActiveSupport::TestCase
+class PcRegionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
