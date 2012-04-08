@@ -149,6 +149,7 @@ def make_pages
       page.contributions.build(:user_id => b.user.id)
       page.save!
     end
+  end
 end
 
 def make_case_studies
