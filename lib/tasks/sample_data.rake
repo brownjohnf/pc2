@@ -74,7 +74,7 @@ def make_users
   99.times do |n|
     name = Faker::Name.name
     email = Faker::Internet.email
-    user = User.create!(:name => name, :email => email, :country => 'SN')
+    user = User.create!(:name => name, :email => email, :password => 'testing', :country => 'SN')
     user.volunteers.create!(:local_name => Faker::Name.name, :country => 'SN')
   end
 end
@@ -85,17 +85,17 @@ end
 
 def make_regions
 	Region.create!([
-  { name: 'Dakar', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Kaolack', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Saint-Louis', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Tambacounda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Kaffrine', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Kedougou', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Kolda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Louga', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Linguere', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Mattam', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Ziguinchor', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
-  { name: 'Thies', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil }
-])
+    { name: 'Dakar', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Kaolack', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Saint-Louis', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Tambacounda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Kaffrine', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Kedougou', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Kolda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Louga', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Linguere', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Mattam', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Ziguinchor', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+    { name: 'Thies', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil }
+  ])
 end
