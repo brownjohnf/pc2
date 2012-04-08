@@ -150,6 +150,11 @@ def make_pages
       page.save!
     end
   end
+  page_total = Page.count
+  Page.all.each do |page|
+    page.parent_id = 1 + rand(page_count)
+  end
+  Page.rebuild!
 end
 
 def make_case_studies
