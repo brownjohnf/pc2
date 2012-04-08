@@ -39,7 +39,7 @@ describe UsersController do
   describe "'GET' search" do
     context 'as admin' do
       login_admin
-      it 'should be successful' do
+      it 'should be successful with postgres' do
         get :search, :q => 'test'
         response.should be_success
       end

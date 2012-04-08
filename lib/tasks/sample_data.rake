@@ -1,11 +1,15 @@
 namespace :db do
-	task :populate => :environment do
+	task :sample_data => :environment do
 		Rake::Task['db:reset'].invoke
-		make_users
-		make_memberships
-		make_regiontypes
+    Rake::Task['db:seed'].invoke
+    make_pc_regions
+    make_sectors
+    make_languages
+    make_regiontypes
 		make_regions
-		make_moments
+    make_user
+    make_users
+		Rake::Task['db:populate_timeline'].invoke
 	end
 end
 
@@ -45,7 +49,9 @@ def make_user
     :local_name => 'Babakar Ndiaye',
     :country => 'SN'
   )
-
+  jack.staff.create!(
+    :country => 'SN'
+  )
   jack.blogs.create!(
     :title => 'Senegal et al',
     :description => 'Info about my life in Senegal.',

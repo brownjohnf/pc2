@@ -17,7 +17,7 @@ describe CaseStudiesController do
   # GET search
   describe "GET 'search'" do
     context 'as anyone' do
-      it 'should be successful with a query present' do
+      it 'should be successful with a query present and postgres' do
         get :search, {:q => 'test'}
         response.should be_success
       end

@@ -17,7 +17,6 @@ pro_environment.rb
 *.sassc
 .sass-cache
 capybara-*.html
-.rspec
 /.bundle
 /vendor/bundle
 /log/*
