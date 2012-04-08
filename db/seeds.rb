@@ -38,9 +38,9 @@ Page.create!([
     :country => 'SN', 
     :language_id => Language.find_by_code('EN').id
   },{
-    :title => 'Initiatives', 
-    :description => 'Sample initiatives page', 
-    :content => "This is the Initiatives page created by default. Please DO NOT delete it, but edit it to reflect your post's initiatives.", 
+    :title => 'What We Do', 
+    :description => 'Sample what we do page', 
+    :content => "This is the What We Do page created by default. Please DO NOT delete it, but edit it to reflect your post's activities.", 
     :country => 'SN', 
     :language_id => Language.find_by_code('EN').id
   }
