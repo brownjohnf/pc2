@@ -144,7 +144,7 @@ def make_pages
         :description => Faker::Lorem.paragraph, 
         :content => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
-        :lannguage => 1+rand(2)
+        :language => 1+rand(2)
       }])
       page.contributions.build(:user_id => b.user.id)
       page.save!
@@ -159,7 +159,7 @@ def make_case_studies
         :title => Faker::Company.catch_phrase, 
         :summary => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
-        :lannguage => 1+rand(2)
+        :language => 1+rand(2)
       }])
       case_study.contributions.build(:user_id => b.user.id)
       case_study.save!
