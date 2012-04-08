@@ -150,11 +150,21 @@ def make_pages
       page.save!
     end
   end
-  page_count = Page.count
-  Page.all.each do |page|
-    page.parent_id = 1 + rand(page_count)
+  start = 11
+  middle = Page.count - 15
+  Page.where(:id => start..middle).each do |page|
+    page.parent_id = 1 + rand(start - 2)
+    page.save!
+  end
+  Page.where('id > ?', middle).each do |page|
+    page.parent_id = start + rand(middle - start)
+    page.save!
   end
   Page.rebuild!
+  Page.all.each do |page|
+    page.title = "#{page.title} (#{page.children.count})"
+    page.save!
+  end
 end
 
 def make_case_studies
