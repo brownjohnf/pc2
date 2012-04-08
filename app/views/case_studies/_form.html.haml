@@ -1,43 +1,11 @@
-= form_for(@case_study) do |f|
-  .box
-    = render :partial => 'shared/form_error', :locals => {:a => @case_study} if @case_study.errors.any?
-    %h3
-      About the case study
-      = link_to 'cancel', @case_study
-    .field
-      = f.label :title, 'Title*'
-      = f.text_field :title
-    .field
-      = f.label :photo_id, 'Profile Photo'
-      = f.collection_select(:photo_id, Photo.all, :id, :title, :include_blank => true)
-    .field
-      = f.label :language_id, 'Language*'
-      = f.collection_select(:language_id, Language.all, :id, :name)
-    = render 'shared/tag_field', :f => f
-    = render 'shared/country_field', :f => f, :object => @case_study
-  .box
-    %h3 Body of study
-  .field
-    = f.label :summary, 'Summary*'
-    = f.text_area :summary
-  .field
-    = f.label :context
-    = f.text_area :context
-  .field
-    = f.label :approach
-    = f.text_area :approach
-  .field
-    = f.label :results
-    = f.text_area :results
-  .field
-    = f.label :challenges
-    = f.text_area :challenges
-  .field
-    = f.label :lessons_learned
-    = f.text_area :lessons_learned
-  .field
-    = f.label :next_steps
-    = f.text_area :next_steps
-  .box
-    .actions
-      = f.submit
+= semantic_form_for(@case_study) do |f|
+  = f.semantic_errors
+  %h3 About the case study
+  = f.inputs :title, :photo, :language, :tag_list
+  - if can? :manage, Page
+    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+  - else
+    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+  %h3 Body of study
+  = f.inputs :summary, :context, :approach, :results, :challenges, :lessons_learned, :next_steps
+  = f.buttons

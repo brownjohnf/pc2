@@ -2,7 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :to => :read
+    alias_action :updated, :added, :download, :search, :feed, :podcast, :table, :ajax, :to => :read
+    alias_action :mercury_update, :to => :update
     # Define abilities for the passed in user here. For example:
     #
     unless user
@@ -11,8 +12,9 @@ class Ability
     end
     
     # all users, even non-logged in ones
-    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, Pcregion, Position, Sector, Staff, Stage ]
+    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, PcRegion, Position, Sector, Staff, Stage ]
     can :index, [ User, Volunteer ]
+    
     can :create, Feedback
     can :read, Document do |item|
       item.roles.where(:id => user.roles).any?
@@ -27,9 +29,7 @@ class Ability
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ Volunteer, Staff ]
 
-        can :create, [ Page, CaseStudy, Region, Stage ] do |item|
-          item.where(:country => user.country_list)
-        end
+        can :create, [ Page, CaseStudy, Region, Stage ]
 
         can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack

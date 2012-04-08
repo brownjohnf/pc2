@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # return a title on a per-page basis
   def title
-    base_title = "#{organization} #{country}"
+    base_title = "Peace Corps #{country}"
     if @title.nil?
       base_title
     else
@@ -10,12 +10,8 @@ module ApplicationHelper
     end
   end
 
-  def organization
-    Setting.where(:property => 'organization').first.value
-  end
-
   def country
-    Setting.where(:property => 'country').first.value
+    'Senegal'
   end
 
   def avatar_for(object, options = { :size => :icon, :photo => 'blank.png' })

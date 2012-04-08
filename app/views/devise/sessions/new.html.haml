@@ -1,8 +1,7 @@
 .container
   .row
-    .span-9
-    .span-6
-      .box
+    .span4.offset4
+      .well.center-block
         %h1 Sign in
         = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
           .field

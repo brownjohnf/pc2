@@ -1,0 +1,27 @@
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Short</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @pc_regions.each do |pc_region| %>
+      <tr>
+        <td><%= pc_region.name %></td>
+        <td><%= pc_region.short %></td>
+        <td><%= pc_region.description %></td>
+        <td><%= link_to 'Show', pc_region %></td>
+        <td><%= link_to 'Edit', edit_pc_region_path(pc_region) %></td>
+        <td><%= link_to 'Destroy', pc_region, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+      <% end %>
+      </table>
+  .span2

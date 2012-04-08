@@ -56,12 +56,11 @@ class Library < ActiveRecord::Base
       }
     }
 
-   # set read permissions on the file
-   File.chmod(0644, bundle_filename)
+    # set read permissions on the file
+    File.chmod(0644, bundle_filename)
 
-   # save the object
-   self.save
-   
+    # save the object
+    self.save
   end
 
 end

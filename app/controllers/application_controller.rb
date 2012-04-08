@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   before_filter :handle_cookies
+  before_filter :check_for_users
   
   protect_from_forgery
   
@@ -14,7 +15,17 @@ class ApplicationController < ActionController::Base
   include Carmen
 
   def handle_cookies
-    cookies[:country] ||= 'SN'
+    if params[:country]
+      cookies[:country] = params[:country]
+    else
+      cookies[:country] ||= 'SN'
+    end
+  end
+
+  def check_for_users
+    if User.any?
+      #redirect_to login_path
+    end
   end
 
   def after_sign_in_path_for(resource)

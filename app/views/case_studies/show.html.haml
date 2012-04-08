@@ -15,11 +15,12 @@
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
-          %li= link_to 'edit', '#edit', 'data-toggle' => 'tab'
+          %li= link_to 'basic edit', '#edit', 'data-toggle' => 'tab'
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }
           %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#view.active
-            = markdown @case_study.summary
+            .mercury-region#cs_summary{'data-type' => 'editable'}= markdown @case_study.summary
             - if @case_study.context
               %h2 Context
               = markdown @case_study.context

@@ -6,8 +6,11 @@
       %h1
         Photo Gallery
         %small= pluralize(Photo.count, 'photo')
-      - @photos.each do |photo|
-        = link_to image_tag(photo.photo.url(:icon), :width => '10%', :style => 'float:left;'), photo
+      - if @photos
+        - @photos.each do |photo|
+          = link_to image_tag(photo.photo.url(:icon), :width => '10%', :style => 'float:left;'), photo
+      - else
+        %p No photos have been uploaded.
       .clearfloat
       .center= will_paginate
       = render 'shared/search'

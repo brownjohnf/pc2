@@ -5,13 +5,13 @@ OmniauthDemo::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   devise_scope :user do
-    get 'login', :to => 'devise/sessions#new'
-    get 'logout', :to => 'devise/sessions#destroy'
+    get 'login', :to => 'devise/sessions#new', :as => :login
+    get 'logout', :to => 'devise/sessions#destroy', :as => :logout
   end
   
-  constraints :subdomain => '' do
-    match '/' => redirect("http://www.pcsenegal.com")
-  end
+  #constraints :subdomain => '' do
+  #  match '/' => redirect('/') #("http://www.pcsenegal.com")
+  #end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
     member do
@@ -33,11 +33,14 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :case_studies, :except => [:edit] do
+  resources :case_studies do
     collection do
       get :added
       get :updated
       get :search
+    end
+    member do
+      post :mercury_update
     end
   end
 
@@ -78,7 +81,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pcregions, :regions, :volunteers, :settings
+  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pc_regions, :regions, :volunteers
 
   resources :blogs do
     collection do
@@ -96,7 +99,7 @@ OmniauthDemo::Application.routes.draw do
 
   resources :permissions, :only => [ :index, :new, :create, :destroy ]
 
-  resources :pages, :except => [:edit] do
+  resources :pages do
     collection do
       get :updated
       get :added

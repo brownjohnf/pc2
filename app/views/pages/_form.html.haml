@@ -4,7 +4,7 @@
   - if can? :manage, Page
     = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
   - else
-    = f.input :country_id, :as => :select, :collection => current_user.countries, :include_blank => false
+    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
   = f.inputs :parent
   = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
   = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'

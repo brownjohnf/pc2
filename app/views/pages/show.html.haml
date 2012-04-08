@@ -26,8 +26,8 @@
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#1', 'data-toggle' => 'tab'
-          %li= link_to 'edit content', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }
-          %li= link_to 'edit properties', '#2', 'data-toggle' => 'tab'
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }
+          %li= link_to 'properties', '#2', 'data-toggle' => 'tab'
           %li= link_to 'destroy', '#3', 'data-toggle' => 'tab' if can? :destroy, @page
         .tab-content
           .tab-pane#1.active

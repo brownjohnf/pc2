@@ -1,0 +1,20 @@
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    :erb
+      <p>
+        <b>Name:</b>
+        <%= @pc_region.name %>
+      </p>
+
+      <p>
+        <b>Short:</b>
+        <%= @pc_region.short %>
+      </p>
+
+      <p>
+        <b>Description:</b>
+        <%= @pc_region.description %>
+      </p>
+  .span2

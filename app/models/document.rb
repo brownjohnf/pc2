@@ -28,6 +28,10 @@ class Document < ActiveRecord::Base
     self.name
   end
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
   private
 
     def clear_empty_attrs

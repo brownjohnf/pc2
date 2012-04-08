@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   
   accepts_nested_attributes_for :roles, :allow_destroy => true
-  validates :name, :email, :presence => true
+  validates :name, :presence => true, :length => { :minimum => 5, :maximum => 128 }
+  validates :email, :presence => true
   
   after_create :add_user_role
 
@@ -34,8 +35,8 @@ class User < ActiveRecord::Base
   has_many :sites
   has_many :websites
   
-  has_many :stacks, :as => :stackable
-  has_many :added_stacks, :as => :user
+  has_many :stacks, :as => :stackable, :dependent => :destroy
+  has_many :added_stacks, :foreign_key => :user_id, :class_name => 'Stack'
   
   # all photos directly uploaded by the user, just to upload. all photos are also tagged with the user_id of their uploader, 
   # even if they were uploaded as part of a timeline moment or something else.
@@ -59,11 +60,6 @@ class User < ActiveRecord::Base
     name ? "#{id}-#{name.parameterize}" : id
   end
 
-  def destroy_avatar
-    self.avatar = nil
-    self.save
-  end
-  
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
@@ -94,6 +90,10 @@ class User < ActiveRecord::Base
       country_list << code
     end
     country_list
+  end
+
+  def canonical_title
+    self.name
   end
 
   private

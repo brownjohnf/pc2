@@ -18,6 +18,7 @@
           %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
           %li= link_to 'Files', '#documents', 'data-toggle' => 'tab'
           %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
+          %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
           %li= link_to 'Timeline events', '#moments', 'data-toggle' => 'tab'
           %li= link_to 'Collections', '#libraries', 'data-toggle' => 'tab'
         .tab-content
@@ -127,14 +128,23 @@
             - else
               %p This user has not uploaded any files.
           .tab-pane#pages
-            - if @user.contributions.any?
+            - if (contributions = @user.contributions.where(:contributable_type => 'Page').limit(10)).any?
               .box
-                %h3 Contributions
+                %h3 Pages
                 %ul.feed
-                  - @user.contributions.limit(10).each do |c|
-                    = render c.contributable
+                  - contributions.each do |contribution|
+                    = render contribution.contributable
             - else
-              %p This user has not created nor contributed to any pages.
+              %p This user has neither created nor contributed to any pages.
+          .tab-pane#case_studies
+            - if (contributions = @user.contributions.where(:contributable_type => 'CaseStudy').limit(10)).any?
+              .box
+                %h3 Pages
+                %ul.feed
+                  - contributions.each do |contribution|
+                    = render contribution.contributable
+            - else
+              %p This user has neither created nor contributed to any case studies.
           .tab-pane#moments
             - if @user.moments.any?
               .box.moments
@@ -159,6 +169,6 @@
             %span.caret
           %ul.dropdown-menu
             = link_to 'Change password', edit_user_registration_path, :method => :get
-      - if @user.avatar? && can?(:update, @user)
-        = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
+        - if @user.avatar?
+          = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
       = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?

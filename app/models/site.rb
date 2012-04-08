@@ -8,4 +8,12 @@ class Site < ActiveRecord::Base
 
   validates :user_id, :name, :presence => true
 
+  def canonical_title
+    self.name
+  end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
 end

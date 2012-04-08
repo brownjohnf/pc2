@@ -1,5 +1,5 @@
 %a.brand{:href => '/splash'}
-  = organization
+  Peace Corps
   = '|'
   = Carmen.country_name(cookies[:country])
   %sub beta
@@ -8,8 +8,8 @@
     %li= link_to 'Home', splash_path
   - else
     %li= link_to 'Home', '/splash'
-  %li= link_to 'About us', '/pages/97'
-  %li= link_to 'Initiatives', '/pages/96'
+  %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
+  %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
   %ul.nav
     %li.dropdown
       %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
@@ -73,14 +73,13 @@
             %li= link_to "libraries (#{Library.count})", libraries_path
             %li= link_to "moments (#{Moment.count})", moments_path
             %li= link_to "pages (#{Page.count})", pages_path
-            %li= link_to "pc regions", pcregions_path
+            %li= link_to "pc regions", pc_regions_path
             %li= link_to "photos (#{Photo.count})", photos_path
             %li= link_to "positions (#{Position.count})", positions_path
             %li= link_to "regions (#{Region.count})", regions_path
             %li= link_to "region types", regiontypes_path
             %li= link_to "scopes", scopes_path
             %li= link_to "sectors (#{Sector.count})", sectors_path
-            %li= link_to "settings", settings_path
             %li= link_to "sites (#{Site.count})", sites_path
             %li= link_to "stacks", stacks_path
             %li= link_to "staff (#{Staff.count})", staff_index_path
@@ -97,7 +96,7 @@
           = current_user.name
           %b.caret
         %ul.dropdown-menu
-          %li= link_to 'Dashboard', root_path
+          %li= link_to 'Dashboard', dashboard_path
           %li= link_to 'Profile', current_user
           %li= link_to 'Use SSL', 'https://pcsenegal.com'
           %li= link_to 'Leave Feedback', new_feedback_path
