@@ -13,7 +13,7 @@ def make_moments
       :content => Faker::Lorem.paragraphs(8), 
       :user_id => volunteer.user.id,
       :country => volunteer.country,
-      :datapoint => (1963+rand(35)).to_s + '-' + (1+rand(12)).to_s + '-' + (1+rand(30)).to_s
+      :datapoint => (1963+rand(35)).to_s + '-' + (1+rand(12)).to_s + '-' + (1+rand(28)).to_s
     }])
   end
 end
