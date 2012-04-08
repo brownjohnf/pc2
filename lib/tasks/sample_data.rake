@@ -85,17 +85,17 @@ end
 
 def make_regions
 	Region.create!([
-  { name: 'Dakar', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Kaolack', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Saint-Louis', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Tambacounda', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Kaffrine', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Kedougou', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Kolda', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Louga', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Linguere', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Mattam', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Ziguinchor', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil },
-  { name: 'Thies', short: 'DKR', country_id: 3, type_id: 1, parent_id: nil }
+  { name: 'Dakar', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Kaolack', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Saint-Louis', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Tambacounda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Kaffrine', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Kedougou', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Kolda', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Louga', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Linguere', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Mattam', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Ziguinchor', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil },
+  { name: 'Thies', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil }
 ])
 end
