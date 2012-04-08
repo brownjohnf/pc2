@@ -139,13 +139,13 @@ end
 def make_pages
   [Volunteer, Staff].each do |a|
     a.all.each do |b|
-      page = Page.create!([{
+      page = Page.create!(
         :title => Faker::Company.catch_phrase, 
         :description => Faker::Lorem.paragraph, 
         :content => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
         :language_id => 1+rand(2)
-      }])
+      )
       page.contributions.build(:user_id => b.user.id)
       page.save!
     end
@@ -155,12 +155,12 @@ end
 def make_case_studies
   [Volunteer, Staff].each do |a|
     a.all.each do |b|
-      CaseStudy.create!([{
+      CaseStudy.create!(
         :title => Faker::Company.catch_phrase, 
         :summary => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
         :language_id => 1+rand(2)
-      }])
+      )
       case_study.contributions.build(:user_id => b.user.id)
       case_study.save!
     end
