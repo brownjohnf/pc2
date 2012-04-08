@@ -69,8 +69,7 @@ end
 
 def make_languages
   languages = Language.create!([
-    { :name => 'Sereer', :code => 'SE', :description => 'A lovely little language.' },
-    { :name => 'English', :code => 'EN', :description => 'The greatest language in the world.' }
+    { :name => 'Sereer', :code => 'SE', :description => 'A lovely little language.' }
   ])
 end
 

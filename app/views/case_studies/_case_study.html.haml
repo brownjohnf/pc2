@@ -2,7 +2,7 @@
   .floatleft= avatar_for case_study, :size => size ||= :thumb
   %h4
     = link_to case_study.title, case_study
-    %span #{time_ago_in_words(case_study.updated_at)} ago
+    .small #{time_ago_in_words(case_study.updated_at)} ago
   %p= truncate(strip_tags(case_study.summary), :length => 100, :separator => ' ')
   .tags.right= render 'shared/tags', :tags => case_study.tag_list
   %hr

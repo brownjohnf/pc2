@@ -24,3 +24,25 @@ Scope.create!([
   { name: 'CaseStudy', title: 'Case Study', description: 'Ability to modify case studies' }
 ])
 
+Language.create(
+  :name => 'English',
+  :code => 'EN',
+  :description => 'Default app language.'
+)
+
+Page.create!([
+  {
+    :title => 'About us', 
+    :description => 'Sample about us page', 
+    :content => 'This is the About us page created by default. Please DO NOT delete it, but edit it to reflect your post.', 
+    :country => 'SN', 
+    :language_id => Language.find_by_code('EN').id
+  },{
+    :title => 'Initiatives', 
+    :description => 'Sample initiatives page', 
+    :content => "This is the Initiatives page created by default. Please DO NOT delete it, but edit it to reflect your post's initiatives.", 
+    :country => 'SN', 
+    :language_id => Language.find_by_code('EN').id
+  }
+])
+
