@@ -6,12 +6,13 @@ namespace :db do
 end
 
 def make_moments
-  User.all.each do |user|
+  Volunteer.all.each do |volunteer|
     Moment.create!([{
       :title => Faker::Company.catch_phrase, 
       :summary => Faker::Lorem.paragraph, 
       :content => Faker::Lorem.paragraphs(8), 
-      :user_id => user.id, 
+      :user_id => volunteer.user.id,
+      :country => volunteer.country
       :datapoint => (1963+rand(35)).to_s + '-' + (1+rand(12)).to_s + '-' + (1+rand(30)).to_s
     }])
   end

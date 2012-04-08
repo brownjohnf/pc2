@@ -9,6 +9,10 @@ namespace :db do
 		make_regions
     make_user
     make_users
+    make_volunteers
+    make_staff
+    make_pages
+    make_case_studies
 		Rake::Task['db:populate_timeline'].invoke
 	end
 end
@@ -72,10 +76,42 @@ end
 
 def make_users
   99.times do |n|
-    name = Faker::Name.name
-    email = Faker::Internet.email
-    user = User.create!(:name => name, :email => email, :password => 'testing', :country => 'SN')
+    user = User.create!(
+      :name => Faker::Name.name, 
+      :email => Faker::Internet.email,
+      :password => 'testing', 
+      :country => 'SN'
+    )
+    user.confirmed_at = Time.now
+    user.save!
+  end
+end
+
+def make_volunteers
+  99.times do |n|
+    user = User.create!(
+      :name => Faker::Name.name, 
+      :email => Faker::Internet.email, 
+      :password => 'testing', 
+      :country => 'SN'
+    )
+    user.confirmed_at = Time.now
+    user.save!
     user.volunteers.create!(:local_name => Faker::Name.name, :country => 'SN')
+  end
+end
+
+def make_staff
+  99.times do |n|
+    user = User.create!(
+      :name => Faker::Name.name, 
+      :email => Faker::Internet.email, 
+      :password => 'testing', 
+      :country => 'SN'
+    )
+    user.confirmed_at = Time.now
+    user.save!
+    user.staff.create!(:country => 'SN')
   end
 end
 
@@ -99,3 +135,34 @@ def make_regions
     { name: 'Thies', short: 'DKR', country: 'SN', type_id: 1, parent_id: nil }
   ])
 end
+
+def make_pages
+  [Volunteer, Staff].each do |a|
+    a.all.each do |b|
+      page = Page.create!([{
+        :title => Faker::Company.catch_phrase, 
+        :description => Faker::Lorem.paragraph, 
+        :content => Faker::Lorem.paragraphs(8), 
+        :country => 'SN', 
+        :lannguage => 1+rand(2)
+      }])
+      page.contributions.build(:user_id => b.user.id)
+      page.save!
+    end
+end
+
+def make_case_studies
+  [Volunteer, Staff].each do |a|
+    a.all.each do |b|
+      CaseStudy.create!([{
+        :title => Faker::Company.catch_phrase, 
+        :summary => Faker::Lorem.paragraphs(8), 
+        :country => 'SN', 
+        :lannguage => 1+rand(2)
+      }])
+      case_study.contributions.build(:user_id => b.user.id)
+      case_study.save!
+    end
+  end
+end
+
