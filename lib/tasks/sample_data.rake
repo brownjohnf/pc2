@@ -75,7 +75,7 @@ def make_languages
 end
 
 def make_users
-  99.times do |n|
+  25.times do |n|
     user = User.create!(
       :name => Faker::Name.name, 
       :email => Faker::Internet.email,
@@ -88,7 +88,7 @@ def make_users
 end
 
 def make_volunteers
-  99.times do |n|
+  50.times do |n|
     user = User.create!(
       :name => Faker::Name.name, 
       :email => Faker::Internet.email, 
@@ -102,7 +102,7 @@ def make_volunteers
 end
 
 def make_staff
-  99.times do |n|
+  25.times do |n|
     user = User.create!(
       :name => Faker::Name.name, 
       :email => Faker::Internet.email, 
@@ -155,7 +155,7 @@ end
 def make_case_studies
   [Volunteer, Staff].each do |a|
     a.all.each do |b|
-      CaseStudy.create!(
+      case_study = CaseStudy.create!(
         :title => Faker::Company.catch_phrase, 
         :summary => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
