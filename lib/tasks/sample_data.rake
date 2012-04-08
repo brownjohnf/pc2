@@ -150,7 +150,7 @@ def make_pages
       page.save!
     end
   end
-  page_total = Page.count
+  page_count = Page.count
   Page.all.each do |page|
     page.parent_id = 1 + rand(page_count)
   end
