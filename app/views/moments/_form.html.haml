@@ -8,7 +8,7 @@
       = f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
       = f.input :country, :as => :hidden, :input_html => { :value => current_user.country }
     = f.input :photo
-    = f.input :datapoint
+    = f.input :datapoint, :as => :text
     = f.input :title
     = f.input :summary
     = f.input :content, :input_html => {:class => 'richtext', :value => (@moment.content ? markdown(@moment.content) : nil)}

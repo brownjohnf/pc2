@@ -359,9 +359,16 @@ describe User do
       it 'should be able to read libraries' do
         @ability.should be_able_to(:read, Library)
       end
-      it 'should be able to read timeline moments' do
-        @ability.should be_able_to(:read, Moment)
+
+      describe 'moments' do
+        it 'can read' do
+          @ability.should be_able_to(:read, Moment)
+        end
+        it 'cannot edit' do
+          @ability.should_not be_able_to :edit, Moment
+        end
       end
+
       it 'should be able to read peace corps regions' do
         @ability.should be_able_to(:read, PcRegion)
       end
