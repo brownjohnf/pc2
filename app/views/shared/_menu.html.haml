@@ -41,20 +41,4 @@
   %li= link_to 'Libraries', libraries_path
   %li= link_to 'Volunteers', volunteers_path
   %li= link_to 'Staff', staff_path
-.well
-  %h1 Google Search
-  :erb
-    <div id="google_search" name="google_search"><!-- Google search -->
-      <form method="get" action="http://www.google.com/search">
-        <input type="hidden" name="ie" value="UTF-8" />
-        <input type="hidden" name="oe" value="UTF-8" />
-        <input type="hidden" name="domains" value="http://pcsenegal.org" />
-        <input type="hidden" name="sitesearch" value="http://pcsenegal.org" checked />
-        <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
-        <input type="text" name="q" maxlength="200" />
-        <input type="submit">
-      </form>
-    </div><!--END Search Google -->
-    <!-- Performable Super Conversion Button -->
-    <script src='//d1nu2rn22elx8m.cloudfront.net/buttons/3V6NX/smRDw-sPwXkE7jwmUZ.js'></script>
-    <!-- /Performable Super Conversion Button -->
+  %li= link_to 'Google Search', '/search'

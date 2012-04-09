@@ -1,5 +1,5 @@
-%li.user
-  = avatar_for_user staff.user
+.feed_item
+  .floatleft= avatar_for_user staff.user
   %h4= link_to staff.user.name, staff.user
   %p
     = staff.user.country

@@ -1,5 +1,5 @@
-%li.user
-  = gravatar_for volunteer.user
+.feed_item
+  .floatleft= avatar_for_user volunteer.user
   %h4= link_to volunteer.user.name, volunteer.user
   = link_to volunteer.site.region.name, volunteer.site.region if volunteer.site
   = volunteer.user.country

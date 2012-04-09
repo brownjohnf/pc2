@@ -70,7 +70,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :moments, :path => 'timeline' do
+  resources :moments do
     member do
       get 'decade'
       get 'year'
@@ -123,6 +123,7 @@ OmniauthDemo::Application.routes.draw do
   match '/welcome', :to => 'statics#welcome', :as => :entry
   match '/goodbye', :to => 'statics#goodbye', :as => :exit
   match '/dashboard', :to => 'statics#dashboard', :as => :dashboard
+  match '/timeline', :to => 'statics#timeline', :as => :timeline
 
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'

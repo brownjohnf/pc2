@@ -1,0 +1,11 @@
+.container
+  .row
+    .span12
+      #timeline-embed
+        :javascript
+          var config = {
+            width: 900,
+            height: 700,
+            source: '/moments.json?all=true'
+            }
+      %script{:type => 'text/javascript', :src => "http://veritetimeline.appspot.com/latest/timeline-embed.js"}

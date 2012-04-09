@@ -6,6 +6,8 @@ postgres: &postgres
   password: testing
   encoding: unicode
 
+sqlite: &sqlite
+  adapter: sqlite3
 
 common: &common
   # Choose one of the following

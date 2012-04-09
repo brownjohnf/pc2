@@ -69,4 +69,10 @@ class StaticsController < ApplicationController
   def goodbye
     
   end
+
+  def timeline
+    @title_photo = Photo.tagged_with('timeline_splash').first
+
+  end
+
 end

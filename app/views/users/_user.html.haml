@@ -1,6 +1,6 @@
-%li.feed_item
-  = avatar_for_user user, :size => :icon
-  %h4
+.feed_item
+  .floatleft= avatar_for_user user, :size => :icon
+  %h3
     = link_to user.name, user
     = flag_icon(user.country) if user.country
     = link_to 'edit', edit_user_path(user) if can? :update, user
@@ -25,3 +25,4 @@
               = p.title
           %br
   .clearfloat
+  %hr

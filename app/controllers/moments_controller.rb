@@ -24,9 +24,13 @@ class MomentsController < ApplicationController
       @title = "Timeline | #{params[:start]} to #{params[:stop]}"
       render 'index'
     elsif params[:all]
-      @moments = Moment.paginate(:page => params[:page], :per_page => 50)
+      @moments = Moment.all
       @title = 'All Timeline Moments'
-      render 'index'
+
+      respond_to do |format|
+        format.html
+        format.json
+      end
     else
       search_set = []
       10.times do
@@ -34,7 +38,6 @@ class MomentsController < ApplicationController
       end
       @moments = Moment.where(:id => search_set).paginate(:page => params[:page], :per_page => 10)
       @title = 'Timeline | Home'
-      render 'index'
     end
   end
 
