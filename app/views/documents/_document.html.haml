@@ -1,10 +1,10 @@
 - if can? :read, document
-  %li.feed_item
-    = document_icon_for document, :size => size ||= :thumb
+  .feed_item
+    .floatleft= document_icon_for document, :size => size ||= :thumb
     %h3
       = link_to document.name, document
       = link_to 'edit', edit_document_path(document) if can? :update, document
-      %span
+      %small
         = time_ago_in_words(document.updated_at)
         ago by
         = link_to document.user.name, document.user
@@ -22,3 +22,4 @@
       = document.file.size
       bytes
     .tags.right= render 'shared/tags', :tags => document.tag_list
+    %hr

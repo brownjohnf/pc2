@@ -3,14 +3,10 @@
     = render 'shared/menu'
   .span7
     = render 'menu'
-    .row
-      .span4
-        %h2 Alphabetical
-        %ul.feed
-          = render @users
-        = will_paginate @users
-      .span3
-        = render 'shared/search'
+    %h2 Alphabetical
+    %ul.feed
+      = render @users
+    = will_paginate @users
   .span2
     .box
       %h3 A bit about us

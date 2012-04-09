@@ -55,12 +55,13 @@
               per user!
         .tab-pane#tags
           %h1 Top Tags
-          = cloud_of_tags Photo
-          = cloud_of_tags Document
-          = cloud_of_tags Page
-          = cloud_of_tags CaseStudy
-          = cloud_of_tags User
-          = cloud_of_tags Blog
+          .well
+            = cloud_of_tags Photo
+            = cloud_of_tags Document
+            = cloud_of_tags Page
+            = cloud_of_tags CaseStudy
+            = cloud_of_tags User
+            = cloud_of_tags Blog
         .tab-pane#photos
           %h1 Latest Photos
           = render @photos
