@@ -54,8 +54,9 @@
                   %h1
                     = flag_icon(v.country)
                     = v.local_name
-                    = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
-                    = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
+                    %small
+                      = link_to 'destroy', v, confirm: 'Are you sure?', method: :delete if can? :destroy, v
+                      = link_to 'edit', edit_volunteer_path(v) if can? :manage, Volunteer
                   %div
                     %p
                       = "#{v.sector.name} Volunteer" if v.sector
@@ -84,8 +85,9 @@
                   %h3
                     = flag_icon(s.country)
                     Staff Member
-                    = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
-                    = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
+                    %small
+                      = link_to 'destroy', s, confirm: 'Are you sure?', method: :delete if can? :destroy, s
+                      = link_to 'edit', edit_staff_path(s) if can? :manage, Staff
                   %h4= s.site.name if s.site
                   %p= Carmen.country_name(s.country) if s.country
                   %p

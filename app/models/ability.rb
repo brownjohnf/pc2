@@ -12,22 +12,33 @@ class Ability
     end
     
     # all users, even non-logged in ones
-    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, PcRegion, Position, Sector, Staff, Stage ]
-    can :index, [ User, Volunteer ]
+    can :read, [ Page, CaseStudy, Photo, Website, Blog, Library, Moment, PcRegion, Position, Sector, Stage, User ]
+    can :index, [ Volunteer, Staff ]
+    cannot :table, [ User, Volunteer, Staff ]
     
     can :create, Feedback
+
     can :read, Document do |item|
       item.roles.where(:id => user.roles).any?
+    end
+
+    can [ :update ], Page do |page|
+      page.contributors.find_by_id(user.id)
+    end
+    can [ :update ], CaseStudy do |cs|
+      cs.contributors.find_by_id(user.id)
     end
     
     if user.role? :admin
       can :manage, :all
+
     elsif user.role? :user
       can :read, :welcome
-      can :read, [ User, Region ]
+      can :read, Region
       can [ :update, :destroy ], User, :id => user.id
+
       if user.role?(:volunteer) || user.role?(:staff)
-        can :read, [ Volunteer, Staff ]
+        can :read, [ User, Volunteer, Staff ]
 
         can :create, [ Page, CaseStudy, Region, Stage ]
 
@@ -38,12 +49,6 @@ class Ability
           site.region.country = user.country
         end
 
-        can [ :update, :destroy ], Page do |page|
-          page.contributors.find_by_id(user.id)
-        end
-        can [ :update, :destroy ], CaseStudy do |cs|
-          cs.contributors.find_by_id(user.id)
-        end
       end
       if user.role? :moderator
         can :manage, Library, :country => user.country

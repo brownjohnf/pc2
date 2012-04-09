@@ -123,5 +123,12 @@ module ApplicationHelper
     if params[:controller] == 'pages'
       auto_discovery_link_tag(:atom, feed_pages_path) + auto_discovery_link_tag(:rss, feed_pages_path)
     end
-  end  
+  end
+
+  def allowed_countries
+    {
+      'SN' => 'Senegal'
+    }
+  end
+
 end

@@ -34,4 +34,3 @@
               = link_to 'download', download_document_path(document) if can? :read, document
               = mime_icon(document.file_content_type)
     .clearfloat
-    = render 'shared/search'

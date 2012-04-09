@@ -265,17 +265,17 @@ describe PagesController do
             @page.contributions.build(:user_id => @user.id)
             @page.save!
           end
-          it 'should not change the page attributes' do
+          it 'should change the page attributes' do
             put :update, :id => @page, :page => @attr
             @page.reload
-            @page.title.should_not == @attr[:title]
-            @page.description.should_not == @attr[:description]
-            @page.content.should_not == @attr[:content]
-            @page.language_id.should_not == @attr[:language_id]
+            @page.title.should == @attr[:title]
+            @page.description.should == @attr[:description]
+            @page.content.should == @attr[:content]
+            @page.language_id.should == @attr[:language_id]
           end
-          it 'should redirect to login' do
+          it 'should redirect to page' do
             put 'update', {:id => @page.id, :page => @attr}
-            response.should redirect_to login_path
+            response.should redirect_to assigns[:page]
           end
         end
       end
@@ -405,14 +405,14 @@ describe PagesController do
           @page.contributions.build(:user_id => @user.id)
           @page.save!
         end
-        it 'should destroy the page' do
+        it 'should not destroy the page' do
           lambda do
             delete :destroy, :id => @page
-          end.should change(Page, :count).by(-1)
+          end.should_not change(Page, :count).by(-1)
         end
         it 'should redirect to pages index' do
           delete 'destroy', :id => @page
-          response.should redirect_to pages_url
+          response.should redirect_to login_path
         end
       end
     end
@@ -434,14 +434,14 @@ describe PagesController do
           @page.contributions.build(:user_id => @user.id)
           @page.save!
         end
-        it 'should destroy the page' do
+        it 'should not destroy the page' do
           lambda do
             delete :destroy, :id => @page
-          end.should change(Page, :count).by(-1)
+          end.should_not change(Page, :count).by(-1)
         end
         it 'should redirect to pages index' do
           delete 'destroy', :id => @page
-          response.should redirect_to pages_url
+          response.should redirect_to login_path
         end
       end
     end
@@ -468,9 +468,38 @@ describe PagesController do
             delete :destroy, :id => @page
           end.should_not change(Page, :count).by(-1)
         end
-        it 'should redirect to login' do
+        it 'should redirect to pages index' do
           delete 'destroy', :id => @page.id
           response.should redirect_to login_path
+        end
+      end
+    end
+    context 'as admin' do
+      login_admin
+      context 'non-contributor' do
+        it 'should destroy the page' do
+          lambda do
+            delete :destroy, :id => @page
+          end.should change(Page, :count).by(-1)
+        end
+        it 'should redirect to pages path' do
+          delete :destroy, :id => @page
+          response.should redirect_to pages_path
+        end
+      end
+      context 'contributor' do
+        before(:each) do
+          @page.contributions.build(:user_id => @user.id)
+          @page.save!
+        end
+        it 'should destroy the page' do
+          lambda do
+            delete :destroy, :id => @page
+          end.should change(Page, :count).by(-1)
+        end
+        it 'should redirect to pages index' do
+          delete 'destroy', :id => @page.id
+          response.should redirect_to pages_path
         end
       end
     end
@@ -478,9 +507,11 @@ describe PagesController do
 
   # GET ajax
   describe "GET 'ajax'" do
-    it 'should be successful' do
-      get 'ajax'
-      response.should be_success
+    context 'as anyone' do
+      it 'should be successful' do
+        get 'ajax'
+        response.should be_success
+      end
     end
   end
   

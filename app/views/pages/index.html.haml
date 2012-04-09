@@ -1,11 +1,9 @@
 .container
   .row
-    .span12
-      = render 'menu'
-  .row
     .span3
       = render 'shared/menu'
     .span7
+      = render 'menu'
       %h1= @title
       = nested_li(@pages) do |item|
         - link_to item.title, item

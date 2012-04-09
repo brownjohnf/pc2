@@ -31,12 +31,11 @@
         -#%li= link_to 'Videos', ''
         %li= link_to 'Files', documents_path
         %li= link_to 'Libraries', libraries_path
-        - if can? :read, User
-          %li= link_to 'Users', users_path
+        %li= link_to 'Volunteers', volunteers_path
+        %li= link_to 'Staff', staff_path
   -#%li= link_to '50th', moments_path
   - if user_signed_in?
     - if current_user.volunteers.any? || current_user.staff.any?
-      %li.divider-vertical
       %ul.nav
         %li.dropdown
           %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
@@ -55,6 +54,8 @@
           %ul.dropdown-menu
             %li= link_to 'Photo', new_photo_path if can? :create, Photo
             %li= link_to 'File', new_document_path if can? :create, Document
+%ul.nav.pull-right
+  - if signed_in?
     - if current_user.role? :admin
       %ul.nav
         %li.dropdown
@@ -87,8 +88,6 @@
             %li= link_to "users (#{User.count})", users_path
             %li= link_to "volunteers (#{Volunteer.count})", volunteers_path
             %li= link_to "websites", websites_path
-%ul.nav.pull-right
-  - if signed_in?
     -#%li= avatar_for_user current_user, :size => :icon
     %ul.nav
       %li.dropdown

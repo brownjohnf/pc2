@@ -5,7 +5,7 @@
       .box
         %h3 Basic
         = f.input :name
-        = f.input :country
+        = f.input :country, :as => :select, :collection => allowed_countries, :include_blank => false
         = f.input :tag_list
         = f.input :avatar
       .box
