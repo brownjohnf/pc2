@@ -316,26 +316,37 @@ describe User do
     #subject { ability }
     #let(:ability){ Ability.new(user) }
 
-    context 'a guest' do
+    context 'as a guest' do
       before(:each) do
         @ability = Ability.new(User.new)
       end
 
       describe 'pages' do
+        build_page
         it 'should be able to read' do
           @ability.should be_able_to(:read, Page)
         end
         it 'should not be able to create' do
           @ability.should_not be_able_to(:create, Page)
         end
-        it 'should not be able to mercury update' do
-          @ability.should_not be_able_to :mercury_update, Page
+        it 'should not be able to update' do
+          @ability.should_not be_able_to :update, @page
         end
       end
       
-      it 'should be able to read case studies' do
-        @ability.should be_able_to(:read, CaseStudy)
+      describe 'case studies' do
+        build_case_study
+        it 'can be read' do
+          @ability.should be_able_to(:read, CaseStudy)
+        end
+        it 'cannot be created' do
+          @ability.should_not be_able_to :create, CaseStudy
+        end
+        it 'cannot update' do
+          @ability.should_not be_able_to :update, @case_study
+        end
       end
+
       it 'should be able to read photos' do
         @ability.should be_able_to(:read, Photo)
       end
@@ -360,14 +371,16 @@ describe User do
       it 'should be able to read sectors' do
         @ability.should be_able_to(:read, Sector)
       end
+
       describe 'staff' do
         it 'should be able to index staff' do
           @ability.should be_able_to(:index, Staff)
         end
-        it 'should be able to show staff' do
-          @ability.should be_able_to(:show, Staff)
+        it 'cannnot show' do
+          @ability.should_not be_able_to(:show, Staff)
         end
       end
+
       it 'should be able to read stages' do
         @ability.should be_able_to(:read, Stage)
       end
@@ -404,12 +417,13 @@ describe User do
       it 'should not be able to read stacks' do
         @ability.should_not be_able_to(:read, Stack)
       end
+
       describe 'users' do
         it 'should be able to index' do
           @ability.should be_able_to :index, User
         end
-        it 'should not be able to show' do
-          @ability.should_not be_able_to :show, Factory(:user)
+        it 'should be able to show' do
+          @ability.should be_able_to :show, Factory(:user)
         end
         it 'should not be able to new' do
           @ability.should_not be_able_to :new, User
@@ -427,17 +441,19 @@ describe User do
           @ability.should_not be_able_to :destroy, User
         end
       end
+
       describe 'volunteers' do
-        it 'should not be able to index volunteers' do
+        build_volunteer
+        it 'can index' do
           @ability.should be_able_to :index, Volunteer
         end
-        it 'should not be able to show volunteers' do
-          @ability.should_not be_able_to :show, Volunteer
+        it 'cannot show' do
+          @ability.should_not be_able_to :show, @volunteer
         end
       end
     end
 
-    context 'when it is a user' do
+    context 'as a user' do
       before(:each) do
         @user = Factory(:user)
         @user.roles << Role.find_or_create_by_name('User')

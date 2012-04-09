@@ -1,4 +1,18 @@
 module ModelMacros
+  
+  # case study
+  def build_case_study
+    before(:each) do
+      @case_study = Factory.create(:case_study)
+    end
+  end
+
+  # page
+  def build_page
+    before(:each) do
+      @page = Factory.create(:page)
+    end
+  end
 
   # photo
   def build_photo
@@ -96,6 +110,14 @@ module ModelMacros
       @user = Factory.create(:user)
       @photo = Factory.create(:photo)
       @user.photo = @photo
+    end
+  end
+
+  # volunteer
+  def build_volunteer
+    before(:each) do
+      @volunteer = Factory.create(:volunteer)
+      @volunteer.user.confirm!
     end
   end
 

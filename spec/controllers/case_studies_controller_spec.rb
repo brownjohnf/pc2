@@ -8,7 +8,7 @@ describe CaseStudiesController do
   describe "GET 'index'" do
     context 'as anyone' do
       it 'should be successful' do
-        get 'index'
+        get :index
         response.should be_success
       end
     end
@@ -66,7 +66,7 @@ describe CaseStudiesController do
   end
   
   # GET new
-  describe "GET 'new'" do
+  describe "'GET' new" do
     context 'as guest' do
       it 'should redirect to login' do
         get :new
@@ -85,6 +85,66 @@ describe CaseStudiesController do
       it 'should be successful' do
         get :new
         response.should be_success
+      end
+    end
+    context 'as staff' do
+      login_staff
+      it 'should be successful' do
+        get :new
+        response.should be_success
+      end
+    end
+  end
+
+  # GET edit
+  describe "'GET' edit'" do
+    before(:each) do
+      @case_study = Factory.create(:case_study)
+    end
+    context 'as guest' do
+      it 'should redirect to login' do
+        get :edit, :id => @case_study
+        response.should redirect_to login_path
+      end
+    end
+    context 'as a user' do
+      login_user
+      describe 'who is a contributor' do
+        before(:each) do
+          @case_study.contributions.build(:user_id => @user.id)
+        end
+        it 'should redirect' do
+          get :edit, :id => @case_study
+          response.should redirect_to login_path
+        end
+      end
+      describe 'who is not a contributor' do
+        it 'should redirect to login' do
+          get :edit, :id => @case_study
+          response.should redirect_to login_path
+        end
+      end
+    end
+    context 'as volunteer' do
+      login_volunteer
+      describe 'with a case study' do
+        before(:each) do
+          @case_study = Factory.create(:case_study)
+        end
+        context 'as a contributor' do
+          before(:each) do
+            @case_study.contributions.build(:user_id => @user.id)
+            @case_study.save!
+          end
+          it 'should be successful' do
+            get :edit, :id => @case_study
+            response.should be_success
+          end
+          it 'should have the correct data' do
+            get :edit, :id => @case_study
+            response.should have_selector('input', :id => 'case_study_title', :value => @case_study.title)
+          end
+        end
       end
     end
     context 'as staff' do
@@ -172,15 +232,17 @@ describe CaseStudiesController do
 
   # PUT update
   describe "PUT 'update'" do
+    before(:each) do
+      @case_study = Factory.create(:case_study)
+    end
     context 'as guest' do
       it 'should redirect to login path' do
-        put :update
+        put :update, :id => @case_study
         response.should redirect_to login_path
       end
     end
     describe 'should fail' do
       before(:each) do
-        @case_study = Factory.create(:case_study)
         @attr = {
           :title => '',
           :summary => '',
@@ -364,14 +426,14 @@ describe CaseStudiesController do
           @case_study.contributions.build(:user_id => @user.id)
           @case_study.save!
         end
-        it 'should destroy the case study' do
+        it 'should not destroy the case study' do
           lambda do
             delete :destroy, :id => @case_study
-          end.should change(CaseStudy, :count).by(-1)
+          end.should_not change(CaseStudy, :count).by(-1)
         end
         it 'should redirect to case studies index' do
           delete :destroy, :id => @case_study
-          response.should redirect_to case_studies_path
+          response.should redirect_to login_path
         end
       end
     end
@@ -393,14 +455,14 @@ describe CaseStudiesController do
           @case_study.contributions.build(:user_id => @user.id)
           @case_study.save!
         end
-        it 'should destroy the case study' do
+        it 'should not destroy the case study' do
           lambda do
             delete :destroy, :id => @case_study
-          end.should change(CaseStudy, :count).by(-1)
+          end.should_not change(CaseStudy, :count).by(-1)
         end
         it 'should redirect to case studies index' do
           delete :destroy, :id => @case_study
-          response.should redirect_to case_studies_path
+          response.should redirect_to login_path
         end
       end
     end

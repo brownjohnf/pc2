@@ -21,6 +21,10 @@ describe StaticsController do
       get :security
       response.should be_success
     end
+    it 'should have the right title' do
+      get :security
+      response.should have_selector('h1', :content => 'Security')
+    end
   end
 
   describe "GET 'welcome'" do
@@ -29,6 +33,10 @@ describe StaticsController do
       it 'should be successful' do
         get :welcome
         response.should be_success
+      end
+      it 'should have the right title' do
+        get :welcome
+        response.should have_selector('h1', :content => 'Welcome')
       end
     end
     context 'as guest' do
@@ -44,12 +52,28 @@ describe StaticsController do
       get :goodbye
       response.should be_success
     end
+    it 'should have the right title' do
+      get :goodbye
+      response.should have_selector('h1', :content => 'Goodbye')
+    end
   end
 
   describe "GET 'splash'" do
     it 'should be successful' do
       get :splash
       response.should be_success
+    end
+    it 'should set a splashed=viewed cookie' do
+      get :splash
+      response.cookies[:splashed].should == 'viewed'
+    end
+    it 'should have a slider' do
+      get :splash
+      response.should have_selector('div', :class => 'carousel')
+    end
+    it 'should have thumbnails' do
+      get :splash
+      response.should have_selector('ul', :class => 'thumbnails')
     end
   end
 
@@ -58,12 +82,20 @@ describe StaticsController do
       get :help
       response.should be_success
     end
+    it 'should have the right title' do
+      get :help
+      response.should have_selector('h1', :content => 'Help')
+    end
   end
 
   describe "GET 'about us'" do
     it 'should be successful' do
       get :about_us
       response.should be_success
+    end
+    it 'should have the right title' do
+      get :about_us
+      response.should have_selector('h1', :content => 'About')
     end
   end
 
@@ -72,6 +104,10 @@ describe StaticsController do
       get :disclaimer
       response.should be_success
     end
+    it 'should have the right title' do
+      get :disclaimer
+      response.should have_selector('h1', :content => 'Disclaimer')
+    end
   end
 
   describe "GET 'privacy policy'" do
@@ -79,12 +115,20 @@ describe StaticsController do
       get :privacy
       response.should be_success
     end
+    it 'should have the right title' do
+      get :privacy
+      response.should have_selector('h1', :content => 'Privacy')
+    end
   end
 
   describe "GET 'search'" do
     it 'should be successful' do
       get :search
       response.should be_success
+    end
+    it 'should have the right title' do
+      get :search
+      response.should have_selector('h1', :content => 'Search')
     end
   end
 

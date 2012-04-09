@@ -14,10 +14,13 @@ class UsersController < ApplicationController
   end
   
   def search
-    @users = User.search(params[:q]).paginate(:page => params[:page], :per_page => 20)
-    @count = @users.count
-    
-    render 'index'
+    if params[:q]
+      @users = User.search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+      @count = @users.count
+      render 'index'
+    else
+      redirect_to users_path
+    end
   end
 
   def show
@@ -53,6 +56,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.avatar = nil
     @user.save
+
+    render action: 'show'
   end
 
 end

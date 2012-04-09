@@ -1,5 +1,8 @@
 -#= link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
 
+%h3
+  = flag_icon(cookies[:country].downcase)
+  = Carmen.country_name(cookies[:country])
 %ul.nav.nav-list
   - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
     %li.nav-header= @page.title.upcase
@@ -22,20 +25,22 @@
     - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
       %li
         = link_to item.title, item
-    %hr
-%h3
-  = flag_icon(cookies[:country].downcase)
-  = Carmen.country_name(cookies[:country])
-%ul.nav.nav-list
+  %li.nav-header Browse
   - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
     %li
       = link_to item.title, item
-.well
   - if Page.unscoped.tagged_with('quicklink').order('title').any?
-    %ul.nav.nav-list
-      %li.nav-header Quick Links
-      - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
-        %li= link_to link.title, link
+    %li.nav-header Quick Links
+    - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
+      %li= link_to link.canonical_title, link if can? :read, link
+  %li.nav-header Resources
+  %li= link_to 'Pages', pages_path
+  %li= link_to 'Case Studies', case_studies_path
+  %li= link_to 'Photos', photos_path
+  %li= link_to 'Files', documents_path
+  %li= link_to 'Libraries', libraries_path
+  %li= link_to 'Volunteers', volunteers_path
+  %li= link_to 'Staff', staff_path
 .well
   %h1 Google Search
   :erb
