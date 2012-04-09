@@ -132,4 +132,15 @@ describe StaticsController do
     end
   end
 
+  describe "'GET' timeline" do
+    it 'should be successful' do
+      get :timeline
+      response.should be_success
+    end
+    it 'should have the verite timeline present' do
+      get :timeline
+      response.should have_selector('div', :id => 'timeline-embed')
+    end
+  end
+
 end

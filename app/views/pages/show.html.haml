@@ -1,4 +1,7 @@
 .row
+  .span12
+    = render 'menu'
+.row
   .span3
     = render 'shared/menu'
   .span7
@@ -45,7 +48,6 @@
       %p= @page.description
       .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
-    = render 'shared/search'
   .span2
     = avatar_for @page, :size => :medium
     = render 'shared/social'
