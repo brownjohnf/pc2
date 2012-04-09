@@ -14,9 +14,9 @@
     {
       "startDate": "<%= moment.datapoint.strftime("%Y,%m,%d") %>",
       "headline": "<%= moment.title %>",
-      "text": "<%= json_escape(raw("<p>#{moment.summary}</p><p><div style=\"display:inline-block;float:left;\">#{avatar_for_user(moment.user)}</div>Submitted by #{link_to(moment.user.name, moment.user)}<br />#{(moment.user.volunteers.any? ? Carmen.country_name(moment.user.volunteers.first.country) : Carmen.country_name(moment.user.country))}")) %>",
+      "text": "<%= json_escape(raw("<p>#{moment.summary if moment.photo}</p><p><div style=\"display:inline-block;float:left;\">#{avatar_for_user(moment.user)}</div>Submitted by #{link_to(moment.user.name, moment.user)}<br />#{(moment.user.volunteers.any? ? Carmen.country_name(moment.user.volunteers.first.country) : Carmen.country_name(moment.user.country))}")) %>",
       "asset": {
-      "media": "<%= moment.photo ? moment.photo.photo.url : json_escape(raw("<blockquote>#{truncate(moment.content.gsub(/\n/, ''), :length => 600, :separator => ' ')} #{link_to('read the full story', moment)}</blockquote>")) %>",
+      "media": "<%= moment.photo ? moment.photo.photo.url : json_escape(raw("<blockquote>#{truncate(moment.summary.gsub(/\n/, ''), :length => 600, :separator => ' ')} #{link_to('read the full story', moment)}</blockquote>")) %>",
         "credit": "<%= json_escape(raw((moment.photo ? link_to(moment.photo.user.name, moment.photo.user) : link_to(moment.user.name, moment.user)))) %>",
         "caption": "<%= json_escape(raw(moment.photo ? moment.photo.description : moment.summary)) %>"
       }
