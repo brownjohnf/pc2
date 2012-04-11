@@ -1,5 +1,26 @@
 module ControllerMacros
 
+  # moments
+  def bad_moment_attributes
+    before(:each) do
+      @attr = {
+        :title => '',
+        :summary => '',
+        :datapoint => ''
+      }
+    end
+  end
+
+  def good_moment_attributes
+    before(:each) do
+      @attr = {
+        :title => 'Test Moment Title',
+        :summary => 'Test moment summary',
+        :datapoint => Time.now.years_ago(1).to_date
+      }
+    end
+  end
+
   # user login management
 
   def login_user

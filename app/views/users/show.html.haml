@@ -20,7 +20,7 @@
           %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
           %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
           %li= link_to 'Timeline events', '#moments', 'data-toggle' => 'tab'
-          %li= link_to 'Collections', '#libraries', 'data-toggle' => 'tab'
+          %li= link_to 'Libraries', '#libraries', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#user.active
             %p= Carmen.country_name(@user.country) if @user.country
@@ -48,7 +48,7 @@
                 %h4 A little bit about #{@user.name}...
                 = markdown(@user.bio)
           .tab-pane#volunteers
-            - if can? :read, Volunteer && @user.volunteers.any?
+            - if can?(:read, Volunteer) && @user.volunteers.any?
               - @user.volunteers.each do |v|
                 .well
                   %h1
@@ -79,7 +79,7 @@
               .well
                 You do not have permission to view this user's details.
           .tab-pane#staff
-            - if can? :read, Staff && @user.staff.any?
+            - if can?(:read, Staff) && @user.staff.any?
               - @user.staff.each do |s|
                 .well
                   %h3
@@ -151,12 +151,7 @@
             - if @user.moments.any?
               .box.moments
                 %h3 Timeline Events
-                %ul
-                  - @user.moments.each do |moment|
-                    %li
-                      = avatar_for moment
-                      %h4= link_to moment.title, moment
-                      %p= truncate(moment.summary, :length => 100, :separator => ' ')
+                = render @user.moments
             - else
               %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
           .tab-pane#libraries
@@ -166,11 +161,15 @@
       = avatar_for_user @user, :size => :small
       - if can? :update, @user
         .btn-group
-          = link_to 'Edit profile', edit_user_path, :method => :get, :class=> 'btn'
+          - unless @user.volunteers.any?
+            = link_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :class => 'btn'
+          - else
+            = link_to 'Edit profile', edit_user_path, :method => :get, :class => 'btn'
           %a.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
             %span.caret
           %ul.dropdown-menu
-            = link_to 'Change password', edit_user_registration_path, :method => :get
+            = link_to 'Edit profile', edit_user_path, :method => :get unless @user.volunteers.any?
+            = link_to 'Change password', edit_user_registration_path
+            = link_to "I'm a staff member!", volunteer_request_feedback_index_path, :class => 'btn' unless @user.staff.any?
         - if @user.avatar?
           = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
-      = button_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :method => :get if can?(:update, @user) && !@user.volunteers.any?

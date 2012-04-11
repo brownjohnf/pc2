@@ -1,36 +1,21 @@
-.row.moment
-  .box.longform
-    .span-2
-      %h4= moment.datapoint.strftime('%B')
-      %h4= moment.datapoint.strftime('%Y')
-    .span-4
-      = avatar_for_user(moment.user, :size => :small)
-      %p
-        = link_to moment.user.name, moment.user
-        %br
-        = moment.user.country
-        %br
-        = link_to moment.user.volunteers.first.sector.name, moment.user.volunteers.first.sector if moment.user.volunteers.any?
-        %br
-        = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
-        \-
-        = link_to moment.datapoint.year, year_moment_path(moment.datapoint.year)
-      = button_to 'Edit', edit_moment_path(moment), :method => :get if can? :update, moment
-    .span-14
-      %h1= moment.title
-      %p
-        = image_tag(moment.user.photos.first.photo.url(:small)) unless moment.user.photos.empty?
-        = moment.summary
-      %hr
-      - if @max && moment.content.length > @max
-        = markdown(truncate(moment.content, :length => @max, :separator => "\n"))
-        %p= link_to 'View full event &rarr;', moment
-      - else
-        = markdown(moment.content)
-    .span-4.last
-      - if moment.photos.any?
-        = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
-        = render moment.photos.limit(3)
-        %br
-        = link_to 'view all photos', moment if moment.photos.count > 3
+.feed_item
+  %p
+    .floatleft= moment.photos.any? ? image_tag(moment.photos.first.photo.url(:small)) : avatar_for_user(moment.user)
+    %h3
+      = moment.title
+      %small= link_to 'edit', edit_moment_path(moment) if can? :update, moment
+    %h4
+      = moment.datapoint.strftime('%B')
+      = moment.datapoint.strftime('%Y')
+    = moment.summary
+    = link_to moment.user.name, moment.user
+    %br
+    = moment.user.country
+    %br
+    = link_to moment.user.volunteers.first.sector.name, moment.user.volunteers.first.sector if moment.user.volunteers.any?
+    %br
+    = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
+    \-
+    = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
     .clearfloat
+  %hr

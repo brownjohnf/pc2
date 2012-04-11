@@ -22,12 +22,6 @@ class Ability
       item.roles.where(:id => user.roles).any?
     end
 
-    can [ :update ], Page do |page|
-      page.contributors.find_by_id(user.id)
-    end
-    can [ :update ], CaseStudy do |cs|
-      cs.contributors.find_by_id(user.id)
-    end
     
     if user.role? :admin
       can :manage, :all
@@ -36,13 +30,21 @@ class Ability
       can :read, :welcome
       can :read, Region
       can [ :update, :destroy ], User, :id => user.id
+      can [ :update, :destroy ], Moment, :user_id => user.id
+
+      can [ :update ], Page do |page|
+        page.contributors.find_by_id(user.id)
+      end
+      can [ :update ], CaseStudy do |cs|
+        cs.contributors.find_by_id(user.id)
+      end
 
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ User, Volunteer, Staff ]
 
-        can :create, [ Page, CaseStudy, Region, Stage ]
-
-        can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Moment, Volunteer, Staff ], :user_id => user.id
+        can :create, [ Page, CaseStudy, Region, Stage, Moment ]
+        can :update, Moment, :user_id => user.id
+        can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack
 
         can :create, Site do |site|

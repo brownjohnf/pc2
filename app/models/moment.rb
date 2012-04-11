@@ -7,7 +7,7 @@ class Moment < ActiveRecord::Base
 
   has_many :photos, :as => :imageable
 
-  validates :title, :summary, :user_id, :datapoint, :presence => true
+  validates :title, :summary, :user_id, :datapoint, :country, :presence => true
   accepts_nested_attributes_for :photos, :reject_if => lambda { |a| a[:photo].nil? }, :allow_destroy => true
 
   before_validation :set_values
@@ -27,7 +27,7 @@ class Moment < ActiveRecord::Base
   private
 
     def set_values
-      self.country = self.user.country# if country.nil?
+      self.country ||= (self.user ? self.user.country : nil)
     end
 
 end

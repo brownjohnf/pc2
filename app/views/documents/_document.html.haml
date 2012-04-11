@@ -1,5 +1,5 @@
-- if can? :read, document
-  .feed_item
+.feed_item
+  - if can? :read, document
     .floatleft= document_icon_for document, :size => size ||= :thumb
     %h3
       = link_to document.name, document
@@ -9,12 +9,14 @@
         ago by
         = link_to document.user.name, document.user
     %p= document.description if document.description
-    -if document.author
-      %p
+    %p
+      -if document.author
         authored by
         = document.author
-    %p
-      = document.language.name if document.language
+        %br
+      - if document.language
+        = document.language.name
+        %br
       = render document.roles
     %p
       = link_to 'download', download_document_path(document) if can? :read, document
@@ -22,4 +24,8 @@
       = document.file.size
       bytes
     .tags.right= render 'shared/tags', :tags => document.tag_list
+    %hr
+  - else
+    %p
+      You do not have access to document ID##{document.id}. If you believe this is in error, please contact a site administrator, noting the ID# of the document.
     %hr

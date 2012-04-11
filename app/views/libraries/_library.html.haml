@@ -1,11 +1,13 @@
-%li
+.feed_item
   %h3
     = flag_icon(library.country.downcase)
     = link_to library.name, library
-    = pluralize(library.stacks.count, 'item')
-    = link_to 'edit', edit_library_path(library) if can? :update, library
-    .tags.right.inline= render 'shared/tags', :tags => library.tag_list
+    %small
+      = pluralize(library.stacks.count, 'item')
+      = link_to 'edit', edit_library_path(library) if can? :update, library
+      .tags.right.inline= render 'shared/tags', :tags => library.tag_list
   .right
     maintained by
     = link_to library.user.name, library.user
   .clearfloat
+  %hr

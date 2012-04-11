@@ -70,18 +70,7 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  resources :moments do
-    member do
-      get 'decade'
-      get 'year'
-    end
-    collection do
-      get 'all'
-      get 'span'
-    end
-  end
-
-  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pc_regions, :regions, :volunteers
+  resources :sites, :sectors, :positions, :jobs, :staff, :websites, :identities, :stages, :scopes, :regiontypes, :pc_regions, :regions, :volunteers, :moments
 
   resources :blogs do
     collection do

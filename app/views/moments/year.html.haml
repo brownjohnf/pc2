@@ -1,3 +1,39 @@
-.container
-  = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => [0,1,2,3,4,5,6,7,8,9] }
-  = render @moments
+.row
+  .span3
+    = render 'shared/menu'
+  .span9
+    = render :partial => 'menu' 
+    - @moments.each do |moment|
+      .row
+        .span6
+          %h1= moment.title
+          %p
+            .floatleft= image_tag(moment.user.photos.first.photo.url(:icon)) unless moment.user.photos.empty?
+            = moment.summary
+          - if @max && moment.content.length > @max
+            = markdown(truncate(moment.content, :length => @max, :separator => "\n"))
+            %p= link_to 'View full event &rarr;', moment
+          - else
+            = markdown(moment.content)
+        .span3
+          = avatar_for_user(moment.user, :size => :small)
+          %p
+            = link_to moment.user.name, moment.user
+            %br
+            = moment.user.country
+            %br
+            = link_to moment.user.volunteers.first.sector.name, moment.user.volunteers.first.sector if moment.user.volunteers.any?
+            %br
+            = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
+            \-
+            = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
+          = button_to 'Edit', edit_moment_path(moment), :method => :get if can? :update, moment
+          - if moment.photos.any?
+            = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
+            = render moment.photos.limit(3)
+            %br
+            = link_to 'view all photos', moment if moment.photos.count > 3
+          %h4= moment.datapoint.strftime('%B')
+          %h4= moment.datapoint.strftime('%Y')
+      %hr
+

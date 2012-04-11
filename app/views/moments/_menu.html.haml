@@ -1,37 +1,33 @@
 -# need to input decades, years
 .row
-  .span-10
+  .span3
     .box.longform
       %h1 About the timeline
       %P Info about the timeline.
-  .span-14.last
-    .box#buttongroup
-      %h1 Navigation
-      %table
-        %tr
-          %td
-            = link_to 'Timeline Home', moments_path
-          %td
-            = link_to 'All Events', moments_path(:all => true)
-          %td
-            = form_tag(moments_path, :method => :get) do
-              = submit_tag 'View span'
-              = text_field_tag 'start', nil, :maxlength => 4, :size => 4
-              to
-              = text_field_tag 'stop', nil, :maxlength => 4, :size => 4\
-      %h3 Decade
-      %table
-        %tr
-          - if decades
-            - decades.each do |d|
-              %td
-                = decade_button(d)
-      - if params[:decade]
-        %h3 Year
-        %table
-          %tr
-            - years.each do |y|
-              %td
-                = year_button(truncate(params[:decade], :length => 2).to_i * 10 + y)
-        .clearfloat
-      .clearfloat
+  .span9
+    .subnav
+      %ul.nav.nav-pills
+        %li= link_to 'Interactive Timeline', timeline_path
+        %li= link_to 'All Events', moments_path(:all => true)
+        %li.dropdown
+          %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+            Decade
+            = "(#{@decade})" if @decade
+            %b.caret
+          %ul.dropdown-menu
+            - [1960,1970,1980,1990,2000,2010].each do |d|
+              %li= decade_link(d)
+        - if @decade
+          %li.dropdown
+            %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+              Year
+              = "(#{@year})" if @year
+              %b.caret
+            %ul.dropdown-menu
+              - (0..9).each do |y|
+                %li= year_link(truncate(@decade.to_s, :length => 2).to_i * 10 + y)
+        = form_tag(moments_path, :method => :get, :class => 'navbar-form pull-right') do
+          = text_field_tag 'start', nil, :maxlength => 4, :class => 'span1'
+          to
+          = text_field_tag 'stop', nil, :maxlength => 4, :class => 'span1'
+          = submit_tag 'View span', :class => 'btn'
