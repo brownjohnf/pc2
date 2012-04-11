@@ -11,6 +11,9 @@ class Document < ActiveRecord::Base
     'text/csv',
     'text/html',
     'text/xml',
+    'audio/mp3',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     'application/vnd.ms-excel',
     'application/vnd.ms-powerpoint',
     'application/vnd.google-earth.kml+kml',
@@ -60,7 +63,7 @@ class Document < ActiveRecord::Base
     end
 
     def run_before_save
-      if file_content_type == 'audio/mpeg'
+      if (file_content_type == 'audio/mpeg') || (file_content_type == 'audio/mp3')
         self.audio_length = Mp3Info.open(file.to_file).length.round
       end
     end
