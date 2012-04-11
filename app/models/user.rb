@@ -16,25 +16,43 @@ class User < ActiveRecord::Base
   
   after_create :add_user_role
 
-  has_attached_file :avatar, :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140>' }
+  has_attached_file :avatar, :styles => {
+    :icon => '80x80#', 
+    :thumb => '100x100', 
+    :small => '200x200', 
+    :medium => '380x380', 
+    :large => '980x980>', 
+    :full => '1140x1140>' 
+  }
+
   acts_as_taggable_on :tags
   acts_as_tagger
 
   has_many :volunteers, :dependent => :destroy
   has_many :staff, :dependent => :destroy
-  has_many :blogs, :dependent => :destroy
-  has_many :moments, :dependent => :destroy
-  has_many :libraries, :dependent => :destroy
+
+  # blogs, not necessarily by the user, but mostly
+  has_many :blogs
+  has_many :moments
+  has_many :libraries
   has_many :documents
+
+  # volunteer, staff, or host country national site locations
   has_many :sites
+
+  # online websites
   has_many :websites
   
-  has_many :stacks, :as => :stackable, :dependent => :destroy
-  has_many :added_stacks, :foreign_key => :user_id, :class_name => 'Stack'
+  # stacks for libraries in which the user is included
+  has_many :stacked_in, :as => :stackable, :class_name => 'Stack', :dependent => :destroy
+
+  # records of what stackables have been added to what libraries
+  has_many :stacks
   
   # all photos directly uploaded by the user, just to upload. all photos are also tagged with the user_id of their uploader, 
   # even if they were uploaded as part of a timeline moment or something else.
-  has_many :photos, :as => :imageable
+  has_many :added_photos, :as => :imageable, :class_name => 'Photo'
+  has_many :photos
   
   # pages, case studies to which this user has contributed/is author
   has_many :contributions, :dependent => :destroy

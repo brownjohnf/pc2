@@ -3,6 +3,7 @@ Factory.define :case_study, :class => CaseStudy do |c|
   c.summary 'Factory summary'
   c.country 'SN'
   c.language_id 1
+  c.association :photo
 end
 
 Factory.sequence :title do |n|

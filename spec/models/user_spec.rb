@@ -229,28 +229,32 @@ describe User do
         Website.find_by_id(@website.id).should_not be_nil
       end
     end
-    describe 'added_stacks' do
-      build_user_added_stacks
-      it 'should respond to stacks attribute' do
-        @user.should respond_to :added_stacks
-      end
-      it 'should have an associated library' do
-        @user.added_stacks.find_by_id(@stack.id).library.should == @library
-      end
-    end
     describe 'stacks' do
       build_user_stacks
       it 'should respond to stacks attribute' do
         @user.should respond_to :stacks
       end
-      it 'should return the correct stack' do
-        @user.stacks.should == [@stack]
+      it 'should have an associated library' do
+        @user.stacks.find_by_id(@stack.id).library.should == @library
       end
-      it 'should return an associated user' do
-        @user.stacks.find_by_id(@stack.id).user.should == @user2
+      it 'should have an associated stackable' do
+        @user.stacks.find_by_id(@stack.id).stackable.should == @stackable
+      end
+      it 'should not destroy stacks' do
+        @user.destroy
+        Stack.find_by_id(@stack.id).should_not be_nil
+      end
+    end
+    describe 'stacked_in' do
+      build_user_stacked_in
+      it 'should respond to stacked_in attribute' do
+        @user.should respond_to :stacked_in
+      end
+      it 'should return the correct stack' do
+        @user.stacked_in.should == [@stack]
       end
       it 'should return an associated library' do
-        @user.stacks.find_by_id(@stack.id).library == @library
+        @user.stacked_in.find_by_id(@stack.id).library == @library
       end
       it 'should destroy associated stacks' do
         @user.destroy

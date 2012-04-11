@@ -6,21 +6,24 @@ class MomentsController < ApplicationController
   # GET /moments.json
   def index
     if params[:year]
+      @year = params[:year]
+      @decade = @year.to_s.truncate(2).to_i * 10
       start = "#{params[:year].to_s}-1-1".to_date
       stop = start.end_of_year
-      @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
+      @moments = Moment.where(:datapoint => (start)..(stop))
       @title = "Timeline | #{params[:year]}"
       render 'year'
     elsif params[:decade]
+      @decade = params[:decade]
       start = "#{params[:decade].to_s}-1-1".to_date
       stop = start.end_of_year.advance(:years => 9)
-      @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
+      @moments = Moment.where(:datapoint => (start)..(stop))
       @title = "Timeline | #{params[:decade]}s"
       render 'index'
     elsif params[:start] && params[:stop]
       start = "#{params[:start].to_s}-1-1".to_date
       stop = "#{params[:stop].to_s}-1-1".to_date
-      @moments = Moment.where(:datapoint => (start..stop)).paginate(:page => params[:page], :per_page => 10)
+      @moments = Moment.where(:datapoint => (start..stop))
       @title = "Timeline | #{params[:start]} to #{params[:stop]}"
       render 'index'
     elsif params[:all]
@@ -41,47 +44,12 @@ class MomentsController < ApplicationController
     end
   end
 
-  # GET /moments
-  # GET /moments.json
-  def all
-    @moments = Moment.paginate(:page => params[:page], :per_page => 50)
-    @title = 'All Timeline Moments'
-
-    render 'index'
-  end
-
-  # GET /moments/decade
-  def decade
-    start = "#{params[:id].to_s}-1-1".to_date
-    stop = start.end_of_year.advance(:years => 9)
-    @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
-    @title = "Timeline"
-
-    render 'index'
-  end
-
-  # GET /moments/year
-  def year
-    start = "#{params[:id].to_s}-1-1".to_date
-    stop = start.end_of_year
-    @moments = Moment.where(:datapoint => (start)..(stop)).paginate(:page => params[:page], :per_page => 10)
-    @title = 'Timeline'
-  end
-
-  # GET /moments/span
-  def span
-    start = "#{params[:start].to_s}-1-1".to_date
-    stop = "#{params[:stop].to_s}-1-1".to_date
-    @moments = Moment.where(:datapoint => (start..stop)).paginate(:page => params[:page], :per_page => 10)
-    @title = "Timeline Span"
-
-    render 'index'
-  end
-
   # GET /moments/1
   # GET /moments/1.json
   def show
     @moment = Moment.find(params[:id])
+    @year = @moment.datapoint.year
+    @decade = @year.to_s.truncate(2).to_i * 10
 
     respond_to do |format|
       format.html # show.html.erb
@@ -109,7 +77,7 @@ class MomentsController < ApplicationController
   # POST /moments
   # POST /moments.json
   def create
-    @moment = Moment.new(params[:moment])
+    @moment = current_user.moments.build(params[:moment])
 
     respond_to do |format|
       if @moment.save

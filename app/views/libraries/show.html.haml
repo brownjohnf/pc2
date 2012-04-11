@@ -6,13 +6,13 @@
     .row
       .span5
         %h1
+          = flag_icon(@library.country.downcase)
           = @library.name
           = link_to 'edit', edit_library_path(@library) if can? :update, @library
         %h4= @library.description
       .span4
         %h3
-          = flag_icon(@library.country.downcase)
-          This library is managed by
+          Questions? Comments? This library is managed by
         %ul.feed
           = render @library.user
     .tabbable
@@ -21,8 +21,6 @@
         %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
       .tab-content
         .tab-pane#files.active
-          - @library.stacks.each do |s|
-            = render s.stackable if s.stackable_type == 'Document'
+          = render @library.documents
         .tab-pane#photos
-          - @library.stacks.each do |s|
-            = render s.stackable if s.stackable_type == 'Photo'
+          = render @library.photos

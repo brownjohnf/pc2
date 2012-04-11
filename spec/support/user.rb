@@ -3,6 +3,7 @@ Factory.define :user, :class => User do |u|
   u.email { Factory.next(:email) }
   u.password 'testing'
   u.avatar nil
+  u.country 'SN'
 end
 
 Factory.sequence :email do |n|

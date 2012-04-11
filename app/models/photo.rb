@@ -1,9 +1,13 @@
 class Photo < ActiveRecord::Base
 
-  # small is for span-4
-  # medium is for span-8
   has_attached_file :photo, :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140>' }
   validates_attachment_presence :photo
+  validates_attachment_content_type :photo, :content_type => [
+    'image/png',
+    'image/jpg',
+    'image/jpeg',
+    'image/gif'
+  ]
 
   acts_as_taggable_on :tags
 
@@ -14,8 +18,8 @@ class Photo < ActiveRecord::Base
   
   has_many :stacks, :as => :stackable, :dependent => :destroy
 
-  belongs_to :imageable, :polymorphic => true
   belongs_to :user
+  belongs_to :imageable, :polymorphic => true
 
   accepts_nested_attributes_for :stacks
 
@@ -31,22 +35,18 @@ class Photo < ActiveRecord::Base
     self.title
   end
 
+  def to_param
+    "#{id}-#{canonical_title.parameterize}"
+  end
+
   private
 
     def reset_pointers
-      User.where(:photo_id => self).each do |u|
-        u.photo_id = nil
-        u.save
-      end
-
-      Page.where(:photo_id => self).each do |u|
-        u.photo_id = nil
-        u.save
-      end
-
-      Moment.where(:photo_id => self).each do |u|
-        u.photo_id = nil
-        u.save
+      [User,Page,Moment,CaseStudy].each do |remove_from|
+        remove_from.where(:photo_id => self).each do |u|
+          u.photo = nil
+          u.save
+        end
       end
     end
 

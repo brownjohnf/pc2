@@ -11,4 +11,13 @@
     %li= link_to 'All Libraries', libraries_path
     %li= link_to 'Table View', libraries_path
     %li= link_to 'Create Library', new_library_path if can? :create, Library
+    - if can? :edit, @library
+      %li.dropdown
+        %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+          Actions
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to 'Edit', edit_library_path(@library)
+          - if can? :destroy, @library
+            %li= link_to 'Destroy', ''
     = render 'shared/search'

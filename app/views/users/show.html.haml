@@ -151,13 +151,7 @@
             - if @user.moments.any?
               .box.moments
                 %h3 Timeline Events
-                %ul
-                  - @user.moments.each do |moment|
-                    .feed_item
-                      .floatleft= avatar_for moment
-                      %h3= link_to moment.title, moment
-                      %p= truncate(moment.summary, :length => 100, :separator => ' ')
-                      %hr
+                = render @user.moments
             - else
               %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
           .tab-pane#libraries

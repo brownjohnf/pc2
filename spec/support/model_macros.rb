@@ -7,6 +7,47 @@ module ModelMacros
     end
   end
 
+  # document
+  def build_document
+    before(:each) do
+      @document = Factory.create(:document)
+    end
+  end
+
+  def build_document_stacks
+    before(:each) do
+      @stack = Factory.create(:stack, :stackable => @document)
+    end
+  end
+
+  def build_document_language
+    before(:each) do
+      @language = Factory.create(:language)
+      @document.language = @language
+    end
+  end
+
+  # moment
+  def build_moment
+    before(:each) do
+      @moment = Factory.create(:moment)
+    end
+  end
+
+  def build_moment_photos
+    before(:each) do
+      @photo = Factory.create(:photo, :imageable => @moment)
+    end
+  end
+
+  def build_moment_photo
+    before(:each) do
+      @photo = Factory.create(:photo)
+      @moment.photo = @photo
+    end
+  end
+
+
   # page
   def build_page
     before(:each) do
@@ -18,6 +59,12 @@ module ModelMacros
   def build_photo
     before(:each) do
       @photo = Factory.create(:photo)
+    end
+  end
+
+  def build_photo_users
+    before(:each) do
+      @user = Factory.create(:user, :photo => @photo)
     end
   end
 
@@ -78,17 +125,17 @@ module ModelMacros
   
   def build_user_stacks
     before(:each) do
-      @user2 = Factory.create(:user)
+      @stackable = Factory.create(:document)
       @library = Factory.create(:library)
-      @stack = Factory.create(:stack, :stackable => @user, :library => @library, :user => @user2)
+      @stack = Factory.create(:stack, :stackable => @stackable, :library => @library, :user => @user)
     end
   end
 
-  def build_user_added_stacks
+  def build_user_stacked_in
     before(:each) do
       @library = Factory.create(:library)
       @document = Factory.create(:document)
-      @stack = Factory.create(:stack, :stackable => @document, :library => @library, :user => @user)
+      @stack = Factory.create(:stack, :stackable => @user, :library => @library)
     end
   end
   

@@ -72,7 +72,7 @@ class StaticsController < ApplicationController
 
   def timeline
     @title_photo = Photo.tagged_with('timeline_splash').first
-
+    render 'timeline', :layout => nil
   end
 
 end
