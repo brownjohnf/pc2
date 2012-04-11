@@ -84,15 +84,19 @@ class LibrariesController < ApplicationController
     end
   end
   
+  # GET /libraries/1/download
   def download
     @library = Library.find(params[:id])
     
     if @library.bundle
       send_file "public/system/#{@library.file_name}"
+      File.delete("public/system/#{@library.file_name}")
+    else
+      redirect_to @library, notice: 'There was an error zipping your file. Please try again later.'
     end
-    File.delete("public/system/#{@library.file_name}")
   end
   
+  # GET /libraries/1/podcast
   def podcast
     @library = Library.find(params[:id])
     @title = @library.name
@@ -106,12 +110,11 @@ class LibrariesController < ApplicationController
     @itunes_email = 'admin@pcsenegal.org'
 
     # the mp3 files
-    @mp3s = @library.documents.order("updated_at desc").where(:file_content_type => 'audio/mp3')
-    
+    @mp3s = @library.mp3s
+      
     if @mp3s.empty?
       redirect_to @library, notice: 'There is currently no podcast associated with this library.'
     else
-      require 'mp3info'
       respond_to do |format|
         format.xml { render :layout => false }
       end

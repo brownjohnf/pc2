@@ -35,6 +35,14 @@ class Library < ActiveRecord::Base
     photos
   end
 
+  def mp3s
+    mp3s = []
+    stacks.where(:stackable_type => 'Document').all.each do |stack|
+      mp3s << stack.stackable unless stack.stackable.audio_length.nil?
+    end
+    mp3s
+  end
+
   # sets the url to include the title
   def to_param
     "#{id}-#{canonical_title.parameterize}"
@@ -61,7 +69,13 @@ class Library < ActiveRecord::Base
   end
   
   # package library into .zip file for bulk download
+  # this should probably be a worker task, but oh well...
   def bundle
+
+    # set the path.
+    # on heroku, this amounts to a temporary path
+    # so i've not included any system for removing them
+    # except recreating them
     bundle_filename = "public/system/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
@@ -69,22 +83,19 @@ class Library < ActiveRecord::Base
       File.delete(bundle_filename)
     end
 
-    # set the bundle_filename attribute of this object
-    #self.bundle_filename = "/uploads/#{name}-all_files.zip"
-
     # open or create the zip file
     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
       |zipfile|
-      # collect the album's tracks
+      # collect the library's objects
       self.documents.collect {
         |document|
-          # add each track to the archive, names using the track's attributes
-          zipfile.add( "#{full_name}/files/#{document.name}", document.file.to_file)
+          # add each track to the archive, using its canonical_title for file name
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}", document.file.to_file)
       }
       self.photos.collect {
         |photo|
-          # add each track to the archive, names using the track's attributes
-          zipfile.add( "#{full_name}/photos/#{photo.title}-#{photo.attribution ? photo.attribution : photo.user.name}", photo.photo.to_file)
+          # add each track to the archive, using its canonical_title and credit for file name
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}", photo.photo.to_file)
       }
     }
 

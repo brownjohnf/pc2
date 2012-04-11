@@ -78,6 +78,20 @@ describe Library do
     it 'should respond to bundle' do
       @library.should respond_to :bundle
     end
+    it 'bundle should return true' do
+      @library.bundle.should be_true
+    end
+    it 'should respond to mp3s' do
+      @library.should respond_to :mp3s
+    end
+    it 'mp3s should return only mp3 files' do
+      Factory.create(:stack, :library => @library, :stackable => @mp3 = Factory(:mp3))
+      Factory.create(:stack, :library => @library, :stackable => @document = Factory(:document))
+      Factory.create(:stack, :library => @library, :stackable => @photo = Factory(:photo))
+      @library.mp3s.should include(@mp3)
+      @library.mp3s.should_not include(@document)
+      @library.mp3s.should_not include(@photo)
+    end
   end
 
   # associations

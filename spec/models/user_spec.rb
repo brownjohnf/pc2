@@ -170,10 +170,10 @@ describe User do
       it 'should return the right moments in the right order' do
         @user.moments.should == [@moment2, @moment, @moment3]
       end
-      it 'should destroy associated moments' do
+      it 'should not destroy associated moments' do
         @user.destroy
         [@moment, @moment2, @moment3].each do |moment|
-          Moment.find_by_id(moment.id).should be_nil
+          Moment.find_by_id(moment.id).should_not be_nil
         end
       end
     end
@@ -185,9 +185,9 @@ describe User do
       it 'should return the correct blog' do
         @user.blogs.should == [@blog]
       end
-      it 'should destroy associated blogs' do
+      it 'should not destroy associated blogs' do
         @user.destroy
-        Blog.find_by_id(@blog.id).should be_nil
+        Blog.find_by_id(@blog.id).should_not be_nil
       end
     end
     describe 'libraries' do
@@ -198,9 +198,9 @@ describe User do
       it 'should return the correct library' do
         @user.libraries.should == [@library]
       end
-      it 'should destroy associated libraries' do
+      it 'should not destroy associated libraries' do
         @user.destroy
-        Library.find_by_id(@library.id).should be_nil
+        Library.find_by_id(@library.id).should_not be_nil
       end
     end
     describe 'sites' do

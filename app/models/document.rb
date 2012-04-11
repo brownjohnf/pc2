@@ -1,5 +1,7 @@
 class Document < ActiveRecord::Base
 
+  require 'mp3info'
+
   has_attached_file :file,
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
@@ -9,10 +11,17 @@ class Document < ActiveRecord::Base
     }
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => [
-    'application/mp3',
-    'audio/mp3',
+    'audio/mpeg',
+    'application/pdf',
     'text/plain',
-    'text/xml'
+    'text/csv',
+    'text/html',
+    'text/xml',
+    'application/vnd.ms-excel',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.google-earth.kml+kml',
+    'application/x-latex',
+    'application/x-shockwave-flash'
   ]
   
   acts_as_taggable_on :tags
@@ -30,7 +39,8 @@ class Document < ActiveRecord::Base
   validates :name, :user_id, :presence => true
 
   before_validation :clear_empty_attrs
-  after_save :check_roles
+  before_save :run_before_save
+  after_save :run_after_save
 
   def canonical_title
     self.name
@@ -49,9 +59,15 @@ class Document < ActiveRecord::Base
       self.name = self.file_file_name if name.nil?
     end
 
-    def check_roles
+    def run_after_save
       if roles.empty?
         roles << Role.find_by_name('Public')
+      end
+    end
+
+    def run_before_save
+      if file_content_type == 'audio/mpeg'
+        self.audio_length = Mp3Info.open(file.to_file).length.round
       end
     end
 

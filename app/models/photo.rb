@@ -3,7 +3,14 @@ class Photo < ActiveRecord::Base
   # small is for span-4
   # medium is for span-8
   has_attached_file :photo,
-    :styles => { :icon => '80x80#', :thumb => '100x100', :small => '200x200', :medium => '380x380', :large => '980x980>', :full => '1140x1140>' },
+    :styles => { 
+      :icon => '80x80#', 
+      :thumb => '100x100', 
+      :small => '200x200',
+      :medium => '380x380',
+      :large => '980x980>',
+      :full => '1140x1140>' 
+    }
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
     :s3_credentials => {
@@ -13,7 +20,6 @@ class Photo < ActiveRecord::Base
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
-    'image/jpg',
     'image/jpeg',
     'image/gif'
   ]
