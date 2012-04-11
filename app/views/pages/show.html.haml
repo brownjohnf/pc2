@@ -24,6 +24,7 @@
     %h4
       %small originally posted
       = @page.created_at.strftime('%d %B %Y')
+    %p= link_to 'home', root_path, :id => 'test_tooltip', :title => 'test tooltip'
     %hr
     - if can? :update, @page
       .tabbable.tabs-right

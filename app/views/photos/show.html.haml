@@ -24,7 +24,7 @@
           - @photo.stacks.each do |s|
             %li
               = link_to s.library.name, s.library if s.id
-              = button_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...', :class => 'btn btn-mini btn-danger' if can? :destroy, s
+              = link_to 'remove', stack_path(s), :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...', :class => 'btn btn-mini btn-danger' if can? :destroy, s
       - if can? :create, Stack
         %h3 Add to a library
         - if current_user.libraries.any?

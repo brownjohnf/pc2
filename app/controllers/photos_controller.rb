@@ -24,8 +24,8 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo = Photo.find(params[:id])
-    @next = Photo.unscoped.order('photos.id ASC').where("id > #{params[:id]}").limit(1).first
-    @prev = Photo.unscoped.order('photos.id DESC').where("id < #{params[:id]}").limit(1).first
+    @next = Photo.unscoped.order('photos.id ASC').where("id > #{@photo.id}").limit(1).first
+    @prev = Photo.unscoped.order('photos.id DESC').where("id < #{@photo.id}").limit(1).first
 
     respond_to do |format|
       format.html # show.html.erb
