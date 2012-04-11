@@ -1,6 +1,5 @@
 class Photo < ActiveRecord::Base
 
-<<<<<<< HEAD
   # small is for span-4
   # medium is for span-8
   has_attached_file :photo,
