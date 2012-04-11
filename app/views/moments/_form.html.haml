@@ -11,7 +11,7 @@
     = f.input :datapoint, :as => :text
     = f.input :title
     = f.input :summary
-    = f.input :content, :input_html => {:class => 'richtext', :value => (@moment.content ? markdown(@moment.content) : nil)}
+    = f.input :content
   = f.semantic_fields_for :photos do |p|
     = p.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
     = p.inputs :photo, :title, :description, :attribution, :tag_list
