@@ -18,7 +18,7 @@
     %p
       = link_to @moment.user.volunteers.first.stage.swear_in.year, moments_path(:year => @moment.user.volunteers.first.stage.swear_in.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.swear_in
       \-
-      = link_to @moment.user.volunteers.first.stage.cos.year, moments_path(:year => @moment.user.volunteers.first.stage.cos.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stag && @moment.user.volunteers.first.stage.cos
+      = link_to @moment.user.volunteers.first.stage.cos.year, moments_path(:year => @moment.user.volunteers.first.stage.cos.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.cos
       = button_to 'Edit', edit_moment_path(@moment), :method => :get if can? :update, @moment
     .well
       %p= @moment.summary
