@@ -3,7 +3,6 @@
 	<channel>
 		<%= render 'shared/podcast' %>
 		<% @mp3s.each do |mp3| %>
-			<% duration = Mp3Info.open(mp3.file.to_file).length.round %>
 			<item>
 				<title><%= mp3.name %></title>
 				<itunes:author><%= mp3.author ? mp3.author : "Peace Corps #{mp3.user.country}" %></itunes:author>
@@ -12,7 +11,7 @@
 				<enclosure url="<%= mp3.file.url %>" length="<%= mp3.file.size %>" type="<%= mp3.file_content_type %>" />
 				<guid><%= mp3.file.url %></guid>
 				<pubDate><%= mp3.updated_at.strftime('%a, %d %B %Y %H:%M:%S %Z') %></pubDate>
-				<itunes:duration><%= duration / 60 %>:<%= duration - 60 * (duration / 60) %></itunes:duration>
+				<itunes:duration><%= mp3.audio_length / 60 %>:<%= mp3.audio_length - 60 * (mp3.audio_length / 60) %></itunes:duration>
 				<itunes:keywords><%= mp3.tag_list %></itunes:keywords>
 			</item>
 		<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406233138) do
+ActiveRecord::Schema.define(:version => 20120411183355) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120406233138) do
     t.datetime "updated_at",        :null => false
     t.integer  "language_id"
     t.string   "author"
+    t.integer  "audio_length"
   end
 
   create_table "documents_roles", :id => false, :force => true do |t|

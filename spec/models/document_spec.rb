@@ -23,8 +23,7 @@ describe Document do
     it { should have_attached_file(:file) }
     it { should validate_attachment_presence(:file) }
     it { should validate_attachment_content_type(:file).
-      allowing('text/plain', 'text/xml', 'audio/mp3').
-      rejecting('image/png', 'image/gif', 'image/jpeg') }
+      allowing('audio/mpeg', 'application/pdf', 'text/plain', 'text/csv', 'text/xml', 'text/html', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.google-earth.kml+kml', 'application/x-latex', 'application/x-shockwave-flash') }
     it { should_not validate_attachment_size(:file) }
     it 'should create a name if missing' do
       missing_name = @user.documents.new(@attr)
@@ -69,6 +68,10 @@ describe Document do
     it 'should respond to tag_list' do
       @document.should respond_to :tag_list
       @document.tag_list.should be_a_kind_of Array
+    end
+    it 'should set audio_length on audio/mpeg upload' do
+      @mp3 = Factory.create(:mp3)
+      @mp3.audio_length.should_not be_nil
     end
   end
 

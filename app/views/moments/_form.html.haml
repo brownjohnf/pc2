@@ -11,6 +11,17 @@
     = f.input :datapoint, :as => :text
     = f.input :title
     = f.input :summary
+    %p You can include one of the following items as your moment content:
+    %ul
+      %li Text. Simply start typing! Needs to be formatted in HTML.
+      %li YouTube. Paste the link to the video. Not the embed code.
+      %li Vimeo. Like YouTube. Paste in a link to the video.
+      %li Website. Type the link. Include the http:// or https://.
+      %li Google Map. Just include the link to the map.
+      %li Flickr. Paste the link to a photo page.
+      %li Tweet. Use the link to the tweet status.
+      %li SoundCloud. Paste the link to the track.
+    %p If that doesn't cover your needs, get in touch with us, and we can accomadate you.
     = f.input :content
   = f.semantic_fields_for :photos do |p|
     = p.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }

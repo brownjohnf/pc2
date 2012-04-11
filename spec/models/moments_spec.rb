@@ -54,6 +54,62 @@ describe Moment do
       @moment.save!
       @moment.country.should_not == @user.country
     end
+    describe 'text content' do
+      it 'should respond to text' do
+        @moment.should respond_to :text
+      end
+      it 'should not be nil' do
+        @moment.text.should_not be_nil
+      end
+      it 'should not be nil without photo' do
+        @moment.photo = nil
+        @moment.text.should_not be_nil
+      end
+      it 'should not be nil without content' do
+        @moment.content = nil
+        @moment.text.should_not be_nil
+      end
+    end
+    describe 'media' do
+      it 'should respond to media' do
+        @moment.should respond_to :media
+      end
+      it 'should not be nil' do
+        @moment.media.should_not be_nil
+      end
+      it 'should not be nil without photo' do
+        @moment.photo = nil
+        @moment.media.should_not be_nil
+      end
+      it 'should not be nil without content' do
+        @moment.content = nil
+        @moment.media.should_not be nil
+      end
+    end
+    describe 'credit' do
+      it 'should respond to credit' do
+        @moment.should respond_to :credit
+      end
+      it 'should not be nil' do
+        @moment.credit.should_not be_nil
+      end
+      it 'should not be nil without photo' do
+        @moment.photo = nil
+        @moment.credit.should_not be_nil
+      end
+    end
+    describe 'caption' do
+      it 'should respond to caption' do
+        @moment.should respond_to :caption
+      end
+      it 'should not be nil' do
+        @moment.caption.should_not be_nil
+      end
+      it 'should not be nil without photo' do
+        @moment.photo = nil
+        @moment.caption.should_not be_nil
+      end
+    end
   end
 
   # associations
