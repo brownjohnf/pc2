@@ -11,7 +11,7 @@
 				<enclosure url="<%= mp3.file.url %>" length="<%= mp3.file.size %>" type="<%= mp3.file_content_type %>" />
 				<guid><%= mp3.file.url %></guid>
 				<pubDate><%= mp3.updated_at.strftime('%a, %d %B %Y %H:%M:%S %Z') %></pubDate>
-				<itunes:duration><%= mp3.audio_length / 60 %>:<%= mp3.audio_length - 60 * (mp3.audio_length / 60) %></itunes:duration>
+				<itunes:duration><%= mp3.audio_length.to_i / 60 %>:<%= mp3.audio_length.to_i - 60 * (mp3.audio_length.to_i / 60) %></itunes:duration>
 				<itunes:keywords><%= mp3.tag_list %></itunes:keywords>
 			</item>
 		<% end %>
