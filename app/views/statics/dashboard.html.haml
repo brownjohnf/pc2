@@ -1,7 +1,9 @@
 .row
-  .span8.offset2
+  .span3
+    = render 'shared/menu'
+  .span7
     .tabbable
-      %ul.nav.nav-tabs
+      %ul.nav.nav-pills
         %li.active= link_to "Pages (#{Page.count})", '#pages', 'data-toggle' => 'tab'
         %li= link_to "Files (#{Document.count})", '#files', 'data-toggle' => 'tab'
         %li= link_to "Users (#{User.count})", '#users', 'data-toggle' => 'tab'
