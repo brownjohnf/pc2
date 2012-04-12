@@ -1,8 +1,15 @@
 .feed_item
-  .floatleft= avatar_for_user volunteer.user
-  %h4= link_to volunteer.user.name, volunteer.user
-  = link_to volunteer.site.region.name, volunteer.site.region if volunteer.site
-  = volunteer.user.country
-  %br
-  = link_to volunteer.sector.name, volunteer.sector if volunteer.sector
+  .floatleft= avatar_for_user volunteer.user, :size => :icon
+  %h3
+    = link_to volunteer.user.name, volunteer.user
+    = flag_icon(volunteer.user.country) if volunteer.user.country
+    %small= link_to 'edit', edit_user_path(volunteer.user) if can? :update, volunteer.user
+  %p
+    - if can? :read, volunteer
+      = flag_icon(volunteer.country) if volunteer.country
+      PCV
+      - if volunteer.sector
+        |
+        = link_to volunteer.sector.name, volunteer.sector
   .clearfloat
+  %hr

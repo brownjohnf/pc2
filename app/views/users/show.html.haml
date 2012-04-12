@@ -3,12 +3,12 @@
     .span3
       = render 'shared/menu'
     .span7
-      .box
-        %h1
-          = flag_icon(@user.country)
-          = @user.name
-          %small= render 'shared/tags', :tags => @user.tag_list
-        %hr
+      = render 'menu'
+      %h1
+        = flag_icon(@user.country)
+        = @user.name
+        %small= render 'shared/tags', :tags => @user.tag_list
+      %hr
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'Basic', '#user', 'data-toggle' => 'tab'

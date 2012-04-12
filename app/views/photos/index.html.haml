@@ -8,7 +8,7 @@
         %small= pluralize(Photo.count, 'photo')
       - if @photos
         - @photos.each do |photo|
-          = link_to image_tag(photo.photo.url(:icon), :width => '10%', :style => 'float:left;'), photo
+          = link_to image_tag(photo.photo.url(:icon), :width => '10%', :style => 'float:left;', :rel => 'popover-top', :title => photo.title, 'data-content' => photo.description), photo
       - else
         %p No photos have been uploaded.
       .clearfloat

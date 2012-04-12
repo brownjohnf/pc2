@@ -22,7 +22,22 @@ $(function(){
   }
   
   $('.dyn-datatable').dataTable();
-
-  $('#test_tooltip').tooltip();
+  
+  $('.accordion').collapse();
+  $('.carousel').carousel();
+  $('[rel=popover-top]').popover({
+    'placement':'top'
+    });
+  $('[rel=popover-right]').popover({
+    placement: 'right'
+    });
+  $('.tooltip-right-slow').tooltip({
+    placement: 'right',
+    delay: { show: 1000, hide:50 }
+  });
+  $('.tooltip-left-slow').tooltip({
+    placement: 'left',
+    delay: { show: 1000, hide:50 }
+  });
 
 });

@@ -8,7 +8,6 @@
         %h1
           = flag_icon(@library.country.downcase)
           = @library.name
-          = link_to 'edit', edit_library_path(@library) if can? :update, @library
         %h4= @library.description
       .span4
         %h3

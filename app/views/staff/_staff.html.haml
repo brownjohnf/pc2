@@ -1,8 +1,16 @@
 .feed_item
-  .floatleft= avatar_for_user staff.user
-  %h4= link_to staff.user.name, staff.user
+  .floatleft= avatar_for_user staff.user, :size => :icon
+  %h3
+    = link_to staff.user.name, staff.user
+    = flag_icon(staff.user.country) if staff.user.country
+    %small= link_to 'edit', edit_user_path(staff.user) if can? :update, staff.user
   %p
-    = staff.user.country
-    %br
-    = link_to staff.jobs.first.position.title, staff.jobs.first.position if staff.jobs.any?
+    - if can? :read, staff
+      = flag_icon(staff.country) if staff.country
+      Staff
+      - if staff.positions.any?
+        - staff.positions.each do |p|
+          |
+          = p.title
   .clearfloat
+  %hr

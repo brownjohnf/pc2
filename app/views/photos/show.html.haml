@@ -1,18 +1,14 @@
 .container
   .row
+    .span12
+      = render 'menu'
+  .row
     .span8.offset2
       %h1
         = (@photo.title) ? @photo.title : @photo.photo_file_name
-      %p= @photo.description
-    .span2
-      - if can? :update, @photo
-        .btn-group
-          = link_to 'Edit Photo', edit_photo_path(@photo), :class => 'btn'
-          - if can? :destroy, @photo
-            %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
-              %span.caret
-            %ul.dropdown-menu
-              %li= link_to 'Delete Photo', @photo, :confirm => 'Are you sure?', :method => :delete if can? :destroy, @photo
+      %p
+        = @photo.description
+        = render 'shared/tags', :tags => @photo.tag_list
   .row
     .span2
       %ul.pager
@@ -44,9 +40,6 @@
     .span2
       %ul.pager
         %li.next= link_to 'Next >', @next if @next
-      .box.tags
-        %h3 Tags
-        = render 'shared/tags', :tags => @photo.tag_list
   .row
     .span4.offset2
       %p
