@@ -47,7 +47,7 @@
                 %li.feed_item
                   = link_to s.library.name, s.library if s.id
                   |
-                  = link_to 'remove', s, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...' if can? :destroy, s
+                  = link_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
                   .clearfloat
         %br
         - if can? :create, Stack

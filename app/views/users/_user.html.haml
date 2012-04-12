@@ -3,7 +3,7 @@
   %h3
     = link_to user.name, user
     = flag_icon(user.country) if user.country
-    = link_to 'edit', edit_user_path(user) if can? :update, user
+    %small= link_to 'edit', edit_user_path(user) if can? :update, user
   %p
     - if user.volunteers.any?
       - user.volunteers.each do |v|

@@ -45,10 +45,11 @@ class StacksController < ApplicationController
   # DELETE /stacks/1.json
   def destroy
     @stack = Stack.find(params[:id])
+    @library = @stack.library
     @stack.destroy
 
     respond_to do |format|
-      format.html { redirect_to stacks_url }
+      format.html { redirect_to @library }
       format.json { head :ok }
     end
   end

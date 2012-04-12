@@ -13,7 +13,7 @@
           go up
     - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
       %li
-        = link_to item.title, item
+        = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
     %hr
   -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
     %li.nav-header= @page.parent.title.upcase
@@ -24,21 +24,21 @@
           go up
     - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
       %li
-        = link_to item.title, item
+        = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
   %li.nav-header Browse
   - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
     %li
-      = link_to item.title, item
+      = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
   - if Page.unscoped.tagged_with('quicklink').order('title').any?
     %li.nav-header Quick Links
     - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
       %li= link_to link.canonical_title, link if can? :read, link
   %li.nav-header Resources
-  %li= link_to 'Pages', pages_path
-  %li= link_to 'Case Studies', case_studies_path
-  %li= link_to 'Photos', photos_path
-  %li= link_to 'Files', documents_path
-  %li= link_to 'Libraries', libraries_path
-  %li= link_to 'Volunteers', volunteers_path
-  %li= link_to 'Staff', staff_path
-  %li= link_to 'Google Search', '/search'
+  %li= link_to 'Pages', pages_path, :class => 'tooltip-right-slow', :title => 'Presentation content. Info about what we do, and how we do it.'
+  %li= link_to 'Case Studies', case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.'
+  %li= link_to 'Photos', photos_path, :class => 'tooltip-right-slow', :title => 'Browse Volunteer photos, or upload your own.'
+  %li= link_to 'Files', documents_path, :class => 'tooltip-right-slow', :title => 'Get the latest and greatest information, podcasts, and radio shows.'
+  %li= link_to 'Libraries', libraries_path, :class => 'tooltip-right-slow', :title => 'View collections put together by users, highlighting favorite or useful items.'
+  %li= link_to 'Volunteers', volunteers_path, :class => 'tooltip-right-slow', :title => 'Get to know our Volunteers.'
+  %li= link_to 'Staff', staff_path, :class => 'tooltip-right-slow', :title => 'Get to know our staff.'
+  %li= link_to 'Google Search', '/search', :class => 'tooltip-right-slow', :title => "Still can't find it? Search within our site using the power of Google."

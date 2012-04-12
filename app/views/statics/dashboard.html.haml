@@ -1,15 +1,17 @@
 .row
-  .span12
+  .span3
+    = render 'shared/menu'
+  .span7
     .tabbable
-      %ul.nav.nav-tabs
-        %li.active= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
-        %li= link_to 'Files', '#files', 'data-toggle' => 'tab'
-        %li= link_to 'Users', '#users', 'data-toggle' => 'tab'
-        %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
+      %ul.nav.nav-pills
+        %li.active= link_to "Pages (#{Page.count})", '#pages', 'data-toggle' => 'tab'
+        %li= link_to "Files (#{Document.count})", '#files', 'data-toggle' => 'tab'
+        %li= link_to "Users (#{User.count})", '#users', 'data-toggle' => 'tab'
+        %li= link_to "Case Studies (#{CaseStudy.count})", '#case_studies', 'data-toggle' => 'tab'
         %li= link_to 'News', '#news', 'data-toggle' => 'tab'
-        %li= link_to 'Stats', '#stats', 'data-toggle' => 'tab'
+        %li= link_to 'Statistics', '#stats', 'data-toggle' => 'tab'
         %li= link_to 'Tags', '#tags', 'data-toggle' => 'tab'
-        %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
+        %li= link_to "Photos (#{Photo.count})", '#photos', 'data-toggle' => 'tab'
       .tab-content
         .tab-pane#pages.active
           %h1 Latest Page Updates

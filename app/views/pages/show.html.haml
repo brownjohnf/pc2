@@ -28,10 +28,10 @@
     - if can? :update, @page
       .tabbable.tabs-right
         %ul.nav.nav-tabs
-          %li.active= link_to 'view', '#1', 'data-toggle' => 'tab'
-          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }
-          %li= link_to 'properties', '#2', 'data-toggle' => 'tab'
-          %li= link_to 'destroy', '#3', 'data-toggle' => 'tab' if can? :destroy, @page
+          %li.active= link_to 'view', '#1', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'View the page as others will see it'
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }, :class => 'tooltip-left-slow', :title => 'Edit the page in place, using a WYSIWYG editor'
+          %li= link_to 'properties', '#2', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'Quick-edit the raw properties in a form'
+          %li= link_to 'destroy', '#3', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'Trash it' if can? :destroy, @page
         .tab-content
           .tab-pane#1.active
             %p= @page.description

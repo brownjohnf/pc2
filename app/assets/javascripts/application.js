@@ -15,4 +15,4 @@
 // require jquery_ujs
 // require jquery.url
 //= require bootstrap
-//= require_tree .
+//= require default

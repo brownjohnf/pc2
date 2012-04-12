@@ -2,6 +2,7 @@
   .span3
     = render 'shared/menu'
   .span7
+    = render 'menu'
     %h1
       = flag_icon @case_study.country.downcase
       = @case_study.title
@@ -65,7 +66,6 @@
       - if @case_study.next_steps
         %h2 Next Steps
         = markdown @case_study.next_steps
-    = render 'shared/search'
   .span2
     = avatar_for @case_study, :size => :small
     = render 'shared/social'

@@ -19,7 +19,7 @@
         %br
       = render document.roles
     %p
-      = link_to 'download', download_document_path(document) if can? :read, document
+      = link_to 'download', download_document_path(document), :rel => 'popover-right', :title => document.file_content_type, 'data-content' => ((document.audio_length ? "#{document.audio_length} seconds<br/>" : ' ') + "#{document.file_file_size} bytes")
       = mime_icon(document.file_content_type)
       = document.file.size
       bytes
