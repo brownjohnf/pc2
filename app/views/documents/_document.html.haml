@@ -19,10 +19,8 @@
         %br
       = render document.roles
     %p
-      = link_to 'download', download_document_path(document), :rel => 'popover-right', :title => document.file_content_type, 'data-content' => ((document.audio_length ? "#{document.audio_length} seconds<br/>" : ' ') + "#{document.file_file_size} bytes")
+      = link_to 'download', download_document_path(document), :rel => 'popover-right', :title => document.file_content_type, 'data-content' => ((document.audio_length ? "#{document.formatted_audio_length}<br/>" : ' ') + "#{change_units(document.file_file_size)} Mb")
       = mime_icon(document.file_content_type)
-      = document.file.size
-      bytes
     .tags.right= render 'shared/tags', :tags => document.tag_list
     %hr
   - else
