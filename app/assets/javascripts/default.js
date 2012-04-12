@@ -31,6 +31,9 @@ $(function(){
   $('[rel=popover-right]').popover({
     placement: 'right'
     });
+  $('[rel=popover-bottom]').popover({
+    'placement':'bottom'
+    });
   $('.tooltip-right-slow').tooltip({
     placement: 'right',
     delay: { show: 1000, hide:50 }
