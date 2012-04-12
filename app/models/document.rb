@@ -43,6 +43,12 @@ class Document < ActiveRecord::Base
     self.name
   end
 
+  def formatted_audio_length
+    if audio_length
+      "#{audio_length.to_i / 3600}:#{sprintf("%02.f", audio_length.to_i / 60)}:#{sprintf("%02.f", audio_length.to_i - 60 * (audio_length.to_i / 60))}"
+    end
+  end
+
   def to_param
     "#{id}-#{canonical_title.parameterize}"
   end

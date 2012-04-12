@@ -131,4 +131,11 @@ module ApplicationHelper
     }
   end
 
+  def change_units(to_convert, unit = :mb)
+    units = {
+      :mb => (1024 * 1024)
+    }
+    to_convert.to_i / units[unit].to_i
+  end
+
 end
