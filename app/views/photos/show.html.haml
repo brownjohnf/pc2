@@ -1,7 +1,7 @@
 .container
   .row
     .span12
-      = render 'menu'
+      = render 'menu', :current_user => current_user
   .row
     .span8.offset2
       %h1
@@ -21,7 +21,7 @@
             %li
               = link_to s.library.name, s.library if s.id
               = link_to 'remove', stack_path(s), :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'please wait...', :class => 'btn btn-mini btn-danger' if can? :destroy, s
-      - if can? :create, Stack
+      - if user_signed_in? && can?(:create, Stack)
         %h3 Add to a library
         - if current_user.libraries.any?
           - @stack = @photo.stacks.build

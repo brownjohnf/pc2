@@ -14,10 +14,13 @@ class PhotosController < ApplicationController
   end
   
   def search
-    @photos = Photo.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
-    @count = @photos.count
-    
-    render 'index'
+    if params[:q]
+      @photos = Photo.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 50)
+      @count = @photos.count 
+      render 'index'
+    else
+      redirect_to photos_path
+    end
   end
 
   # GET /photos/1
@@ -58,7 +61,7 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = current_user.photos.build(params[:photo])
-    @photo.user_id = current_user.id
+    @photo.imageable = current_user
 
     respond_to do |format|
       if @photo.save
