@@ -89,8 +89,8 @@ class LibrariesController < ApplicationController
     @library = Library.find(params[:id])
     
     if @library.bundle
-      send_file "public/system/#{@library.file_name}"
-      File.delete("public/system/#{@library.file_name}")
+      send_file "public/system/#{Rails.env}/#{@library.file_name}"
+      File.delete("public/system/#{Rails.env}/#{@library.file_name}")
     else
       redirect_to @library, notice: 'There was an error zipping your file. Please try again later.'
     end

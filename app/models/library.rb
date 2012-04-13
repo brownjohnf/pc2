@@ -70,6 +70,8 @@ class Library < ActiveRecord::Base
   
   # package library into .zip file for bulk download
   # this should probably be a worker task, but oh well...
+  #
+  # @todo make sure that only documents authorized for viewing are included.
   def bundle
 
     # set the path.
