@@ -99,7 +99,7 @@ describe CaseStudiesController do
   # GET edit
   describe "'GET' edit'" do
     before(:each) do
-      @case_study = Factory.create(:case_study)
+      @case_study = Factory(:case_study)
     end
     context 'as guest' do
       it 'should redirect to login' do

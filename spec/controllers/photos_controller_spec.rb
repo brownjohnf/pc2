@@ -140,25 +140,15 @@ describe PhotosController do
     describe 'should be successful' do
       before(:each) do
         @attr = {
-          :photo => File.new(File.join(Rails.root, 'spec', 'support', 'test.png'))
+          :photo => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'test.png'), 'image/png')
         }
       end
       context 'as admin' do
         login_admin
         it 'should create a photo' do
           lambda do
-            puts @attr.inspect
             post :create, :photo => @attr
-            pp assigns(:photo).errors
           end.should change(Photo, :count).by(1)
-        end
-        it 'should allow assignment of photo' do
-          @photo = Factory.create(:photo)
-          @photo.photo = File.new(File.join(Rails.root, 'spec', 'support', 'test.txt'))
-          @photo.title = 'Fuck'
-          pp @photo.inspect
-          @photo.save!
-          pp @photo.inspect
         end
         it 'should redirect to newly created photo' do
           post :create, :photo => @attr
