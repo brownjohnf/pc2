@@ -1,6 +1,9 @@
 class Import < ActiveRecord::Base
 
-  has_attached_file :csv
+  has_attached_file :csv, {
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+  }
   validates_attachment_presence :csv
 
   belongs_to :scope

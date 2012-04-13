@@ -2,7 +2,7 @@
 
 class Photo < ActiveRecord::Base
 
-  has_attached_file :photo,
+  has_attached_file :photo, {
     :styles => { 
       :icon => '80x80#', 
       :thumb => '100x100', 
@@ -10,6 +10,9 @@ class Photo < ActiveRecord::Base
       :medium => '380x380',
       :large => '980x980>',
       :full => '1140x1140>' 
+    },
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
   }
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => [

@@ -76,7 +76,8 @@ class Library < ActiveRecord::Base
     # on heroku, this amounts to a temporary path
     # so i've not included any system for removing them
     # except recreating them
-    bundle_filename = "public/system/#{file_name}"
+    # put it in the appropriate folder for the environment
+    bundle_filename = "public/system/#{Rails.env}/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
     if File.file?(bundle_filename)

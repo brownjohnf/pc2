@@ -2,7 +2,10 @@ class Document < ActiveRecord::Base
 
   require 'mp3info'
 
-  has_attached_file :file
+  has_attached_file :file, {
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+  }
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => [
     'audio/mpeg',

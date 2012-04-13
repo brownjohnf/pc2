@@ -16,13 +16,17 @@ class User < ActiveRecord::Base
   
   after_create :add_user_role
 
-  has_attached_file :avatar, :styles => {
-    :icon => '80x80#', 
-    :thumb => '100x100', 
-    :small => '200x200', 
-    :medium => '380x380', 
-    :large => '980x980>', 
-    :full => '1140x1140>' 
+  has_attached_file :avatar, {
+    :styles => {
+      :icon => '80x80#', 
+      :thumb => '100x100', 
+      :small => '200x200', 
+      :medium => '380x380', 
+      :large => '980x980>', 
+      :full => '1140x1140>' 
+    },
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
   }
 
   acts_as_taggable_on :tags
