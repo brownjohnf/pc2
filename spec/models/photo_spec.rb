@@ -31,8 +31,7 @@ describe Photo do
     it { should have_attached_file(:photo) }
     it { should validate_attachment_presence(:photo) }
     it { should validate_attachment_content_type(:photo).
-      allowing('image/png', 'image/jpg', 'image/jpeg', 'image/gif').
-      rejecting('text/xml', 'text/plain', 'application/mp3', 'audio/mp3') }
+      allowing('image/png', 'image/jpeg', 'image/gif') }
     it { should_not validate_attachment_size(:photo) }
     it 'should create a title if missing' do
       missing_title = @user.photos.new(@attr)
