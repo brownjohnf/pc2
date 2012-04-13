@@ -21,29 +21,9 @@ describe PhotosController do
         get :search, {:q => 'test'}
         response.should be_success
       end
-      it 'should redirect without a query present' do
+      it 'should redirect to photos without a query present' do
         get :search
-        response.should redirect_to case_studies_path
-      end
-    end
-  end
-
-  # GET added
-  describe "GET 'added'" do
-    context 'as anyone' do
-      it 'should be successful' do
-        get 'added'
-        response.should be_success
-      end
-    end
-  end
-
-  # GET updated
-  describe "GET 'updated'" do
-    context 'as anyone' do
-      it 'should be successful' do
-        get 'updated'
-        response.should be_success
+        response.should redirect_to photos_path
       end
     end
   end
@@ -58,7 +38,7 @@ describe PhotosController do
         get :show, :id => @photo
         response.should be_success
       end
-      it 'should be the correct case study' do
+      it 'should be the correct photo' do
         get :show, :id => @photo
         assigns(:photo).should == @photo
       end
@@ -98,60 +78,34 @@ describe PhotosController do
 
   # GET edit
   describe "'GET' edit'" do
-    before(:each) do
-      @case_study = Factory.create(:case_study)
-    end
     context 'as guest' do
+      before(:each) do
+        @photo = Factory.create(:photo)
+      end
       it 'should redirect to login' do
-        get :edit, :id => @case_study
+        get :edit, :id => @photo
         response.should redirect_to login_path
       end
     end
     context 'as a user' do
       login_user
-      describe 'who is a contributor' do
+      describe 'who is owner' do
         before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
+          @photo = Factory.create(:photo, :user => @user)
         end
-        it 'should redirect' do
-          get :edit, :id => @case_study
-          response.should redirect_to login_path
+        it 'should be successful' do
+          get :edit, :id => @photo
+          response.should be_success
         end
       end
-      describe 'who is not a contributor' do
+      describe 'who is not owner' do
+        before(:each) do
+          @photo = Factory.create(:photo)
+        end
         it 'should redirect to login' do
-          get :edit, :id => @case_study
+          get :edit, :id => @photo
           response.should redirect_to login_path
         end
-      end
-    end
-    context 'as volunteer' do
-      login_volunteer
-      describe 'with a case study' do
-        before(:each) do
-          @case_study = Factory.create(:case_study)
-        end
-        context 'as a contributor' do
-          before(:each) do
-            @case_study.contributions.build(:user_id => @user.id)
-            @case_study.save!
-          end
-          it 'should be successful' do
-            get :edit, :id => @case_study
-            response.should be_success
-          end
-          it 'should have the correct data' do
-            get :edit, :id => @case_study
-            response.should have_selector('input', :id => 'case_study_title', :value => @case_study.title)
-          end
-        end
-      end
-    end
-    context 'as staff' do
-      login_staff
-      it 'should be successful' do
-        get :new
-        response.should be_success
       end
     end
   end
@@ -167,63 +121,95 @@ describe PhotosController do
     describe 'no-content failure' do
       before(:each) do
         @attr = {
-          :title => '',
-          :summary => '',
-          :country => '',
-          :language_id => ''
+          :photo => nil
         }
       end
       context 'as admin' do
         login_admin
-        it 'should not create a case study' do
+        it 'should not create a photo' do
           lambda do
-            post :create, :case_study => @attr
-          end.should_not change(CaseStudy, :count).by(1)
+            post :create, :photo => @attr
+          end.should_not change(Photo, :count).by(1)
         end
-        it 'should render the new case study form' do
-          post :create, :case_study => @attr
-          response.should render_template 'case_studies/new'
+        it 'should render the new photo form' do
+          post :create, :photo => @attr
+          response.should render_template 'photos/new'
         end
       end
     end
     describe 'should be successful' do
       before(:each) do
         @attr = {
-          :title => 'Test Title',
-          :summary => 'Test summary',
-          :country => 'SN',
-          :language_id => 1
+          :photo => File.new(File.join(Rails.root, 'spec', 'support', 'test.png'))
         }
+      end
+      context 'as admin' do
+        login_admin
+        it 'should create a photo' do
+          lambda do
+            puts @attr.inspect
+            post :create, :photo => @attr
+            pp assigns(:photo).errors
+          end.should change(Photo, :count).by(1)
+        end
+        it 'should allow assignment of photo' do
+          @photo = Factory.create(:photo)
+          @photo.photo = File.new(File.join(Rails.root, 'spec', 'support', 'test.txt'))
+          @photo.title = 'Fuck'
+          pp @photo.inspect
+          @photo.save!
+          pp @photo.inspect
+        end
+        it 'should redirect to newly created photo' do
+          post :create, :photo => @attr
+          response.should redirect_to assigns[:photo]
+        end
+        it 'should have a success message' do
+          post :create, :photo => @attr
+          flash[:notice].should =~ /success/i
+        end
+      end
+      context 'as user' do
+        login_user
+        it 'should not create a photo' do
+          lambda do
+            post :create, :photo => @attr
+          end.should_not change(Photo, :count).by(1)
+        end
+        it 'should redirect to login' do
+          post :create, :photo => @attr
+          response.should redirect_to login_path
+        end
       end
       context 'as volunteer' do
         login_volunteer
-        it 'should create a case study' do
+        it 'should create a photo' do
           lambda do
-            post :create, :case_study => @attr
-          end.should change(CaseStudy, :count).by(1)
+            post :create, :photo => @attr
+          end.should change(Photo, :count).by(1)
         end
-        it 'should redirect to newly created case study' do
-          post :create, :case_study => @attr
-          response.should redirect_to assigns[:case_study]
+        it 'should redirect to newly created photo' do
+          post :create, :photo => @attr
+          response.should redirect_to assigns[:photo]
         end
         it 'should have a success message' do
-          post :create, :case_study => @attr
+          post :create, :photo => @attr
           flash[:notice].should =~ /success/i
         end
       end
       context 'as staff' do
         login_staff
-        it 'should create a case study' do
+        it 'should create a photo' do
           lambda do
-            post :create, :case_study => @attr
-          end.should change(CaseStudy, :count).by(1)
+            post :create, :photo => @attr
+          end.should change(Photo, :count).by(1)
         end
-        it 'should redirect to newly created case study' do
-          post :create, :case_study => @attr
-          response.should redirect_to assigns[:case_study]
+        it 'should redirect to newly created photo' do
+          post :create, :photo => @attr
+          response.should redirect_to assigns[:photo]
         end
         it 'should have a success message' do
-          post :create, :case_study => @attr
+          post :create, :photo => @attr
           flash[:notice].should =~ /success/i
         end
       end
@@ -232,161 +218,51 @@ describe PhotosController do
 
   # PUT update
   describe "PUT 'update'" do
-    before(:each) do
-      @case_study = Factory.create(:case_study)
-    end
     context 'as guest' do
-      it 'should redirect to login path' do
-        put :update, :id => @case_study
-        response.should redirect_to login_path
-      end
-    end
-    describe 'should fail' do
       before(:each) do
-        @attr = {
-          :title => '',
-          :summary => '',
-          :country => '',
-          :language_id => ''
-        }
+        @photo = Factory.create(:photo)
       end
-      context 'as admin' do
-        login_admin
-        it 'should render the edit page' do
-          put :update, :id => @case_study, :case_study => @attr
-          response.should render_template 'edit'
-        end
+      it 'should redirect to login path' do
+        put :update, :id => @photo
+        response.should redirect_to login_path
       end
     end
     describe 'should succeed' do
       before(:each) do
-        @case_study = Factory.create(:case_study)
         @attr = {
-          :title => 'Test Title',
-          :summary => 'Test summary.',
-          :country => 'SN',
-          :language_id => 2
+          :photo => File.new(File.join(Rails.root, 'spec', 'support', 'test.png'))
         }
       end
       context 'as volunteer' do
         login_volunteer
         before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
+          @photo = Factory.create(:photo, :user => @user)
         end
-        it 'should change the case study attributes' do
-          put 'update', :id => @case_study, :case_study => @attr
-          @case_study.reload
-          @case_study.title.should == @attr[:title]
-          @case_study.summary.should == @attr[:summary]
-          @case_study.country.should == @attr[:country]
-          @case_study.language_id.should == @attr[:language_id]
+        it 'should change the photo attributes' do
+          put :update, :id => @photo, :photo => @attr
+          @photo.reload
+          @photo.photo.url.should =~ /original/i
         end
-        it 'should redirect to show case study' do
-          put :update, :id => @case_study, :case_study => @attr
+        it 'should redirect to the photo' do
+          put :update, :id => @photo, :photo => @attr
           flash[:notice].should =~ /success/i
-          response.should redirect_to assigns[:case_study]
+          response.should redirect_to assigns[:photo]
         end
       end
       context 'as staff' do
         login_staff
         before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
+          @photo = Factory.create(:photo, :user => @user)
         end
-        it 'should change the case study attributes' do
-          put 'update', :id => @case_study, :case_study => @attr
-          @case_study.reload
-          @case_study.title.should == @attr[:title]
-          @case_study.summary.should == @attr[:summary]
-          @case_study.country.should == @attr[:country]
-          @case_study.language_id.should == @attr[:language_id]
+        it 'should change the photo attributes' do
+          put :update, :id => @photo, :photo => @attr
+          @photo.reload
+          @photo.photo.url.should =~ /original/i
         end
-        it 'should redirect to show case study' do
-          put :update, :id => @case_study, :case_study => @attr
+        it 'should redirect to the photo' do
+          put :update, :id => @photo, :photo => @attr
           flash[:notice].should =~ /success/i
-          response.should redirect_to assigns[:case_study]
-        end
-      end
-    end
-  end
-
-  # POST mercury_update
-  describe "POST 'mercury_update'" do
-    before(:each) do
-      @case_study = Factory.create(:case_study)
-      @attr = {
-        :cs_summary => {
-          :value => 'new case study summary'
-        }
-      }
-    end
-    context 'as guest' do
-      it 'should not change case study attributes' do
-        post :mercury_update, :id => @case_study, :content => @attr
-        @case_study.reload
-        @case_study.summary.should_not == @attr[:cs_summary][:value]
-      end
-      it 'should redirect to login' do
-        post :mercury_update, :id => @case_study, :content => @attr
-        response.should redirect_to login_path
-      end
-    end
-    context 'as volunteer' do
-      login_volunteer
-      context 'non-contributor' do
-        it 'should not change case study attributes' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          @case_study.reload
-          @case_study.summary.should_not == @attr[:cs_summary][:value]
-        end
-        it 'should redirect to login' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          response.should redirect_to login_path
-        end
-      end
-      context 'contributor' do
-        before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
-        end
-        it 'should be successful' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          response.should be_success
-        end
-        it 'should change the case study attributes' do
-          put :mercury_update, :id => @case_study, :content => @attr
-          @case_study.reload
-          @case_study.summary.should == @attr[:cs_summary][:value]
-        end
-      end
-    end
-    context 'as staff' do
-      login_staff
-      context 'non-contributor' do
-        it 'should not change case study attributes' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          @case_study.reload
-          @case_study.summary.should_not == @attr[:cs_summary][:value]
-        end
-        it 'should redirect to login' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          response.should redirect_to login_path
-        end
-      end
-      context 'contributor' do
-        before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
-        end
-        it 'should be successful' do
-          post :mercury_update, :id => @case_study, :content => @attr
-          response.should be_success
-        end
-        it 'should change the case study attributes' do
-          put :mercury_update, :id => @case_study, :content => @attr
-          @case_study.reload
-          @case_study.summary.should == @attr[:cs_summary][:value]
+          response.should redirect_to assigns[:photo]
         end
       end
     end
@@ -394,11 +270,11 @@ describe PhotosController do
 
   # DELETE destroy
   describe "DELETE 'destroy'" do
-    before(:each) do
-      @photo = Factory.create(:photo)
-    end
     context 'as admin' do
       login_admin
+      before(:each) do
+        @photo = Factory.create(:photo)
+      end
       it 'should destroy the photo' do
         lambda do
           delete :destroy, :id => @photo
@@ -410,99 +286,46 @@ describe PhotosController do
       end
     end
     context 'as guest' do
-      it 'should not destroy the case study' do
+      before(:each) do
+        @photo = Factory.create(:photo)
+      end
+      it 'should not destroy the photo' do
         lambda do
-          delete :destroy, :id => @case_study
-        end.should_not change(CaseStudy, :count).by(-1)
+          delete :destroy, :id => @photo
+        end.should_not change(Photo, :count).by(-1)
       end
       it 'should redirect to login path' do
-        delete :destroy, :id => @case_study
+        delete :destroy, :id => @photo
         response.should redirect_to login_path
       end
     end
     context 'as volunteer' do
       login_volunteer
-      context 'non-contributor' do
-        it 'should not destroy the case study' do
+      context 'non-owner' do
+        before(:each) do
+          @photo = Factory.create(:photo)
+        end
+        it 'should not destroy the photo' do
           lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
+            delete :destroy, :id => @photo
+          end.should_not change(Photo, :count).by(-1)
         end
         it 'should redirect to login path' do
-          delete :destroy, :id => @case_study
+          delete :destroy, :id => @photo
           response.should redirect_to login_path
         end
       end
-      context 'contributor' do
+      context 'owner' do
         before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
+          @photo = Factory.create(:photo, :user => @user)
         end
-        it 'should not destroy the case study' do
+        it 'should not destroy the photo' do
           lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
-        end
-        it 'should redirect to case studies index' do
-          delete :destroy, :id => @case_study
-          response.should redirect_to login_path
-        end
-      end
-    end
-    context 'as staff' do
-      login_staff
-      context 'non-contributor' do
-        it 'should not destroy the case study' do
-          lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
-        end
-        it 'should redirect to login path' do
-          delete :destroy, :id => @case_study
-          response.should redirect_to login_path
-        end
-      end
-      context 'contributor' do
-        before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
-        end
-        it 'should not destroy the case study' do
-          lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
-        end
-        it 'should redirect to case studies index' do
-          delete :destroy, :id => @case_study
-          response.should redirect_to login_path
-        end
-      end
-    end
-    context 'as user' do
-      login_user
-      context 'non-contributor' do
-        it 'should not destroy the case study' do
-          lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
-        end
-        it 'should redirect to login path' do
-          delete :destroy, :id => @case_study
-          response.should redirect_to login_path
-        end
-      end
-      context 'contributor' do
-        before(:each) do
-          @case_study.contributions.build(:user_id => @user.id)
-          @case_study.save!
-        end
-        it 'should not destroy the case study' do
-          lambda do
-            delete :destroy, :id => @case_study
-          end.should_not change(CaseStudy, :count).by(-1)
+            delete :destroy, :id => @photo
+          end.should_not change(Photo, :count).by(-1)
         end
         it 'should redirect to login' do
-          delete :destroy, :id => @case_study
+          delete :destroy, :id => @photo
           response.should redirect_to login_path
         end
       end
