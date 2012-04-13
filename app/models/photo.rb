@@ -1,3 +1,5 @@
+# @author John Brown
+
 class Photo < ActiveRecord::Base
 
   has_attached_file :photo,
@@ -38,10 +40,19 @@ class Photo < ActiveRecord::Base
 
   default_scope :order => 'photos.created_at DESC'
 
+  # Return a standard title. Used as a handle for referenc from views 
+  # if you don't know what the object is with which you'reworking.
+  #
+  # @return [String] canonical_title
+  #
   def canonical_title
     self.title
   end
 
+  # Add the title to the address, for improved readability.
+  #
+  # @return [String] to_param in the form of id-canonical_title
+  #
   def to_param
     "#{id}-#{canonical_title.parameterize}"
   end

@@ -1,15 +1,16 @@
 .subnav
   %ul.nav.nav-pills
     %li= link_to 'All photos', photos_path
-    %li.dropdown
-      %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
-        Your libraries
-        %b.caret
-      %ul.dropdown-menu
-        - current_user.libraries.each do |library|
-          %li= link_to library.canonical_title, library
+    - if user_signed_in?
+      %li.dropdown
+        %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+          Your libraries
+          %b.caret
+        %ul.dropdown-menu
+          - current_user.libraries.each do |library|
+            %li= link_to library.canonical_title, library
     %li= link_to 'Upload a photo!', new_photo_path if can? :create, Photo
-    - if can? :edit, @photo
+    - if user_signed_in? && can?(:edit, @photo)
       %li.dropdown
         %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
           Actions

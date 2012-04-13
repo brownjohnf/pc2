@@ -31,6 +31,7 @@ class Ability
       can :read, Region
       can [ :update, :destroy ], User, :id => user.id
       can [ :update, :destroy ], Moment, :user_id => user.id
+      can :update, Photo, :user_id => user.id
 
       can [ :update ], Page do |page|
         page.contributors.find_by_id(user.id)

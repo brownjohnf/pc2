@@ -1,6 +1,10 @@
 module ApplicationHelper
 
-  # return a title on a per-page basis
+  # @author John Brown
+  # Returns a title on a per-page basis.
+  #
+  # @return [String] 'Peace Corps | X'
+  #
   def title
     base_title = "Peace Corps #{country}"
     if @title.nil?
@@ -10,10 +14,24 @@ module ApplicationHelper
     end
   end
 
+  # @author John Brown
+  # Returns preferred country for the site.
+  #
+  # @return [String] Senegal
+  #
   def country
     'Senegal'
   end
 
+  # @author John Brown
+  # Given an object, attempts to locate a profile photo.
+  #
+  # @param [Object] object for which a photo is desired
+  # @param [Symbol] size takes symbol: icon, thumb, small, medium, large, full
+  # @param [Symbol] photo
+  #
+  # @return [String] anchor link wrapping the photo for the object, with class 'avatar'
+  #
   def avatar_for(object, options = { :size => :icon, :photo => 'blank.png' })
     sizes = { :icon => '80', :thumb => '100', :small => '200', :medium => '380', :large => '980', :full => '1140' }
     if object.photo.nil?
@@ -25,10 +43,21 @@ module ApplicationHelper
     end
   end
 
+  # @author John Brown
+  # Converts Markdown text to HTML.
+  #
+  # @param [String] Markdown
+  #
+  # @return [String] HTML
+  #
   def markdown(text)
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true).render(text).html_safe
   end
 
+  # Locates all named routes.
+  #
+  # @return [Hash] routes
+  #
   def find_named_routes
     routes = []
 
@@ -42,6 +71,12 @@ module ApplicationHelper
     routes
   end
 
+  # Given a set of awesome-nested-set records, generates a set of nested ul/li HTML items.
+  #
+  # @param [Array] records
+  #
+  # @return [String] HTML set of nested, unordered lists
+  #
   def nested_li(objects)
     output = ""
     path = [nil]
@@ -69,10 +104,25 @@ module ApplicationHelper
     return output.html_safe
   end
 
+  # @author John Brown
+  # Find all top-level pages for a given country.
+  #
+  # @param [String] country defaults to 'SN'
+  #
+  # @return [Array] pages set of top-level pages (pages with no parent)
+  #
   def fetch_menu(country = 'SN')
     current_user.viewable_pages.order('title ASC').where("parent_id IS NULL AND country = ?", country)
   end
 
+  # @author John Brown
+  # Retrieve a photo given an ID and size.
+  #
+  # @param [integer] id ID of photo
+  # @param [Symbol] size size of photo
+  #
+  # @return [String] IMG tag
+  #
   def render_photo(id, size)
     image_tag((id.nil?) ? 'blank.png' : Photo.find(id).photo.url(size))
   end
@@ -125,12 +175,26 @@ module ApplicationHelper
     end
   end
 
+  # @author John Brown
+  # Defines countries allowed
+  #
+  # @return [hash] code=>name format
+  #
   def allowed_countries
     {
       'SN' => 'Senegal'
     }
   end
 
+  # @author John Brown
+  # Converts file sizes in bytes to one of a selection of output sizes.
+  # Defaults to megabytes
+  #
+  # @param [integer] to_convert the filesize in bytes
+  # @return [integer] the value in the selected format
+  #
+  # @todo add other format options, and set an auto-selector if non specified
+  #
   def change_units(to_convert, unit = :mb)
     units = {
       :mb => (1024 * 1024)
