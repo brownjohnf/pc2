@@ -1,5 +1,5 @@
 app/models/job.rb f0ac3ad57c2eb50ee6f65506b721cc173a239f61
-app/models/blog.rb 6ee87910e29b0ac4ce9537bf0f37b60b7683c2ab
+app/models/blog.rb a06ed6e0addd512444d1ff512ee51db569cbdf29
 app/models/user.rb feaac67111416c42e3c8ab5ae235eacd5bef2ac3
 app/models/role.rb 11dbbdd25076a55b8dc1c4118308b6a5256e79e1
 app/models/site.rb 20604cfd8d260b05478e6d6aecf387f59f5a28bc
@@ -67,7 +67,7 @@ app/controllers/sites_controller.rb 157fbf6227fcca2c1af7e21f71256a7b80ad1499
 app/controllers/stacks_controller.rb a675f172793024be250ed8b17b12650145db7080
 app/controllers/stages_controller.rb 60daed1d58c8c26dc469dfdab65264f6d14f5f55
 app/controllers/scopes_controller.rb 940c7f3df13800fa46ce24f1b1d8787701b3ed5f
-app/controllers/photos_controller.rb 5b395e4f471b689867cdc3d0a58f265c3ce0a441
+app/controllers/photos_controller.rb 9181be78ea9248c79ff4f6ecaaf8b10ee61a05a4
 app/controllers/sectors_controller.rb 022bb7dec946cb0992b6ca2814badd7cb295d7be
 app/controllers/regions_controller.rb 86e160ec76ac9967d00cf78633574a0ab137ac14
 app/controllers/moments_controller.rb 3cfdc7894428327055b1fb34a721e5f65f18c4e8

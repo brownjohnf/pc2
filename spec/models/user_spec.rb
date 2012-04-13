@@ -301,7 +301,9 @@ describe User do
       end
     end
     describe 'photo' do
-      build_user_photo
+      before(:each) do
+        @photo = Factory.create(:photo, :imageable => @user, :user => @user)
+      end
       it 'should respond to photo attribute' do
         @user.should respond_to :photo
       end

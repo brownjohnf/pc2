@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411183355) do
+ActiveRecord::Schema.define(:version => 20120413100012) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20120411183355) do
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.integer  "user_id"
+    t.string   "photo_fingerprint"
   end
 
   create_table "positions", :force => true do |t|

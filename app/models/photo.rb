@@ -2,9 +2,7 @@
 
 class Photo < ActiveRecord::Base
 
-  # small is for span-4
-  # medium is for span-8
-  has_attached_file :photo,
+  has_attached_file :photo, {
     :styles => { 
       :icon => '80x80#', 
       :thumb => '100x100', 
@@ -19,6 +17,7 @@ class Photo < ActiveRecord::Base
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     }
+  }
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
@@ -43,6 +42,7 @@ class Photo < ActiveRecord::Base
   before_validation :clear_empty_attrs
   validates :title, :imageable_id, :imageable_type, :user_id, :presence => true
   validates :description, :length => { :maximum => 255 }
+  validates :photo_fingerprint, :uniqueness => true, :presence => true
 
   after_destroy :reset_pointers
 

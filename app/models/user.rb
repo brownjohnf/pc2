@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
   after_create :add_user_role
 
-  has_attached_file :avatar,
+  has_attached_file :avatar, {
     :styles => { 
       :icon => '80x80#',
       :thumb => '100x100',
@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     }
+  }
   
   acts_as_taggable_on :tags
   acts_as_tagger

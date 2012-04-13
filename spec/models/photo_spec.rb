@@ -28,6 +28,13 @@ describe Photo do
     it 'should require a photo' do
       @user.photos.build(@attr.merge(:photo => '')).should_not be_valid
     end
+    it 'should require a fingerprint' do
+      @user.photos.build(@attr.merge(:photo_fingerprint => nil)).should_not be_valid
+    end
+    it 'should require file uniqueness' do
+      @photo1 = @user.photos.create(@attr).should be_valid
+      @user.photos.build(@attr).should_not be_valid
+    end
     it { should have_attached_file(:photo) }
     it { should validate_attachment_presence(:photo) }
     it { should validate_attachment_content_type(:photo).
@@ -48,6 +55,7 @@ describe Photo do
       photo.photo_content_type.should_not be_nil
       photo.photo_file_size.should_not be_nil
       photo.photo_updated_at.should_not be_nil
+      photo.photo_fingerprint.should_not be_nil
       photo.photo.url.should =~ /original\//i
     end
     it 'should reject descriptions longer than 255 chars' do
@@ -71,13 +79,15 @@ describe Photo do
 
   # associations
   describe 'associations' do
-    build_photo
     describe 'users' do
-      build_photo_users
+      before(:each) do
+        @user = Factory.create(:user, :photo => @photo = Factory.create(:photo))
+      end
       it 'should have a users attribute' do
         @photo.should respond_to(:users)
       end
       it 'should return the correct users' do
+        @user.photo = @photo
         @photo.users.should == [@user]
       end
       it 'should not destroy users' do
@@ -121,7 +131,9 @@ describe Photo do
       end
     end
     describe 'user' do
-      build_user_photos
+      before(:each) do
+        @photo = Factory.create(:photo, :user => @user = Factory.create(:user))
+      end
       it 'should respond to user attribute' do
         @photo.should respond_to :user
       end
