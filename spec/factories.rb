@@ -10,7 +10,9 @@ FactoryGirl.define do
 
   factory :document do
     association :user
-    file { File.new(File.join(Rails.root, 'spec', 'support', 'test.txt')) }
+    file File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.txt'))
+    #file { File.new(File.join(Rails.root, 'spec', 'support', 'test.txt')) }
+    sequence(:file_fingerprint) { |n| "#{n}#{SecureRandom.hex(10)}" }
   end
 
   factory :mp3, :class => Document do

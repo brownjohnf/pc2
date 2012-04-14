@@ -4,7 +4,7 @@ describe Document do
   before(:each) do
     @user = Factory(:user)
     @attr = {
-      :file => File.new(File.join(Rails.root, 'spec', 'support', 'test.txt'))
+      :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'))
     }
   end
 
@@ -23,7 +23,22 @@ describe Document do
     it { should have_attached_file(:file) }
     it { should validate_attachment_presence(:file) }
     it { should validate_attachment_content_type(:file).
-      allowing('audio/mpeg', 'application/pdf', 'text/plain', 'text/csv', 'text/xml', 'text/html', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.google-earth.kml+kml', 'application/x-latex', 'application/x-shockwave-flash', 'application/atom+xml', 'application/rss+xml', 'application/xhtml+xml') }
+      allowing(
+        'audio/mpeg', 
+        'application/pdf',
+        'text/plain',
+        'text/csv',
+        'text/xml',
+        'text/html',
+        'application/vnd.ms-excel',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.google-earth.kml+kml', 
+        'application/x-latex',
+        'application/x-shockwave-flash',
+        'application/atom+xml',
+        'application/rss+xml',
+        'application/xhtml+xml') 
+    }
     it { should_not validate_attachment_size(:file) }
     it { should have_attached_file(:source) }
     it { should validate_attachment_content_type(:source).
@@ -73,9 +88,18 @@ describe Document do
       @document = @user.documents.create(@attr.merge(:tag_list => tags))
       @document.tag_list.should == tags.split(',')
     end
-    it 'should require a fingerprint' do
-      @user.documents.build(@attr.merge(:photo_fingerprint => nil)).should_not be_valid
+    it 'should require a fingerprint for file' do
+      @user.documents.build(@attr.merge(:file_fingerprint => nil)).should_not be_valid
     end 
+    it 'should set a fingerprint for source if present' do
+      @document = @user.documents.create(@attr.merge(:source => @attr[:file]))
+      @document.source_fingerprint.should_not be_nil
+    end
+    it 'should require a fingerprint for source if present' do
+      @document = @user.documents.build(@attr.merge(:source => @attr[:file]))
+      @document.source_fingerprint = nil
+      @document.save.should_not be_true
+    end
   end
 
   # properties

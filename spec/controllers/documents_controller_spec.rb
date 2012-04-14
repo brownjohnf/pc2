@@ -156,7 +156,7 @@ describe DocumentsController do
     describe 'should be successful' do
       before(:each) do
         @attr = {
-          :file => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'test.txt'), 'text/plain')
+          :file => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'), 'text/plain')
         }
       end
       context 'as admin' do
@@ -257,7 +257,7 @@ describe DocumentsController do
     describe 'with valid content' do
       before(:each) do
         @attr = {
-          :file => File.new(File.join(Rails.root, 'spec', 'support', 'test.txt')),
+          :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt')),
           :name => 'new title'
         }
       end
