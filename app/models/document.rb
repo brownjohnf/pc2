@@ -2,26 +2,57 @@ class Document < ActiveRecord::Base
 
   require 'mp3info'
 
+  # main document
   has_attached_file :file, {
     :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
     :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
   }
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => [
-    'audio/mpeg',
+    'audio/mpeg', 
     'application/pdf',
     'text/plain',
     'text/csv',
-    'text/html',
     'text/xml',
-    'audio/mp3',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'text/html',
     'application/vnd.ms-excel',
     'application/vnd.ms-powerpoint',
-    'application/vnd.google-earth.kml+kml',
+    'application/vnd.google-earth.kml+kml', 
     'application/x-latex',
-    'application/x-shockwave-flash'
+    'application/x-shockwave-flash',
+    'application/atom+xml',
+    'application/rss+xml',
+    'application/xhtml+xml'
+  ]
+
+  # source file for document, for archiving
+  has_attached_file :source, {
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+  }
+  validates_attachment_content_type :source, :content_type => [
+    'text/plain', 
+    'text/csv', 
+    'text/xml', 
+    'text/html', 
+    'application/vnd.ms-excel', 
+    'application/vnd.ms-powerpoint', 
+    'application/vnd.google-earth.kml+kml',
+    'application/x-latex', 
+    'application/x-shockwave-flash',
+    'application/zip',
+    'application/x-gzip',
+    'text/vcard',
+    'application/vnd.oasis.opendocument.text',
+    'application/vnd.oasis.opendocument.spreadsheet',
+    'application/vnd.oasis.opendocument.presentation',
+    'application/vnd.oasis.opendocument.graphics', 
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation', 
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   ]
   
   acts_as_taggable_on :tags
@@ -37,6 +68,9 @@ class Document < ActiveRecord::Base
   accepts_nested_attributes_for :stacks
   
   validates :name, :user_id, :presence => true
+  validates :file_fingerprint, :presence => true, :uniqueness => true
+  validates :source_fingerprint, :uniqueness => true, :if => "source_file_name"
+  validates :source_fingerprint, :presence => true, :if => "source_file_name"
 
   before_validation :clear_empty_attrs
   before_save :run_before_save

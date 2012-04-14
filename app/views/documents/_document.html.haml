@@ -10,7 +10,11 @@
         = link_to document.user.name, document.user
     %p= document.description if document.description
     %p
-      -if document.author
+      - if document.source
+        source file:
+        = document.source_file_name
+        %br
+      - if document.author
         authored by
         = document.author
         %br
