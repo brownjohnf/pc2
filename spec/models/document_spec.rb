@@ -4,7 +4,7 @@ describe Document do
   before(:each) do
     @user = Factory(:user)
     @attr = {
-      :file => File.new(File.join(Rails.root, 'spec', 'support', 'test.txt'))
+      :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'))
     }
   end
 
@@ -23,8 +23,50 @@ describe Document do
     it { should have_attached_file(:file) }
     it { should validate_attachment_presence(:file) }
     it { should validate_attachment_content_type(:file).
-      allowing('audio/mpeg', 'application/pdf', 'text/plain', 'text/csv', 'text/xml', 'text/html', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.google-earth.kml+kml', 'application/x-latex', 'application/x-shockwave-flash') }
+      allowing(
+        'audio/mpeg', 
+        'application/pdf',
+        'text/plain',
+        'text/csv',
+        'text/xml',
+        'text/html',
+        'application/vnd.ms-excel',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.google-earth.kml+kml', 
+        'application/x-latex',
+        'application/x-shockwave-flash',
+        'application/atom+xml',
+        'application/rss+xml',
+        'application/xhtml+xml') 
+    }
     it { should_not validate_attachment_size(:file) }
+    it { should have_attached_file(:source) }
+    it { should validate_attachment_content_type(:source).
+      allowing(
+        'text/plain', 
+        'text/csv', 
+        'text/xml', 
+        'text/html', 
+        'application/vnd.ms-excel', 
+        'application/vnd.ms-powerpoint', 
+        'application/vnd.google-earth.kml+kml',
+        'application/x-latex', 
+        'application/x-shockwave-flash',
+        'application/zip',
+        'application/x-gzip',
+        'text/vcard',
+        'application/vnd.oasis.opendocument.text',
+        'application/vnd.oasis.opendocument.spreadsheet',
+        'application/vnd.oasis.opendocument.presentation',
+        'application/vnd.oasis.opendocument.graphics', 
+        'application/vnd.ms-excel',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation', 
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+    }
+    it { should_not validate_attachment_size(:source) }
     it 'should create a name if missing' do
       missing_name = @user.documents.new(@attr)
       missing_name.should be_valid
@@ -43,13 +85,32 @@ describe Document do
     end
     it 'should accept tags' do
       tags = 'tag1,tag2'
-      @photo = @user.documents.create(@attr.merge(:tag_list => tags))
-      @photo.tag_list.should == tags.split(',')
+      @document = @user.documents.create(@attr.merge(:tag_list => tags))
+      @document.tag_list.should == tags.split(',')
+    end
+    it 'should require a fingerprint for file' do
+      @user.documents.build(@attr.merge(:file_fingerprint => nil)).should_not be_valid
+    end 
+    it 'should set a fingerprint for source if present' do
+      @document = @user.documents.create(@attr.merge(:source => @attr[:file]))
+      @document.source_fingerprint.should_not be_nil
+    end
+    it 'should require a fingerprint for source if present' do
+      @document = @user.documents.build(@attr.merge(:source => @attr[:file]))
+      @document.source_fingerprint = nil
+      @document.save.should_not be_true
     end
   end
 
   # properties
   describe 'properties' do
+    it 'should respond to all db fields' do
+      @document.should respond_to(:name)
+      @document.should respond_to(:description)
+      @document.should respond_to(:file)
+      @document.should respond_to(:source)
+      @document.should respond_to(:source_comment)
+    end
     build_document
     it 'should set the name in the address' do
       @document.should respond_to(:to_param)

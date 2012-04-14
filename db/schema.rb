@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413100012) do
+ActiveRecord::Schema.define(:version => 20120414011013) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -54,11 +54,18 @@ ActiveRecord::Schema.define(:version => 20120413100012) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "language_id"
     t.string   "author"
     t.integer  "audio_length"
+    t.string   "file_fingerprint"
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+    t.string   "source_comment"
+    t.string   "source_fingerprint"
   end
 
   create_table "documents_roles", :id => false, :force => true do |t|

@@ -140,7 +140,7 @@ describe PhotosController do
     describe 'should be successful' do
       before(:each) do
         @attr = {
-          :photo => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'test.png'), 'image/png')
+          :photo => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'test.png'), 'image/png')
         }
       end
       context 'as admin' do
@@ -220,7 +220,7 @@ describe PhotosController do
     describe 'should succeed' do
       before(:each) do
         @attr = {
-          :photo => File.new(File.join(Rails.root, 'spec', 'support', 'test.png'))
+          :photo => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.png'))
         }
       end
       context 'as volunteer' do

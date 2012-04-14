@@ -2,6 +2,8 @@
   = f.semantic_errors
   = f.inputs do
     = f.input :file, :label => 'File to upload (currently limited to 30Mb)'
+    = f.input :source, :label => 'Source file for main file. This can be a proprietary editable format'
+    = f.input :source_comment, :label => 'Describe the source document'
     = f.input :name
     = f.input :author
     = f.input :language, :include_blank => true

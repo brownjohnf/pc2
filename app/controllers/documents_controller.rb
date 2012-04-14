@@ -13,6 +13,7 @@ class DocumentsController < ApplicationController
     end
   end
   
+  # GET /documents/table
   def table
     @documents = Document.all
 
@@ -22,11 +23,16 @@ class DocumentsController < ApplicationController
     end
   end
   
+  # GET /documents/search?q
   def search
-    @documents = Document.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
-    @count = @documents.count
-    
-    render 'index'
+    if params[:q]
+      @documents = Document.unscoped.order('updated_at DESC').search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+      @count = @documents.count
+      
+      render 'index'
+    else
+      redirect_to documents_path
+    end
   end
 
   # GET /documents/1
