@@ -185,7 +185,7 @@ end
 def make_files
   [Volunteer, Staff].each do|a|
     a.all.each do |b|
-      document = b.documents.build(
+      document = b.user.documents.build(
         :title => Faker::Company.catch_phrase,
         :summary => Faker::Company.catch_phrase,
         :file => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.pdf')),
@@ -201,7 +201,7 @@ end
 def make_photos
   [Volunteer, Staff].each do |a|
     a.all.each do |b|
-      photo = b.photos.build(
+      photo = b.user.photos.build(
         :photo => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.png'))
       )
       photo.imageable = b
