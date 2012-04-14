@@ -22,21 +22,55 @@
         Resources
         %b.caret
       %ul.dropdown-menu
-        %li= link_to 'Case Studies', case_studies_path
-        %li= link_to 'Files', documents_path
-        %li= link_to 'Libraries', libraries_path
-        %li= link_to 'Pages', updated_pages_path
-        %li= link_to 'Photos', photos_path
-        -#%li= link_to 'Videos', ''
-        %li= link_to 'Staff', staff_path
-        %li= link_to 'Users', users_path
-        %li= link_to 'Volunteers', volunteers_path
+        %li
+          = link_to case_studies_path do
+            %i.icon-road
+            Case Studies
+        %li
+          = link_to updated_pages_path do
+            %i.icon-list-alt
+            Content
+        %li
+          = link_to documents_path do
+            %i.icon-file
+            Files
+        %li
+          = link_to libraries_path do
+            %i.icon-book
+            Libraries
+        %li
+          = link_to photos_path do
+            %i.icon-picture
+            Photos
+        -#%li= link_to videos_path do
+          %i.icon-film
+          Videos
+        %li
+          = link_to staff_path do
+            %i.icon-user
+            Staff
+        %li
+          = link_to users_path do
+            %i.icon-user
+            Users
+        %li
+          = link_to volunteers_path do
+            %i.icon-user
+            Volunteers
         - if user_signed_in?
           - if current_user.role?(:volunteer) || current_user.role?(:staff)
             %li.divider
             %li.nav-header Upload
-            %li= link_to 'File', new_document_path if can? :create, Document
-            %li= link_to 'Photo', new_photo_path if can? :create, Photo
+            - if can? :create, Document
+              %li
+                = link_to new_document_path do
+                  %i.icon-file
+                  File
+            - if can? :create, Photo
+              %li
+                = link_to new_photo_path do
+                  %i.icon-picture
+                  Photo
             %li.divider
             %li.nav-header Create
             %li= link_to 'Case Study', new_case_study_path if can? :create, CaseStudy
@@ -84,15 +118,39 @@
           = current_user.name
           %b.caret
         %ul.dropdown-menu
-          %li= link_to 'Dashboard', dashboard_path
-          %li= link_to 'Profile', current_user
-          %li= link_to 'Use SSL', 'https://pcsenegal.com'
-          %li= link_to 'Leave Feedback', new_feedback_path
-          %li= link_to 'Help Me!', '/help'
+          %li
+            = link_to dashboard_path do
+              %i.icon-home
+              Dashboard
+          %li
+            = link_to current_user do
+              %i.icon-user
+              Profile
+          %li
+            = link_to 'https://pcsenegal.com' do
+              %i.icon-lock
+              Encrypt session
+          %li
+            = link_to new_feedback_path do
+              %i.icon-comment
+              Leave feedback
+          %li
+            = link_to '/help' do
+              %i.icon-question-sign
+              Help me!
           %li.divider
-          %li= link_to 'Edit profile', edit_user_path(current_user)
-          %li= link_to 'Change password', edit_user_registration_path(current_user)
-          %li= link_to 'Sign out', '/logout'
+          %li
+            = link_to edit_user_path(current_user) do
+              %i.icon-cog
+              Edit Profile
+          %li
+            = link_to edit_user_registration_path(current_user) do
+              %i.icon-barcode
+              Change password
+          %li
+            = link_to '/logout' do
+              %i.icon-off
+              Sign out
   - else
     %ul.nav
       %li.dropdown
@@ -100,9 +158,25 @@
           sign in
           %b.caret
         %ul.dropdown-menu
-          %li= link_to 'Sign in', login_path
-          %li= link_to 'Sign up', new_user_registration_path
+          %li
+            = link_to login_path do
+              %i.icon-arrow-right
+              Sign in
+          %li
+            = link_to new_user_registration_path do
+              %i.icon-plus
+              Sign up!
           %li.divider
-          %li= link_to 'Use SSL', 'https://pcsenegal.com'
-          %li= link_to 'Leave Feedback', new_feedback_path
-          %li= link_to 'Help Me!', '/help'
+          %li
+            = link_to 'https://pcsenegal.com' do
+              %i.icon-lock
+              Encrypt session
+          %li
+            = link_to new_feedback_path do
+              %i.icon-comment
+              Leave feedback
+          %li
+            = link_to '/help' do
+              %i.icon-question-sign
+              Help me!
+

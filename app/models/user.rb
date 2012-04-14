@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   
   accepts_nested_attributes_for :roles, :allow_destroy => true
-  validates :name, :presence => true, :length => { :minimum => 5, :maximum => 128 }
+  validates :name, :presence => true, :length => { :minimum => 8, :maximum => 127 }
   validates :email, :presence => true
   
   after_create :add_user_role
@@ -85,6 +85,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def pc?(country = nil)
+    if !! self.roles.find_by_name('Admin')
+      return true
+    elsif country
+      return !!self.volunteers.find_by_country(country)
+    else
+      return !!self.volunteers
+    end
+  end
+
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
   end

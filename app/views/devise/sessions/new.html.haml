@@ -1,21 +1,38 @@
 .container
   .row
-    .span4.offset4
-      .well.center-block
-        %h1 Sign in
-        = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          .field
-            = f.label :email
-            = f.email_field :email
-          .field
-            = f.label :password
-            = f.password_field :password
-          
+    .span6.offset2
+      .well
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'form-horizontal' }) do |f|
+          .control-group
+            .controls
+              %h2 Sign in
+          .control-group
+            = f.label :email, :class => 'control-label'
+            .controls
+              .input-prepend
+                %span.add-on
+                  %i.icon-envelope
+                = f.email_field :email, :rel => 'popover-left-focus', :title => "What's my email?", 'data-content' => "This must be the email address with which you registered. If you signed in with Facebook, use the <strong>Sign in with Facebook</strong> link on the right.", :id => 'default_form_focus'
+              %p.help-block the email you used to sign up
+          .control-group
+            = f.label :password, :class => 'control-label'
+            .controls
+              .input-prepend
+                %span.add-on
+                  %i.icon-barcode
+                = f.password_field :password, :rel => 'popover-right-focus', :title => "What's my password?", 'data-content' => "If you've forgotten this, no worries. Click the <strong>Forgotten your password?</strong> link on the right."
+              %p.help-block if you have already signed in using a third party login, you will need to request a password reset in order to have a password to use
           - if devise_mapping.rememberable?
-            .field
-              = f.check_box :remember_me
-              = f.label :remember_me
-          .actions
-            = f.submit "Sign in"
-        
-        = render "links"
+            .control-group
+              = f.label :remember_me, :class => 'control-label', :for => 'user_remember_me'
+              .controls
+                %label.checkbox
+                  = f.check_box :remember_me, :rel => 'popover-top', :title => "What does this mean?", 'data-content' => "Selecting this option will allow you to remain logged in even after closing your browser or restarting your computer.<h3>Warning</h3><strong>Do not</strong> use this option if anyone else shares your computer. Regardless of your choice, you will be required to re-authenticate at certain intervals."
+                  Retain sign in after closing browser.
+          .form-actions
+            = f.submit "Sign in", :class => 'btn btn-success tooltip-left-focus-slow', :title => "if you're sure..."
+    .span3.offset1
+      .control-group
+        .controls
+          = render "links"
+

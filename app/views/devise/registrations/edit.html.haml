@@ -1,28 +1,48 @@
-.container
-  .row
-    .span-9
-    .span-6
-      .box
-        %h1 Edit #{resource_name.to_s.humanize}
-        
-        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-          = devise_error_messages!
-        
-          = f.label :email
-          = f.email_field :email
-        
-          = f.label :password, "Password (leave blank if you don't want to change it)"
-          = f.password_field :password
-        
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation
-        
-          = f.label :current_password, "Current Password (we need your current password to confirm your changes)"
-          = f.password_field :current_password
-        
-          = f.submit "Update"
-        
-        %p Unhappy? #{link_to "Cancel your account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
-        
-        = link_to "Back", :back
-    .span-9.last
+.row
+  .span6.offset2
+    .well
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f|
+        .control-group
+          .controls
+            %h1 Edit #{resource_name.to_s.humanize} Info
+        .control-group
+          .controls
+            = devise_error_messages!
+        .control-group
+          = f.label :email, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-envelope
+              = f.email_field :email
+            %p.help-block your email address
+        .control-group
+          = f.label :password, "New password", :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-plus
+              = f.email_field :password, :id => 'default_form_focus'
+            %p.help-block leave blank if you don't want to change it
+        .control-group
+          = f.label :password_confirmation, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-check
+              = f.email_field :password_confirmation
+            %p.help-block only if you're changing it
+        .control-group
+          = f.label :current_password, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-barcode
+              = f.email_field :current_password
+            %p.help-block needed to confirm either an email or password change
+        .form-actions
+          = f.submit "Update", :class => 'btn btn-primary'
+    = link_to "Back", :back      
+  .span3.offset1
+    %h3 Unhappy?
+    %p Boy, we sure hope not. But if you are, you can #{link_to "cancel your account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete} here.

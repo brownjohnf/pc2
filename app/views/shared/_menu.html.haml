@@ -34,11 +34,42 @@
     - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
       %li= link_to link.canonical_title, link if can? :read, link
   %li.nav-header Resources
-  %li= link_to 'Pages', pages_path, :class => 'tooltip-right-slow', :title => 'Presentation content. Info about what we do, and how we do it.'
-  %li= link_to 'Case Studies', case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.'
-  %li= link_to 'Photos', photos_path, :class => 'tooltip-right-slow', :title => 'Browse Volunteer photos, or upload your own.'
-  %li= link_to 'Files', documents_path, :class => 'tooltip-right-slow', :title => 'Get the latest and greatest information, podcasts, and radio shows.'
-  %li= link_to 'Libraries', libraries_path, :class => 'tooltip-right-slow', :title => 'View collections put together by users, highlighting favorite or useful items.'
-  %li= link_to 'Volunteers', volunteers_path, :class => 'tooltip-right-slow', :title => 'Get to know our Volunteers.'
-  %li= link_to 'Staff', staff_path, :class => 'tooltip-right-slow', :title => 'Get to know our staff.'
-  %li= link_to 'Google Search', '/search', :class => 'tooltip-right-slow', :title => "Still can't find it? Search within our site using the power of Google."
+  %li
+    = link_to case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.' do
+      %i.icon-road
+      Case Studies
+  %li
+    = link_to updated_pages_path, :class => 'tooltip-right-slow', :title => 'Presentation content. Info about what we do, and how we do it.' do
+      %i.icon-list-alt
+      Content
+  %li
+    = link_to documents_path, :class => 'tooltip-right-slow', :title => 'Get the latest and greatest information, podcasts, and radio shows.' do
+      %i.icon-file
+      Files
+  %li
+    = link_to libraries_path, :class => 'tooltip-right-slow', :title => 'View collections put together by users, highlighting favorite or useful items.' do
+      %i.icon-book
+      Libraries
+  %li
+    = link_to photos_path, :class => 'tooltip-right-slow', :title => 'Browse Volunteer photos, or upload your own.' do
+      %i.icon-picture
+      Photos
+  -#%li= link_to videos_path do
+    %i.icon-film
+    Videos
+  %li
+    = link_to staff_path, :class => 'tooltip-right-slow', :title => 'Get to know our staff.' do
+      %i.icon-user
+      Staff
+  %li
+    = link_to users_path, :class => 'tooltip-right-slow', :title => "Take a look at who's on the site." do
+      %i.icon-user
+      Users
+  %li
+    = link_to volunteers_path, :class => 'tooltip-right-slow', :title => 'Get to know our Volunteers.' do
+      %i.icon-user
+      Volunteers
+  %li
+    = link_to '/search', :class => 'tooltip-right-slow', :title => "Still can't find it? Search within our site using the power of Google." do
+      %i.icon-search
+      Google Search

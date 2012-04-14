@@ -3,11 +3,20 @@
     = render 'shared/menu'
   .span7
     %h1 Welcome, #{current_user.name}!
-    %p Thanks for signing in. Our records indicate that you are #{(current_user.role?(:volunteer) ? nil : 'not')} a Volunteer, and are #{(current_user.role?(:staff) ? nil : 'are')} a Staff member. For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
+    %p Thanks for signing in. Our records indicate that you are #{(current_user.role?(:volunteer) ? nil : 'not')} a Volunteer, and are #{(current_user.role?(:staff) ? nil : 'are')} a Staff member.
     %h2 Where to go from here?
-    %p Take off, explore the site!
+    %p For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
+    %p For an overview of content and updates on the site, you can use your #{link_to 'dashboard', dashboard_path}.
+    -if current_user.pc?
+      %h2
+        Latest Features
+        %small Volunteers and Staff
+      %ul
+        %li Include source files with #{link_to 'file uploads', new_document_path}. Have a PDF that might need to be edited later? Include the original MS Office doc, and posterity will thank you. Plus, you can always get it back later, so it's like an archive!
+        %li Upload #{link_to 'files', new_document_path} and #{link_to 'photos', new_photo_path} right from your computer! Have something beautiful? Useful? Essential? Upload it straight to the website.
+        %li #{link_to 'Create pages', new_page_path} right here! It's as easy as using Microsoft Word! Well, almost... But trust us, it's easy.
+        %li Now #{link_to 'create case studies', new_case_study_path} on the website. Stop emailing them to Jack, having him send it back, etc. Just create it here, someone will review it, and you're good to go.
     %h2 Latest Features
     %ul
-      %li Upload files and photos right from your computer! Have something beautiful? Useful? Essential? Upload it straight to the website.
       %li There's a brand-new look! Enjoy the site's new appearance.
   .span2
