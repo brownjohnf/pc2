@@ -14,6 +14,7 @@ namespace :db do
     make_pages
     make_case_studies
     make_files
+    make_photos
 		Rake::Task['db:populate_timeline'].invoke
 	end
 end

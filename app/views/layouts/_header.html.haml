@@ -22,26 +22,26 @@
         Resources
         %b.caret
       %ul.dropdown-menu
-        %li= link_to 'Pages', updated_pages_path
         %li= link_to 'Case Studies', case_studies_path
-        %li= link_to 'Photos', photos_path
-        -#%li= link_to 'Videos', ''
         %li= link_to 'Files', documents_path
         %li= link_to 'Libraries', libraries_path
-        %li= link_to 'Volunteers', volunteers_path
+        %li= link_to 'Pages', updated_pages_path
+        %li= link_to 'Photos', photos_path
+        -#%li= link_to 'Videos', ''
         %li= link_to 'Staff', staff_path
         %li= link_to 'Users', users_path
+        %li= link_to 'Volunteers', volunteers_path
         - if user_signed_in?
           - if current_user.role?(:volunteer) || current_user.role?(:staff)
             %li.divider
             %li.nav-header Upload
-            %li= link_to 'Photo', new_photo_path if can? :create, Photo
             %li= link_to 'File', new_document_path if can? :create, Document
+            %li= link_to 'Photo', new_photo_path if can? :create, Photo
             %li.divider
             %li.nav-header Create
-            %li= link_to 'Page', new_page_path if can? :create, Page
             %li= link_to 'Case Study', new_case_study_path if can? :create, CaseStudy
             %li= link_to 'Library', new_library_path if can? :create, Library
+            %li= link_to 'Page', new_page_path if can? :create, Page
             %li= link_to 'Timeline Event', new_moment_path if can? :create, Moment
 %ul.nav.pull-right
   - if signed_in?
