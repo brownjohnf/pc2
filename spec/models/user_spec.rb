@@ -91,7 +91,7 @@ describe User do
     end
     describe 'with an avatar' do
       before(:each) do
-        @user = Factory.create(:user, :avatar => File.new(File.join(Rails.root, 'spec', 'support', 'test.png')))
+        @user = Factory.create(:user, :avatar => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.png')))
       end
       it 'should have an avatar' do
         @user.avatar_file_name.should == 'test.png'
@@ -303,6 +303,8 @@ describe User do
     describe 'photo' do
       before(:each) do
         @photo = Factory.create(:photo, :imageable => @user, :user => @user)
+        @user.photo = @photo
+        @user.save
       end
       it 'should respond to photo attribute' do
         @user.should respond_to :photo

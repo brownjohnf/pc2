@@ -4,7 +4,7 @@ describe Photo do
   before(:each) do
     @user = Factory(:user)
     @attr = {
-      :photo => File.new(File.join(Rails.root, 'spec', 'support', 'test.png')),
+      :photo => File.open(File.join(Rails.root, 'spec', 'fixtures', 'test.png')),
       :imageable_id => @user.id,
       :imageable_type => 'User'
     }
