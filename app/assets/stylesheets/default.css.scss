@@ -158,3 +158,9 @@ section {
 .center {
   text-align: center;
 }
+.modal-standard {
+  .modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}

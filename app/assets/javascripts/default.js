@@ -70,6 +70,9 @@ $(function(){
     delay: { show: 1000, hide:50 },
     trigger: 'focus'
   });
+  $('.modal-standard').modal({
+    show: false
+  });
 
   $('#default_form_focus').focus();
 

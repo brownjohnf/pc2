@@ -3,7 +3,7 @@
     = render 'shared/menu'
   .span7
     %h1 Welcome, #{current_user.name}!
-    %p Thanks for signing in. Our records indicate that you are #{(current_user.role?(:volunteer) ? nil : 'not')} a Volunteer, and are #{(current_user.role?(:staff) ? nil : 'are')} a Staff member.
+    %p Thanks for signing in. Our records indicate that you are #{(current_user.role?(:volunteer) ? nil : 'not')} a Volunteer, and are #{(current_user.role?(:staff) ? nil : 'not')} a Staff member.
     %h2 Where to go from here?
     %p For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
     %p For an overview of content and updates on the site, you can use your #{link_to 'dashboard', dashboard_path}.

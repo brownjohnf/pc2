@@ -1,46 +1,8 @@
-.span-12
-  .field
-    = f.label 'Name*'
-    = f.text_field :name
-  .field
-    = f.label 'Primary Email*'
-    = f.email_field :email
-  .field
-    = f.label 'Primary Phone'
-    = f.text_field :phone1
-  .field
-    = f.label :tag_list, 'Tag yourself! (comma-separated)'
-    = f.text_field :tag_list
-.span-12.last
-  .field
-    = f.label 'Current residence*'
-    = f.country_select(:country, 'SN')
-  .field
-    = f.label 'Secondary Email'
-    = f.email_field :email2
-  .field
-    = f.label 'Secondary Phone'
-    = f.text_field :phone2
-  .field
-    = f.label 'Profile Photo'
-    = f.file_field :avatar
-.span-24.last
-  .field
-    = f.label 'Bio'
-    = f.text_area :bio
-= f.fields_for :blogs do |f3|
-  = f3.hidden_field(:user_id, :value => @user.id)
-  .span-12
-    .field
-      = f3.label 'Blog Title'
-      = f3.text_field :title
-    .field
-      = f3.label 'Blog URL'
-      = f3.text_field :url
-    .field
-      = f.label 'Personal Website'
-      = f.text_field :site
-  .span-12.last
-    .field
-      = f3.label 'Blog Description'
-      = f3.text_area :description
+= f.inputs do
+  = f.input :name
+  = f.input :country, :as => :select, :collection => allowed_countries, :include_blank => false
+  = f.input :tag_list
+  = f.input :avatar
+  = f.input :bio, :as => :text
+  = f.inputs :email, :phone1, :email2, :phone2, :site
+

@@ -164,7 +164,7 @@
           - unless @user.volunteers.any?
             = link_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :class => 'btn'
           - else
-            = link_to 'Edit profile', edit_user_path, :method => :get, :class => 'btn'
+            = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn', 'data-toggle' => 'modal'
           %a.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
             %span.caret
           %ul.dropdown-menu
@@ -173,3 +173,4 @@
             = link_to "I'm a staff member!", volunteer_request_feedback_index_path, :class => 'btn' unless @user.staff.any?
         - if @user.avatar?
           = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
+    = render 'modal_form'

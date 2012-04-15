@@ -182,7 +182,7 @@ module ApplicationHelper
   #
   def allowed_countries
     {
-      'SN' => 'Senegal'
+      'Senegal' => 'SN'
     }
   end
 

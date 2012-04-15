@@ -34,6 +34,11 @@
     - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
       %li= link_to link.canonical_title, link if can? :read, link
   %li.nav-header Resources
+  - if user_signed_in?
+    %li
+      = link_to dashboard_path, :class => 'tooltip-right-slow', :title => "An overview of the various resources on the site, and what's been changing." do
+        %i.icon-home
+        Dashboard
   %li
     = link_to case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.' do
       %i.icon-road
