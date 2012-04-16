@@ -92,6 +92,49 @@ describe Library do
       @library.mp3s.should_not include(@document)
       @library.mp3s.should_not include(@photo)
     end
+    describe 'available' do
+      it 'should respond to available' do
+        Library.should respond_to :available
+      end
+      it 'no libraries, and no user' do
+        Factory.create(:stack, :library => @library_with = Factory.create(:library, :user => @user = Factory(:user)), :stackable => @photo = Factory.create(:photo))
+        Factory.create(:stack, :library => @library_without = Factory.create(:library, :user => @user))
+        Factory.create(:stack, :library => @library_rando = Factory.create(:library))
+        @photo2 = Factory.create(:photo)
+        Library.available(@photo2).should include(@library_without)
+        Library.available(@photo2).should include(@library_rando)
+        Library.available(@photo2).should include(@library_with)
+      end
+      it 'libraries, but no user' do
+        Factory.create(:stack, :library => @library_with = Factory.create(:library, :user => @user = Factory(:user)), :stackable => @photo = Factory.create(:photo))
+        Factory.create(:stack, :library => @library_with2 = Factory.create(:library, :user => @user), :stackable => @photo)
+        Factory.create(:stack, :library => @library_without = Factory.create(:library, :user => @user))
+        Factory.create(:stack, :library => @library_rando = Factory.create(:library))
+        Library.available(@photo).should include(@library_without)
+        Library.available(@photo).should include(@library_rando)
+        Library.available(@photo).should_not include(@library_with)
+        Library.available(@photo).should_not include(@library_with2)
+      end
+      it 'no libraries, but user' do
+        Factory.create(:stack, :library => @library_with = Factory.create(:library, :user => @user = Factory(:user)), :stackable => @photo = Factory.create(:photo))
+        Factory.create(:stack, :library => @library_without = Factory.create(:library, :user => @user))
+        Factory.create(:stack, :library => @library_rando = Factory.create(:library))
+        @photo2 = Factory.create(:photo)
+        Library.available(@photo2, @user).should include(@library_without)
+        Library.available(@photo2, @user).should_not include(@library_rando)
+        Library.available(@photo2, @user).should include(@library_with)
+      end
+      it 'libraries and user' do
+        Factory.create(:stack, :library => @library_with = Factory.create(:library, :user => @user = Factory(:user)), :stackable => @photo = Factory.create(:photo))
+        Factory.create(:stack, :library => @library_with2 = Factory.create(:library, :user => @user), :stackable => @photo)
+        Factory.create(:stack, :library => @library_without = Factory.create(:library, :user => @user))
+        Factory.create(:stack, :library => @library_rando = Factory.create(:library))
+        Library.available(@photo, @user).should include(@library_without)
+        Library.available(@photo, @user).should_not include(@library_rando)
+        Library.available(@photo, @user).should_not include(@library_with)
+        Library.available(@photo, @user).should_not include(@library_with2)
+      end
+    end
   end
 
   # associations

@@ -78,7 +78,8 @@ describe Photo do
   end
 
   # associations
-  describe 'associations' do
+  describe 'association' do
+    # has_many users
     describe 'users' do
       before(:each) do
         @user = Factory.create(:user, :photo => @photo = Factory.create(:photo))
@@ -87,7 +88,6 @@ describe Photo do
         @photo.should respond_to(:users)
       end
       it 'should return the correct users' do
-        @user.photo = @photo
         @photo.users.should == [@user]
       end
       it 'should not destroy users' do
@@ -99,17 +99,61 @@ describe Photo do
         @user.reload
         @user.photo_id.should be_nil
       end
+    end
+    describe 'has_many pages' do
+      before(:each) do
+        @page = Factory.create(:page, :photo => @photo = Factory.create(:photo))
+      end
+      it 'should have a pages attribute' do
+        @photo.should respond_to(:pages)
+      end
+      it 'should return the correct pages' do
+        @photo.pages.should == [@page]
+      end
+      it 'should not destroy pages' do
+        @photo.destroy
+        Page.find_by_id(@page.id).should_not be_nil
+      end
       it 'should reset page pointers' do
-        @page = Factory.create(:page, :photo => @photo)
         @photo.destroy
         @page.reload
         @page.photo_id.should be_nil
+      end
+    end
+    describe 'has_many moments' do
+      before(:each) do
+        @moment = Factory.create(:moment, :photo => @photo = Factory.create(:photo))
+      end
+      it 'should have a moments attribute' do
+        @photo.should respond_to(:moments)
+      end
+      it 'should return the correct moments' do
+        @photo.moments.should == [@moment]
+      end
+      it 'should not destroy moments' do
+        @photo.destroy
+        Moment.find_by_id(@moment.id).should_not be_nil
       end
       it 'should reset moment pointers' do
         @moment = Factory.create(:moment, :photo => @photo)
         @photo.destroy
         @moment.reload
         @moment.photo_id.should be_nil
+      end
+    end
+    describe 'has_many case studies' do
+      before(:each) do
+        @case_study = Factory.create(:case_study, :photo => @photo = Factory.create(:photo))
+      end
+      it 'should have a case_studies attribute' do
+        @photo.should respond_to(:case_studies)
+      end
+      it 'should return the correct case_studies' do
+        @photo.case_studies.should == [@case_study]
+      end
+      it 'should not destroy case_studies' do
+        @photo.destroy
+        CaseStudy.find_by_id(@case_study.id).should_not be_nil
       end
       it 'should reset case study pointers' do
         @case_study = Factory.create(:case_study, :photo => @photo)
@@ -118,7 +162,37 @@ describe Photo do
         @case_study.photo_id.should be_nil
       end
     end
-    describe 'imageable' do
+    describe 'has_many stacks' do
+      before(:each) do
+        @stack = Factory.create(:stack, :stackable => @photo = Factory.create(:photo))
+      end
+      it 'should have a stacks attribute' do
+        @photo.should respond_to(:stacks)
+      end
+      it 'should return the correct stack' do
+        @photo.stacks.should == [@stack]
+      end
+      it 'should destroy stacks' do
+        @photo.destroy
+        Stack.find_by_id(@stack.id).should be_nil
+      end
+    end
+    describe 'has_many libraries' do
+      before(:each) do
+        Factory.create(:stack, :library => @library = Factory.create(:library), :stackable => @photo = Factory.create(:photo))
+      end
+      it 'should have a stacks attribute' do
+        @photo.should respond_to(:libraries)
+      end
+      it 'should return the correct library' do
+        @photo.libraries.should == [@library]
+      end
+      it 'should not destroy libraries' do
+        @photo.destroy
+        Library.find_by_id(@library.id).should_not be_nil
+      end
+    end
+    describe 'belongs_to imageable' do
       build_photo
       it 'should respond to imageable attribute' do
         @photo.should respond_to :imageable
@@ -130,7 +204,7 @@ describe Photo do
         @class.find_by_id(@id).should_not be_nil
       end
     end
-    describe 'user' do
+    describe 'belongs_to user' do
       before(:each) do
         @photo = Factory.create(:photo, :user => @user = Factory.create(:user))
       end

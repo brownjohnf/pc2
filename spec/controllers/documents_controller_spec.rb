@@ -393,14 +393,14 @@ describe DocumentsController do
         before(:each) do
           @document = Factory.create(:document, :user => @user)
         end
-        it 'should not destroy the document' do
+        it 'should destroy the document' do
           lambda do
             delete :destroy, :id => @document
-          end.should_not change(Document, :count).by(-1)
+          end.should change(Document, :count).by(-1)
         end
-        it 'should redirect to login' do
+        it 'should redirect to docs' do
           delete :destroy, :id => @document
-          response.should redirect_to login_path
+          response.should redirect_to documents_path
         end
       end
     end

@@ -1,8 +1,13 @@
-= f.inputs do
-  = f.input :name
-  = f.input :country, :as => :select, :collection => allowed_countries, :include_blank => false
-  = f.input :tag_list
-  = f.input :avatar
-  = f.input :bio, :as => :text
-  = f.inputs :email, :phone1, :email2, :phone2, :site
+= f.text_field :name
+= f.select :country, allowed_countries
+- if can? :manage, User
+  = f.collection_check_boxes :roles, Role.all, :id, :name
+= f.text_field :tag_list
+= f.file_field :avatar
+= f.text_area :bio, :as => :text
+= f.text_field :email
+= f.text_field :phone1
+= f.text_field :email2
+= f.text_field :phone2
+= f.text_field :site
 

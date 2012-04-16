@@ -32,7 +32,7 @@ class StacksController < ApplicationController
 
     respond_to do |format|
       if @stack.save
-        format.html { redirect_to @stack, notice: 'Stack was successfully created.' }
+        format.html { redirect_to @stack.stackable, notice: 'Stack was successfully created.' }
         format.json { render json: @stack, status: :created, location: @stack }
       else
         format.html { render action: "new" }

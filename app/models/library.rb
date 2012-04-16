@@ -17,10 +17,42 @@ class Library < ActiveRecord::Base
 
   validates :name, :user_id, :country, :presence => true
 
+  def self.available(item, user = nil)
+    # no libraries, no user
+    if item.libraries.empty? && user.nil?
+      Library.all
+    # libraries, no user
+    elsif !item.libraries.empty? && user.nil?
+      libraries = []
+      return_libraries = []
+      item.libraries.each do |lib|
+        libraries << lib
+      end
+      Library.all.each do |lib|
+        return_libraries << lib unless libraries.include?(lib)
+      end
+      return_libraries
+    # no libraries, user
+    elsif item.libraries.empty? && !user.nil?
+      user.libraries.all
+    # libraries, user
+    else
+      libraries = []
+      return_libraries = []
+      item.libraries.each do |lib|
+        libraries << lib
+      end
+      Library.where("user_id = ?", user.id).each do |lib|
+        return_libraries << lib unless libraries.include?(lib)
+      end
+      return_libraries
+    end
+  end
+
   # retrieves the actual document objects from the stacks
   def documents
     documents = []
-    stacks.where(:stackable_type => 'Document').all.each do |stack|
+    stacks.documents.all.each do |stack|
       documents << stack.stackable
     end
     documents
@@ -29,7 +61,7 @@ class Library < ActiveRecord::Base
   # retrieves the actual photo objects from the stacks
   def photos
     photos = []
-    stacks.where(:stackable_type => 'Photo').all.each do |stack|
+    stacks.photos.all.each do |stack|
       photos << stack.stackable
     end
     photos
@@ -37,7 +69,7 @@ class Library < ActiveRecord::Base
 
   def mp3s
     mp3s = []
-    stacks.where(:stackable_type => 'Document').all.each do |stack|
+    stacks.documents.all.each do |stack|
       mp3s << stack.stackable unless stack.stackable.audio_length.nil?
     end
     mp3s

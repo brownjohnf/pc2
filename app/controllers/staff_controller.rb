@@ -61,7 +61,7 @@ class StaffController < ApplicationController
 
     respond_to do |format|
       if @staff.update_attributes(params[:staff])
-        format.html { redirect_to @staff, notice: @notice }
+        format.html { redirect_to @staff.user, notice: @notice }
         format.js
       else
         format.html { render action: "edit" }

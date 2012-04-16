@@ -36,9 +36,17 @@
   %li.nav-header Resources
   - if user_signed_in?
     %li
+      = link_to entry_path, :class => 'tooltip-right-slow', :title => "List of the latest features. If you've forgotten about something, check here first." do
+        %i.icon-star
+        Welcome
+    %li
       = link_to dashboard_path, :class => 'tooltip-right-slow', :title => "An overview of the various resources on the site, and what's been changing." do
         %i.icon-home
         Dashboard
+  %li
+    = link_to timeline_path, :class => 'tooltip-right-slow', :title => 'Stories, photos and videos shared by 50 years of Peace Corps Senegal Volunteers.' do
+      %i.icon-time
+      50th Anniversary Timeline
   %li
     = link_to case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.' do
       %i.icon-road

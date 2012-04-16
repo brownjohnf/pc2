@@ -309,14 +309,14 @@ describe PhotosController do
         before(:each) do
           @photo = Factory.create(:photo, :user => @user)
         end
-        it 'should not destroy the photo' do
+        it 'should destroy the photo' do
           lambda do
             delete :destroy, :id => @photo
-          end.should_not change(Photo, :count).by(-1)
+          end.should change(Photo, :count).by(-1)
         end
-        it 'should redirect to login' do
+        it 'should redirect to photos' do
           delete :destroy, :id => @photo
-          response.should redirect_to login_path
+          response.should redirect_to photos_path
         end
       end
     end

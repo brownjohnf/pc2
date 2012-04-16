@@ -143,6 +143,15 @@ section {
   }
 }
 
+/*************************************************/
+/* custom styles for random stuff */
+
+/* set the links around photos to cover the photo */
+.photo_thumb {
+  display: inline-block;
+}
+
+/* set the various font sizes for tag cloud */
 .tag1 {
   font-size: .8em;
 }
@@ -155,12 +164,23 @@ section {
 .tag4 {
   font-size: 1.8em;
 }
+
+/* add a class for convenient centering
+/* should prob be pulled from the SASS mixin */
 .center {
   text-align: center;
 }
+
+/*************************************************/
+/* modal settings */
+
+/* define a standard modal
+/* scrolls the body */
 .modal-standard {
+  max-height: none;
   .modal-body {
     max-height: 400px;
     overflow-y: auto;
   }
 }
+

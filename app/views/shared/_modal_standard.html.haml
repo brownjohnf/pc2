@@ -1,0 +1,11 @@
+- title ||= nil
+- body ||= nil
+- footer ||= nil
+.modal.modal-standard.hide{:id => id}
+  .modal-header
+    %a.close{'data-dismiss' => 'modal'} x
+    %h3= title
+  .modal-body
+    = body
+  .modal-footer
+    = footer

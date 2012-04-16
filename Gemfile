@@ -23,6 +23,7 @@ gem 'gravatar_image_tag', '1.0.0'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'acts-as-taggable-on', '2.2.2'
 gem 'formtastic-bootstrap', '1.1.1'
+gem 'bootstrap_forms', '2.0.0'
 gem 'cancan', '1.6.7'
 gem 'texticle', '~> 2.0', :require => 'texticle/rails'
 gem 'rubyzip', '0.9.5'
@@ -35,7 +36,7 @@ group :assets do
   gem 'sass-rails', "3.2.3"
   gem 'coffee-rails', "3.2.2"
   gem 'uglifier', '1.0.3'
-  gem 'bootstrap-sass', '2.0.2'
+  gem 'bootstrap-sass', '2.0.1'
 end
 
 group :test do

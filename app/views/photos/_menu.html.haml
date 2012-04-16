@@ -7,16 +7,18 @@
           Your libraries
           %b.caret
         %ul.dropdown-menu
+          %li= link_to 'New library', new_library_path if can? :create, Library
           - current_user.libraries.each do |library|
             %li= link_to library.canonical_title, library
     %li= link_to 'Upload a photo!', new_photo_path if can? :create, Photo
+    %li= link_to 'Add to library', '#new_stack_form_modal', 'data-toggle' => 'modal' if can? :create, Photo
     - if user_signed_in? && can?(:edit, @photo)
       %li.dropdown
         %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
           Actions
           %b.caret
         %ul.dropdown-menu
-          %li= link_to 'Edit', edit_photo_path(@photo)
+          %li= link_to 'Edit', '#edit_photo_form_modal', 'data-toggle' => 'modal'
           - if can? :destroy, @photo
             %li= link_to 'Destroy', ''
     = render 'shared/search'

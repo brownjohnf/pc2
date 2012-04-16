@@ -70,7 +70,12 @@ $(function(){
     delay: { show: 1000, hide:50 },
     trigger: 'focus'
   });
-  $('.modal-standard').modal({
+
+  // modals
+  
+  // add a slide effect to all modal-standard modals
+  // init modal
+  $('.modal-standard').addClass('fade').modal({
     show: false
   });
 

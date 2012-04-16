@@ -29,6 +29,7 @@ class Photo < ActiveRecord::Base
   has_many :users
   
   has_many :stacks, :as => :stackable, :dependent => :destroy
+  has_many :libraries, :through => :stacks
 
   belongs_to :user
   belongs_to :imageable, :polymorphic => true
@@ -43,8 +44,8 @@ class Photo < ActiveRecord::Base
   after_destroy :reset_pointers
 
   default_scope :order => 'photos.created_at DESC'
-
-  # Return a standard title. Used as a handle for referenc from views 
+  
+  # Return a standard title. Used as a handle for reference from views 
   # if you don't know what the object is with which you'reworking.
   #
   # @return [String] canonical_title

@@ -1,3 +1,3 @@
 -# takes size, photo
 - size ||= :icon
-= link_to image_tag(photo.photo.url(size)), photo, :class => 'photo_thumb'
+= link_to image_tag(photo.photo.url(size)), photo, :class => 'photo_thumb', :rel => 'popover-top', :title => photo.title, 'data-content' => (photo.description.blank? ? 'No description. Is this your photo? You should add a description.' : photo.description)

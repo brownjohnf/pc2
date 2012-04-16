@@ -1,9 +1,0 @@
-.modal.modal-standard.hide#edit_user_form_modal
-  .modal-header
-    %h3 Edit basic information
-  .modal-body
-    = semantic_form_for(@user, :html => { :multipart => true } ) do |f|
-      = f.semantic_errors
-      = render 'fields', :f => f
-      = f.buttons do
-        = f.commit_button
