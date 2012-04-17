@@ -12,8 +12,6 @@
     %br
     = moment.user.country
     %br
-    = link_to moment.user.volunteers.first.sector.name, moment.user.volunteers.first.sector if moment.user.volunteers.any?
-    %br
     = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
     \-
     = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)

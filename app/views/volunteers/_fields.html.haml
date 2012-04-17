@@ -1,11 +1,10 @@
 - if user_signed_in? && (current_user.role?(:admin) || current_user.role?(:moderator))
-  = f.collection_select :user_id, User.all, :id, :name
   = f.select :country, allowed_countries
 = f.text_field :local_name
-= f.collection_select :sector_id, Sector.all, :id, :name
-= f.collection_select :site_id, Site.all, :id, :name
-= f.collection_select :stage_id, Stage.all, :id, :name
-= f.date_select :cos_date, :label => 'test'
+= f.collection_select :sector_id, Sector.all, :id, :name, :include_blank => true
+= f.collection_select :site_id, Site.all, :id, :name, :include_blank => true
+= f.collection_select :stage_id, Stage.all, :id, :name, :include_blank => true
+= f.date_select :cos_date, :label => 'COS Date'
 = f.text_field :emphasis
 = f.text_area :projects
 
