@@ -22,6 +22,7 @@ class Photo < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
     'image/jpeg',
+    'image/pjpeg',
     'image/gif'
   ]
 
