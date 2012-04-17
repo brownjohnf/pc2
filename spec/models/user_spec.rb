@@ -102,6 +102,9 @@ describe User do
         @user.reload
         @user.avatar_file_name.should be_nil
       end
+      it 'should respond to pc?' do
+        @user.should respond_to :pc?
+      end
     end
   end
 

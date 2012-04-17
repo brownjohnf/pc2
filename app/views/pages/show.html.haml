@@ -60,7 +60,7 @@
         %li.nav-header Case Studies
         - @case_studies.each do |c|
           %li= link_to c.title, c
-      - if @page.contributions.count > 1
+      - if @page.contributions.count > 0
         %li.nav-header Contributors
         - @page.contributions.each do |c|
           - unless c.new_record?
@@ -72,13 +72,20 @@
       %h3 Tag Cloud
       = cloud_of_tags(Page)
       - if can? :manage, Contribution
-        .box
-          %h3 Add Contributor
+        = link_to 'add contributor', '#add_cont', :class => 'btn', 'data-toggle' => 'modal'
+        .modal.modal-standard.hide#add_cont
           - @contribution = @page.contributions.build
           = semantic_form_for @contribution, :remote => true do |f|
-            = f.inputs do
-              = f.input :user
-              = f.input :contributable_type, :as => :hidden
-              = f.input :contributable_id, :as => :hidden
-            = f.buttons do
-              = f.commit_button :input_html => {:disable_with => 'wait'}
+            .modal-header
+              %a.close{'data-dismiss' => 'modal'} x
+              %h3 Add Contributor
+            .modal-body
+              = f.inputs do
+                = f.input :user
+                = f.input :contributable_type, :as => :hidden
+                = f.input :contributable_id, :as => :hidden
+            .modal-footer
+              = link_to 'Close', '#', :class => 'btn', 'data-dismiss' => 'modal'
+              = f.buttons do
+                = f.commit_button :input_html => {:disable_with => 'wait', :class => 'btn btn-primary'}
+

@@ -49,3 +49,11 @@ end
 
 Spork.each_run do
 end
+
+# suggestion from http://www.jstorimer.com/ruby/2010/01/05/speep-up-your-paperclip-tests.html
+#
+#class Photo
+#  before_post_process do |image|
+#    false
+#  end
+#end

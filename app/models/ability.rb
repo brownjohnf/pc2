@@ -45,7 +45,8 @@ class Ability
 
         can :create, [ Page, CaseStudy, Region, Stage, Moment ]
         can :update, Moment, :user_id => user.id
-        can [ :read, :create, :update ], [ Photo, Document, Website, Blog, Library, Volunteer, Staff ], :user_id => user.id
+        can :manage, [ Photo, Document, Website, Blog, Library ], :user_id => user.id
+        can [ :read, :create, :update ], [ Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack
 
         can :create, Site do |site|

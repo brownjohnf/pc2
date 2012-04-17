@@ -1,25 +1,46 @@
-.container
-  .row
-    .span4.offset4
-      .well
-        %h1 Sign up
-        
-        = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-          = devise_error_messages!
-          
-          .field
-            = f.label :name, 'Name*'
-            = f.text_field :name
-          .field
-            = f.label :email, 'Email*'
-            = f.email_field :email
-          .field
-            = f.label :password, 'Password*'
-            = f.password_field :password
-          .field
-            = f.label :password_confirmation, 'Password Confirmation*'
-            = f.password_field :password_confirmation
-          .actions
-            = f.submit "Sign up"
-          
-        = render "links"
+.row
+  .span6.offset2
+    .well
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'form-horizontal' }) do |f|
+        .control-group
+          .controls
+            %h1 Sign me up!
+        .control-group
+          .controls
+            = devise_error_messages!
+        .control-group
+          = f.label :name, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-user
+              = f.email_field :name, :id => 'default_form_focus', :rel => 'popover-right-focus', :title => 'Your Name', 'data-content' => "This can be any name you want. However, if you're a Peace Corps Volunteer or Staff member, we recommend that you use something that will allow your friends and colleagues to find you. You cannot be verified as a PCV or Staff member if your name is unintelligible"
+            %p.help-block your name
+        .control-group
+          = f.label :email, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-envelope
+              = f.email_field :email, :rel => 'popover-right-focus', :title => 'Your Email Address', 'data-content' => "You must submit a valid email address, becaus you will be required to confirm your account."
+            %p.help-block must be valid email for account confirmation
+        .control-group
+          = f.label :password, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-barcode
+              = f.email_field :password, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
+            %p.help-block must be 8 - 127 characters long
+        .control-group
+          = f.label :password_confirmation, :class => 'control-label'
+          .controls
+            .input-prepend
+              %span.add-on
+                %i.icon-check
+              = f.email_field :password_confirmation, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "This password must match that originally provided.<hr/>Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
+            %p.help-block confirm your password
+        .form-actions
+          = f.submit "Sign up", :class => 'btn btn-primary tooltip-left-focus-slow', :title => "if you're sure..."
+  .span3.offset1
+    = render 'links'

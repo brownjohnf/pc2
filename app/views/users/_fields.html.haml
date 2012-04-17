@@ -1,46 +1,13 @@
-.span-12
-  .field
-    = f.label 'Name*'
-    = f.text_field :name
-  .field
-    = f.label 'Primary Email*'
-    = f.email_field :email
-  .field
-    = f.label 'Primary Phone'
-    = f.text_field :phone1
-  .field
-    = f.label :tag_list, 'Tag yourself! (comma-separated)'
-    = f.text_field :tag_list
-.span-12.last
-  .field
-    = f.label 'Current residence*'
-    = f.country_select(:country, 'SN')
-  .field
-    = f.label 'Secondary Email'
-    = f.email_field :email2
-  .field
-    = f.label 'Secondary Phone'
-    = f.text_field :phone2
-  .field
-    = f.label 'Profile Photo'
-    = f.file_field :avatar
-.span-24.last
-  .field
-    = f.label 'Bio'
-    = f.text_area :bio
-= f.fields_for :blogs do |f3|
-  = f3.hidden_field(:user_id, :value => @user.id)
-  .span-12
-    .field
-      = f3.label 'Blog Title'
-      = f3.text_field :title
-    .field
-      = f3.label 'Blog URL'
-      = f3.text_field :url
-    .field
-      = f.label 'Personal Website'
-      = f.text_field :site
-  .span-12.last
-    .field
-      = f3.label 'Blog Description'
-      = f3.text_area :description
+= f.text_field :name
+= f.select :country, allowed_countries
+- if can? :manage, User
+  = f.collection_check_boxes :roles, Role.all, :id, :name
+= f.text_field :tag_list
+= f.file_field :avatar
+= f.text_area :bio, :as => :text
+= f.text_field :email
+= f.text_field :phone1
+= f.text_field :email2
+= f.text_field :phone2
+= f.text_field :site
+

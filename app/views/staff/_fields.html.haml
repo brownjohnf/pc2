@@ -1,0 +1,23 @@
+- if user_signed_in? && (current_user.role?(:admin) || current_user.role?(:moderator))
+  = f.collection_select :user_id, User.all, :id, :name
+  = f.select :country, allowed_countries
+= f.collection_select :site_id, Site.all, :id, :name
+.control-group
+  %label.control-label= link_to 'add a site', new_site_path if can? :create, Site
+= f.text_field :building
+= f.text_field :office
+= f.select :floor, ['1st', '2nd', '3rd', '4th']
+.control-group
+  %label.control-label Morning opening time
+= f.time_select :morning_open, :help_block => 'popover'
+.control-group
+  %label.control-label Morning close time
+= f.time_select :morning_close
+.control-group
+  %label.control-label Afternoon open time
+= f.time_select :afternoon_open
+.control-group
+  %label.control-label Afternoon close time
+= f.time_select :afternoon_close
+= f.text_field :details
+

@@ -1,17 +1,18 @@
-= semantic_form_for(@page) do |f|
-  = f.semantic_errors
-  = f.inputs :title, :description
+= bootstrap_form_for(@page) do |f|
+  = f.text_field :title
+  = f.text_field :description
   - if can? :manage, Page
-    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
+    = f.select :country, :collection => current_user.countries, :include_blank => false
   - else
-    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
-  = f.inputs :parent
-  = f.input :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
-  = f.input :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
-  = f.inputs :language, :photo
-  = f.input :created_at, :as => :text
-  = f.input :content, :label => 'Content', :input_html => {:class => 'richtext', :value => (@page.content ? markdown(@page.content) : nil) }
-  = link_to 'Insert Photo', '#', :id => 'insert_photo'
-  .box
-    = f.input :tag_list
-    = f.buttons
+    = f.select :country, current_user.countries, :include_blank => false
+  = f.collection_select :parent, Page.accessible_by(current_ability), :id, :title
+  = f.select :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
+  = f.select :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
+  = f.collection_select :language, Language.all, :id, :name
+  = f.collection_select :photo, Photo.all, :id, :title
+  .control-group
+    %label.control-label Created on
+  = f.date_select :created_at
+  = f.text_area :content, :label => 'Content'
+  = f.text_field :tag_list
+  = f.actions

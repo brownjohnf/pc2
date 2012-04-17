@@ -1,108 +1,204 @@
+%a.btn.btn-navbar{'data-toggle' => "collapse", 'data-target' => ".nav-collapse"}
+  %span.icon-bar
+  %span.icon-bar
+  %span.icon-bar
 %a.brand{:href => '/splash'}
   Peace Corps
   = '|'
   = Carmen.country_name(cookies[:country])
   %sub beta
-%ul.nav
-  %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
-  %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
-  %li= link_to '50th Anniversary Timeline', timeline_path
+.nav-collapse
   %ul.nav
-    %li.dropdown
-      %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
-        Country
-        %b.caret
-      %ul.dropdown-menu
-        - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
-          %li= link_to Carmen.country_name(country.country), pages_path(:country => country.country)
-  %li.divider-vertical
+    %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
+    %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
+    %li= link_to '50th Anniversary Timeline', timeline_path
+    %ul.nav
+      %li.dropdown
+        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+          Country
+          %b.caret
+        %ul.dropdown-menu
+          - Page.find_by_sql("SELECT DISTINCT country FROM pages ORDER BY country ASC").each do |country|
+            %li= link_to Carmen.country_name(country.country), pages_path(:country => country.country)
+    %li.divider-vertical
+    %ul.nav
+      %li.dropdown
+        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+          Resources
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to timeline_path do
+              %i.icon-time
+              50th Timeline
+          %li
+            = link_to case_studies_path do
+              %i.icon-road
+              Case Studies
+          %li
+            = link_to updated_pages_path do
+              %i.icon-list-alt
+              Content
+          %li
+            = link_to documents_path do
+              %i.icon-file
+              Files
+          %li
+            = link_to libraries_path do
+              %i.icon-book
+              Libraries
+          %li
+            = link_to photos_path do
+              %i.icon-picture
+              Photos
+          -#%li= link_to videos_path do
+            %i.icon-film
+            Videos
+          %li
+            = link_to staff_path do
+              %i.icon-user
+              Staff
+          %li
+            = link_to users_path do
+              %i.icon-user
+              Users
+          %li
+            = link_to volunteers_path do
+              %i.icon-user
+              Volunteers
+          - if user_signed_in?
+            - if current_user.role?(:volunteer) || current_user.role?(:staff)
+              %li.divider
+              %li.nav-header Upload
+              - if can? :create, Document
+                %li
+                  = link_to new_document_path do
+                    %i.icon-file
+                    File
+              - if can? :create, Photo
+                %li
+                  = link_to new_photo_path do
+                    %i.icon-picture
+                    Photo
+              %li.divider
+              %li.nav-header Create
+              %li
+                = link_to new_case_study_path do
+                  %i.icon-road
+                  Case Study
+              %li
+                = link_to new_library_path do
+                  %i.icon-book
+                  Library
+              %li
+                = link_to new_page_path do
+                  %i.icon-list-alt
+                  Page
+              %li
+                = link_to new_moment_path do
+                  %i.icon-time
+                    Timeline Event
+.nav-collapse.pull-right
   %ul.nav
-    %li.dropdown
-      %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
-        Resources
-        %b.caret
-      %ul.dropdown-menu
-        %li= link_to 'Pages', updated_pages_path
-        %li= link_to 'Case Studies', case_studies_path
-        %li= link_to 'Photos', photos_path
-        -#%li= link_to 'Videos', ''
-        %li= link_to 'Files', documents_path
-        %li= link_to 'Libraries', libraries_path
-        %li= link_to 'Volunteers', volunteers_path
-        %li= link_to 'Staff', staff_path
-        %li= link_to 'Users', users_path
-        - if user_signed_in?
-          - if current_user.role?(:volunteer) || current_user.role?(:staff)
-            %li.divider
-            %li.nav-header Upload
-            %li= link_to 'Photo', new_photo_path if can? :create, Photo
-            %li= link_to 'File', new_document_path if can? :create, Document
-            %li.divider
-            %li.nav-header Create
-            %li= link_to 'Page', new_page_path if can? :create, Page
-            %li= link_to 'Case Study', new_case_study_path if can? :create, CaseStudy
-            %li= link_to 'Library', new_library_path if can? :create, Library
-            %li= link_to 'Timeline Event', new_moment_path if can? :create, Moment
-%ul.nav.pull-right
-  - if signed_in?
-    - if current_user.role? :admin
+    - if signed_in?
+      - if current_user.role? :admin
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+              Manage
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "blogs (#{Blog.count})", blogs_path
+              %li= link_to "case studies (#{CaseStudy.count})", case_studies_path
+              %li= link_to "contributions", contributions_path
+              %li= link_to "documents (#{Document.count})", documents_path
+              %li= link_to "feedback (#{Feedback.count})", feedback_index_path
+              %li= link_to "imports", imports_path
+              %li= link_to "jobs", jobs_path
+              %li= link_to "languages (#{Language.count})", languages_path
+              %li= link_to "libraries (#{Library.count})", libraries_path
+              %li= link_to "moments (#{Moment.count})", moments_path
+              %li= link_to "pages (#{Page.count})", pages_path
+              %li= link_to "pc regions", pc_regions_path
+              %li= link_to "photos (#{Photo.count})", photos_path
+              %li= link_to "positions (#{Position.count})", positions_path
+              %li= link_to "regions (#{Region.count})", regions_path
+              %li= link_to "region types", regiontypes_path
+              %li= link_to "scopes", scopes_path
+              %li= link_to "sectors (#{Sector.count})", sectors_path
+              %li= link_to "sites (#{Site.count})", sites_path
+              %li= link_to "stacks", stacks_path
+              %li= link_to "staff (#{Staff.count})", staff_index_path
+              %li= link_to "stages (#{Stage.count})", stages_path
+              %li= link_to "users (#{User.count})", users_path
+              %li= link_to "volunteers (#{Volunteer.count})", volunteers_path
+              %li= link_to "websites", websites_path
+      -#%li= avatar_for_user current_user, :size => :icon
       %ul.nav
         %li.dropdown
           %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
-            Manage
+            = current_user.name
             %b.caret
           %ul.dropdown-menu
-            %li= link_to "blogs (#{Blog.count})", blogs_path
-            %li= link_to "case studies (#{CaseStudy.count})", case_studies_path
-            %li= link_to "contributions", contributions_path
-            %li= link_to "documents (#{Document.count})", documents_path
-            %li= link_to "feedback (#{Feedback.count})", feedback_index_path
-            %li= link_to "imports", imports_path
-            %li= link_to "jobs", jobs_path
-            %li= link_to "languages (#{Language.count})", languages_path
-            %li= link_to "libraries (#{Library.count})", libraries_path
-            %li= link_to "moments (#{Moment.count})", moments_path
-            %li= link_to "pages (#{Page.count})", pages_path
-            %li= link_to "pc regions", pc_regions_path
-            %li= link_to "photos (#{Photo.count})", photos_path
-            %li= link_to "positions (#{Position.count})", positions_path
-            %li= link_to "regions (#{Region.count})", regions_path
-            %li= link_to "region types", regiontypes_path
-            %li= link_to "scopes", scopes_path
-            %li= link_to "sectors (#{Sector.count})", sectors_path
-            %li= link_to "sites (#{Site.count})", sites_path
-            %li= link_to "stacks", stacks_path
-            %li= link_to "staff (#{Staff.count})", staff_index_path
-            %li= link_to "stages (#{Stage.count})", stages_path
-            %li= link_to "users (#{User.count})", users_path
-            %li= link_to "volunteers (#{Volunteer.count})", volunteers_path
-            %li= link_to "websites", websites_path
-    -#%li= avatar_for_user current_user, :size => :icon
-    %ul.nav
-      %li.dropdown
-        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
-          = current_user.name
-          %b.caret
-        %ul.dropdown-menu
-          %li= link_to 'Dashboard', dashboard_path
-          %li= link_to 'Profile', current_user
-          %li= link_to 'Use SSL', 'https://pcsenegal.com'
-          %li= link_to 'Leave Feedback', new_feedback_path
-          %li= link_to 'Help Me!', '/help'
-          %li.divider
-          %li= link_to 'Edit profile', edit_user_path(current_user)
-          %li= link_to 'Change password', edit_user_registration_path(current_user)
-          %li= link_to 'Sign out', '/logout'
-  - else
-    %ul.nav
-      %li.dropdown
-        %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
-          sign in
-          %b.caret
-        %ul.dropdown-menu
-          %li= link_to 'Sign in', login_path
-          %li= link_to 'Sign up', new_user_registration_path
-          %li.divider
-          %li= link_to 'Use SSL', 'https://pcsenegal.com'
-          %li= link_to 'Leave Feedback', new_feedback_path
-          %li= link_to 'Help Me!', '/help'
+            %li
+              = link_to dashboard_path do
+                %i.icon-home
+                Dashboard
+            %li
+              = link_to current_user do
+                %i.icon-user
+                Profile
+            %li
+              = link_to 'https://pcsenegal.com' do
+                %i.icon-lock
+                Encrypt session
+            %li
+              = link_to new_feedback_path do
+                %i.icon-comment
+                Leave feedback
+            %li
+              = link_to '/help' do
+                %i.icon-question-sign
+                Help me!
+            %li.divider
+            %li
+              = link_to edit_user_path(current_user) do
+                %i.icon-cog
+                Edit Profile
+            %li
+              = link_to edit_user_registration_path(current_user) do
+                %i.icon-barcode
+                Change password
+            %li
+              = link_to '/logout' do
+                %i.icon-off
+                Sign out
+    - else
+      %ul.nav
+        %li.dropdown
+          %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
+            sign in
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = link_to login_path do
+                %i.icon-arrow-right
+                Sign in
+            %li
+              = link_to new_user_registration_path do
+                %i.icon-plus
+                Sign up!
+            %li.divider
+            %li
+              = link_to 'https://pcsenegal.com' do
+                %i.icon-lock
+                Encrypt session
+            %li
+              = link_to new_feedback_path do
+                %i.icon-comment
+                Leave feedback
+            %li
+              = link_to '/help' do
+                %i.icon-question-sign
+                Help me!
+

@@ -182,7 +182,12 @@ module ApplicationHelper
   #
   def allowed_countries
     {
-      'SN' => 'Senegal'
+      'Senegal' => 'SN',
+      'United States' => 'US',
+      'The Gambia' => 'GM',
+      'Mauritania' => 'MR',
+      'Niger' => 'NE',
+      'France' => 'FR'
     }
   end
 

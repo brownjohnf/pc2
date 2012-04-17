@@ -15,6 +15,12 @@ FactoryGirl.define do
     sequence(:file_fingerprint) { |n| "#{n}#{SecureRandom.hex(10)}" }
   end
 
+  factory :library do
+    name 'Test Library'
+    country 'SN'
+    association :user, :factory => :user
+  end
+
   factory :mp3, :class => Document do
     association :user, :factory => :user
     file File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.mp3'))
@@ -34,6 +40,12 @@ FactoryGirl.define do
     # photo { File.new(File.join(Rails.root, 'spec', 'support', 'test.png')) }
     photo File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.png'))
     sequence(:photo_fingerprint) { |n| "#{n}#{SecureRandom.hex(10)}" }
+  end
+
+  factory :stack do
+    association :library
+    association :user
+    association :stackable, :factory => :document
   end
 
 end

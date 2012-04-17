@@ -13,14 +13,19 @@ class Document < ActiveRecord::Base
   }
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => [
-    'audio/mpeg', 
+    'audio/mpeg',
+    'audio/mp3',
     'application/pdf',
     'text/plain',
     'text/csv',
     'text/xml',
     'text/html',
+    'application/vnd.oasis.opendocument.spreadsheet',
+    'application/vnd.oasis.opendocument.presentation',
     'application/vnd.ms-excel',
     'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation', 
     'application/vnd.google-earth.kml+kml', 
     'application/x-latex',
     'application/x-shockwave-flash',

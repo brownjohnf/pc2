@@ -1,13 +1,14 @@
 .feed_item
+  .floatleft= link_to image_tag((library.photos.any? ? library.photos.first.photo.url(:icon) : 'blank.png'), :width => '80'), library, :class => 'avatar'
   %h3
     = flag_icon(library.country.downcase)
     = link_to library.name, library
     %small
       = pluralize(library.stacks.count, 'item')
-      = link_to 'edit', edit_library_path(library) if can? :update, library
-      .tags.right.inline= render 'shared/tags', :tags => library.tag_list
-  .right
+  %p
+    = library.description
+    = render 'shared/tags', :tags => library.tag_list
+    %br
     maintained by
     = link_to library.user.name, library.user
-  .clearfloat
-  %hr
+  %hr.clearfloat

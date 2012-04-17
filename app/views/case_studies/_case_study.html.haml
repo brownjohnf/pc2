@@ -5,4 +5,4 @@
     .small #{time_ago_in_words(case_study.updated_at)} ago
   %p= truncate(strip_tags(case_study.summary), :length => 100, :separator => ' ')
   .tags.right= render 'shared/tags', :tags => case_study.tag_list
-  %hr
+  %hr.clearfloat

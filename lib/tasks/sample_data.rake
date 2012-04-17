@@ -13,6 +13,8 @@ namespace :db do
     make_staff
     make_pages
     make_case_studies
+    make_files
+    make_photos
 		Rake::Task['db:populate_timeline'].invoke
 	end
 end
@@ -177,6 +179,35 @@ def make_case_studies
       )
       case_study.contributions.build(:user_id => b.user.id)
       case_study.save!
+    end
+  end
+end
+
+def make_files
+  [Volunteer, Staff].each do|a|
+    a.all.each do |b|
+      document = b.user.documents.build(
+        :name => Faker::Company.catch_phrase,
+        :description => Faker::Company.catch_phrase,
+        :file => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.pdf')),
+        :source => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.docx'))
+      )
+      document.file_fingerprint = SecureRandom.hex(10)
+      document.source_fingerprint = SecureRandom.hex(10)
+      document.save!
+    end
+  end
+end
+
+def make_photos
+  [Volunteer, Staff].each do |a|
+    a.all.each do |b|
+      photo = b.user.photos.build(
+        :photo => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.png'))
+      )
+      photo.imageable = b
+      photo.photo_fingerprint = SecureRandom.hex(10)
+      photo.save!
     end
   end
 end
