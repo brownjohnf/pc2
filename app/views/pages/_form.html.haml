@@ -2,12 +2,12 @@
   = f.text_field :title
   = f.text_field :description
   - if can? :manage, Page
-    = f.select :country, :collection => current_user.countries, :include_blank => false
+    = f.select :country, current_user.countries
   - else
-    = f.select :country, current_user.countries, :include_blank => false
+    = f.select :country, current_user.countries
   = f.collection_select :parent, Page.accessible_by(current_ability), :id, :title
-  = f.select :sort_by, :as => :select, :collection => {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
-  = f.select :sort_order, :as => :select, :collection => {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
+  = f.select :sort_by, {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
+  = f.select :sort_order, {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
   = f.collection_select :language, Language.all, :id, :name
   = f.collection_select :photo, Photo.all, :id, :title
   .control-group
