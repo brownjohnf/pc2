@@ -48,6 +48,24 @@ section {
   margin-top: 20px;
 }
 
+/********************************************/
+/* bootstrap fixes */
+
+/* fix for navbar turning blue */
+.navbar-inner {
+  // for IE
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
+}
+
+/* fix for breadcrumb turning blue */
+.breadcrumb {
+  // for IE
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F5F5F5', GradientType=0);
+}
+
+/********************************************/
+/* borrowed styles from the bootstrap demo page */
+
 /* Subnav */
 .subnav {
   width: 100%;
@@ -59,7 +77,7 @@ section {
   background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
   background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
   background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0 ); /* IE6-9 */
   background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 4px;
