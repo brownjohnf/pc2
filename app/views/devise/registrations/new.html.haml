@@ -14,7 +14,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-user
-              = f.email_field :name, :id => 'default_form_focus', :rel => 'popover-right-focus', :title => 'Your Name', 'data-content' => "This can be any name you want. However, if you're a Peace Corps Volunteer or Staff member, we recommend that you use something that will allow your friends and colleagues to find you. You cannot be verified as a PCV or Staff member if your name is unintelligible"
+              = f.text_field :name, :id => 'default_form_focus', :rel => 'popover-right-focus', :title => 'Your Name', 'data-content' => "This can be any name you want. However, if you're a Peace Corps Volunteer or Staff member, we recommend that you use something that will allow your friends and colleagues to find you. You cannot be verified as a PCV or Staff member if your name is unintelligible"
             %p.help-block your name
         .control-group
           = f.label :email, :class => 'control-label'
@@ -30,7 +30,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-barcode
-              = f.email_field :password, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
+              = f.password_field :password, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
             %p.help-block must be 8 - 127 characters long
         .control-group
           = f.label :password_confirmation, :class => 'control-label'
@@ -38,7 +38,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-check
-              = f.email_field :password_confirmation, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "This password must match that originally provided.<hr/>Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
+              = f.password_field :password_confirmation, :rel => 'popover-right-focus', :title => 'Password', 'data-content' => "This password must match that originally provided.<hr/>Your password must be at least <strong>8</strong> characters long, and no more than <strong>127</strong>."
             %p.help-block confirm your password
         .form-actions
           = f.submit "Sign up", :class => 'btn btn-primary tooltip-left-focus-slow', :title => "if you're sure..."

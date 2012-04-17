@@ -22,7 +22,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-plus
-              = f.email_field :password, :id => 'default_form_focus'
+              = f.password_field :password, :id => 'default_form_focus'
             %p.help-block leave blank if you don't want to change it
         .control-group
           = f.label :password_confirmation, :class => 'control-label'
@@ -30,7 +30,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-check
-              = f.email_field :password_confirmation
+              = f.password_field :password_confirmation
             %p.help-block only if you're changing it
         .control-group
           = f.label :current_password, :class => 'control-label'
@@ -38,7 +38,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-barcode
-              = f.email_field :current_password
+              = f.password_field :current_password
             %p.help-block needed to confirm either an email or password change
         .form-actions
           = f.submit "Update", :class => 'btn btn-primary'
