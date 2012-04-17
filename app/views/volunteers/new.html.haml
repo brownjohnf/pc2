@@ -1,6 +1,12 @@
-.row
-  .span3
-    = render 'shared/menu'
-  .span9
-    = render 'users/menu'
-    = render 'form'
+.container
+  .row
+    .span3
+      = render 'shared/menu'
+    .span9
+      = render 'users/menu'
+      = bootstrap_form_for(@volunteer) do |f|
+        = f.collection_select :user_id, User.all, :id, :name
+        = f.select :country, allowed_countries
+        = f.actions
+
+

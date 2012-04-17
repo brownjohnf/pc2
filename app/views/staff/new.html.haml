@@ -4,4 +4,9 @@
       = render 'shared/menu'
     .span9
       = render 'users/menu'
-      = render 'form'
+      = bootstrap_form_for(@staff) do |f|
+        = f.collection_select :user_id, User.all, :id, :name
+        = f.select :country, allowed_countries
+        = f.actions do
+          = f.submit
+      
