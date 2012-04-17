@@ -18,15 +18,16 @@
         %a.close{'data-dismiss' => 'alert'} &times;
         %h3 You're a Volunteer!
         %p There's a lot you can do with this new site. You should read the #{link_to 'latest features', '#latest_features'} list below to stay up to date, or catch up on what you've missed if you're just joining. And of course, as always, you can always harrass Jack with questions and feature requests.
+    - if current_user.role?(:staff)
       .alert.alert-success
         %a.close{'data-dismiss' => 'alert'} &times;
         %h3 You're a staff member!
         %p There's a lot you can do with this new site. You should read the #{link_to 'latest features', '#latest_features'} list below to stay up to date, or catch up on what you've missed if you're just joining. And of course, as always, you can always harrass Jack with questions and feature requests.
-      .alert.alert-info
-        %a.close{'data-dismiss' => 'alert'} &times;
-        %h2 Where to go from here?
-        %p For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
-        %p For an overview of content and updates on the site, you can use your #{link_to 'dashboard', dashboard_path}.
+    .alert.alert-info
+      %a.close{'data-dismiss' => 'alert'} &times;
+      %h2 Where to go from here?
+      %p For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
+      %p For an overview of content and updates on the site, you can use your #{link_to 'dashboard', dashboard_path}.
     -if current_user.pc?
       %h2#latest_features
         Latest Features
