@@ -57,6 +57,9 @@ OmniauthDemo::Application.routes.draw do
       get :download
       get :podcast, :as => :podcast, :defaults => { :format => 'xml' }
     end
+    collection do
+      get :search
+    end
   end
 
   resources :stacks, :only => [ :index, :new, :create, :destroy ]
