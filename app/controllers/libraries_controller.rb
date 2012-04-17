@@ -5,11 +5,20 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = @libraries.order('name ASC').limit(20).paginate(:page => params[:page])
+    @libraries = @libraries.order('name ASC').paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @libraries }
+    end
+  end
+
+  def search
+    if params[:q]
+      @libraries = Library.search(params[:q]).paginate(:page => params[:page], :per_page => 20)
+      render 'index'
+    else
+      redirect_to libraries_path
     end
   end
 
