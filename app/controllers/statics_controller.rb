@@ -14,25 +14,38 @@ class StaticsController < ApplicationController
   def splash
     @title = 'Splash'
     cookies[:splashed] = 'viewed'
+
     @slides = []
     Photo.order('updated_at DESC').tagged_with('splash').each do |p|
-      @slides << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p} if p.photo
+      @slides << {:title => p.title, :text => p.description, :photo => p.photo.url(:wide), :link => 'view photo', :path => p} if p.photo
     end
     Page.order('updated_at DESC').tagged_with('splash').each do |p|
-      @slides << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:large), :path => p} if p.photo
+      @slides << {:title => p.title, :text => p.description, :photo => p.photo.photo.url(:wide), :link => 'read more', :path => p} if p.photo
     end
     CaseStudy.order('updated_at DESC').tagged_with('splash').each do |cs|
-      @slides << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:large), :path => cs} if cs.photo
+      @slides << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:wide), :link => 'go to case study', :path => cs} if cs.photo
     end
-    @spotlights = []
-    Photo.order('updated_at DESC').tagged_with('spotlight').each do |p|
-      @spotlights << {:title => p.title, :text => p.description, :photo => p.photo.url(:large), :path => p} if p.photo
+
+    @spotlights_small = []
+    Photo.order('updated_at DESC').tagged_with('spotlight_small').each do |p|
+      @spotlights_small << {:title => p.title, :text => p.description, :photo => p.photo.url(:spotlight), :path => p} if p.photo
     end
-    Page.order('updated_at DESC').tagged_with('spotlight').each do |p|
-      @spotlights << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:medium), :path => p} if p.photo
+    Page.order('updated_at DESC').tagged_with('spotlight_small').each do |p|
+      @spotlights_small << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:spotlight), :path => p} if p.photo
     end
-    CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight').each do |cs|
-      @spotlights << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:medium), :path => cs} if cs.photo
+    CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight_small').each do |cs|
+      @spotlights_small << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:spotlight), :path => cs} if cs.photo
+    end
+    
+    @spotlights_large = []
+    Photo.order('updated_at DESC').tagged_with('spotlight_large').each do |p|
+      @spotlights_large << {:title => p.title, :text => p.description, :photo => p.photo.url(:spotlight), :path => p} if p.photo
+    end
+    Page.order('updated_at DESC').tagged_with('spotlight_large').each do |p|
+      @spotlights_large << {:title => p.title, :text => p.content, :photo => p.photo.photo.url(:spotlight), :path => p} if p.photo
+    end
+    CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight_large').each do |cs|
+      @spotlights_large << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:spotlight), :path => cs} if cs.photo
     end
 
     render 'splash', :layout => 'splash'

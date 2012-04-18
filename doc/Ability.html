@@ -241,7 +241,8 @@ A new instance of Ability
 73
 74
 75
-76</pre>
+76
+77</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/models/ability.rb', line 4</span>
@@ -290,7 +291,8 @@ A new instance of Ability
 
       <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='lbracket'>[</span> <span class='const'>Page</span><span class='comma'>,</span> <span class='const'>CaseStudy</span><span class='comma'>,</span> <span class='const'>Region</span><span class='comma'>,</span> <span class='const'>Stage</span><span class='comma'>,</span> <span class='const'>Moment</span> <span class='rbracket'>]</span>
       <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:update</span><span class='comma'>,</span> <span class='const'>Moment</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
-      <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:read</span><span class='comma'>,</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span> <span class='const'>Photo</span><span class='comma'>,</span> <span class='const'>Document</span><span class='comma'>,</span> <span class='const'>Website</span><span class='comma'>,</span> <span class='const'>Blog</span><span class='comma'>,</span> <span class='const'>Library</span><span class='comma'>,</span> <span class='const'>Volunteer</span><span class='comma'>,</span> <span class='const'>Staff</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+      <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:manage</span><span class='comma'>,</span> <span class='lbracket'>[</span> <span class='const'>Photo</span><span class='comma'>,</span> <span class='const'>Document</span><span class='comma'>,</span> <span class='const'>Website</span><span class='comma'>,</span> <span class='const'>Blog</span><span class='comma'>,</span> <span class='const'>Library</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+      <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:read</span><span class='comma'>,</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span> <span class='const'>Volunteer</span><span class='comma'>,</span> <span class='const'>Staff</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
       <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='symbol'>:destroy</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'>Stack</span>
 
       <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='const'>Site</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_site'>site</span><span class='op'>|</span>
@@ -330,7 +332,7 @@ A new instance of Ability
 </div>
     
     <div id="footer">
-  Generated on Fri Apr 13 09:38:17 2012 by 
+  Generated on Wed Apr 18 11:38:46 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.2).
 </div>

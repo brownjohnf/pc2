@@ -47,7 +47,7 @@
                 %li.feed_item
                   = link_to s.library.name, s.library if s.id
                   |
-                  = link_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
+                  = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
                   .clearfloat
         %br
         - if can? :create, Stack
@@ -61,7 +61,7 @@
               .field
                 = f.collection_select(:library_id, Library.accessible_by(current_ability, :update).all, :id, :name)
               .actions
-                = f.submit 'Add to library', :disable_with => 'adding...'
+                = f.submit 'Add to library'
         - elsif can? :create, Library
           = link_to 'create a library', new_library_path
     .span2

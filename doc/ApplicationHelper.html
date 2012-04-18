@@ -533,14 +533,24 @@ John Brown
 184
 185
 186
-187</pre>
+187
+188
+189
+190
+191
+192</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_allowed_countries'>allowed_countries</span>
   <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SN</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Senegal</span><span class='tstring_end'>'</span></span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Senegal</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SN</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>United States</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>US</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>The Gambia</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>GM</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Mauritania</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>MR</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Niger</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>NE</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>France</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>FR</span><span class='tstring_end'>'</span></span>
   <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -780,15 +790,15 @@ John Brown
       <pre class="lines">
 
 
-198
-199
-200
-201
-202
-203</pre>
+203
+204
+205
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 198</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_change_units'>change_units</span><span class='lparen'>(</span><span class='id identifier rubyid_to_convert'>to_convert</span><span class='comma'>,</span> <span class='id identifier rubyid_unit'>unit</span> <span class='op'>=</span> <span class='symbol'>:mb</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_units'>units</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -1686,7 +1696,7 @@ John Brown
 </div>
     
     <div id="footer">
-  Generated on Fri Apr 13 09:38:18 2012 by 
+  Generated on Wed Apr 18 11:38:46 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.2).
 </div>

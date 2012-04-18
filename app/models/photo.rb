@@ -1,5 +1,8 @@
 # @author John Brown
-
+# General photo class. Holds photos for various other models. It has attached files in various sizes.
+#
+# @return [Object] photo has the following sizes: icon(80x80#), thumb(100x100), small(200x200), spotlight(360x230#), medium(380x380), large(980x980>), wide(980x400#), full(1140x1140>)
+#
 class Photo < ActiveRecord::Base
 
   has_attached_file :photo, {
@@ -7,8 +10,10 @@ class Photo < ActiveRecord::Base
       :icon => '80x80#', 
       :thumb => '100x100', 
       :small => '200x200',
+      :spotlight => '360x230#',
       :medium => '380x380',
       :large => '980x980>',
+      :wide => '980x400#',
       :full => '1140x1140>' 
     },
     :storage => :s3,

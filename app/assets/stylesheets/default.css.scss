@@ -48,6 +48,16 @@ section {
   margin-top: 20px;
 }
 
+ul.thumbnails div.thumbnail {
+  p {
+    min-height: 50px;
+  }
+}
+
+img#pc_big {
+  width: 90%
+}
+
 /********************************************/
 /* bootstrap fixes */
 
