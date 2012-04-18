@@ -69,7 +69,7 @@ describe StaticsController do
     end
     it 'should have a slider' do
       get :splash
-      response.should have_selector('div', :class => 'carousel')
+      response.should have_selector('div', :class => 'carousel-inner')
     end
     it 'should have thumbnails' do
       get :splash
