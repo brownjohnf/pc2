@@ -392,7 +392,7 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_media'>media</span>
   <span class='comment'># if photo and content, use the photo
 </span>  <span class='kw'>if</span> <span class='id identifier rubyid_photo'>photo</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_content'>content</span>
-    <span class='const'>ActiveSupport</span><span class='op'>::</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_photo'>photo</span><span class='period'>.</span><span class='id identifier rubyid_photo'>photo</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
+    <span class='const'>ActiveSupport</span><span class='op'>::</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_photo'>photo</span><span class='period'>.</span><span class='id identifier rubyid_photo'>photo</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span><span class='lparen'>(</span><span class='symbol'>:large</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='comment'># if the content's short enough to likely be a URL (youtube, site, vimeo, etc.), use that
 </span>  <span class='kw'>elsif</span> <span class='id identifier rubyid_content'>content</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_content'>content</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;</span> <span class='int'>100</span>
     <span class='const'>ActiveSupport</span><span class='op'>::</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
@@ -488,7 +488,7 @@
 </div>
     
     <div id="footer">
-  Generated on Fri Apr 13 09:38:17 2012 by 
+  Generated on Wed Apr 18 11:38:46 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.2).
 </div>

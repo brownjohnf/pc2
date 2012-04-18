@@ -6,56 +6,45 @@
     %span{:style => 'font-size:200px;line-height:200px;display:block;'}= country.upcase
     .row
       .span10
-        :erb
-          <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="item active">
-                <img src="/system/development/photos/12/original/Emily_and_Jack.jpg?1334331056" alt="">
-                <div class="carousel-caption">
-                  <h4>First Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                </div>
-              </div>
-              <div class="item">
-                <img src="/system/development/photos/13/original/ec4a482695bb587cde7d075123afde96.JPG?1334331631" alt="">
-                <div class="carousel-caption">
-                  <h4>Second Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                </div>
-              </div>
-              <div class="item">
-                <img src="/system/development/photos/3/original/928a9de03b3b3572e10f1e6b62ff8146.JPG?1330689636" alt="">
-                <div class="carousel-caption">
-                  <h4>Third Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                </div>
-              </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-          </div>
--#.row
-  .span2
-    = image_tag 'pc_logo.png', :id => 'patch', :width => '100%', :style => 'margin: 20px 0;'
-    = image_tag 'pc_big.png', :id => 'pc_big', :width => '100%'
-  .span10
-    %span{:style => 'font-size:200px;line-height:200px;display:block;'}= country.upcase
-  .span10
-    = render 'shared/slider', :slides => @slides
-    .carousel#testc.slide
-      .carousel-inner
-        .item.active
-          .img{'src' => '/assets/pc_logo.png'}
-          .carousel-caption
-            %p test
-    %ul.thumbnails 
-      - @spotlights.each do |spotlight|
-        %li.span3
-          .thumbnail
-            = image_tag spotlight[:photo]
-            %h4= spotlight[:title]
-            %p= truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
-            = link_to 'read more', spotlight[:path]
-            &rarr;
--##corner_banner
--#  We're turning 50!
+        #myCarousel.carousel.slide
+          .carousel-inner
+            - count = 1
+            - for slide in @slides do
+              %div{:class => (count == 1 ? 'item active' : 'item') }
+                = image_tag(slide[:photo])
+                .carousel-caption
+                  %h4= slide[:title]
+                  %p
+                    = slide[:text]
+                    = link_to slide[:path] do
+                      = slide[:link]
+                      &rang;
+              - count = count + 1
+          %a.left.carousel-control{ :href => "#myCarousel", 'data-slide' => "prev" } &lsaquo;
+          %a.right.carousel-control{ :href => "#myCarousel", 'data-slide' => "next" } &rsaquo;
+    .row
+      .span6
+        %ul.thumbnails
+          - @spotlights_small.each do |spotlight|
+            %li.span3
+              .thumbnail
+                = image_tag spotlight[:photo]
+                %h4= spotlight[:title]
+                %p
+                  = truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
+                  = link_to spotlight[:path] do
+                    read more
+                    &rarr;
+      .span4
+        %ul.thumbnails
+          - @spotlights_large.each do |spotlight|
+            %li.span4
+              .thumbnail
+                = image_tag spotlight[:photo]
+                %h4= spotlight[:title]
+                %p
+                  = truncate(strip_tags(spotlight[:text]), :length => 300, :separator => ' ')
+                  = link_to spotlight[:path] do
+                    read more
+                    &rarr;
+

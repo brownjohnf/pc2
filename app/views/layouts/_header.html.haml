@@ -98,6 +98,16 @@
                 = link_to new_moment_path do
                   %i.icon-time
                   Timeline Event
+          %li.divider
+          %li.nav-header Visit us
+          %li
+            = link_to '/facebook' do
+              %i.icon-share-alt
+              Facebook
+          %li
+            = link_to '/youtube' do
+              %i.icon-share-alt
+              YouTube
 .nav-collapse.pull-right
   %ul.nav
     - if signed_in?

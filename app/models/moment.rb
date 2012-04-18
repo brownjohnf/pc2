@@ -41,7 +41,7 @@ class Moment < ActiveRecord::Base
   def media
     # if photo and content, use the photo
     if photo && content
-      ActiveSupport::JSON.encode(photo.photo.url)
+      ActiveSupport::JSON.encode(photo.photo.url(:large))
     # if the content's short enough to likely be a URL (youtube, site, vimeo, etc.), use that
     elsif content && content.length < 100
       ActiveSupport::JSON.encode(content)
