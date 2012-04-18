@@ -69,21 +69,24 @@
   .span2
     = avatar_for @case_study, :size => :small
     = render 'shared/social'
-    .box
-      %h2 Case Studies
-      %ul
+    %ul.nav-list
+      - if @case_studies.any?
+        %li.nav-header Related Case Studies
         - @case_studies.each do |c|
           %li= link_to c.title, c
-    .box
-      %h2 Popular Tags
+      - if @pages.any?
+        %li.nav-header Related Pages
+        - @pages.each do |item|
+          %li= link_to item.title, item
+      - if @case_study.contributions.count > 0
+        %li.nav-header Authors
+        - @case_study.contributions.each do |c|
+          - unless c.new_record?
+            %li
+              = link_to c.user.name, c.user
+              - if can? :destroy, c
+                %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete
+    
+    %hr
+    %h2 Popular Tags
       = cloud_of_tags
-    .box
-      %h2 Suggested Reading
-      %ul
-        - @pages.each do |p|
-          %li= link_to p.title, p
-    .box
-      %h2 Authors
-      %ul
-        = render @case_study.contributors
-    %p= button_to 'destroy this case study', @case_study, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @case_study

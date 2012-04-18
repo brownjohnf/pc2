@@ -23,33 +23,34 @@
           %li= link_to 'Libraries', '#libraries', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#user.active
-            %h2
-              = flag_icon(@user.country)
-              = Carmen.country_name(@user.country) if @user.country
-              %small
-                = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :edit, @volunteer
-            - if can? :read, @user
-              %h3 Connect
-              %p
-                = @user.email
-                - unless @user.email2.nil?
-                  %br
-                  = @user.email2
-              - unless @user.phone1.nil?
+            .well
+              %h2
+                = flag_icon(@user.country)
+                = Carmen.country_name(@user.country) if @user.country
+                %small
+                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :edit, @volunteer
+              - if can? :read, @user
+                %h3 Connect
                 %p
-                  = @user.phone1
-                  - unless @user.phone2.nil?
+                  = @user.email
+                  - unless @user.email2.nil?
                     %br
-                    = @user.phone2
-            - else
-              %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
-            - if @user.blogs.any?
-              %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
-            - unless @user.site.nil?
-              %p= link_to @user.site
-            - if @user.bio
-              %h4 A little bit about #{@user.name}...
-              = markdown(@user.bio)
+                    = @user.email2
+                - unless @user.phone1.nil?
+                  %p
+                    = @user.phone1
+                    - unless @user.phone2.nil?
+                      %br
+                      = @user.phone2
+              - else
+                %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
+              - if @user.blogs.any?
+                %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
+              - unless @user.site.nil?
+                %p= link_to @user.site
+              - if @user.bio
+                %h4 A little bit about #{@user.name}...
+                = markdown(@user.bio)
           .tab-pane#volunteers
             - if can?(:read, Volunteer) && @user.volunteers.any?
               - @user.volunteers.each do |v|
@@ -114,12 +115,13 @@
               .well
                 %p You do not have permission to view this user's details. Most likely, this means that you are neither a Peace Corps Volunter nor Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
           .tab-pane#groups
-            %h3
-              Groups
-              %small= link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
-            %ul
-              - @user.roles.each do |role|
-                %li= role.name
+            .well
+              %h3
+                Groups
+                %small= link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
+              %ul
+                - @user.roles.each do |role|
+                  %li= role.name
           .tab-pane#photos
             - if @user.photos.any?
               .box
@@ -127,7 +129,8 @@
                 - @user.photos.limit(5).each do |p|
                   = render p
             - else
-              %p This user has not uploaded any photos.
+              .well
+                %p This user has not uploaded any photos.
           .tab-pane#documents
             - if @user.documents.any?
               .box
@@ -135,7 +138,8 @@
                 %ul.feed
                   = render @user.documents.limit(5)
             - else
-              %p This user has not uploaded any files.
+              .well
+                %p This user has not uploaded any files.
           .tab-pane#pages
             - if (contributions = @user.contributions.where(:contributable_type => 'Page').limit(10)).any?
               .box
@@ -144,7 +148,8 @@
                   - contributions.each do |contribution|
                     = render contribution.contributable
             - else
-              %p This user has neither created nor contributed to any pages.
+              .well
+                %p This user has neither created nor contributed to any pages.
           .tab-pane#case_studies
             - if (contributions = @user.contributions.where(:contributable_type => 'CaseStudy').limit(10)).any?
               .box
@@ -153,17 +158,22 @@
                   - contributions.each do |contribution|
                     = render contribution.contributable
             - else
-              %p This user has neither created nor contributed to any case studies.
+              .well
+                %p This user has neither created nor contributed to any case studies.
           .tab-pane#moments
             - if @user.moments.any?
               .box.moments
                 %h3 Timeline Events
                 = render @user.moments
             - else
-              %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
+              .well
+                %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
           .tab-pane#libraries
             - if @user.libraries.any?
               %ul= render @user.libraries
+            - else
+              .well
+                %p This user has not yet created any libraries.
     .span2
       = avatar_for_user @user, :size => :small
       - if can? :update, @user
