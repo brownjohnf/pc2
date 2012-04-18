@@ -29,9 +29,10 @@
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#1', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'View the page as others will see it'
-          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }, :class => 'tooltip-left-slow', :title => 'Edit the page in place, using a WYSIWYG editor'
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_page_path(@page) }, :rel => 'popover-left', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit using Mercury, we strongly suggest you get a <em>real</em> browser such as Firefox or Chrome."
           %li= link_to 'properties', '#2', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'Quick-edit the raw properties in a form'
           %li= link_to 'destroy', '#3', 'data-toggle' => 'tab', :class => 'tooltip-left-slow', :title => 'Trash it' if can? :destroy, @page
+          %li= link_to 'add editor', '#add_cont', 'data-toggle' => 'modal', :title => 'Add a contributor (an editor)' if can? :manage, Contribution
         .tab-content
           .tab-pane#1.active
             %p= @page.description
@@ -57,7 +58,7 @@
         - @pages.each do |p|
           %li= link_to p.title, p
       - if @case_studies
-        %li.nav-header Case Studies
+        %li.nav-header Related Case Studies
         - @case_studies.each do |c|
           %li= link_to c.title, c
       - if @page.contributions.count > 0
@@ -68,24 +69,23 @@
               = link_to c.user.name, c.user
               - if can? :destroy, c
                 %small= link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...'
-      %hr
-      %h3 Tag Cloud
-      = cloud_of_tags(Page)
-      - if can? :manage, Contribution
-        = link_to 'add contributor', '#add_cont', :class => 'btn', 'data-toggle' => 'modal'
-        .modal.modal-standard.hide#add_cont
-          - @contribution = @page.contributions.build
-          = semantic_form_for @contribution, :remote => true do |f|
-            .modal-header
-              %a.close{'data-dismiss' => 'modal'} x
-              %h3 Add Contributor
-            .modal-body
-              = f.inputs do
-                = f.input :user
-                = f.input :contributable_type, :as => :hidden
-                = f.input :contributable_id, :as => :hidden
-            .modal-footer
-              = link_to 'Close', '#', :class => 'btn', 'data-dismiss' => 'modal'
-              = f.buttons do
-                = f.commit_button :input_html => {:disable_with => 'wait', :class => 'btn btn-primary'}
+    %hr
+    %h3 Popular Page Tags
+    = cloud_of_tags Page
+    - if can? :manage, Contribution
+      .modal.modal-standard.hide#add_cont
+        - @contribution = @page.contributions.build
+        = semantic_form_for @contribution, :remote => true do |f|
+          .modal-header
+            %a.close{'data-dismiss' => 'modal'} x
+            %h3 Add Contributor
+          .modal-body
+            = f.inputs do
+              = f.input :user
+              = f.input :contributable_type, :as => :hidden
+              = f.input :contributable_id, :as => :hidden
+          .modal-footer
+            = link_to 'Close', '#', :class => 'btn', 'data-dismiss' => 'modal'
+            = f.buttons do
+              = f.commit_button :input_html => {:disable_with => 'wait', :class => 'btn btn-primary'}
 

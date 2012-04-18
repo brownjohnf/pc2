@@ -16,8 +16,8 @@
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
-          %li= link_to 'basic edit', '#edit', 'data-toggle' => 'tab'
-          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }, :rel => 'popover-top', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit using Mercury, we strongly suggest you get a <em>real</em> browser such as Firefox or Chrome."
+          %li= link_to 'properties', '#edit', 'data-toggle' => 'tab'
           %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#view.active
@@ -69,21 +69,24 @@
   .span2
     = avatar_for @case_study, :size => :small
     = render 'shared/social'
-    .box
-      %h2 Case Studies
-      %ul
-        - @case_studies.each do |c|
-          %li= link_to c.title, c
-    .box
-      %h2 Popular Tags
-      = cloud_of_tags
-    .box
-      %h2 Suggested Reading
-      %ul
-        - @pages.each do |p|
-          %li= link_to p.title, p
-    .box
-      %h2 Authors
-      %ul
-        = render @case_study.contributors
-    %p= button_to 'destroy this case study', @case_study, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, @case_study
+    %ul.nav.nav-list
+      -# if @case_studies.any?
+      %li.nav-header Related Case Studies
+      - @case_studies.each do |c|
+        %li= link_to c.title, c
+      - if @pages.any?
+        %li.nav-header Related Pages
+        - @pages.each do |item|
+          %li= link_to item.title, item
+      - if @case_study.contributions.count > 0
+        %li.nav-header Authors
+        - @case_study.contributions.each do |c|
+          - unless c.new_record?
+            %li
+              = link_to c.user.name, c.user
+              - if can? :destroy, c
+                %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger btn-mini'
+    
+    %hr
+    %h3 Popular Tags
+    = cloud_of_tags CaseStudy

@@ -6,14 +6,20 @@
     %table.table.table-striped.table-compact.dyn-datatable
       %thead
         %th Name
+        %th Volunteer?
+        %th Staff?
         %th Country
         %th Joined
         %th Last updated
+        %th Confirmed?
       %tbody
         - @users.each do |user|
           %tr
-            %td= user.name
+            %td= link_to user.name, user
+            %td= user.volunteers.any? ? 'yes' : 'no'
+            %td= user.staff.any? ? 'yes' : 'no'
             %td= Carmen.country_name(user.country) if user.country
-            %td= user.created_at
-            %td= user.updated_at
+            %td= user.created_at.strftime('%d %B %Y')
+            %td #{user.updated_at.strftime('%d %B %Y')} (#{time_ago_in_words(user.updated_at)} ago)
+            %td= user.confirmed_at ? 'yes' : 'no'
 

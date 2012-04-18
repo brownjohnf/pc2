@@ -2,8 +2,11 @@
   .span3
     = render 'shared/menu'
   .span7
-    %h1= @title
     = render 'menu'
+    %h1= @title
     = render @pages
     = will_paginate :class => 'pagination pagination-centered'
   .span2
+    %h3 Popular Page Tags
+    = cloud_of_tags Page
+

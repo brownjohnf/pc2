@@ -9,8 +9,8 @@
     - if @page.parent && can?(:read, @page.parent)
       %li
         = link_to @page.parent do
-          = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
-          go up
+          %i.icon-chevron-up
+          go back up
     - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
       %li
         = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
@@ -20,8 +20,8 @@
     - if @page.parent && can?(:read, @page.parent)
       %li
         = link_to @page.parent do
-          = image_tag 'icons/arrow_4.png', :style => 'height:1em;'
-          go up
+          %i.icon-chevron-up
+          go back up
     - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
       %li
         = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
