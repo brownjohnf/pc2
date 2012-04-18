@@ -1,13 +1,11 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      = render 'menu'
-      %h1= @title
-      = nested_li(@pages) do |item|
-        - link_to item.title, item
-    .span2
-      .box
-        %h2 Top Tags
-        = cloud_of_tags Page
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    = render 'menu'
+    %h1= @title
+    = nested_li(@pages) do |item|
+      - link_to item.title, item
+  .span2
+    %h3 Popular Page Tags
+    = cloud_of_tags Page

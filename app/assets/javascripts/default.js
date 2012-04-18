@@ -115,6 +115,11 @@ $(function(){
     trigger: 'focus'
   });
 
+  // top
+  $('.tooltip-top').tooltip({
+    placement: 'top',
+  });
+
   /*********************************************/
   /* bootstrap modals */  
   

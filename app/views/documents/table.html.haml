@@ -2,19 +2,18 @@
   .span2
     = render 'shared/menu'
   .span10
-    %h1 All Files
     = render 'menu'
     %table.table.table-striped.table-condensed.dyn-datatable
       %thead
-        %tr
-          %th Name
-          %th Description
-          %th Last Updated
-          %th Author
-          %th Language
-          %th Size
-          %th Permissions
-          %th
+        %th Name
+        %th Description
+        %th Last Updated
+        %th Author
+        %th Language
+        %th Size
+        %th Permissions
+        %th Source?
+        %th
       %tbody
         - @documents.each do |document|
           %tr
@@ -31,6 +30,13 @@
               bytes
             %td= render document.roles
             %td
-              = link_to 'download', download_document_path(document) if can? :read, document
-              = mime_icon(document.file_content_type)
+              - if document.source.path
+                %i.icon-ok.tooltip-top{:title => document.source_file_name}
+            %td
+              - if can? :read, document
+                = link_to download_document_path(document) do
+                  download
+              %br
+              = document.file_content_type
+              -#= mime_icon(document.file_content_type)
     .clearfloat

@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages.json
   def index
     @title = Carmen.country_name(cookies[:country])
-    @pages = @pages.order('lft ASC', 'title ASC')
+    @pages = @pages.where(:country => cookies[:country]).order('lft ASC', 'title ASC')
   end
   
   def feed

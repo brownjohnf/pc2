@@ -40,7 +40,6 @@ class CaseStudiesController < ApplicationController
   # GET /case_studies/1
   # GET /case_studies/1.json
   def show
-    @case_study = CaseStudy.find(params[:id])
     @title = @case_study.title
     @case_studies = @case_study.find_related_tags
     @pages = Page.tagged_with(@case_study.tag_list, :any => true)

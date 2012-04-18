@@ -16,8 +16,8 @@
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
-          %li= link_to 'basic edit', '#edit', 'data-toggle' => 'tab'
-          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }
+          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }, :rel => 'popover-top', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit using Mercury, we strongly suggest you get a <em>real</em> browser such as Firefox or Chrome."
+          %li= link_to 'properties', '#edit', 'data-toggle' => 'tab'
           %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
         .tab-content
           .tab-pane#view.active
@@ -69,11 +69,11 @@
   .span2
     = avatar_for @case_study, :size => :small
     = render 'shared/social'
-    %ul.nav-list
-      - if @case_studies.any?
-        %li.nav-header Related Case Studies
-        - @case_studies.each do |c|
-          %li= link_to c.title, c
+    %ul.nav.nav-list
+      -# if @case_studies.any?
+      %li.nav-header Related Case Studies
+      - @case_studies.each do |c|
+        %li= link_to c.title, c
       - if @pages.any?
         %li.nav-header Related Pages
         - @pages.each do |item|
@@ -85,8 +85,8 @@
             %li
               = link_to c.user.name, c.user
               - if can? :destroy, c
-                %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete
+                %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger btn-mini'
     
     %hr
-    %h2 Popular Tags
-      = cloud_of_tags
+    %h3 Popular Tags
+    = cloud_of_tags CaseStudy
