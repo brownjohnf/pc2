@@ -118,19 +118,46 @@
               Manage
               %b.caret
             %ul.dropdown-menu
-              %li= link_to "blogs (#{Blog.count})", blogs_path
-              %li= link_to "case studies (#{CaseStudy.count})", case_studies_path
-              %li= link_to "contributions", contributions_path
-              %li= link_to "documents (#{Document.count})", documents_path
+              %li
+                = link_to blogs_path do
+                  %i.icon-leaf
+                  Blogs (#{Blog.count})
+              %li
+                = link_to contributions_path do
+                  %i.icon-asterisk
+                  Contributions
+              %li
+                = link_to case_studies_path do
+                  %i.icon-road
+                  Case Studies
+              %li
+                = link_to documents_path do
+                  %i.icon-file
+                  Documents
               %li= link_to "feedback (#{Feedback.count})", feedback_index_path
               %li= link_to "imports", imports_path
               %li= link_to "jobs", jobs_path
               %li= link_to "languages (#{Language.count})", languages_path
-              %li= link_to "libraries (#{Library.count})", libraries_path
-              %li= link_to "moments (#{Moment.count})", moments_path
-              %li= link_to "pages (#{Page.count})", pages_path
+              %li
+                = link_to libraries_path do
+                  %i.icon-book
+                  Libraries
+              %li
+                = link_to timeline_path do
+                  %i.icon-time
+                  Moments
+              %li
+                = link_to pages_path do
+                  %i.icon-list-alt
+                  Pages
               %li= link_to "pc regions", pc_regions_path
-              %li= link_to "photos (#{Photo.count})", photos_path
+              %li
+                = link_to photos_path do
+                  %i.icon-picture
+                  Photos
+              -#%li= link_to videos_path do
+                %i.icon-film
+                Videos
               %li= link_to "positions (#{Position.count})", positions_path
               %li= link_to "regions (#{Region.count})", regions_path
               %li= link_to "region types", regiontypes_path
@@ -138,10 +165,19 @@
               %li= link_to "sectors (#{Sector.count})", sectors_path
               %li= link_to "sites (#{Site.count})", sites_path
               %li= link_to "stacks", stacks_path
-              %li= link_to "staff (#{Staff.count})", staff_index_path
+              %li
+                = link_to staff_path do
+                  %i.icon-user
+                  Staff
               %li= link_to "stages (#{Stage.count})", stages_path
-              %li= link_to "users (#{User.count})", users_path
-              %li= link_to "volunteers (#{Volunteer.count})", volunteers_path
+              %li
+                = link_to users_path do
+                  %i.icon-user
+                  Users
+              %li
+                = link_to volunteers_path do
+                  %i.icon-user
+                  Volunteers
               %li= link_to "websites", websites_path
       -#%li= avatar_for_user current_user, :size => :icon
       %ul.nav

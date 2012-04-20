@@ -160,9 +160,33 @@ module ApplicationHelper
   def mime_icon(mime)
     icons = {
       'application/pdf' => 'pdf.png',
-      'audio/mp3' => 'mp3.png'
+      'audio/mp3' => 'mp3.png',
+      'audio/mpeg' => 'mpg.png',
+      'text/plain' => 'txt.png',
+      'text/csv' => 'csv.png',
+      'text/xml' => 'xml.png',
+      'text/html' => 'html.png',
+      'application/vnd.oasis.opendocument.spreadsheet' => 'ods.png',
+      'application/vnd.oasis.opendocument.presentation' => 'odp.png',
+      'application/vnd.ms-excel' => 'xls.png',
+      'application/vnd.ms-powerpoint' => 'ppt.png',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xls.png',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'ppt.png',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'doc.png',
+      'application/vnd.google-earth.kml+kml' => 'xml.png',
+      'application/x-latex' => 'tex.png',
+      'application/x-shockwave-flash' => 'swf.png',
+      'application/atom+xml' => 'rss.png',
+      'application/rss+xml' => 'rss.png',
+      'application/xhtml+xml' => 'xml.png',
+      'application/zip' => 'zip.png',
+      'application/x-gzip' => 'gz.png',
+      'text/vcard' => 'vcf.png',
+      'application/vnd.oasis.opendocument.text' => 'odt.png',
+      'application/vnd.oasis.opendocument.graphics' => 'odg.png', 
+      'application/msword' => 'doc.png'
     }
-    image_tag("icons/#{icons[mime] ? icons[mime] : 'file_down.png'}", :class => 'icon')
+    image_tag("icons/#{icons[mime] ? icons[mime] : 'file_down.png'}", :class => 'icon tooltip-top', :title => mime)
   end
   
   def flag_icon(country_code)

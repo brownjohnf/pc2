@@ -5,11 +5,11 @@
     = f.select :country, current_user.countries
   - else
     = f.select :country, current_user.countries
-  = f.collection_select :parent_id, Page.accessible_by(current_ability), :id, :title, :include_blank => true
+  = f.collection_select :parent_id, Page.accessible_by(current_ability).order('title ASC'), :id, :title, :include_blank => true
   = f.select :sort_by, {'Title' => 'title', 'Updated' => 'updated_at', 'Created' => 'created_at'}, :label => 'Sort children by'
   = f.select :sort_order, {'Ascending' => 'ASC', 'Descending' => 'DESC'}, :label => 'Sort children order'
   = f.collection_select :language_id, Language.all, :id, :name
-  = f.collection_select :photo_id, Photo.all, :id, :title
+  = f.collection_select :photo_id, Photo.all, :id, :title, :include_blank => true
   .control-group
     %label.control-label Created on
   = f.date_select :created_at

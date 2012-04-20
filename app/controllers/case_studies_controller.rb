@@ -12,6 +12,12 @@ class CaseStudiesController < ApplicationController
       format.json { render json: @case_studies }
     end
   end
+
+  def table
+    respond_to do |format|
+      format.html { render :layout => 'layouts/application-fluid' }
+    end
+  end
   
   def search
     if params[:q]
