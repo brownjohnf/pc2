@@ -1,6 +1,13 @@
 .subnav
   %ul.nav.nav-pills
-    %li= link_to 'All Case Studies', case_studies_path
-    %li= link_to 'Recently Added', added_case_studies_path
-    %li= link_to 'Recently Updated', updated_case_studies_path
+    %li.dropdown
+      %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+        View by
+        %b.caret
+      %ul.dropdown-menu
+        %li= link_to 'Alphabetical', case_studies_path
+        %li= link_to 'Recently Added', added_case_studies_path
+        %li= link_to 'Recently Updated', updated_case_studies_path
+        %li= link_to 'Table', table_case_studies_path
+    %li= link_to 'Create Case Study', new_case_study_path if can? :create, CaseStudy
     = render 'shared/search'

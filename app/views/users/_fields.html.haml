@@ -1,7 +1,7 @@
 = f.text_field :name
 = f.select :country, allowed_countries
 - if can? :manage, User
-  = f.collection_check_boxes :roles, Role.all, :id, :name
+  = f.collection_check_boxes :role_ids, Role.all, :id, :name
 = f.text_field :tag_list
 = f.file_field :avatar
 = f.text_area :bio, :as => :text

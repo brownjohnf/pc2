@@ -1,0 +1,28 @@
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    = render 'menu'
+    %table.table.table-striped.table-compact.dyn-datatable
+      %thead
+        %th Title
+        %th Language
+        %th Tags
+        %th Country
+        %th Last updated
+        %th Created
+        %th Editors
+      %tbody
+        - for page in @pages do
+          %tr
+            %td= link_to page.title, page
+            %td= page.language.name
+            %td= page.tag_list
+            %td= Carmen.country_name(page.country)
+            %td #{page.updated_at.strftime('%d %B %Y')} (#{time_ago_in_words(page.updated_at)} ago)
+            %td= page.created_at.strftime('%d %B %Y')
+            %td
+              - for user in page.contributors do
+                #{link_to user.name, user}#{user == page.contributors.last ? nil : ','}
+
+

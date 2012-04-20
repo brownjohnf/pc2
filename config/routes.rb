@@ -38,6 +38,7 @@ OmniauthDemo::Application.routes.draw do
       get :added
       get :updated
       get :search
+      get :table
     end
     member do
       post :mercury_update
@@ -99,6 +100,7 @@ OmniauthDemo::Application.routes.draw do
       get :ajax
       get :search
       get :feed, :as => :feed, :defaults => { :format => 'atom' }
+      get :table
     end
     member do
       post :mercury_update

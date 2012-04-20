@@ -1,22 +1,15 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-14
-      %h1 Add me as a Volunteer!
-      = form_for(@feedback) do |f|
-        -#= if @feedback.errors.any?
-
-        = f.hidden_field(:subject, :value => "#{current_user.name} [#{current_user.id}]")
-
-        .field
-          = f.label :content, 'Any helpful info? YOUR COUNTRY OF SERVICE IS REQUIRED'
-          = f.text_area :content
-        .actions
-          = f.submit 'Submit Request'
-    .span-5.last
+.row
+  .span3
+    = render 'shared/menu'
+  .span6
+    %h1 Add me as a Volunteer!
+    = bootstrap_form_for(@feedback) do |f|
+      = f.hidden_field(:subject, :value => "#{current_user.name} [#{current_user.id}]")
+      = f.text_area :content, :label => 'Any helpful info? YOUR COUNTRY OF SERVICE IS REQUIRED', :class => 'span6'
+      = f.actions
+  .span3
+    .well
       %h3 Your Feedback
       %p You can also send an email to admin@pcsenegal.org, if you like. This form is probably more efficient.
       %p If you DO send us an email, be sure to send it from the one which you used to sign in (the one displayed in your #{link_to 'profile', user_path(current_user)}, and include your name and country of service. We need to verify that you did/do in fact serve there.
       %p If this is related to the 50th anniversary timeline, you can also submit content to 50th@pcsenegal.org.
-      = render 'shared/right_user_menu'

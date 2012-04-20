@@ -1,0 +1,5 @@
+= bootstrap_form_for(@feedback) do |f|
+  = f.text_field :subject, :label => "What's this about?", :class => 'span6'
+  = f.text_area :content, :label => 'Details about your issue', :class => 'span6'
+  = f.actions
+

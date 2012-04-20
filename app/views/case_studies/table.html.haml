@@ -1,0 +1,28 @@
+.row-fluid
+  .span2
+    = render 'shared/menu'
+  .span10
+    = render 'menu'
+    %table.table.table-striped.table-compact.dyn-datatable
+      %thead
+        %th Title
+        %th Language
+        %th Tags
+        %th Country
+        %th Last updated
+        %th Created
+        %th Authors
+      %tbody
+        - for case_study in @case_studies do
+          %tr
+            %td= link_to case_study.title, case_study
+            %td= case_study.language.name
+            %td= case_study.tag_list
+            %td= Carmen.country_name(case_study.country)
+            %td #{case_study.updated_at.strftime('%d %B %Y')} (#{time_ago_in_words(case_study.updated_at)} ago)
+            %td= case_study.created_at.strftime('%d %B %Y')
+            %td
+              - for user in case_study.contributors do
+                #{link_to user.name, user}#{user == case_study.contributors.last ? nil : ','}
+
+

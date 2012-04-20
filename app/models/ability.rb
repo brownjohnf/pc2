@@ -22,6 +22,7 @@ class Ability
       item.roles.where(:id => user.roles).any?
     end
 
+
     
     if user.role? :admin
       can :manage, :all
@@ -32,6 +33,7 @@ class Ability
       can [ :update, :destroy ], User, :id => user.id
       can [ :update, :destroy ], Moment, :user_id => user.id
       can :update, Photo, :user_id => user.id
+      can :volunteer_request, Feedback
 
       can [ :update ], Page do |page|
         page.contributors.find_by_id(user.id)
@@ -39,6 +41,8 @@ class Ability
       can [ :update ], CaseStudy do |cs|
         cs.contributors.find_by_id(user.id)
       end
+
+      can :download, :doc_download, :user_id => user.id
 
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ User, Volunteer, Staff ]
@@ -55,8 +59,9 @@ class Ability
 
       end
       if user.role? :moderator
-        can :manage, Library, :country => user.country
-        can :manage, [ Document, Photo ]
+        can :manage, [ Document, Photo, Library ] do |item|
+          user.country_list.include?(item.country)
+        end
         can :read, Feedback
       end
     end

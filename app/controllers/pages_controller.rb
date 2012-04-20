@@ -27,6 +27,12 @@ class PagesController < ApplicationController
     end
   end
   
+  def table
+    respond_to do |format|
+      format.html { render :layout => 'layouts/application-fluid' }
+    end
+  end
+  
   def search
     if params[:q]
       @pages = Page.unscoped.search(params[:q]).paginate(:page => params[:page], :per_page => 10)

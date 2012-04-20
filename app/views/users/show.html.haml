@@ -177,18 +177,15 @@
     .span2
       = avatar_for_user @user, :size => :small
       - if can? :update, @user
-        .btn-group
-          - unless @user.volunteers.any?
-            = link_to "I'm a Volunteer!", volunteer_request_feedback_index_path, :class => 'btn'
-          - else
-            = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn', 'data-toggle' => 'modal'
-          %a.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+        .btn-group.span2
+          %a.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
+            Manage
             %span.caret
-          %ul.dropdown-menu
-            = link_to 'Change password', edit_user_registration_path
-            = link_to "I'm a staff member!", volunteer_request_feedback_index_path, :class => 'btn' unless @user.staff.any?
-        - if @user.avatar?
-          = button_to 'Remove photo', remove_avatar_user_path, :method => :put, :remote => true, :disable_with => 'please wait...'
+          %ul.dropdown-menu.pull-right
+            %li= link_to 'Remove photo', remove_avatar_user_path, :method => :put if @user.photo
+            %li= link_to "I'm with PC!", volunteer_request_feedback_index_path, :rel => 'popover-left', :title => "Are you a PCV or Staff member?", 'data-content' => "Click this link to fill out a form requesting authorization as a PC user. You country doesn't matter; we support them all."
+            %li= link_to 'Change password', edit_user_registration_path
+            %li= link_to 'Terminate Account', edit_user_registration_path
     - if can? :edit, @user
       = render 'shared/modal_standard',:id => 'edit_user_form_modal', :title => 'Edit user information', :body => render('users/form'), :footer => nil
     - for volunteer in @user.volunteers do

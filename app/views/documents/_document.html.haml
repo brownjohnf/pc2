@@ -12,10 +12,6 @@
       - if document.description
         = document.description
         %br
-      - if document.source_file_name
-        source file:
-        = document.source_file_name
-        %br
       - if document.author
         authored by
         = document.author
@@ -31,8 +27,10 @@
         %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{document.source_file_name}<br/>#{document.source_comment}" }
       = mime_icon(document.file_content_type)
     .tags.right= render 'shared/tags', :tags => document.tag_list
-    %hr
   - else
-    %p
-      You do not have access to document ID##{document.id}. If you believe this is in error, please contact a site administrator, noting the ID# of the document.
-    %hr
+    .alert.alert-info
+      - if user_signed_in?
+        You do not have access to all documents. If you are a PCV or Staff member, request access #{link_to 'here', volunteer_request_feedback_index_path}.
+      - else
+        You do not have access to all documents. For greater access privileges, please #{link_to 'login', login_path}.
+  %hr.clearfloat
