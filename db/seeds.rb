@@ -9,6 +9,8 @@
 
 Role.create!([
   {:name => 'Public'},
+  {:name => 'Invitee'},
+  {:name => 'Trainee'},
   {:name => 'User'},
   {:name => 'Volunteer'},
   {:name => 'Staff'},
