@@ -21,6 +21,8 @@
         last updated
         = time_ago_in_words(@page.updated_at)
         ago
+        = link_to page_path(@page.id, :format => 'svg') do
+          %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this page." }
     %h4
       %small originally posted
       = @page.created_at.strftime('%d %B %Y')

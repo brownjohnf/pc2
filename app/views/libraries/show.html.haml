@@ -8,6 +8,9 @@
         %h1
           = flag_icon(@library.country.downcase)
           = @library.name
+          %small
+            = link_to library_path(@library.id, :format => 'svg') do
+              %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this library." }
         %h4= @library.description
       .span4
         %h3
