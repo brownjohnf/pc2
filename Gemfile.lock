@@ -176,6 +176,9 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.0)
+    rqrcode (0.4.2)
+    rqrcode-rails3 (0.1.5)
+      rqrcode (>= 0.4.2)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -262,6 +265,7 @@ DEPENDENCIES
   pg (= 0.13.0)
   rails (= 3.2.1)
   redcarpet (= 2.1.0)
+  rqrcode-rails3
   rspec-rails (= 2.9.0)
   ruby-mp3info (= 0.7)
   rubyzip (= 0.9.5)

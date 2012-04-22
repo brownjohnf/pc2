@@ -48,7 +48,11 @@ class StaticsController < ApplicationController
       @spotlights_large << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:spotlight), :path => cs} if cs.photo
     end
 
-    render 'splash', :layout => 'splash'
+    respond_to do |format|
+      format.html { render 'splash', :layout => 'splash' }
+      format.svg { render :qrcode => request.url }
+    end
+    
   end
 
   def help

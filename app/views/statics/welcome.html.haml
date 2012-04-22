@@ -28,6 +28,8 @@
       %h2 Where to go from here?
       %p For more detailed information regarding your status on this site, please take a look at your #{link_to 'profile', current_user}.
       %p For an overview of content and updates on the site, you can use your #{link_to 'dashboard', dashboard_path}.
+
+    -# PC features
     -if current_user.pc?
       %h2#latest_features
         Latest Features
@@ -37,7 +39,13 @@
         %li Upload #{link_to 'files', new_document_path} and #{link_to 'photos', new_photo_path} right from your computer! Have something beautiful? Useful? Essential? Upload it straight to the website.
         %li #{link_to 'Create pages', new_page_path} right here! It's as easy as using Microsoft Word! Well, almost... But trust us, it's easy.
         %li Now #{link_to 'create case studies', new_case_study_path} on the website. Stop emailing them to Jack, having him send it back, etc. Just create it here, someone will review it, and you're good to go.
+
+    -# non-PC features
     %h2 Latest Features
     %ul
+      %li
+        QR Codes! Look for the
+        %i.icon-qrcode
+        icon throughout the site. Clicking on it will take you to an image you can use to link to documents, pages, libraries, and even the site itself!
       %li There's a brand-new look! Enjoy the site's new appearance.
   .span2

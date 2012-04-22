@@ -25,6 +25,8 @@
                   language:
                   = @document.language.name
               %p
+                = link_to document_path(@document.id, :format => 'svg') do
+                  %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this document." }
                 %i.icon-download-alt
                 = link_to 'download', download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)} Mb")}" if can? :read, @document
                 = @document.file_content_type
