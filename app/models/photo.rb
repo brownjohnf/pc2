@@ -6,7 +6,7 @@
 class Photo < ActiveRecord::Base
 
   has_attached_file :photo, {
-    :styles => { 
+    :styles => {
       :icon => '80x80#', 
       :thumb => '100x100', 
       :small => '200x200',
@@ -16,7 +16,7 @@ class Photo < ActiveRecord::Base
       :wide => '980x400#',
       :full => '1140x1140>' 
     },
-    :convert_options => { :all => "-auto-orient" },
+    # :convert_options => { :all => "-auto-orient" },
     :storage => :s3,
     :s3_credentials => {
       :access_key_id => ENV['S3_KEY'],
