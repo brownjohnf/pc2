@@ -5,6 +5,8 @@
 #
 class Photo < ActiveRecord::Base
 
+  # instructions for using CloudFront CDN from
+  # http://www.storm-consultancy.com/blog/development/ror-using-paperclip-with-amazon-s3-and-cloudfront/
   has_attached_file :photo, {
     :styles => {
       :icon => '80x80#', 
