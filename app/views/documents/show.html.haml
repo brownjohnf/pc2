@@ -37,7 +37,7 @@
                 - if @document.source.path
                   %br
                   %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
-                  = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download, :doc_source
+                  = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download_source, @document
                   = @document.source.content_type
                   = @document.source.size
                   bytes

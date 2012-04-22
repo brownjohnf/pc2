@@ -42,7 +42,7 @@ class Ability
         cs.contributors.find_by_id(user.id)
       end
 
-      can :download, :doc_download, :user_id => user.id
+      can :download_source, Document, :user_id => user.id
 
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ User, Volunteer, Staff ]
