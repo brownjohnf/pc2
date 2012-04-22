@@ -16,6 +16,7 @@ class Photo < ActiveRecord::Base
       :wide => '980x400#',
       :full => '1140x1140>' 
     },
+    :convert_options => { :all => "-auto-orient" },
     :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
     :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
   }
