@@ -5,7 +5,7 @@
 #
 class Photo < ActiveRecord::Base
 
-  has_attached_file :photo,
+  has_attached_file :photo, {
     :styles => {
       :icon => '80x80#', 
       :thumb => '100x100', 
@@ -20,10 +20,12 @@ class Photo < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
-    }
-    :url => ':s3_alias_url',
+    },
+    :url => ":s3_alias_url",
     :s3_host_alias => ENV['CDN_CNAME'],
-    :bucket => ENV['S3_BUCKET']
+    :bucket => ENV['S3_BUCKET'],
+    :path => 'photos/:id/:style/:filename'
+  }
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
