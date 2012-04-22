@@ -28,7 +28,7 @@
                 = flag_icon(@user.country)
                 = Carmen.country_name(@user.country) if @user.country
                 %small
-                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :edit, @volunteer
+                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, @volunteer
               - if can? :read, @user
                 %h3 Connect
                 %p
@@ -59,7 +59,7 @@
                     = flag_icon(v.country)
                     = v.local_name
                     %small
-                      = link_to 'edit', "#edit_volunteer_#{v.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :edit, v
+                      = link_to 'edit', "#edit_volunteer_#{v.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, v
                       = link_to 'manage', edit_volunteer_path(v) if can? :manage, Volunteer
                   %div
                     %p
@@ -90,7 +90,7 @@
                     = flag_icon(s.country)
                     Staff Member
                     %small
-                      = link_to 'edit', "#edit_staff_#{s.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :edit, s
+                      = link_to 'edit', "#edit_staff_#{s.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, s
                       = link_to 'manage', edit_staff_path(s) if can? :manage, Staff
                   %h4= s.site.name if s.site
                   %p= Carmen.country_name(s.country) if s.country
@@ -186,12 +186,12 @@
             %li= link_to "I'm with PC!", volunteer_request_feedback_index_path, :rel => 'popover-left', :title => "Are you a PCV or Staff member?", 'data-content' => "Click this link to fill out a form requesting authorization as a PC user. You country doesn't matter; we support them all."
             %li= link_to 'Change password', edit_user_registration_path
             %li= link_to 'Terminate Account', edit_user_registration_path
-    - if can? :edit, @user
+    - if can? :update, @user
       = render 'shared/modal_standard',:id => 'edit_user_form_modal', :title => 'Edit user information', :body => render('users/form'), :footer => nil
     - for volunteer in @user.volunteers do
-      - if can? :edit, volunteer
+      - if can? :update, volunteer
         = render 'shared/modal_standard',:id => "edit_volunteer_#{volunteer.id}_form_modal", :title => 'Edit Volunteer information', :body => render('volunteers/form', :volunteer => volunteer), :footer => nil
     - for staff in @user.staff do
-      - if can? :edit, staff
+      - if can? :update, staff
         = render 'shared/modal_standard',:id => "edit_staff_#{staff.id}_form_modal", :title => 'Edit staff information', :body => render('staff/form', :staff => staff), :footer => nil
         
