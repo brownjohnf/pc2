@@ -14,9 +14,6 @@ OmniauthDemo::Application.routes.draw do
   #end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
-    member do
-      put :remove_avatar
-    end
     collection do
       get :search
       get :table

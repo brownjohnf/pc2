@@ -51,7 +51,7 @@ class Ability
         can :update, Moment, :user_id => user.id
         can :manage, [ Photo, Document, Website, Blog, Library ], :user_id => user.id
         can [ :read, :create, :update ], [ Volunteer, Staff ], :user_id => user.id
-        can [ :create, :destroy], Stack
+        can [ :create, :destroy], Stack, :user_id => user.id
 
         can :create, Site do |site|
           site.region.country = user.country

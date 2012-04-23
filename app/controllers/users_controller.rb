@@ -52,12 +52,4 @@ class UsersController < ApplicationController
     end
   end
 
-  def remove_avatar
-    @user = User.find(params[:id])
-    @user.avatar = nil
-    @user.save
-
-    render action: 'show'
-  end
-
 end

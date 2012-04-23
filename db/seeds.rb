@@ -48,3 +48,11 @@ Page.create!([
   }
 ])
 
+user = User.create!({
+  :name => 'Administrator',
+  :email => 'admin@example.com',
+  :password => 'password',
+  :country => 'SN'
+});
+user.confirmed_at = Time.now
+user.save!
