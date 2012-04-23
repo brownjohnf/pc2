@@ -80,7 +80,7 @@ class Document < ActiveRecord::Base
 
   accepts_nested_attributes_for :stacks
   
-  validates :name, :user_id, :presence => true
+  validates :name, :user_id, :country, :presence => true
   validates :file_fingerprint, :presence => true, :uniqueness => true
   validates :source_fingerprint, :uniqueness => true, :if => "source_file_name"
   validates :source_fingerprint, :presence => true, :if => "source_file_name"

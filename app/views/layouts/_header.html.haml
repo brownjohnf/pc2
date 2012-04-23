@@ -27,45 +27,54 @@
           Resources
           %b.caret
         %ul.dropdown-menu
-          %li
-            = link_to timeline_path do
-              %i.icon-time
-              50th Timeline
-          %li
-            = link_to case_studies_path do
-              %i.icon-road
-              Case Studies
-          %li
-            = link_to updated_pages_path do
-              %i.icon-list-alt
-              Content
-          %li
-            = link_to documents_path do
-              %i.icon-file
-              Files
-          %li
-            = link_to libraries_path do
-              %i.icon-book
-              Libraries
-          %li
-            = link_to photos_path do
-              %i.icon-picture
-              Photos
-          -#%li= link_to videos_path do
-            %i.icon-film
-            Videos
-          %li
-            = link_to :controller => 'staff', :action => 'index' do
-              %i.icon-user
-              Staff
-          %li
-            = link_to users_path do
-              %i.icon-user
-              Users
-          %li
-            = link_to volunteers_path do
-              %i.icon-user
-              Volunteers
+          - if can? :read, Moment
+            %li
+              = link_to timeline_path do
+                %i.icon-time
+                50th Timeline
+          - if can? :read, CaseStudy
+            %li
+              = link_to case_studies_path do
+                %i.icon-road
+                Case Studies
+          - if can? :read, Page
+            %li
+              = link_to updated_pages_path do
+                %i.icon-list-alt
+                Content
+          - if can? :read, Document
+            %li
+              = link_to documents_path do
+                %i.icon-file
+                Files
+          - if can? :read, Library
+            %li
+              = link_to libraries_path do
+                %i.icon-book
+                Libraries
+          - if can? :read, Photo
+            %li
+              = link_to photos_path do
+                %i.icon-picture
+                Photos
+            -#%li= link_to videos_path do
+              %i.icon-film
+              Videos
+          - if can? :read, Staff
+            %li
+              = link_to :controller => 'staff', :action => 'index' do
+                %i.icon-user
+                Staff
+          - if can? :read, User
+            %li
+              = link_to users_path do
+                %i.icon-user
+                Users
+          - if can? :read, Volunteer
+            %li
+              = link_to volunteers_path do
+                %i.icon-user
+                Volunteers
           - if user_signed_in?
             - if current_user.role?(:volunteer) || current_user.role?(:staff)
               %li.divider
@@ -82,22 +91,26 @@
                     Photo
               %li.divider
               %li.nav-header Create
-              %li
-                = link_to new_case_study_path do
-                  %i.icon-road
-                  Case Study
-              %li
-                = link_to new_library_path do
-                  %i.icon-book
-                  Library
-              %li
-                = link_to new_page_path do
-                  %i.icon-list-alt
-                  Page
-              %li
-                = link_to new_moment_path do
-                  %i.icon-time
-                  Timeline Event
+              - if can? :create, CaseStudy
+                %li
+                  = link_to new_case_study_path do
+                    %i.icon-road
+                    Case Study
+              - if can? :create, Library
+                %li
+                  = link_to new_library_path do
+                    %i.icon-book
+                    Library
+              - if can? :create, Page
+                %li
+                  = link_to new_page_path do
+                    %i.icon-list-alt
+                    Page
+              - if can? :create, Moment
+                %li
+                  = link_to new_moment_path do
+                    %i.icon-time
+                    Timeline Event
           %li.divider
           %li.nav-header Visit us
           %li

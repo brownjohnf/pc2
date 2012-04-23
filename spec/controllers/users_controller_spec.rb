@@ -153,19 +153,4 @@ describe UsersController do
     end
   end
 
-  # PUT remove_avatar 
-  describe "'PUT' remove_avatar" do
-    context 'as admin' do
-      login_admin
-      it 'should be successful' do
-        put :remove_avatar, :id => @user2
-        response.should be_success
-      end
-      it 'should remove the avatar' do
-        put :remove_avatar, :id => @user2
-        @user2.reload
-        @user2.avatar.to_s.should =~ /missing/i
-      end
-    end
-  end
 end

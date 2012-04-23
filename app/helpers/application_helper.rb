@@ -228,7 +228,7 @@ module ApplicationHelper
     units = {
       :mb => (1024 * 1024)
     }
-    to_convert.to_i / units[unit].to_i
+    "#{to_convert.to_i / units[unit].to_i} Mb"
   end
 
 end

@@ -6,5 +6,6 @@
 = f.collection_select :language, Language.all, :id, :name
 = f.text_field :description
 = f.text_field :tag_list
-= f.collection_check_boxes :role_ids, Role.all, :id, :name, :label => 'Permissions'
+= f.select :country, allowed_countries
+= f.collection_check_boxes :role_ids, Role.unscoped.order('name ASC').all, :id, :name, :label => 'Permissions'
 
