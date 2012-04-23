@@ -18,14 +18,13 @@
         %br
       - if document.language
         = document.language.name
-        %br
-      = render document.roles
     %p
       = link_to download_document_path(document), :rel => 'popover-right', :title => 'Download', 'data-content' => "#{document.file_content_type}<hr/>#{((document.audio_length ? "#{document.formatted_audio_length}<br/>" : ' ') + "#{change_units(document.file_file_size)} Mb")}" do
         %i.icon-download-alt
       - if document.source.path
         %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{document.source_file_name}<br/>#{document.source_comment}" }
       = mime_icon(document.file_content_type)
+      = render document.roles
     .tags.right= render 'shared/tags', :tags => document.tag_list
   - else
     .alert.alert-info

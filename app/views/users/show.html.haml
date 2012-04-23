@@ -47,7 +47,7 @@
               - if @user.blogs.any?
                 %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
               - unless @user.site.nil?
-                %p= link_to @user.site
+                %p= @user.site
               - if @user.bio
                 %h4 A little bit about #{@user.name}...
                 = markdown(@user.bio)

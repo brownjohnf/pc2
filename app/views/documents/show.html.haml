@@ -62,17 +62,18 @@
                   .clearfloat
         %br
         - if can? :create, Stack
-          %h3 Add to a library
-          - if Library.accessible_by(current_ability).any?
-            - @stack = @document.stacks.build
-            = form_for @stack, :remote => true do |f|
-              = render 'shared/form_error' if @stack.errors.any?
-              = f.hidden_field(:stackable_id)
-              = f.hidden_field(:stackable_type)
-              .field
-                = f.collection_select(:library_id, Library.accessible_by(current_ability, :update).all, :id, :name)
-              .actions
-                = f.submit 'Add to library'
+          .well
+            %h3 Add to a library
+            - if Library.accessible_by(current_ability).any?
+              - @stack = @document.stacks.build
+              = form_for @stack, :remote => true do |f|
+                = render 'shared/form_error' if @stack.errors.any?
+                = f.hidden_field(:stackable_id)
+                = f.hidden_field(:stackable_type)
+                .field
+                  = f.collection_select(:library_id, Library.accessible_by(current_ability, :update).all, :id, :name)
+                .actions
+                  = f.submit 'Add to library', :class => 'btn btn-primary'
         - elsif can? :create, Library
           = link_to 'create a library', new_library_path
     .span2

@@ -38,10 +38,63 @@ Libraries allow users to build collections of files, pages, case studies, photos
 
 To use the search functions in the app, you must be running on PostgreSQL. It's possible to develop/test with SQLite, but the tests/actions involving searches will fail.
 
-## Installation
+## Installation on Heroku
 
-Jump-start instructions: clone this repository, edit the database settings, bundle install, db:migrate, db:seed
+#### Purchase and Configure Domain
+
+#### Pick a Heroku app name
+
+#### Set up Facebook App
+
+#### Set up a Google Analytics account
+
+#### Set up Amazon S3
+
+need a bucket name, key, and secret
+
+#### Set up Amazon Route 53 (should be optional, but need to set up DNS)
+
+need root domain pointing to Heroku IP, subs pointing to heroku appname
+
+#### Set up Amazon CloudFront (should be optional)
+
+#### Branch / clone app from Git
+
+#### Configure app/environments/production.rb, set MailGun domain
+
+#### Create Heroku App
+
+$> heroku create --stack cedar -r <remote name> <appname>
+
+#### Push app to Heroku to initialize environment
+
+git push <branch> <remote name>:master
+
+#### Add domain to Heroku app
+
+heroku domains:add <domain name> --app <appname>
+
+#### Add Heroku Addons
+
+heroku addons:add mailgun:starter --app <appname>
+
+#### Set config variables on Heroku app
+
+heroku config:add FB_KEY=<fb key> FB_SECRET=<fb secret> G_ANALYTICS_ID=<analytics id> S3_BUCKET=<bucket name> S3_KEY=<s3 key> S3_SECRET=<s3 secret>
+
+#### Create and seed the database
+
+heroku run rake db:migrate
+heroku run rake db:seed
+
+#### Sign in as admin, change password
+
+Sign is as user 'Administrator', password 'password'
+Change the name/email/password to be whatever you want
+Make sure it's secure
+
+You're good to go!
 
 ## Testing
 
-Rspec tests are included. To use, run db:prepare_test_db, and then rspec spec/.
+Rspec tests are included. To use, run bundle exec rake db:prepare_test_db, and then bundle exec rspec spec/.
