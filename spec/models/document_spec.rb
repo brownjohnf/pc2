@@ -4,7 +4,8 @@ describe Document do
   before(:each) do
     @user = Factory(:user)
     @attr = {
-      :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'))
+      :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt')),
+      :country => 'SN'
     }
   end
 
@@ -19,6 +20,9 @@ describe Document do
     end
     it 'should require a file' do
       @user.documents.build(@attr.merge(:file => nil)).should_not be_valid
+    end
+    it 'should require a country' do
+      @user.documents.build(@attr.merge(:country=> nil)).should_not be_valid
     end
     it { should have_attached_file(:file) }
     it { should validate_attachment_presence(:file) }
@@ -153,7 +157,9 @@ describe Document do
       end
     end
     describe 'libraries' do
-      build_document_stacks
+      before :each do
+        @stack = Factory.create(:stack, :stackable => @document = Factory.create(:document))
+      end
       it 'should have a libraries attribute' do
         @document.should respond_to(:libraries)
       end

@@ -156,7 +156,8 @@ describe DocumentsController do
     describe 'should be successful' do
       before(:each) do
         @attr = {
-          :file => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'), 'text/plain')
+          :file => Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt'), 'text/plain'),
+          :country => 'SN'
         }
       end
       context 'as admin' do
@@ -237,6 +238,7 @@ describe DocumentsController do
       before(:each) do
         @attr = {
           :file => nil,
+          :country => nil,
           :name => 'new title'
         }
         @document = Factory.create(:document)
@@ -258,7 +260,8 @@ describe DocumentsController do
       before(:each) do
         @attr = {
           :file => File.new(File.join(Rails.root, 'spec', 'fixtures', 'test.txt')),
-          :name => 'new title'
+          :name => 'new title',
+          :country => 'SN'
         }
       end
       context 'as admin' do

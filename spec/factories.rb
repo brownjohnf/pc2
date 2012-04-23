@@ -10,8 +10,8 @@ FactoryGirl.define do
 
   factory :document do
     association :user
+    country 'SN'
     file File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.txt'))
-    #file { File.new(File.join(Rails.root, 'spec', 'support', 'test.txt')) }
     sequence(:file_fingerprint) { |n| "#{n}#{SecureRandom.hex(10)}" }
   end
 
@@ -22,6 +22,7 @@ FactoryGirl.define do
   end
 
   factory :mp3, :class => Document do
+    country 'SN'
     association :user, :factory => :user
     file File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.mp3'))
   end
@@ -36,6 +37,7 @@ FactoryGirl.define do
 
   factory :photo do
     association :user
+    country 'SN'
     association :imageable, :factory => :user
     # photo { File.new(File.join(Rails.root, 'spec', 'support', 'test.png')) }
     photo File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.png'))

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120414011013) do
+ActiveRecord::Schema.define(:version => 20120423150236) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120414011013) do
     t.datetime "source_updated_at"
     t.string   "source_comment"
     t.string   "source_fingerprint"
+    t.string   "country"
   end
 
   create_table "documents_roles", :id => false, :force => true do |t|
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20120414011013) do
     t.string   "imageable_type"
     t.integer  "user_id"
     t.string   "photo_fingerprint"
+    t.string   "country"
   end
 
   create_table "positions", :force => true do |t|
