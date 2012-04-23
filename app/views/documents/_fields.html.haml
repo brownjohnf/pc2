@@ -3,7 +3,7 @@
 = f.text_field :source_comment, :label => 'Describe the source document'
 = f.text_field :name
 = f.text_field :author
-= f.collection_select :language, Language.all, :id, :name
+= f.collection_select :language_id, Language.all, :id, :name
 = f.text_field :description
 = f.text_field :tag_list
 = f.select :country, allowed_countries

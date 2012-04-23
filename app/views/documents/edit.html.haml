@@ -1,13 +1,6 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-5
-    .span-7
-      .box
-        %h2
-          Edit
-          =@document.name
-        = render 'form'
-    .span-3
-    .span-4.last
+.row
+  .span3
+    = render 'shared/menu'
+  .span-7
+    = render 'form'
+  .span2
