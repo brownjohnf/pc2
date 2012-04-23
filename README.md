@@ -60,32 +60,52 @@ need root domain pointing to Heroku IP, subs pointing to heroku appname
 
 #### Branch / clone app from Git
 
-#### Configure app/environments/production.rb, set MailGun domain
+#### Configure code
+
+Set up MailGun settings:
+
+    # app/environments/production.rb
+
+    ActionMailer::Base.smtp_settings = {
+      :port           => ENV['MAILGUN_SMTP_PORT'], 
+      :address        => ENV['MAILGUN_SMTP_SERVER'],
+      :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+      :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+      :domain         => '<your domain here>',
+      :authentication => :plain,
+    }
+    ActionMailer::Base.delivery_method = :smtp
+
+Set up Facebook and YouTube redirects
+
+    match '/facebook' => redirect('<link to your fb page/group/etc>')
+    match '/youtube' => redirect('<link to youtube channel>')
+
 
 #### Create Heroku App
 
-$> heroku create --stack cedar -r <remote name> <appname>
+    heroku create --stack cedar -r <remote name> <appname>
 
 #### Push app to Heroku to initialize environment
 
-git push <branch> <remote name>:master
+    git push <branch> <remote name>:master
 
 #### Add domain to Heroku app
 
-heroku domains:add <domain name> --app <appname>
+    heroku domains:add <domain name> --app <appname>
 
 #### Add Heroku Addons
 
-heroku addons:add mailgun:starter --app <appname>
+    heroku addons:add mailgun:starter --app <appname>
 
 #### Set config variables on Heroku app
 
-heroku config:add FB_KEY=<fb key> FB_SECRET=<fb secret> G_ANALYTICS_ID=<analytics id> S3_BUCKET=<bucket name> S3_KEY=<s3 key> S3_SECRET=<s3 secret>
+    heroku config:add FB_KEY=<fb key> FB_SECRET=<fb secret> G_ANALYTICS_ID=<analytics id> S3_BUCKET=<bucket name> S3_KEY=<s3 key> S3_SECRET=<s3 secret>
 
 #### Create and seed the database
 
-heroku run rake db:migrate
-heroku run rake db:seed
+    heroku run rake db:migrate
+    heroku run rake db:seed
 
 #### Sign in as admin, change password
 
