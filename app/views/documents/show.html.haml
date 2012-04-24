@@ -83,6 +83,6 @@
     .box
       %h3 Top Document Tags
       = cloud_of_tags
-= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => link_to(shorten_url(document_url(@document))), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => shorten_url(document_url(@document)), :footer => nil
 = render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(document_url(@document), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
 
