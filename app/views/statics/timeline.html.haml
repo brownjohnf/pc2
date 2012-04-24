@@ -29,11 +29,33 @@
           box-shadow:0px 0px 0px rgba(0, 0, 0, 0.25) !important;
         }
         
+        #header {
+          font-family: 'Georgia', Times New Roman, Times, serif;
+        }
+        #title {
+          margin: 0;
+          text-align: center;
+        }
+
+        #header a {
+          color: #0088CC;
+          text-decoration: none;
+        }
+        #header a:hover {
+          color: #005580;
+          text-decoration: underline;
+        }
+        
       </style>
       
     </head>
 
     <body>
+    <div id="header">
+      <h1 id="title">Peace Corps Senegal: 50 years in review</h1>
+      &lang;
+      <%= link_to 'back to site', dashboard_path %>
+    </div>
       <!-- BEGIN Timeline Embed -->
       <div id="timeline-embed"></div>
       <script type="text/javascript">

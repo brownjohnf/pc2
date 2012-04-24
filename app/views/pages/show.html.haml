@@ -21,8 +21,10 @@
         last updated
         = time_ago_in_words(@page.updated_at)
         ago
-        = link_to page_path(@page.id, :format => 'svg') do
+        = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
           %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this page." }
+        = link_to '#bitly_url', 'data-toggle' => 'modal' do
+          %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
     %h4
       %small originally posted
       = @page.created_at.strftime('%d %B %Y')
@@ -90,4 +92,6 @@
             = link_to 'Close', '#', :class => 'btn', 'data-dismiss' => 'modal'
             = f.buttons do
               = f.commit_button :input_html => {:disable_with => 'wait', :class => 'btn btn-primary'}
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => shorten_url(page_url(@page)), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(page_url(@page), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
 

@@ -14,7 +14,7 @@
             <tr>
               <td><%= link_to feedback.subject, feedback %></td>
               <td><%= feedback.content %></td>
-              <td><%= link_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger btn-mini' if can? :destroy, feedback %></td>
+              <td><%= button_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger btn-mini' if can? :destroy, feedback %></td>
             </tr>
           <% end %>
         </tbody>
