@@ -1,11 +1,11 @@
-= f.file_field :file, :label => 'File to upload (currently limited to 30Mb)'
-= f.file_field :source, :label => 'Source file for main file. This can be a proprietary editable format'
-= f.text_field :source_comment, :label => 'Describe the source document'
-= f.text_field :name
-= f.text_field :author
+= f.file_field :file, :label => 'Primary file (currently limited to 30Mb)', :rel => 'popover-right', :title => 'Allowed File Types', 'data-content' => 'The following file types are allowed:<ul><li>mp3</li><li>pdf</li><li>txt</li><li>csv</li><li>xml</li><li>html</li><li>ppt</li><li>xls</li><li>kml</li><li>tex</li><li>swf</li><li>rss</li></ul>'
+= f.file_field :source, :label => 'Source file. This can be a proprietary editable format', :rel => 'popover-right', :title => 'What is this?', 'data-content' => 'Source files are original files which may have been used to generate the primary file. A training manual, for example, should be distributed in PDF or eBook format, but the origin might be a Word document. Attach the original here.<hr/>The following file types are allowed:<ul><li>all main file types (hover above)</li><li>doc</li><li>docx</li></ul>'
+= f.text_field :source_comment, :label => 'Describe the source document', :rel => 'popover-right-focus', :title => "Why'd you add a source?", 'data-content' => "Details regarding the source file, and why you've attached it, perhaps."
+= f.text_field :name, :rel => 'popover-right-focus', :title => "File Name/Title", 'data-content' => "If you leave this blank, the original file name will be used."
+= f.text_field :author, :rel => 'popover-right-focus', :title => "Who created the thing?", 'data-content' => "Give credit where credit is due."
 = f.collection_select :language_id, Language.all, :id, :name
-= f.text_field :description
-= f.text_field :tag_list
+= f.text_field :description, :rel => 'popover-right-focus', :title => "Explain yourself!", 'data-content' => "Tell us all about this file, particularly if it's not obvious from the title."
+= f.text_field :tag_list, :rel => 'popover-right-focus', :title => "Tag it!", 'data-content' => "Tags are important, because they connect this file to relevant users, pages, case studies, photos, and libraries! Wow, that's a lot."
 = f.select :country, allowed_countries
-= f.collection_check_boxes :role_ids, Role.unscoped.order('name ASC').all, :id, :name, :label => 'Permissions'
+= f.collection_check_boxes :role_ids, Role.unscoped.order('name ASC').all, :id, :name, :label => 'Permissions', :rel => 'popover-left', :title => "Who's it for?", 'data-content' => "You can restrict access to this document. Most of the time it'll either be 'Public' or 'Volunteer'. Keep in mind that these permissions are not hierarchical; if you set it to 'Volunteer' only, PC Staff members will be unable to view it. To restrict a document to PCVs and Staff, check 'Volunteer' and 'Staff' only."
 
