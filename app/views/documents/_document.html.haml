@@ -25,11 +25,11 @@
         %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{document.source_file_name}<br/>#{document.source_comment}" }
       = mime_icon(document.file_content_type)
       = render document.roles
-    .tags.right= render 'shared/tags', :tags => document.tag_list
+      = render 'shared/tags', :tags => document.tag_list
   - else
     .alert.alert-info
       - if user_signed_in?
         You do not have access to all documents. If you are a PCV or Staff member, request access #{link_to 'here', volunteer_request_feedback_index_path}.
       - else
-        You do not have access to all documents. For greater access privileges, please #{link_to 'login', login_path}.
+        You do not have access to all documents. For greater access privileges, please #{link_to 'login', login_path} as a PCV or staff member.
   %hr.clearfloat

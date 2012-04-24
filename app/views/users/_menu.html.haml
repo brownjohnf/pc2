@@ -7,7 +7,7 @@
       %ul.dropdown-menu
         %li= link_to 'Alphabetical', users_path(:sort => 'name')
         %li= link_to 'Recently updated', users_path(:sort => 'updated_at')
-        %li= link_to 'Table View', table_users_path
+        %li= link_to 'Table View', table_users_path if can? :table, User
     %li.dropdown
       %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
         Volunteers

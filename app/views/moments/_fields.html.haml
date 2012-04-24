@@ -1,16 +1,32 @@
-.field
-  = f.label :photo_id, 'Profile Photo (you can add photos after creating the event)'
-  = f.collection_select(:photo_id, @moment.photos, :id, :title, :include_blank => true)
-.field
-  = f.label :datapoint
-  = f.date_select :datapoint, :start_year => 1963, :end_year => Time.now.year
-.field
-  = f.label :title
-  = f.text_field :title
-.field
-  = f.label :summary
-  = f.text_area :summary
-.field
-  = f.label :content
-  = f.text_area :content
-= render 'shared/tag_field', :f => f
+- if can? :manage, @moment
+  = f.collection_select :user_id, User.all, :id, :name
+  = f.select :country, allowed_countries
+- else
+  = f.hidden_field :user_id, :value => current_user.id
+  = f.hidden_field :country, :value => current_user.country
+.control-group
+  %label.control-label Event Date
+= f.date_select :datapoint, :start_year => 1963, :end_year => Time.now.year
+= f.text_field :title
+= f.text_field :summary
+%p You can include one of the following items as your moment content:
+%ul
+  %li Text. Simply start typing! Needs to be formatted in HTML.
+  %li YouTube. Paste the link to the video. Not the embed code.
+  %li Vimeo. Like YouTube. Paste in a link to the video.
+  %li Website. Type the link. Include the http:// or https://.
+  %li Google Map. Just include the link to the map.
+  %li Flickr. Paste the link to a photo page.
+  %li Tweet. Use the link to the tweet status.
+  %li SoundCloud. Paste the link to the track.
+%p If that doesn't cover your needs, get in touch with us, and we can accomadate you.
+= f.text_area :content
+%h2 Attach a photo
+= f.fields_for :photos do |p|
+  = p.hidden_field :user_id, :value => current_user.id
+  = p.file_field :photo
+  = p.text_field :title
+  = p.text_field :description
+  = p.text_field :attribution
+  = p.text_field :tag_list
+

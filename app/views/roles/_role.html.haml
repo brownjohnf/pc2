@@ -1,1 +1,1 @@
-%span.role{:class => [ role.name.downcase, (user_signed_in? && !current_user.roles.where(:id => role).any? ? 'role_mismatch' : nil ) ]}= role.name
+%span.label{:class => [ role.name.downcase, (user_signed_in? && !current_user.roles.where(:id => role).any? ? 'label-warning' : 'label-success' ) ]}= role.name

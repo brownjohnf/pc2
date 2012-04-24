@@ -5,7 +5,6 @@
     .box
       %h1
         = @document.name
-        %p= render 'shared/tags', :tags => @document.tag_list
       %hr
       .tabbable.tabs-right
         %ul.nav.nav-tabs
@@ -32,11 +31,10 @@
                 = link_to download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)}")}" do
                   %i.icon-download-alt
                   download
-              = @document.file_content_type
-              = change_units(@document.file.size)
-              bytes
-              = render @document.roles
               = mime_icon(@document.file_content_type)
+              = change_units(@document.file.size)
+              = render @document.roles
+              = render 'shared/tags', :tags => @document.tag_list
               - if @document.source.path
                 %br
                 %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
@@ -51,7 +49,7 @@
             .well
               %h1 Are you sure?
               = button_to 'destroy this document', @document, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' if can? :destroy, @document
-    .box
+    .well
       .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
         %h3 Libraries
         %ul.feed
@@ -64,7 +62,7 @@
                 .clearfloat
       %br
       - if can? :create, Stack
-        .well
+        %hr
           %h3 Add to a library
           - if Library.any?
             - @stack = @document.stacks.build
@@ -83,6 +81,6 @@
     .box
       %h3 Top Document Tags
       = cloud_of_tags
-= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => link_to(shorten_url(document_url(@document))), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => shorten_url(document_url(@document)), :footer => nil
 = render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(document_url(@document), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
 
