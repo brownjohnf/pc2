@@ -5,7 +5,11 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = @libraries.order('name ASC').paginate(:page => params[:page])
+    if current_user.role? :moderator
+      @libraries = Library.order('name ASC').paginate(:page => params[:page])
+    else
+      @libraries = @libraries.order('name ASC').paginate(:page => params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,7 +34,6 @@ class LibrariesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @library }
-      format.svg { render :qrcode => request.url }
     end
   end
 

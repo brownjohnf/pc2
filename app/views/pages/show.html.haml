@@ -70,7 +70,7 @@
             %li
               = link_to c.user.name, c.user
               - if can? :destroy, c
-                %small= link_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :remote => true, :disable_with => 'removing...'
+                %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger btn-mini'
     %hr
     %h3 Popular Page Tags
     = cloud_of_tags Page

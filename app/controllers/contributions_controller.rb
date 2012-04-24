@@ -31,7 +31,7 @@ class ContributionsController < ApplicationController
 
     respond_to do |format|
       if @contribution.save
-        format.html { redirect_to contributions_url, notice: 'Contribution was successfully created.' }
+        format.html { redirect_to @contribution.contributable, notice: 'Contribution was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }
@@ -43,10 +43,11 @@ class ContributionsController < ApplicationController
   # DELETE /contributions/1.json
   def destroy
     @contribution = Contribution.find(params[:id])
+    @contributable = @contribution.contributable
     @contribution.destroy
 
     respond_to do |format|
-      format.html { redirect_to contributions_url }
+      format.html { redirect_to @contributable }
       format.json { head :ok }
     end
   end

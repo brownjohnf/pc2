@@ -71,7 +71,7 @@
     %i.icon-film
     Videos
   %li
-    = link_to staff_path, :class => 'tooltip-right-slow', :title => 'Get to know our staff.' do
+    = link_to( { :controller => 'staff', :action => 'index' }, :class => 'tooltip-right-slow', :title => 'Get to know our staff.') do
       %i.icon-user
       Staff
   %li

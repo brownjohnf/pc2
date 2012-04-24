@@ -9,7 +9,7 @@
           = flag_icon(@library.country.downcase)
           = @library.name
           %small
-            = link_to library_path(@library.id, :format => 'svg') do
+            = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
               %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this library." }
         %h4= @library.description
       .span4
@@ -26,3 +26,6 @@
           = render @library.documents
         .tab-pane#photos
           = render @library.photos
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => link_to(shorten_url(library_url(@library))), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(library_url(@library), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
+ 

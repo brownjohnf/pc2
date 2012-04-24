@@ -20,6 +20,8 @@ class Volunteer < ActiveRecord::Base
     
     def add_to_volunteers
       self.user.roles << Role.find_by_name('Volunteer')
+      self.user.roles.delete(Role.find_by_name('Invitee'))
+      self.user.roles.delete(Role.find_by_name('Trainee'))
     end
     
     def remove_from_volunteers

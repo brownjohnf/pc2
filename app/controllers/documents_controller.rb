@@ -43,7 +43,6 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @document }
-      format.svg { render :qrcode => request.url }
     end
   end
 
