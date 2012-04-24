@@ -50,7 +50,6 @@ class StaticsController < ApplicationController
 
     respond_to do |format|
       format.html { render 'splash', :layout => 'splash' }
-      format.svg { render :qrcode => request.url }
     end
     
   end

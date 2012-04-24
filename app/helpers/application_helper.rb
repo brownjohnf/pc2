@@ -231,4 +231,22 @@ module ApplicationHelper
     "#{to_convert.to_i / units[unit].to_i} Mb"
   end
 
+  # @author John Brown
+  # Converts any url into a bit.ly shortened url, assuming there are
+  # appropriate environment variables set.
+  #
+  # @param [String] long_url url to be shortened
+  # 
+  # @return [String] short_url shortened url
+  #
+  def shorten_url(long_url, method = nil, options = { :medium => 'website', :name => 'auto_generated_shortened_link' })
+    bitly = Bitly.new(ENV['BITLY_USERNAME'], ENV['BITLY_KEY'])
+    u = bitly.shorten(long_url + "/?utm_source=digitalpost_app&utm_medium=#{options[:medium]}&utm_campaign=#{options[:name]}")
+    if method == :qr
+      "#{u.short_url}.qrcode"
+    else
+      u.short_url
+    end
+  end
+
 end
