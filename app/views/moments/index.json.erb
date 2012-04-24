@@ -5,8 +5,8 @@
     "startDate":"1963",
     "text":"<p>We're pleased and proud to celebrate fifty years of service in Sénégal. We'd like to take this opportunity to look back on the past, and share stories and photos from our Volunteers past and present. We've got <%= pluralize(Moment.count, 'timeline event') %> and counting!</p><p>If you've got a story, photo or video you'd like to share, you can do so by logging in or signing up on our website <a href=\"/login\">here</a>.",
     "asset": {
-    "media":"<%= Photo.any? ? Photo.first.photo.url : 'You need to upload a photo.' %>",
-    "credit":"<%= Photo.first.attribution if Photo.any? %>",
+      "media":"<%= Photo.any? ? Photo.first.photo.url(:large) : 'You need to upload a photo.' %>",
+      "credit":"<%= Photo.first.attribution if Photo.any? %>",
       "caption":"<%= Photo.first.description if Photo.any? %>"
     },
     "date": [
@@ -27,9 +27,9 @@
       "headline": "And here we are today!",
       "text": "Thanks for joining us on this look back. Hope you enjoyed it.",
       "asset": {
-      "media": "",
-        "credit": "",
-        "caption": ""
+      "media": "<%= Photo.last.photo.url(:large) if Photo.any? %>",
+        "credit": "<%= Photo.last.attribution if Photo.any? %>",
+        "caption": "<%= Photo.last.description if Photo.any? %>"
       }
     }
     ]
