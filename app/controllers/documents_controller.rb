@@ -43,7 +43,6 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @document }
-      format.svg { render :qrcode => request.url + "?utm_source=digitalpost&utm_medium=qrcode&utm_campaign=qrcode_generated_by_site" }
     end
   end
 

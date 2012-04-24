@@ -29,7 +29,7 @@ gem 'texticle', '~> 2.0', :require => 'texticle/rails'
 gem 'rubyzip', '0.9.5'
 gem 'ruby-mp3info', '0.7'
 gem 'mercury-rails', '0.3.1'
-gem 'rqrcode-rails3'
+gem 'bitly'
 
 # Gems used only for assets and not required
 # in production environments by default.

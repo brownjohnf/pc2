@@ -28,7 +28,7 @@
                 = flag_icon(@user.country)
                 = Carmen.country_name(@user.country) if @user.country
                 %small
-                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, @volunteer
+                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, @user
               - if can? :read, @user
                 %h3 Connect
                 %p

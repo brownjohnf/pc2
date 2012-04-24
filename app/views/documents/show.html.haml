@@ -1,82 +1,88 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      .box
-        %h1
-          = @document.name
-          %p= render 'shared/tags', :tags => @document.tag_list
-        %hr
-        .tabbable.tabs-right
-          %ul.nav.nav-tabs
-            %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
-            %li= link_to 'edit', '#edit', 'data-toggle' => 'tab'
-            %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
-          .tab-content
-            .tab-pane#view.active
-              %p= @document.description
-              %p
-                - if @document.author
-                  author:
-                  = @document.author
-                  %br
-                - if @document.language
-                  language:
-                  = @document.language.name
-              %p
-                = link_to document_path(@document.id, :format => 'svg') do
-                  %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this document." }
-                %i.icon-download-alt
-                = link_to 'download', download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)}")}" if can? :read, @document
-                = @document.file_content_type
-                = @document.file.size
-                bytes
-                = render @document.roles
-                = mime_icon(@document.file_content_type)
-                - if @document.source.path
-                  %br
-                  %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
-                  = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download_source, @document
-                  = @document.source.content_type
-                  = change_units @document.source.size
-                  = mime_icon(@document.source.content_type)
-            .tab-pane#edit
-              %h1 Edit Document
-              = render 'form'
-            .tab-pane#destroy
-              .well
-                %h1 Are you sure?
-                = button_to 'destroy this document', @document, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' if can? :destroy, @document
-      .box
-        .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
-          %h3 Libraries
-          %ul.feed
-            - if @document.stacks.any?
-              - @document.stacks.each do |s|
-                %li.feed_item
-                  = link_to s.library.name, s.library if s.id
-                  |
-                  = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
-                  .clearfloat
-        %br
-        - if can? :create, Stack
-          .well
-            %h3 Add to a library
-            - if Library.any?
-              - @stack = @document.stacks.build
-              = form_for @stack, :remote => true do |f|
-                = render 'shared/form_error' if @stack.errors.any?
-                = f.hidden_field(:stackable_id)
-                = f.hidden_field(:stackable_type)
-                .field
-                  = f.collection_select(:library_id, Library.all, :id, :name)
-                .actions
-                  = f.submit 'Add to library', :class => 'btn btn-primary'
-        - elsif can? :create, Library
-          = link_to 'create a library', new_library_path
-    .span2
-      = document_icon_for @document, :size => :small
-      .box
-        %h3 Top Document Tags
-        = cloud_of_tags
+.row
+  .span3
+    = render 'shared/menu'
+  .span7
+    .box
+      %h1
+        = @document.name
+        %p= render 'shared/tags', :tags => @document.tag_list
+      %hr
+      .tabbable.tabs-right
+        %ul.nav.nav-tabs
+          %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
+          %li= link_to 'edit', '#edit', 'data-toggle' => 'tab'
+          %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
+        .tab-content
+          .tab-pane#view.active
+            %p= @document.description
+            %p
+              - if @document.author
+                author:
+                = @document.author
+                %br
+              - if @document.language
+                language:
+                = @document.language.name
+            %p
+              = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
+                %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this document." }
+              = link_to '#bitly_url', 'data-toggle' => 'modal' do
+                %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
+              - if can? :read, @document    
+                = link_to download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)}")}" do
+                  %i.icon-download-alt
+                  download
+              = @document.file_content_type
+              = change_units(@document.file.size)
+              bytes
+              = render @document.roles
+              = mime_icon(@document.file_content_type)
+              - if @document.source.path
+                %br
+                %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
+                = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download_source, @document
+                = @document.source.content_type
+                = change_units @document.source.size
+                = mime_icon(@document.source.content_type)
+          .tab-pane#edit
+            %h1 Edit Document
+            = render 'form'
+          .tab-pane#destroy
+            .well
+              %h1 Are you sure?
+              = button_to 'destroy this document', @document, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' if can? :destroy, @document
+    .box
+      .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
+        %h3 Libraries
+        %ul.feed
+          - if @document.stacks.any?
+            - @document.stacks.each do |s|
+              %li.feed_item
+                = link_to s.library.name, s.library if s.id
+                |
+                = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
+                .clearfloat
+      %br
+      - if can? :create, Stack
+        .well
+          %h3 Add to a library
+          - if Library.any?
+            - @stack = @document.stacks.build
+            = form_for @stack, :remote => true do |f|
+              = render 'shared/form_error' if @stack.errors.any?
+              = f.hidden_field(:stackable_id)
+              = f.hidden_field(:stackable_type)
+              .field
+                = f.collection_select(:library_id, Library.all, :id, :name)
+              .actions
+                = f.submit 'Add to library', :class => 'btn btn-primary'
+      - elsif can? :create, Library
+        = link_to 'create a library', new_library_path
+  .span2
+    = document_icon_for @document, :size => :small
+    .box
+      %h3 Top Document Tags
+      = cloud_of_tags
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => link_to(shorten_url(document_url(@document))), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(document_url(@document), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
+
