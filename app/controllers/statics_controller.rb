@@ -88,7 +88,11 @@ class StaticsController < ApplicationController
 
   def timeline
     @title_photo = Photo.tagged_with('timeline_splash').first
-    render 'timeline', :layout => nil
+    unless request.user_agent =~ /MSIE/
+      render 'timeline', :layout => nil
+    else
+      redirect_to moments_path
+    end
   end
 
 end

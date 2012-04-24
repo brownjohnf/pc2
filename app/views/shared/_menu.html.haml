@@ -33,6 +33,7 @@
     %li.nav-header Quick Links
     - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
       %li= link_to link.canonical_title, link if can? :read, link
+%ul.nav.nav-list.visible-desktop
   %li.nav-header Resources
   - if user_signed_in?
     %li
