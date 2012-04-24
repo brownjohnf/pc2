@@ -5,6 +5,8 @@
   .span7
     %h1= @moment.title
     = markdown(@moment.content) if @moment.content
+    %hr
+    = render @moment.user
   .span2
     &larr;
     = link_to "back to #{@moment.datapoint.strftime('%Y')}", moments_path(:year => @moment.datapoint.year)
@@ -13,13 +15,10 @@
       = link_to image_tag(@moment.photo.photo.url(:medium)), @moment.user, :class => 'avatar'
     - else
       = avatar_for_user(@moment.user, :size => :small)
-    %ul.feed
-      = render @moment.user
     %p
       = link_to @moment.user.volunteers.first.stage.swear_in.year, moments_path(:year => @moment.user.volunteers.first.stage.swear_in.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.swear_in
       \-
       = link_to @moment.user.volunteers.first.stage.cos.year, moments_path(:year => @moment.user.volunteers.first.stage.cos.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.cos
-      = button_to 'Edit', edit_moment_path(@moment), :method => :get if can? :update, @moment
     .well
       %p= @moment.summary
     - if @moment.photos.any?

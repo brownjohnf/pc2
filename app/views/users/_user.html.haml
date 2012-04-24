@@ -12,6 +12,10 @@
           - if v.sector
             |
             = link_to v.sector.name, v.sector
+          - if v.cos_date && v.stage && v.stage.swear_in
+            = v.stage.swear_in.year
+            \-
+            = v.cos_date.year
           %br
     - if user.staff.any?
       - user.staff.each do |s|
