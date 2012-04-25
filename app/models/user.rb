@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   
   accepts_nested_attributes_for :roles, :allow_destroy => true
-  validates :name, :presence => true, :length => { :minimum => 8, :maximum => 127 }
-  validates :email, :presence => true
+  validates :name, :presence => true, :length => { :minimum => 8, :maximum => 127 }, :uniqueness => { :case_sensitive => false }
+  validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
   
   after_create :add_user_role
 
@@ -36,8 +36,8 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :tags
   acts_as_tagger
 
-  has_many :volunteers, :dependent => :destroy
-  has_many :staff, :dependent => :destroy
+  has_many :volunteers
+  has_many :staff
 
   # blogs, not necessarily by the user, but mostly
   has_many :blogs
@@ -60,6 +60,8 @@ class User < ActiveRecord::Base
   # all photos directly uploaded by the user, just to upload. all photos are also tagged with the user_id of their uploader, 
   # even if they were uploaded as part of a timeline moment or something else.
   has_many :added_photos, :as => :imageable, :class_name => 'Photo'
+
+  # all photos uploaded by the user, in any context
   has_many :photos
   
   # pages, case studies to which this user has contributed/is author
@@ -69,6 +71,7 @@ class User < ActiveRecord::Base
   belongs_to :photo
 
   before_validation :clear_empty_attrs
+  before_destroy :reset_possessions
 
   accepts_nested_attributes_for :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs, :reject_if => lambda { |a| a[:url].blank? } 
@@ -137,6 +140,55 @@ class User < ActiveRecord::Base
     def add_user_role
       self.roles << Role.find_by_name('User')
       self.roles << Role.find_by_name('Public')
+    end
+
+    def reset_possessions
+      admin = User.find_by_name('Administrator')
+
+      volunteers.each do |volunteer|
+        volunteer.user = admin
+        volunteer.save!
+      end
+      staff.each do |staff|
+        staff.user = admin
+        staff.save!
+      end
+      blogs.each do |blog|
+        blog.user = admin
+        blog.save!
+      end
+      moments.each do |moment|
+        moment.user = admin
+        moment.save!
+      end
+      libraries.each do |library|
+        library.user = admin
+        library.save!
+      end
+      sites.each do |site|
+        site.user = admin
+        site.save!
+      end
+      websites.each do |website|
+        website.user = admin
+        website.save!
+      end
+      stacks.each do |stack|
+        stack.user = admin
+        stack.save!
+      end
+      documents.each do |document|
+        document.user = admin
+        document.save!
+      end
+      photos.each do |photo|
+        photo.user = admin
+        photo.save!
+      end
+      added_photos.each do |added_photo|
+        added_photo.imageable = admin
+        added_photo.save!
+      end
     end
 
 end

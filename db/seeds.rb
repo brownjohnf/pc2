@@ -55,4 +55,8 @@ user = User.create!({
   :country => 'SN'
 });
 user.confirmed_at = Time.now
+for role in Role.all do
+  user.roles.delete(role)
+  user.roles << role
+end
 user.save!
