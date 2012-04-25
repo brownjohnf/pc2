@@ -1,0 +1,12 @@
+= bootstrap_form_for(@region) do |f|
+  -if can? :manage, Region
+    = f.country_select(:country, ['SN', 'GM'])
+  - else
+    = f.select :country, allowed_countries
+  = f.collection_select(:type_id, Regiontype.all, :id, :name)
+  = link_to 'add a region type', new_regiontype_path if can? :create, Regiontype
+  = f.text_field :name
+  = f.text_field :short
+  = f.collection_select(:parent_id, Region.accessible_by(current_ability, :create), :id, :name, :include_blank => true)
+  = f.text_field :description
+  = f.actions

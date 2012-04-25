@@ -8,6 +8,7 @@
     = render 'layouts/head_scripts'
     = rss_auto_links
     = csrf_meta_tags
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
     = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
   %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
