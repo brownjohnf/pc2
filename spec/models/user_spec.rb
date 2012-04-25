@@ -111,6 +111,9 @@ describe User do
   # associations
   describe 'associations' do
     build_user
+    before :each do
+      @admin = User.find_by_name('Administrator')
+    end
     describe 'roles' do
       it 'should have a roles attribute' do
         @user.should respond_to(:roles)
@@ -135,10 +138,17 @@ describe User do
       it 'should return the right volunteers in the right order' do
         @user.volunteers.should == [@volunteer2, @volunteer, @volunteer3]
       end
-      it 'should destroy associated volunteers' do
+      it 'should not destroy associated volunteers' do
         @user.destroy
         [@volunteer, @volunteer2, @volunteer3].each do |volunteer|
-          Volunteer.find_by_id(volunteer.id).should be_nil
+          Volunteer.find_by_id(volunteer.id).should_not be_nil
+        end
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        [@volunteer, @volunteer2, @volunteer3].each do |volunteer|
+          volunteer.reload
+          volunteer.user.should == @admin
         end
       end
     end
@@ -154,10 +164,17 @@ describe User do
         @user.staff.include?(@staff).should be_true
         @user.staff.include?(@staff2).should be_true
       end
-      it 'should destroy associated staff members' do
+      it 'should not destroy associated staff members' do
         @user.destroy
         [@staff, @staff2].each do |staff|
-          Staff.find_by_id(staff.id).should be_nil
+          Staff.find_by_id(staff.id).should_not be_nil
+        end
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        [@staff, @staff2].each do |staff|
+          staff.reload
+          staff.user.should == @admin
         end
       end
     end
@@ -179,6 +196,13 @@ describe User do
           Moment.find_by_id(moment.id).should_not be_nil
         end
       end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        [@moment, @moment2, @moment3].each do |moment|
+          moment.reload
+          moment.user.should == @admin
+        end
+      end
     end
     describe 'blogs' do
       build_user_blogs
@@ -191,6 +215,11 @@ describe User do
       it 'should not destroy associated blogs' do
         @user.destroy
         Blog.find_by_id(@blog.id).should_not be_nil
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @blog.reload
+        @blog.user.should == @admin
       end
     end
     describe 'libraries' do
@@ -205,6 +234,11 @@ describe User do
         @user.destroy
         Library.find_by_id(@library.id).should_not be_nil
       end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @library.reload
+        @library.user.should == @admin
+      end
     end
     describe 'sites' do
       build_user_sites
@@ -218,6 +252,11 @@ describe User do
         @user.destroy
         Site.find_by_id(@site.id).should_not be_nil
       end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @site.reload
+        @site.user.should == @admin
+      end
     end
     describe 'websites' do
       build_user_websites
@@ -230,6 +269,11 @@ describe User do
       it 'should not destroy associated websites' do
         @user.destroy
         Website.find_by_id(@website.id).should_not be_nil
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @website.reload
+        @website.user.should == @admin
       end
     end
     describe 'stacks' do
@@ -246,6 +290,11 @@ describe User do
       it 'should not destroy stacks' do
         @user.destroy
         Stack.find_by_id(@stack.id).should_not be_nil
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @stack.reload
+        @stack.user.should == @admin
       end
     end
     describe 'stacked_in' do
@@ -276,9 +325,16 @@ describe User do
         @user.destroy
         Document.find_by_id(@document.id).should_not be_nil
       end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @document.reload
+        @document.user.should == @admin
+      end
     end
-    describe 'photos' do
-      build_user_photos
+    describe 'has_many photos' do
+      before(:each) do
+        @photo = Factory.create(:photo, :user => @user)
+      end
       it 'should respond to photos attribute' do
         @user.should respond_to :photos
       end
@@ -288,6 +344,31 @@ describe User do
       it 'should not destroy associated photos' do
         @user.destroy
         Photo.find_by_id(@photo.id).should_not be_nil
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @photo.reload
+        @photo.user.should == @admin
+      end
+    end
+    describe 'has_many added_photos' do
+      before(:each) do
+        @photo = Factory.create(:photo, :imageable => @user, :user => @user)
+      end
+      it 'should respond to photos attribute' do
+        @user.should respond_to :added_photos
+      end
+      it 'should return the correct photo' do
+        @user.added_photos.should == [@photo]
+      end
+      it 'should not destroy associated added_photos' do
+        @user.destroy
+        Photo.find_by_id(@photo.id).should_not be_nil
+      end
+      it 'should transfer ownership to admin on destroy' do
+        @user.destroy
+        @photo.reload
+        @photo.imageable.should == @admin
       end
     end
     describe 'contributions' do
