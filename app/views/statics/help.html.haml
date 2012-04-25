@@ -1,9 +1,33 @@
-.container
-  .row
-    .span-5
-      = render 'shared/menu'
-    .span-15
-      .box
-        %h1 Help!
-        %p You've come to the right place.
-    .span-4.last
+.row
+  .span3
+    = render 'shared/menu'
+  .span9.anchor-hop
+    = render 'help_menu'
+    %section#case_studies
+      %h2 Case Studies
+      %hr
+      %h4 What's a case study?
+      %p Case studios are a way for you to document the work you've done, not only for the edification of future generations of PCVs, but also for your resumé. You can link to them on a resume, print them and attach them (old school), or simply refer a potential employer to your profile.
+    %section#content
+      %h2 Content/Pages
+      %hr
+      %h4 What's a page?
+      %p Pages are a sort of wiki combined with a tradional website. They allow us to host reference material for PCVs and staff, but also show the rest of the world what we're up to. They should always be crisp and professional, and are NOT a place for case studies or any other personal information. Before creating a page, think long and hard about why you're making it, whether your information could better be combined with an existing page, and write it professionally.
+    %section#files
+      %h2 Files
+      %hr
+    %section#libraries
+      %h2 Libraries
+      %hr
+    %section#photos
+      %h2 Photos
+      %hr
+    %section#staff
+      %h2 Staff
+      %hr
+    %section#users
+      %h2 Users
+      %hr
+    %section#volunteers
+      %h2 Volunteers
+      %hr
