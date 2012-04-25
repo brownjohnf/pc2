@@ -62,7 +62,7 @@ need root domain pointing to Heroku IP, subs pointing to heroku appname
 
 #### Configure code
 
-Set up MailGun settings:
+Set up MailGun settings. You need to edit the domain property, and use your Heroku domain. For example, our app is running at pcsenegal-production.herokuapp.com. That's what you use for the domain.
 
     # app/environments/production.rb
 
@@ -71,10 +71,16 @@ Set up MailGun settings:
       :address        => ENV['MAILGUN_SMTP_SERVER'],
       :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
       :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-      :domain         => '<your domain here>',
+      :domain         => '<your heroku domain here>',
       :authentication => :plain,
     }
     ActionMailer::Base.delivery_method = :smtp
+
+Configure the host in Devise's confirmation mailer. This time use your forward-facing domain. For us, it's www.pcsenegal.org.
+
+    # app/views/devise/mailer/confirmation_instructions.html.erb
+
+    <p><%= link_to 'Confirm my account', confirmation_url(@resource, :host => '<your domain here>', :confirmation_token => @resource.confirmation_token) %></p>
 
 Set up Facebook and YouTube redirects
 
