@@ -176,7 +176,10 @@
                 %i.icon-film
                 Videos
               %li= link_to "positions (#{Position.count})", positions_path
-              %li= link_to "regions (#{Region.count})", regions_path
+              %li
+                = link_to regions_path do
+                  %i.icon-globe
+                  Regions (#{Region.count})
               %li= link_to "region types", regiontypes_path
               %li= link_to "scopes", scopes_path
               %li= link_to "sectors (#{Sector.count})", sectors_path
