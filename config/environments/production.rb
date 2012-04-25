@@ -69,7 +69,7 @@ OmniauthDemo::Application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'pcsenegal-production.herokuapp.com',
+    :domain         => 'pcsenegal-staging.herokuapp.com',
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
