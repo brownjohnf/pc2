@@ -5,6 +5,7 @@
     :erb
       <table class="table table-striped table-condensed dyn-datatable">
         <thead>
+          <th>Date</th>
           <th>Subject</th>
           <th>Content</th>
           <th></th>
@@ -12,6 +13,7 @@
         <tbody>
           <% @feedback.each do |feedback| %>
             <tr>
+              <td><%= feedback.created_at %></td>
               <td><%= link_to feedback.subject, feedback %></td>
               <td><%= feedback.content %></td>
               <td><%= button_to 'Destroy', feedback, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger btn-mini' if can? :destroy, feedback %></td>
