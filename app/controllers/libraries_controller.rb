@@ -5,7 +5,7 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    if current_user.role? :moderator
+    if user_signed_in? && current_user.role?(:moderator)
       @libraries = Library.order('name ASC').paginate(:page => params[:page])
     else
       @libraries = @libraries.order('name ASC').paginate(:page => params[:page])
