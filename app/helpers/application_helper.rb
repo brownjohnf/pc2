@@ -239,7 +239,7 @@ module ApplicationHelper
   # 
   # @return [String] short_url shortened url
   #
-  def shorten_url(long_url, method = nil, options = { :medium => 'website', :name => 'auto_generated_shortened_link' })
+  def shorten_url(long_url, method = nil, options = { :medium => 'website', :name => "auto_generated_by_#{user_signed_in? ? current_user.name.parameterize : 'guest'}" })
     bitly = Bitly.new(ENV['BITLY_USERNAME'], ENV['BITLY_KEY'])
     u = bitly.shorten(long_url + "/?utm_source=digitalpost_app&utm_medium=#{options[:medium]}&utm_campaign=#{options[:name]}")
     if method == :qr
