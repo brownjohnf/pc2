@@ -25,7 +25,7 @@
     {
       "startDate": "<%= Time.now.strftime("%Y,%m,%d") %>",
       "headline": "And here we are today!",
-      "text": "Thanks for joining us on this look back. Hope you enjoyed it.",
+      "text": "Thanks for joining us on this look back. We hope you enjoyed it.",
       "asset": {
       "media": "<%= Photo.last.photo.url(:large) if Photo.any? %>",
         "credit": "<%= Photo.last.attribution if Photo.any? %>",

@@ -92,6 +92,6 @@
             = link_to 'Close', '#', :class => 'btn', 'data-dismiss' => 'modal'
             = f.buttons do
               = f.commit_button :input_html => {:disable_with => 'wait', :class => 'btn btn-primary'}
-= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => shorten_url(page_url(@page)), :footer => nil
-= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(page_url(@page), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => raw("<p>#{shorten_url(page_url(@page))}<p>#{link_to 'Why is this not a link?', '/help#shortlinks'}</p>"), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(page_url(@page), :qr, :medium => 'qrcode')) + raw("<p>#{link_to 'Why do I do with this?', '/help#qrcodes'}</p>"), :footer => nil
 

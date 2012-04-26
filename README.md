@@ -58,6 +58,10 @@ need root domain pointing to Heroku IP, subs pointing to heroku appname
 
 #### Set up Amazon CloudFront (should be optional)
 
+#### Create Bit.ly account (required)
+
+This will allow you to use the Bit.ly URL shortening and QR Code generation service. You will need an API username and key.
+
 #### Branch / clone app from Git
 
 #### Configure code
@@ -106,7 +110,15 @@ Set up Facebook and YouTube redirects
 
 #### Set config variables on Heroku app
 
-    heroku config:add FB_KEY=<fb key> FB_SECRET=<fb secret> G_ANALYTICS_ID=<analytics id> S3_BUCKET=<bucket name> S3_KEY=<s3 key> S3_SECRET=<s3 secret>
+    heroku config:add
+      FB_KEY=<fb key> 
+      FB_SECRET=<fb secret> 
+      G_ANALYTICS_ID=<analytics id> 
+      S3_BUCKET=<bucket name> 
+      S3_KEY=<s3 key> 
+      S3_SECRET=<s3 secret>
+      BITLY_USERNAME=<bitly api username>
+      BITLY_KEY=<bitly api key>
 
 #### Create and seed the database
 

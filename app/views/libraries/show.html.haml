@@ -11,6 +11,8 @@
           %small
             = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
               %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this library." }
+            = link_to '#bitly_url', 'data-toggle' => 'modal' do
+              %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
         %h4= @library.description
       .span4
         %h3
@@ -26,6 +28,6 @@
           = render @library.documents
         .tab-pane#photos
           = render @library.photos
-= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => link_to(shorten_url(library_url(@library))), :footer => nil
-= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(library_url(@library), :qr, :medium => 'qrcode', :name => 'qrcode_generated_by_app')), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => raw("<p>#{shorten_url(library_url(@library))}<p>#{link_to 'Why is this not a link?', '/help#shortlinks'}</p>"), :footer => nil
+= render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(library_url(@library), :qr, :medium => 'qrcode')) + raw("<p>#{link_to 'Why do I do with this?', '/help#qrcodes'}</p>"), :footer => nil
  
