@@ -12,7 +12,7 @@
         ago
     = render 'shared/tags', :tags => @case_study.tag_list
     %hr
-    - if can? :update, @page
+    - if can? :update, @case_study
       .tabbable.tabs-right
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'

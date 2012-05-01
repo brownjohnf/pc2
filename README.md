@@ -90,7 +90,7 @@ Set up Facebook and YouTube redirects
 
     match '/facebook' => redirect('<link to your fb page/group/etc>')
     match '/youtube' => redirect('<link to youtube channel>')
-
+    match '/twitter' => redirect('<link to twitter feed>')
 
 #### Create Heroku App
 

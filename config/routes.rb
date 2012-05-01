@@ -119,8 +119,9 @@ OmniauthDemo::Application.routes.draw do
   match '/feedback', :to => 'feedback#new'
   match '/feed/pages', :to => 'pages#updated'
   
-  match '/facebook' => redirect('https://apps.facebook.com/peacecorps_sn/')
+  match '/facebook' => redirect('https://apps.facebook.com/peacecorps')
   match '/youtube' => redirect('https://www.youtube.com/pcsenegaladmin')
+  match '/twitter' => redirect('http://twitter.com/#!/pc_senegal')
     
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
