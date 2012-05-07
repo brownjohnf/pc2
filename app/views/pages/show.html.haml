@@ -66,7 +66,7 @@
         - @case_studies.each do |c|
           %li= link_to c.title, c
       - if @page.contributions.count > 0
-        %li.nav-header Contributors
+        %li.nav-header Editors
         - @page.contributions.each do |c|
           - unless c.new_record?
             %li

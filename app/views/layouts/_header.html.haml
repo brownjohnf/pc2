@@ -121,10 +121,6 @@
             = link_to '/youtube' do
               %i.icon-share-alt
               YouTube
-          %li
-            = link_to root_path(nil, :format => 'svg'), :rel => 'popover-left', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this website." do
-              %i.icon-qrcode
-              QR Code
 .nav-collapse.pull-right
   %ul.nav
     - if signed_in?
