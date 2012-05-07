@@ -23,36 +23,30 @@
           .tab-pane#view.active
             .mercury-region#cs_summary{'data-type' => 'editable'}
               = markdown @case_study.summary
-            - if @case_study.context
-              %h2 Context
-              .mercury-region#cs_context{'data-type' => 'editable'}
-                = markdown @case_study.context
-                &nbsp;
-            - if @case_study.approach
-              %h2 Approach
-              .mercury-region#cs_approach{'data-type' => 'editable'}
-                = markdown @case_study.approach
-                &nbsp;
-            - if @case_study.results
-              %h2 Results
-              .mercury-region#cs_results{'data-type' => 'editable'}
-                = markdown @case_study.results
-                &nbsp;
-            - if @case_study.challenges
-              %h2 Challenges
-              .mercury-region#cs_challenges{'data-type' => 'editable'}
-                = markdown @case_study.challenges
-                &nbsp;
-            - if @case_study.lessons_learned
-              %h2 Lessons Learned
-              .mercury-region#cs_lessons{'data-type' => 'editable'}
-                = markdown @case_study.lessons_learned
-                &nbsp;
-            - if @case_study.next_steps
-              %h2 Next Steps
-              .mercury-region#cs_steps{'data-type' => 'editable'}
-                = markdown @case_study.next_steps
-                &nbsp;
+            %h2 Context
+            .mercury-region#cs_context{'data-type' => 'editable'}
+              = markdown @case_study.context
+              &nbsp;
+            %h2 Approach
+            .mercury-region#cs_approach{'data-type' => 'editable'}
+              = markdown @case_study.approach
+              &nbsp;
+            %h2 Results
+            .mercury-region#cs_results{'data-type' => 'editable'}
+              = markdown @case_study.results
+              &nbsp;
+            %h2 Challenges
+            .mercury-region#cs_challenges{'data-type' => 'editable'}
+              = markdown @case_study.challenges
+              &nbsp;
+            %h2 Lessons Learned
+            .mercury-region#cs_lessons{'data-type' => 'editable'}
+              = markdown @case_study.lessons_learned
+              &nbsp;
+            %h2 Next Steps
+            .mercury-region#cs_steps{'data-type' => 'editable'}
+              = markdown @case_study.next_steps
+              &nbsp;
           .tab-pane#edit
             = render 'form'
           .tab-pane#destroy
