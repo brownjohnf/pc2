@@ -108,12 +108,20 @@ class CaseStudiesController < ApplicationController
 
   # POST mercury_update
   def mercury_update
+
+    # fetch the case study
     case_study = CaseStudy.find(params[:id])
 
-    #update case study
-    case_study.summary = params[:content][:cs_summary][:value]
-    case_study.save!
-    
+    # update case study
+    case_study.update_attributes(
+      :summary => params[:content][:cs_summary][:value],
+      :context => params[:content][:cs_context][:value],
+      :approach => params[:content][:cs_approach][:value],
+      :results => params[:content][:cs_results][:value],
+      :challenges => params[:content][:cs_challenges][:value],
+      :lessons_learned => params[:content][:cs_lessons][:value],
+      :next_steps => params[:content][:cs_steps][:value]
+    )
     render text: ""
   end
 
