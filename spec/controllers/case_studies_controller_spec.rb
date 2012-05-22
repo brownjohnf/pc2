@@ -316,9 +316,13 @@ describe CaseStudiesController do
     before(:each) do
       @case_study = Factory.create(:case_study)
       @attr = {
-        :cs_summary => {
-          :value => 'new case study summary'
-        }
+        :cs_summary => { :value => 'new case study summary' },
+        :cs_context => { :value => 'new case study context' },
+        :cs_approach => { :value => 'new case study approach' },
+        :cs_results => { :value => 'new case study results' },
+        :cs_challenges => { :value => 'new case study challenges' },
+        :cs_lessons => { :value => 'new case study lessons learned' },
+        :cs_steps => { :value => 'new case study next steps' }
       }
     end
     context 'as guest' do

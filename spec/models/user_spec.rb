@@ -492,6 +492,19 @@ describe User do
       it 'should not be able to read contributions' do
         @ability.should_not be_able_to(:read, Contribution)
       end
+
+      describe 'documents' do
+        it 'can read documents in matching groups' do
+          @ability.should be_able_to(:read, Document)
+        end
+        it 'cannot read docs in other groups' do
+          doc = Factory.create(:document)
+          doc.roles.clear
+          doc.roles << Role.find_or_create_by_name('TestRole')
+          @ability.should_not be_able_to :read, doc
+        end
+      end
+
       it 'should not be able to read feedback' do
         @ability.should_not be_able_to(:read, Feedback)
       end
@@ -579,22 +592,59 @@ describe User do
       #it{ should be_able_to(:destroy, Setting) }
     end
 
-    context 'when it is a volunteer' do
-      before(:each) do
-        @user = Factory(:user)
-        @user.roles << Role.find_or_create_by_name('Volunteer')
-        @ability = Ability.new(@user)
-      end
+    for role in [ Volunteer, Staff ] do
 
-      describe 'pages' do
-        it 'should be able to create pages' do
-          @ability.should be_able_to :create, Page
+      context "when it is a #{role}" do
+        before(:each) do
+          @user = Factory(:user)
+          @user.roles << Role.find_or_create_by_name(role)
+          @ability = Ability.new(@user)
         end
-        it 'should be able to edit contributed' do
-          @page = Factory.create(:page)
-          @page.contributions.build(:user_id => @user.id)
-          @page.save!
-          @ability.should be_able_to :update, @page
+
+        describe 'pages' do
+          it 'should be able to create pages' do
+            @ability.should be_able_to :create, Page
+          end
+          it 'should not be able to edit random pages' do
+            @page = Factory.create(:page)
+            @ability.should_not be_able_to :update, @page
+          end
+          it 'should be able to edit contributed' do
+            @page = Factory.create(:page)
+            @page.contributions.build(:user_id => @user.id)
+            @page.save!
+            @ability.should be_able_to :update, @page
+          end
+        end
+
+        describe 'case studies' do
+          it 'should be able to create case studies' do
+            @ability.should be_able_to :create, CaseStudy
+          end
+          it 'should not be able to edit random case studies' do
+            @case_study = Factory.create(:case_study)
+            @ability.should_not be_able_to :update, @case_study
+          end
+          it 'should be able to edit contributed' do
+            @case_study = Factory.create(:case_study)
+            @case_study.contributions.build(:user_id => @user.id)
+            @case_study.save!
+            @ability.should be_able_to :update, @case_study
+          end
+        end
+
+        describe 'documents' do
+          it 'should be able to create documents' do
+            @ability.should be_able_to :create, Document
+          end
+          it 'should not be able to edit random docs' do
+            @doc = Factory.create(:document)
+            @ability.should_not be_able_to :update, @doc
+          end
+          it 'should be able to edit owned docs' do
+            @doc = Factory.create(:document, :user => @user)
+            @ability.should be_able_to :update, @doc
+          end
         end
       end
     end

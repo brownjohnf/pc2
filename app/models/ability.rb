@@ -21,8 +21,6 @@ class Ability
     can :read, Document do |item|
       item.roles.where(:id => user.roles).any?
     end
-
-
     
     if user.role? :admin
       can :manage, :all
@@ -48,8 +46,7 @@ class Ability
         can :read, [ User, Volunteer, Staff ]
 
         can :create, [ Page, CaseStudy, Region, Stage, Moment ]
-        can :update, Moment, :user_id => user.id
-        can :manage, [ Photo, Document, Website, Blog, Library ], :user_id => user.id
+        can :manage, [ Moment, Photo, Document, Website, Blog, Library ], :user_id => user.id
         can [ :read, :create, :update ], [ Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack, :user_id => user.id
 

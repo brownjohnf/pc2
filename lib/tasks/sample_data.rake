@@ -7,7 +7,7 @@ namespace :db do
     make_languages
     make_regiontypes
 		make_regions
-    make_user
+    make_admin
     make_users
     make_volunteers
     make_staff
@@ -44,11 +44,11 @@ def make_sectors
   ])
 end
 
-def make_user
+def make_admin
   jack = User.create!(
     :name => 'Jack Brown',
     :email => 'jack@brownjohnf.com',
-    :password => 'testing',
+    :password => 'testing1',
     :country => 'SN',
   )
   jack.volunteers.create!(
@@ -61,7 +61,7 @@ def make_user
   jack.blogs.create!(
     :title => 'Senegal et al',
     :description => 'Info about my life in Senegal.',
-    :url => 'http://senegaletal.blogspot.com'
+    :url => 'http://senegaletal.brownjohnf.com'
   )
   admin = jack
   admin.roles << Role.find_by_name('Admin')
@@ -78,7 +78,7 @@ end
 def make_users
   25.times do |n|
     user = User.create!(
-      :name => Faker::Name.name, 
+      :name => Faker::Name.name + Faker::Name.name, 
       :email => Faker::Internet.email,
       :password => 'testing', 
       :country => 'SN'
@@ -91,7 +91,7 @@ end
 def make_volunteers
   50.times do |n|
     user = User.create!(
-      :name => Faker::Name.name, 
+      :name => Faker::Name.name + Faker::Name.name, 
       :email => Faker::Internet.email, 
       :password => 'testing', 
       :country => 'SN'
@@ -105,7 +105,7 @@ end
 def make_staff
   25.times do |n|
     user = User.create!(
-      :name => Faker::Name.name, 
+      :name => Faker::Name.name + Faker::Name.name, 
       :email => Faker::Internet.email, 
       :password => 'testing', 
       :country => 'SN'
@@ -142,7 +142,7 @@ def make_pages
     a.all.each do |b|
       page = Page.create!(
         :title => Faker::Company.catch_phrase, 
-        :description => Faker::Lorem.paragraph, 
+        :description => Faker::Company.catch_phrase,
         :content => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
         :language_id => 1+rand(2)
@@ -190,7 +190,8 @@ def make_files
         :name => Faker::Company.catch_phrase,
         :description => Faker::Company.catch_phrase,
         :file => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.pdf')),
-        :source => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.docx'))
+        :source => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.docx')),
+        :country => 'SN'
       )
       document.file_fingerprint = SecureRandom.hex(10)
       document.source_fingerprint = SecureRandom.hex(10)
