@@ -8,14 +8,14 @@
 
 
 Role.create!([
-  {:name => 'Public'},
-  {:name => 'Invitee'},
-  {:name => 'Trainee'},
-  {:name => 'User'},
-  {:name => 'Volunteer'},
-  {:name => 'Staff'},
-  {:name => 'Moderator'},
-  {:name => 'Admin'}
+  {:name => 'Public', :long_name => 'Anyone, all and sundry'},
+  {:name => 'Invitee', :long_name => 'Invitees'},
+  {:name => 'Trainee', :long_name => 'Trainees'},
+  {:name => 'User', :long_name => 'Registered users (PC and non-PC)'},
+  {:name => 'Volunteer', :long_name => 'Peace Corps Volunteers'},
+  {:name => 'Staff', :long_name => 'Peace Corps Staff'},
+  {:name => 'Moderator', :long_name => 'Site Moderators (PCVLs)'},
+  {:name => 'Admin', :long_name => 'Site Administrator'}
 ])
 
 Scope.create!([

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424224800) do
+ActiveRecord::Schema.define(:version => 20120522151908) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -210,8 +210,9 @@ ActiveRecord::Schema.define(:version => 20120424224800) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.string   "long_name",  :default => "Please set a long_name on user roles."
   end
 
   create_table "roles_users", :id => false, :force => true do |t|

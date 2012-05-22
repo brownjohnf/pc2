@@ -50,4 +50,9 @@ FactoryGirl.define do
     association :stackable, :factory => :document
   end
 
+  factory :staff do
+    country 'SN'
+    association :user
+  end
+
 end
