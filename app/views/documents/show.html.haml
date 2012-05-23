@@ -36,16 +36,13 @@
         = change_units @document.source.size
         = mime_icon(@document.source.content_type)
     .well
-      .libraries{:style => (@document.stacks.any? ? nil : 'display:none;')}
-        %h3 Libraries
-        %ul.feed
-          - if @document.stacks.any?
-            - @document.stacks.each do |s|
-              %li.feed_item
-                = link_to s.library.name, s.library if s.id
-                |
-                = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?' if can? :destroy, s
-                .clearfloat
+      - if @document.stacks.any?
+        %h3 Libraries containing this file
+        %ul
+          - @document.stacks.each do |s|
+            %li #{link_to s.library.name, s.library if s.id} #{button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger', :style => 'display:inline-block;' if can? :destroy, s}
+      = link_to 'Add to a library', '#new_stack_form_modal', 'data-toggle' => 'modal', :class => 'btn btn-success' if can? :create, Stack
+      = link_to 'Create a library', new_library_path, :class => 'btn btn-primary' if can? :create, Library
   .span2
     = document_icon_for @document, :size => :small
     .box
