@@ -17,11 +17,19 @@
         - @users.each do |user|
           %tr
             %td= link_to user.name, user
-            %td= user.volunteers.any? ? 'yes' : (link_to('add', new_volunteer_path) if can? :create, Volunteer)
-            %td= user.staff.any? ? 'yes' : (link_to('add', new_staff_path) if can? :create, Staff)
+            %td
+              - if user.volunteers.any?
+                %i.icon-ok
+              - else
+                = link_to 'add', new_volunteer_path(:user_id => user.id), :class => 'btn btn-mini btn-success' if can? :create, Volunteer
+            %td
+              - if user.staff.any?
+                %i.icon-ok
+              - else
+                = link_to 'add', new_staff_path(:user_id => user.id), :class => 'btn btn-mini btn-success' if can? :create, Staff
             %td= Carmen.country_name(user.country) if user.country
             %td= user.created_at.strftime('%d %B %Y')
             %td #{user.updated_at.strftime('%d %B %Y')} (#{time_ago_in_words(user.updated_at)} ago)
-            %td= user.confirmed_at ? 'yes' : 'no'
+            %td= user.confirmed_at ? raw('<i class="icon-ok"/>') : nil
             %td= button_to 'destroy', user, :method => :delete, :confirm => 'This is permanent. Are you sure?', :class => 'btn btn-mini btn-danger' if can? :manage, user
 
