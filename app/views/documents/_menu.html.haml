@@ -1,7 +1,22 @@
 .subnav
   %ul.nav.nav-pills
-    %li= link_to 'Recently updated', documents_path
-    %li= link_to 'Table View', table_documents_path
+    %li.dropdown
+      %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+        View by
+        %b.caret
+      %ul.dropdown-menu
+        %li= link_to 'Recently updated', documents_path
+        %li= link_to 'Table View', table_documents_path
+    %li= link_to 'Upload file', new_document_path if can? :create, Document
+    - if user_signed_in? && @document
+      %li.dropdown
+        %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+          Actions
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to 'Add to library', '#new_stack_form_modal', 'data-toggle' => 'modal' if can? :create, Stack
+          %li= link_to 'Edit', '#edit_document_form_modal', 'data-toggle' => 'modal' if can? :edit, @document
+          %li= link_to 'Delete', '#destroy_document_form_modal', 'data-toggle' => 'modal' if can? :destroy, @document
     = form_tag search_documents_path, :method => :get, :class => 'navbar-form pull-right' do
       = text_field_tag :q, nil, :placeholder => "search within files"
       = submit_tag 'search', :class => 'btn btn-success'
