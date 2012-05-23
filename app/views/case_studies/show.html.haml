@@ -30,27 +30,27 @@
               &nbsp;
             %h2 Approach
             .mercury-region#cs_approach{'data-type' => 'editable'}
-              - if @case_study.context
+              - if @case_study.approach
                 = markdown @case_study.approach
               &nbsp;
             %h2 Results
             .mercury-region#cs_results{'data-type' => 'editable'}
-              - if @case_study.context
+              - if @case_study.results
                 = markdown @case_study.results
               &nbsp;
             %h2 Challenges
             .mercury-region#cs_challenges{'data-type' => 'editable'}
-              - if @case_study.context
+              - if @case_study.challenges
                 = markdown @case_study.challenges
               &nbsp;
             %h2 Lessons Learned
             .mercury-region#cs_lessons{'data-type' => 'editable'}
-              - if @case_study.context
+              - if @case_study.lessons_learned
                 = markdown @case_study.lessons_learned
               &nbsp;
             %h2 Next Steps
             .mercury-region#cs_steps{'data-type' => 'editable'}
-              - if @case_study.context
+              - if @case_study.next_steps
                 = markdown @case_study.next_steps
               &nbsp;
           .tab-pane#edit
