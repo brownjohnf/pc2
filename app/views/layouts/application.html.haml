@@ -24,14 +24,5 @@
         .row
           .span12
             = debug(params)
-        .row
-          .span12
-            .well
-              Class: #{params[:controller]}
-              %br
-              ID: #{params[:action]}
-              %br
-              Host:
-              = request.host
     = render 'layouts/footer'
     = render 'shared/zopim' unless Rails.env.development?

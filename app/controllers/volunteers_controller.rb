@@ -24,7 +24,7 @@ class VolunteersController < ApplicationController
   # GET /volunteers/new
   # GET /volunteers/new.json
   def new
-    @volunteer = Volunteer.new
+    @volunteer = Volunteer.new(:user_id => params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
