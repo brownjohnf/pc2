@@ -288,11 +288,11 @@ window.Mercury = {
     // The handler function should take the response from the server and return an object that matches:
     // `{image: {url: '[your provided url]'}`
     uploading: {
-      enabled: false,
+      enabled: true,
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',
-      url: '/mercury/images',
+      url: '/photos',
       handler: false
       },
 
@@ -447,7 +447,7 @@ window.Mercury = {
     //
     // {{regionClass}} will be automatically replaced with whatever you have set in the regions.class config directive.
     injectedStyles: '' +
-      '.{{regionClass}} { min-height: 10px; outline: 1px dotted #09F } ' +
+      '.{{regionClass}} { min-height: 2em; outline: 1px dotted #09F; margin: 5px; } ' +
       '.{{regionClass}}:focus, .{{regionClass}}.focus { outline: none; -webkit-box-shadow: 0 0 10px #09F, 0 0 1px #045; box-shadow: 0 0 10px #09F, 0 0 1px #045 }' +
       '.{{regionClass}}:after { content: "."; display: block; visibility: hidden; clear: both; height: 0; overflow: hidden; }' +
       '.{{regionClass}} table, .{{regionClass}} td, .{{regionClass}} th { border: 1px dotted red; min-width: 6px; }' +

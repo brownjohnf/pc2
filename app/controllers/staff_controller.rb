@@ -24,7 +24,7 @@ class StaffController < ApplicationController
   # GET /staff/new
   # GET /staff/new.json
   def new
-    @staff = Staff.new
+    @staff = Staff.new(:user_id => params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb

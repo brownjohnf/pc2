@@ -3,7 +3,6 @@
     .floatleft= document_icon_for document, :size => size ||= :thumb
     %h3
       = link_to document.name, document
-      = link_to 'edit', edit_document_path(document) if can? :update, document
       %small
         = time_ago_in_words(document.updated_at)
         ago by
