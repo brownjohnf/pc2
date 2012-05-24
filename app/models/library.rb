@@ -67,6 +67,15 @@ class Library < ActiveRecord::Base
     photos
   end
 
+  # retrieves the actual case study objects from the stacks
+  def case_studies
+    case_studies = []
+    stacks.case_studies.all.each do |stack|
+      case_studies << stack.stackable
+    end
+    case_studies
+  end
+
   def mp3s
     mp3s = []
     stacks.documents.all.each do |stack|

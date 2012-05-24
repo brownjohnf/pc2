@@ -9,13 +9,25 @@ class CaseStudy < ActiveRecord::Base
   # through the contribution connection
   has_many :contributions, :as => :contributable, :dependent => :destroy
   has_many :contributors, :through => :contributions, :source => :user
+  has_many :stacks, :as => :stackable, :dependent => :destroy
+  has_many :libraries, :through => :stacks
 
   belongs_to :language
   belongs_to :photo
 
+  accepts_nested_attributes_for :stacks
+
   before_save :clear_empty_attrs
   
   default_scope :order => 'updated_at DESC'
+
+  def canonical_title
+    self.title
+  end
+
+  def to_param
+    "#{id}-#{canonical_title.parameterize}"
+  end
 
   private
 

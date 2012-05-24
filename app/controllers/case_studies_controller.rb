@@ -75,7 +75,7 @@ class CaseStudiesController < ApplicationController
   # POST /case_studies
   # POST /case_studies.json
   def create
-    @case_study = CaseStudy.new(params[:case_study])
+    @case_study = CaseStudy.new(params[:case_study].merge(:summary => 'Welcome to your new case study! May it bring joy to your life, and the lives of others.<hr>You can begin adding content by choosing Actions->Edit.'))
 
     respond_to do |format|
       if @case_study.save

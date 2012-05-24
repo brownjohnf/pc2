@@ -11,44 +11,33 @@
         = time_ago_in_words(@case_study.updated_at)
         ago
     = render 'shared/tags', :tags => @case_study.tag_list
-    %hr
     - if can? :update, @case_study
-      .tabbable
-        %ul.nav.nav-tabs
-          %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
-          %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }, :rel => 'popover-top', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit using Mercury, we strongly suggest you get a <em>real</em> browser such as Firefox or Chrome."
-          %li= link_to 'properties', '#edit', 'data-toggle' => 'tab'
-          %li= link_to 'destroy', '#destroy_case_study_form_modal', 'data-toggle' => 'modal'
-        .tab-content
-          .tab-pane#view.active
-            .mercury-region#cs_summary{'data-type' => 'editable'}
-              = markdown @case_study.summary
-            %h2 Context
-            .mercury-region#cs_context{'data-type' => 'editable'}
-              - if @case_study.context
-                = markdown @case_study.context
-            %h2 Approach
-            .mercury-region#cs_approach{'data-type' => 'editable'}
-              - if @case_study.approach
-                = markdown @case_study.approach
-            %h2 Results
-            .mercury-region#cs_results{'data-type' => 'editable'}
-              - if @case_study.results
-                = markdown @case_study.results
-            %h2 Challenges
-            .mercury-region#cs_challenges{'data-type' => 'editable'}
-              - if @case_study.challenges
-                = markdown @case_study.challenges
-            %h2 Lessons Learned
-            .mercury-region#cs_lessons{'data-type' => 'editable'}
-              - if @case_study.lessons_learned
-                = markdown @case_study.lessons_learned
-            %h2 Next Steps
-            .mercury-region#cs_steps{'data-type' => 'editable'}
-              - if @case_study.next_steps
-                = markdown @case_study.next_steps
-          .tab-pane#edit
-            = render 'form'
+      .mercury-region#cs_summary{'data-type' => 'editable'}
+        = markdown @case_study.summary
+      %h2 Context
+      .mercury-region#cs_context{'data-type' => 'editable'}
+        - if @case_study.context
+          = markdown @case_study.context
+      %h2 Approach
+      .mercury-region#cs_approach{'data-type' => 'editable'}
+        - if @case_study.approach
+          = markdown @case_study.approach
+      %h2 Results
+      .mercury-region#cs_results{'data-type' => 'editable'}
+        - if @case_study.results
+          = markdown @case_study.results
+      %h2 Challenges
+      .mercury-region#cs_challenges{'data-type' => 'editable'}
+        - if @case_study.challenges
+          = markdown @case_study.challenges
+      %h2 Lessons Learned
+      .mercury-region#cs_lessons{'data-type' => 'editable'}
+        - if @case_study.lessons_learned
+          = markdown @case_study.lessons_learned
+      %h2 Next Steps
+      .mercury-region#cs_steps{'data-type' => 'editable'}
+        - if @case_study.next_steps
+          = markdown @case_study.next_steps
     - else
       = markdown @case_study.summary
       - if @case_study.context
@@ -89,9 +78,18 @@
               = link_to c.user.name, c.user
               - if can? :destroy, c
                 %small= button_to 'remove', c, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger btn-mini'
-    
+      - if @case_study.stacks.any?
+        %li.nav-header Libraries
+        - @case_study.stacks.each do |s|
+          %li
+            = link_to s.library.name, s.library
+            = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' if can? :destroy, s
     %hr
     %h3 Popular Tags
     = cloud_of_tags CaseStudy
+- if can? :edit, @case_study
+  = render 'shared/modal_standard', :id => 'edit_case_study_form_modal', :title => 'Edit properties', :body => render('case_studies/form')
 - if can? :destroy, @case_study
   = render 'shared/modal_standard', :id => 'destroy_case_study_form_modal', :title => 'Are you sure?', :body => button_to('Delete case study', @case_study, :method => :delete, :class => 'btn btn-danger')
+- if can? :create, Stack
+  = render 'shared/modal_standard', :id => 'new_stack_form_modal', :title => 'Add to library', :body => render('case_studies/stacks_form')
