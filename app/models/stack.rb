@@ -18,5 +18,6 @@ class Stack < ActiveRecord::Base
 
   scope :documents, where(:stackable_type => 'Document').includes(:stackable)
   scope :photos, where(:stackable_type => 'Photo').includes(:stackable)
+  scope :case_studies, where(:stackable_type => 'CaseStudy').includes(:stackable)
 
 end
