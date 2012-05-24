@@ -1,11 +1,7 @@
-= semantic_form_for(@case_study) do |f|
-  = f.semantic_errors
-  %h3 About the case study
-  = f.inputs :title, :photo, :language, :tag_list
-  - if can? :manage, Page
-    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
-  - else
-    = f.input :country, :as => :select, :collection => current_user.countries, :include_blank => false
-  %h3 Body of study
-  = f.inputs :summary, :context, :approach, :results, :challenges, :lessons_learned, :next_steps
-  = f.buttons
+= bootstrap_form_for @case_study do |f|
+  = f.text_field :title
+  = f.collection_select :language_id, Language.all, :id, :name, :include_blank => false
+  = f.select :country, current_user.countries, :include_blank => false
+  = f.collection_select :photo_id, current_user.photos.all, :id, :title, :include_blank => true
+  = f.text_field :tag_list
+  = f.actions
