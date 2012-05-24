@@ -13,12 +13,12 @@
     = render 'shared/tags', :tags => @case_study.tag_list
     %hr
     - if can? :update, @case_study
-      .tabbable.tabs-right
+      .tabbable
         %ul.nav.nav-tabs
           %li.active= link_to 'view', '#view', 'data-toggle' => 'tab'
           %li= link_to 'edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }, :rel => 'popover-top', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit using Mercury, we strongly suggest you get a <em>real</em> browser such as Firefox or Chrome."
           %li= link_to 'properties', '#edit', 'data-toggle' => 'tab'
-          %li= link_to 'destroy', '#destroy', 'data-toggle' => 'tab'
+          %li= link_to 'destroy', '#destroy_case_study_form_modal', 'data-toggle' => 'modal'
         .tab-content
           .tab-pane#view.active
             .mercury-region#cs_summary{'data-type' => 'editable'}
@@ -49,10 +49,6 @@
                 = markdown @case_study.next_steps
           .tab-pane#edit
             = render 'form'
-          .tab-pane#destroy
-            .well
-              %h1 You sure?
-              = button_to 'Destroy this case study', @case_study, method: :delete, confirm: 'are you sure?', :class => 'btn btn-danger' if can? :destroy, @case_study
     - else
       = markdown @case_study.summary
       - if @case_study.context
@@ -97,3 +93,5 @@
     %hr
     %h3 Popular Tags
     = cloud_of_tags CaseStudy
+- if can? :destroy, @case_study
+  = render 'shared/modal_standard', :id => 'destroy_case_study_form_modal', :title => 'Are you sure?', :body => button_to('Delete case study', @case_study, :method => :delete, :class => 'btn btn-danger')

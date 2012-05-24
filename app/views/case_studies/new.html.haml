@@ -1,10 +1,17 @@
 .row
   .span3
     = render 'shared/menu'
-  .span7
-    %h1 Add a new case study
-    = render 'form'
-  .span2
+  .span4.offset1
+    .well
+      %h1 Create a case study
+      = bootstrap_form_for @case_study do |f|
+        = f.text_field :title
+        = f.collection_select :language_id, Language.all, :id, :name
+        = f.select :country, current_user.countries, :include_blank => false
+        = f.collection_select :photo_id, current_user.photos.all, :id, :title
+        = f.text_field :tag_list
+        = f.actions
+  .span2.offset2
     %h3 Popular Tags
     = cloud_of_tags CaseStudy
 
