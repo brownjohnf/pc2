@@ -36,6 +36,11 @@ class StaticsController < ApplicationController
     CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight_small').each do |cs|
       @spotlights_small << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:spotlight), :path => cs} if cs.photo
     end
+    Library.order('updated_at DESC').tagged_with('spotlight_small').each do |lib|
+      if lib.photos.any?
+        @spotlights_small << {:title => lib.canonical_title, :text => lib.description, :photo => lib.photos.first.photo.url(:spotlight), :path => lib}
+      end
+    end
     
     @spotlights_large = []
     Photo.order('updated_at DESC').tagged_with('spotlight_large').each do |p|
@@ -46,6 +51,11 @@ class StaticsController < ApplicationController
     end
     CaseStudy.order('updated_at DESC').where('photo_id IS NOT NULL').tagged_with('spotlight_large').each do |cs|
       @spotlights_large << {:title => cs.title, :text => cs.summary, :photo => cs.photo.photo.url(:spotlight), :path => cs} if cs.photo
+    end
+    Library.order('updated_at DESC').tagged_with('spotlight_large').each do |lib|
+      if lib.photos.any?
+        @spotlights_small << {:title => lib.canonical_title, :text => lib.description, :photo => lib.photos.first.photo.url(:spotlight), :path => lib}
+      end
     end
 
     respond_to do |format|
