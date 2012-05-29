@@ -58,6 +58,32 @@
       - if @case_study.next_steps
         %h2 Next Steps
         = markdown @case_study.next_steps
+    :erb
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'pcsenegal'; // required: replace example with your forum shortname
+        // turn on dev mode for dev/test env
+        var disqus_developer = <%= Rails.env.production? ? 0 : 1 %>;
+        // identify current page
+        var disqus_identifier = "case_study-<%= @case_study.id %>";
+        // identify current url
+        var disqus_url = "<%= case_study_url(@case_study) %>";
+        // set the thread title
+        var disqus_title = "<%= @case_study.canonical_title %>";
+        // set the category to pages
+        var disqus_category_id = '1483652';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
   .span2
     = avatar_for @case_study, :size => :small
     = render 'shared/social'

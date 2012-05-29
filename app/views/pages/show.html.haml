@@ -58,6 +58,16 @@
       <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'pcsenegal'; // required: replace example with your forum shortname
+        // turn on dev mode for dev/test env
+        var disqus_developer = <%= Rails.env.production? ? 0 : 1 %>;
+        // identify current page
+        var disqus_identifier = "page-<%= @page.id %>";
+        // identify current url
+        var disqus_url = "<%= page_url(@page) %>";
+        // set the thread title
+        var disqus_title = "<%= @page.canonical_title %>";
+        // set the category to pages
+        var disqus_category_id = '1483633';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
