@@ -118,4 +118,4 @@
 - if can? :destroy, @case_study
   = render 'shared/modal_standard', :id => 'destroy_case_study_form_modal', :title => 'Are you sure?', :body => button_to('Delete case study', @case_study, :method => :delete, :class => 'btn btn-danger')
 - if can? :create, Stack
-  = render 'shared/modal_standard', :id => 'new_stack_form_modal', :title => 'Add to library', :body => render('case_studies/stacks_form')
+  = render 'shared/modal_standard', :id => 'new_stack_form_modal', :title => 'Add to a library', :body => render('case_studies/stacks_form')

@@ -1,8 +1,10 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-15
-      %h1= @title
-      %p All content hosted through this application is safe and secure. For more information please view our #{link_to 'privacy policy', '/privacy'}.
-    .span-4.last
+    .span7
+      .hero-unit
+        %h1= @title
+        %p We take privacy and security seriously, and every effort has been made to protect your personal information. For more information please view our #{link_to 'privacy policy', '/privacy'}.
+        %p This website uses redundant, 99.999999999% durable storage, and is therefore a reliable way to store institutional memory.
+    .span2

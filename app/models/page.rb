@@ -10,6 +10,10 @@ class Page < ActiveRecord::Base
   belongs_to :language
 
   has_many :photos, :as => :imageable
+
+  # for library/stack association
+  has_many :stacks, :as => :stackable, :dependent => :destroy
+  has_many :libraries, :through => :stacks
   
   # first connects each one of this model to all of the contributables which which reference it
   # then connects to all users attached to all those connections by a renamed tunnel

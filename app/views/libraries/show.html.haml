@@ -24,6 +24,7 @@
         %li.active= link_to 'Files', '#files', 'data-toggle' => 'tab'
         %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
         %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
+        %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
       .tab-content
         .tab-pane#files.active
           = render @library.documents
@@ -31,5 +32,7 @@
           = render @library.photos
         .tab-pane#case_studies
           = render @library.case_studies
+        .tab-pane#pages
+          = render @library.pages
 = render 'shared/modal_standard',:id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => raw("<p>#{shorten_url(library_url(@library))}<p>#{link_to 'Why is this not a link?', '/help#shortlinks'}</p>"), :footer => nil
 = render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(library_url(@library), :qr, :medium => 'qrcode')) + raw("<p>#{link_to 'What do I do with this?', '/help#qrcodes'}</p>"), :footer => nil
