@@ -2,6 +2,6 @@
 = bootstrap_form_for stack do |f|
   = f.hidden_field(:stackable_id)
   = f.hidden_field(:stackable_type)
-  = f.collection_select :library_id, Library.available(@document, (can?(:manage, Document) ? nil : current_user)), :id, :name
+  = f.collection_select :library_id, Library.order('name ASC').available(@document, (can?(:manage, Document) ? nil : current_user)), :id, :name
   = f.actions do
     = f.submit 'add to library'
