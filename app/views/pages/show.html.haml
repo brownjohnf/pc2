@@ -37,6 +37,7 @@
       %p= @page.description
       .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
+    %hr
     :erb
       <div id="disqus_thread"></div>
       <script type="text/javascript">
