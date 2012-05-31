@@ -1,8 +1,11 @@
 .container
   .row
-    .span-5
+    .span3
       = render 'shared/menu'
-    .span-15
-      %h1= @title
-      %p We will never give, sell, or in any way communicate any personal information to anyone, save with the owner of said information's express permission.
-    .span-4.last
+    .span7
+      .hero-unit
+        %h1= @title
+        %p We will never give, sell, or in any way communicate any personal information to anyone, save with the owner of said information's permission, with the following exceptions:
+        %ol
+          %li If you are a Peace Corps Volunteer/staff member, your contact information will be shared with other signed in PCVs/staff.
+    .span2

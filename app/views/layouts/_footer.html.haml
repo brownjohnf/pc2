@@ -9,9 +9,24 @@
           %li.divider
           %li= link_to 'Recently added', added_pages_path
           %li= link_to 'Recently updated', updated_pages_path
-          %li= link_to 'Most popular', ''
           %li= link_to 'Site map', pages_path
       .span2
+        %ul.nav.nav-list
+          %li.nav-header Case Studies
+          %li.divider
+          %li= link_to 'Recently added', added_case_studies_path
+          %li= link_to 'Recently updated', updated_case_studies_path
+      .span2
+        %ul.nav.nav-list
+          %li.nav-header Photos
+          %li.divider
+          %li= link_to 'Recently added', photos_path
+        %ul.nav.nav-list
+          %li.nav-header Files
+          %li.divider
+          %li= link_to 'Recently added', documents_path
+          %li= link_to 'Searchable table', table_documents_path
+      -#.span2
         %ul.nav.nav-list
           %li.nav-header Blogs
           %li= link_to 'View by region', ''
@@ -19,7 +34,7 @@
           %li= link_to 'View by sector', ''
           %li= link_to 'Most popular', ''
           %li= link_to 'Recently updated', ''
-      .span2
+      -#.span2
         %ul.nav.nav-list
           %li.nav-header Lessons
           %li= link_to 'View by sector', ''
@@ -29,8 +44,8 @@
           %li= link_to 'Search', ''
       .span2
         %ul.nav.nav-list
-          %li.nav-header Profiles &amp; Photos
-          %li= link_to 'Search', ''
+          %li.nav-header Miscellaneous
+          %li= link_to 'Search', search_path
           %li= link_to 'Photo Albums', libraries_path
           %li= link_to 'Browse profiles', users_path
 .container
