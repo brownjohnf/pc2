@@ -2,8 +2,8 @@ postgres: &postgres
   adapter: postgresql
   host: localhost
   port: 5432
-  username: pc2
-  password: pc2
+  username: dev
+  password: dev
   encoding: unicode
 
 sqlite: &sqlite
