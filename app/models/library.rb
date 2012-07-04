@@ -76,6 +76,14 @@ class Library < ActiveRecord::Base
     case_studies
   end
 
+  def pages
+    pages = []
+    stacks.pages.all.each do |stack|
+      pages << stack.stackable
+    end
+    pages
+  end
+
   def mp3s
     mp3s = []
     stacks.documents.all.each do |stack|

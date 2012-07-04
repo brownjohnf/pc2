@@ -127,7 +127,7 @@ Set up Facebook and YouTube redirects
 
 #### Sign in as admin, change password
 
-Sign is as user 'Administrator', password 'password'
+Sign is as user 'admin@example.com', password 'password'
 Change the name/email/password to be whatever you want
 Make sure it's secure
 

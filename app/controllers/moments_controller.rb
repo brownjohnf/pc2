@@ -79,6 +79,10 @@ class MomentsController < ApplicationController
   # POST /moments.json
   def create
     @moment = current_user.moments.build(params[:moment])
+    for photo in @moment.photos do
+      photo.imageable_id = User.find_by_email('emily@emilyschauer.com').id
+      photo.imageable_type = 'Moment'
+    end
 
     respond_to do |format|
       if @moment.save

@@ -131,6 +131,7 @@
             - else
               .well
                 %p This user has not uploaded any photos.
+            %p= link_to 'view all photos', photos_path
           .tab-pane#documents
             - if @user.documents.any?
               .box
