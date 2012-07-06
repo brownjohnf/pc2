@@ -5,6 +5,9 @@
   .span8.offset3
     %h1
       = (@photo.title) ? @photo.title : @photo.photo_file_name
+      %small
+        uploaded by
+        = link_to @photo.user.name, @photo.user
     %p
       = @photo.description
       = render 'shared/tags', :tags => @photo.tag_list
