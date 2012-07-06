@@ -29,10 +29,10 @@ class Moment < ActiveRecord::Base
   def text
     # if photo and content, use the photo for media, but link to full content here
     if photo && content
-      ActiveSupport::JSON.encode('<p>' + summary + '</p><p>' + truncate(content, :length => 150, :separator => ' ') + '</p><p>Submitted by <a href="/users/' + user.id.to_s + '">' + user.name + '</a><br />' + Carmen.country_name(country) + '</p><p><a href="/moments/' + id.to_s + '">see the full event</a></p>')
+      ActiveSupport::JSON.encode('<p>' + summary + '</p><p>' + truncate(content, :length => 150, :separator => ' ') + '</p><p>Submitted by <a href="/users/' + user.id.to_s + '">' + user.name + '</a><br />' + Carmen.country_name(country) + '</p><p><a href="/moments/' + id.to_s + '" target="_blank">see the full event</a></p>')
     # elsif no photo, but content, don't link to the content because it'll be used for media
     elsif content
-      ActiveSupport::JSON.encode('<p>' + summary + '</p><p>Submitted by <a href="/users/' + user.id.to_s + '">' + user.name + '</a><br />' + Carmen.country_name(country) + '</p><p><a href="/moments/' + id.to_s + '">read the full story</a></p>')
+      ActiveSupport::JSON.encode('<p>' + summary + '</p><p>Submitted by <a href="/users/' + user.id.to_s + '">' + user.name + '</a><br />' + Carmen.country_name(country) + '</p><p><a href="/moments/' + id.to_s + '" target="_blank">read the full story</a></p>')
     # if no photo and no content, just show the contributor, because the summary will be used for media
     else
       ActiveSupport::JSON.encode('<p><div style="display:inline-block;float:left;">' + user.name + '</div>Submitted by ' + user.name + '<br />' + Carmen.country_name(country) + '</p>')
