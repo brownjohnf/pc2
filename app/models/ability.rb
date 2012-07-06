@@ -56,9 +56,11 @@ class Ability
 
       end
       if user.role? :moderator
-        can :manage, [ Document, Photo, Library ] do |item|
+        can :manage, [ Document, Photo, Library, Moment, Page ] do |item|
           user.country_list.include?(item.country)
         end
+        can :download_source, Document
+        can :manage, [ Stage, Stack, Contribution ]
         can :read, Feedback
       end
     end

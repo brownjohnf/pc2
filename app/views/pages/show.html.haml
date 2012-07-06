@@ -32,7 +32,7 @@
     - if can? :edit, @page
       %p= @page.description
       .tags.right= render 'shared/tags', :tags => @page.tag_list
-      .mercury-region#page_content{'data-type' => 'editable'}= @page.content
+      .mercury-region#page_content{'data-type' => 'editable'}= raw(@page.content)
     - else
       %p= @page.description
       .tags.right= render 'shared/tags', :tags => @page.tag_list
