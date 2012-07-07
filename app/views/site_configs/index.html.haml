@@ -1,0 +1,21 @@
+.container
+  .row
+    .span3
+      = render 'shared/menu'
+    .span9
+      %h1 Site Configuration Settings
+
+      %table
+        %tr
+          %th Name
+          %th Setting
+          %th Description
+          %th Photo
+          %th File
+        - @site_configs.each do |site_config|
+          %tr
+            %td= link_to site_config.name, edit_site_config_path(site_config)
+            %td= site_config.setting
+            %td= site_config.description
+            %td= image_tag(site_config.photo.url(:thumb)) if site_config.photo?
+            %td= site_config.file.file_file_name if site_config.file?
