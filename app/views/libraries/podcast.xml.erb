@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
 	<channel>
-		<%= render 'shared/podcast' %>
+    <%= render 'shared/podcast' %>
 		<% @mp3s.each do |mp3| %>
 			<item>
 				<title><%= mp3.name %></title>
