@@ -10,6 +10,7 @@
         %th Last Updated
         %th Author
         %th Language
+        %th Tags
         %th Size
         %th Permissions
         %th Source?
@@ -25,6 +26,7 @@
               = link_to document.user.name, document.user
             %td= document.author
             %td= document.language.name if document.language
+            %td= document.tag_list
             %td
               = document.file.size
               bytes
