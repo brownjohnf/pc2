@@ -14,7 +14,7 @@
     {
       "startDate": "<%= moment.startdate.strftime("%Y,%m,%d") %>",
       "headline": <%= raw(ActiveSupport::JSON.encode(moment.headline)) %>,
-      "text": <%= raw(ActiveSupport::JSON.encode(truncate(moment.text, :length => 200, :separator => ' ') + '<p>' + link_to('read the rest of the story', moment, :target => '_blank') + '<br/>' + (can?(:update, moment) ? link_to('edit', edit_moment_path(moment), :target => '_blank') : nil) + '</p>')) %>,
+      "text": <%= raw(ActiveSupport::JSON.encode(truncate(moment.text, :length => 200, :separator => ' ') + '<p>' + link_to('read the rest of the story', moment, :target => '_blank') + '<br/>' + ((user_signed_in? && can?(:update, moment)) ? link_to('edit', edit_moment_path(moment), :target => '_blank') : '&nbsp;') + '</p>')) %>,
       "asset": {
       "media": <%= raw(ActiveSupport::JSON.encode(truncate(moment.select_media, :length => 600, :separator => ' '))) %>,
         "credit": <%= raw(ActiveSupport::JSON.encode(moment.credit)) %>,
