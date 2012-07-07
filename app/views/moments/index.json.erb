@@ -16,7 +16,7 @@
       "headline": <%= raw(ActiveSupport::JSON.encode(moment.headline)) %>,
       "text": <%= raw(ActiveSupport::JSON.encode(moment.text + '<p>' + link_to('read the rest of the story', moment, :target => '_blank') + '<br/>' + (can?(:update, moment) ? link_to('edit', edit_moment_path(moment), :target => '_blank') : nil) + '</p>')) %>,
       "asset": {
-        "media": <%= raw(ActiveSupport::JSON.encode(moment.media)) %>,
+        "media": <%= raw(ActiveSupport::JSON.encode(truncate(moment.media, :length => 500, :separator => ' '))) %>,
         "credit": <%= raw(ActiveSupport::JSON.encode(moment.credit)) %>,
         "caption": <%= raw(ActiveSupport::JSON.encode(moment.caption)) %>
       }
