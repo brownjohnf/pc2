@@ -11,7 +11,7 @@
   %ul.nav
     %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
     %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
-    %li= link_to '50th Timeline', timeline_path
+    %li= link_to 'Timeline', timeline_path
     %ul.nav
       %li.dropdown
         %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
