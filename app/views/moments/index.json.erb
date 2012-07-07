@@ -16,7 +16,7 @@
       "headline": "<%= moment.headline %>",
       "text": "<%= raw(moment.text) %>",
       "asset": {
-        "media": "<%= raw(moment.media) %>",
+        "media": <%= raw(ActiveSupport::JSON.encode(moment.media)) %>,
         "credit": "<%= raw(moment.credit) %>",
         "caption": "<%= raw(moment.caption) %>"
       }
