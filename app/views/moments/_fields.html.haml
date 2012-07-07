@@ -6,9 +6,10 @@
   = f.hidden_field :country, :value => current_user.country
 .control-group
   %label.control-label Event Date
-= f.date_select :datapoint, :start_year => 1963, :end_year => Time.now.year
-= f.text_field :title
-= f.text_field :summary
+= f.date_select :startdate, :start_year => 1963, :end_year => Time.now.year
+= f.date_select :enddate, :start_year => 1963, :end_year => Time.now.year
+= f.text_field :headline
+= f.text_field :text
 %p You can include one of the following items as your moment content:
 %ul
   %li Text. Simply start typing! Needs to be formatted in HTML.
@@ -20,7 +21,13 @@
   %li Tweet. Use the link to the tweet status.
   %li SoundCloud. Paste the link to the track.
 %p If that doesn't cover your needs, get in touch with us, and we can accomadate you.
-= f.text_area :content
+= f.text_area :media
+= f.text_field :caption
+= f.text_field :credit
+= f.collection_select :region_id, Region.all, :id, :name
+= f.collection_select :site_id, Site.all, :id, :name
+= f.text_field :years_of_service
+= f.text_field :sector
 %h2 Attach a photo
 = f.fields_for :photos do |p|
   = p.hidden_field :user_id, :value => current_user.id
