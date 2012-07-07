@@ -12,8 +12,15 @@ class SiteConfig < ActiveRecord::Base
       :full => '1140x1140>'
     },
     :convert_options => { :all => "-auto-orient" },
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    },
+    :url => :s3_alias_url,
+    :s3_host_alias => ENV['CDN_NAME'],
+    :bucket => ENV['S3_BUCKET'],
+    :path => 'config_photos/:id/:style/:filename'
   }
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
@@ -23,8 +30,14 @@ class SiteConfig < ActiveRecord::Base
   ]
 
   has_attached_file :file, {
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    },
+    :s3_host_alias => ENV['CDN_NAME'],
+    :bucket => ENV['S3_BUCKET'],
+    :path => 'config_files/:id/:style/:filename'
   }
   validates_attachment_content_type :file, :content_type => [
     'text/plain'
