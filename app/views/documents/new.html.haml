@@ -15,5 +15,6 @@
             %p The following tags have been used on more than 2 files already; consider using them to maintain consistency.
             %hr
             - for tag in Document.tag_counts.order('name ASC') do
-              = tag.name if (Document.tagged_with(tag.name).count > 2)
-              %br
+              - if Document.tagged_with(tag.name).count > 2
+                = tag.name
+                %br
