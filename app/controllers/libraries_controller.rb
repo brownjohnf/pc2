@@ -121,6 +121,7 @@ class LibrariesController < ApplicationController
     @description = @library.description
     @itunes_name = 'Peace Corps Senegal'
     @itunes_email = 'admin@pcsenegal.org'
+    @image = @library.avatar.photo.url(:icon)
 
     # the mp3 files
     @mp3s = @library.mp3s

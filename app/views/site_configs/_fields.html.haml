@@ -1,0 +1,7 @@
+%h1= @site_config.name
+%p= @site_config.description
+= f.text_field :setting
+= f.file_field :photo
+= link_to(image_tag(@site_config.photo.url(:thumb), :style => 'border:1px solid #000;'), @site_config.photo.url(:large)) if @site_config.photo?
+= f.file_field :file
+= @site_config.file? ? link_to('preview', @site_config.file.path) : 'no file'

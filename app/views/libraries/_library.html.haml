@@ -1,5 +1,5 @@
 .feed_item
-  .floatleft= link_to image_tag((library.photos.any? ? library.photos.first.photo.url(:icon) : 'blank.png'), :width => '80'), library, :class => 'avatar'
+  .floatleft= link_to(image_tag(library.avatar.photo(:icon), :width => '80'), library, :class => 'avatar')
   %h3
     = flag_icon(library.country.downcase)
     = link_to library.name, library

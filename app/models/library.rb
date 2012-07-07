@@ -17,6 +17,10 @@ class Library < ActiveRecord::Base
 
   validates :name, :user_id, :country, :presence => true
 
+  def avatar
+    photos.any? ? photos.first : SiteConfig.find_by_name('default_avatar')
+  end
+
   def self.available(item, user = nil)
     # no libraries, no user
     if item.libraries.empty? && user.nil?

@@ -179,6 +179,10 @@
               %li= link_to "region types", regiontypes_path
               %li= link_to "scopes", scopes_path
               %li= link_to "sectors (#{Sector.count})", sectors_path
+              %li
+                = link_to site_configs_path do
+                  %i.icon-cog
+                  Site Configuration
               %li= link_to "sites (#{Site.count})", sites_path
               %li= link_to "stacks", stacks_path
               %li
