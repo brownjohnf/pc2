@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @site_config.name
+%p
+  %b Setting:
+  = @site_config.setting
+%p
+  %b Description:
+  = @site_config.description
+
+= link_to 'Edit', edit_site_config_path(@site_config)
+\|
+= link_to 'Back', site_configs_path

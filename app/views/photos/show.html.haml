@@ -19,6 +19,7 @@
         - @photo.stacks.each do |s|
           %li
             = link_to s.library.name, s.library if s.id
+            = button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' if can? :destroy, s
       - else
         %li= link_to 'No libraries', libraries_path
       %hr

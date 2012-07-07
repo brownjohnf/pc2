@@ -1,5 +1,7 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :site_configs, :except => [ :new, :create, :destroy, :show ]
+
   Mercury::Engine.routes
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

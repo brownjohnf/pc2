@@ -24,6 +24,7 @@ class Ability
     
     if user.role? :admin
       can :manage, :all
+      cannot [ :create, :destroy ], SiteConfig
 
     elsif user.role? :user
       can :read, :welcome
