@@ -30,6 +30,7 @@
 = f.text_field :sector
 %hr
 %h2 Attach a photo
+%p WARNING! If you attach a photo, the media field will be ignored in the dynamic timeline!
 = f.fields_for :photos do |p|
   = p.hidden_field :user_id, :value => current_user.id
   = p.file_field :photo

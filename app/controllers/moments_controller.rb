@@ -61,7 +61,9 @@ class MomentsController < ApplicationController
   # GET /moments/new.json
   def new
     @moment = Moment.new
-    @photo = @moment.photos.build
+    5.times do
+      @moment.photos.build
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -72,7 +74,7 @@ class MomentsController < ApplicationController
   # GET /moments/1/edit
   def edit
     @moment = Moment.find(params[:id])
-    @moment.photos.build unless @moment.photos.any?
+    @moment.photos.build
   end
 
   # POST /moments
@@ -80,8 +82,8 @@ class MomentsController < ApplicationController
   def create
     @moment = current_user.moments.build(params[:moment])
     for photo in @moment.photos do
-      photo.imageable_id = User.find_by_email('emily@emilyschauer.com').id
-      photo.imageable_type = 'Moment'
+      photo.imageable_id = @moment.user.id
+      photo.imageable_type = 'User'
     end
 
     respond_to do |format|

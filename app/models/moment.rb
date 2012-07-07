@@ -9,7 +9,13 @@ class Moment < ActiveRecord::Base
 
   has_many :photos, :as => :imageable
 
-  validates :headline, :text, :user_id, :startdate, :country, :presence => true
+  validates :user_id, :startdate, :country, :presence => true
+  validates :caption, :length => { :maximum => 255 }
+  validates :headline, :presence => true, :length => { :maximum => 255 }, :uniqueness => true
+  validates :credit, :length => { :maximum => 255 }
+  validates :years_of_service, :length => { :maximum => 255 }
+  validates :text, :uniqueness => true
+  validates :media, :uniqueness => true
   accepts_nested_attributes_for :photos, :reject_if => lambda { |a| a[:photo].nil? }, :allow_destroy => true
 
   before_validation :set_values
@@ -39,23 +45,22 @@ class Moment < ActiveRecord::Base
       ActiveSupport::JSON.encode('<p><div style="display:inline-block;float:left;">' + user.name + '</div>Submitted by ' + user.name + '<br />' + Carmen.country_name(country) + '</p>')
     end
   end
+=end
 
-  def media
-    # if photo and content, use the photo
-    if photo && content
-      ActiveSupport::JSON.encode(photo.photo.url(:large))
-    # if the content's short enough to likely be a URL (youtube, site, vimeo, etc.), use that
-    elsif content && content.length < 100
-      ActiveSupport::JSON.encode(content)
-    # if there's content, use that
-    elsif content
-      ActiveSupport::JSON.encode("<blockquote>#{truncate(content, :length => 500, :separator => ' ')}</blockquote>")
-    # otherwise, use the summary. bummer.
+  def select_media
+    # if photo attached, use the photo
+    if photos.any?
+      photos.first.photo.url(:large)
+    # otherwise, use the media
+    elsif media.length > 1
+      media
+    # otherwise, use the headline
     else
-      ActiveSupport::JSON.encode('<blockquote>' + summary + '</blockquote>')
+      headline
     end
   end
 
+=begin
   def credit
     # if there's a photo, use the photo credit. otherwise, credit the submitting user
     ActiveSupport::JSON.encode(photo ? photo.user.name : user.name)
