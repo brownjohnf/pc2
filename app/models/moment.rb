@@ -15,7 +15,7 @@ class Moment < ActiveRecord::Base
   validates :credit, :length => { :maximum => 255 }
   validates :years_of_service, :length => { :maximum => 255 }
   validates :text, :uniqueness => true
-  validates :media, :uniqueness => true
+  validates :media, :length => { :maximum => 500 }, :uniqueness => true
   accepts_nested_attributes_for :photos, :reject_if => lambda { |a| a[:photo].nil? }, :allow_destroy => true
 
   before_validation :set_values
