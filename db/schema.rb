@@ -148,8 +148,6 @@ ActiveRecord::Schema.define(:version => 20120707001741) do
     t.string   "sector"
   end
 
-  add_index "moments", ["media"], :name => "index_moments_on_media", :unique => true
-
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "lft"
