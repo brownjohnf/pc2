@@ -7,7 +7,7 @@ class SiteConfig < ActiveRecord::Base
       :small => '200x200',
       :spotlight => '360x230#',
       :medium => '380x380',
-      :large => '980x980',
+      :large => '980x980>',
       :wide => '980x400#',
       :full => '1140x1140>'
     },
