@@ -9,15 +9,15 @@ class Moment < ActiveRecord::Base
 
   has_many :photos, :as => :imageable
 
-  validates :title, :summary, :user_id, :datapoint, :country, :presence => true
+  validates :headline, :text, :user_id, :startdate, :country, :presence => true
   accepts_nested_attributes_for :photos, :reject_if => lambda { |a| a[:photo].nil? }, :allow_destroy => true
 
   before_validation :set_values
 
-  default_scope :order => 'moments.datapoint DESC'
+  default_scope :order => 'moments.startdate DESC'
 
   def to_param
-    "#{id}-#{title.parameterize}"
+    "#{id}-#{headline.parameterize}"
   end
     
   def self.random
@@ -26,6 +26,7 @@ class Moment < ActiveRecord::Base
     end
   end
 
+=begin
   def text
     # if photo and content, use the photo for media, but link to full content here
     if photo && content
@@ -64,6 +65,7 @@ class Moment < ActiveRecord::Base
     # if there's a photo and it has a description, use that. otherwise, no caption.
     ActiveSupport::JSON.encode((photo && photo.description) ? photo.description : '')
   end
+=end
 
   private
 

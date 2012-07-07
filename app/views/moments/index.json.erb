@@ -12,13 +12,13 @@
     "date": [
     <% @moments.each do |moment| %>
     {
-      "startDate": "<%= moment.datapoint.strftime("%Y,%m,%d") %>",
-      "headline": "<%= moment.title %>",
-      "text": <%= raw(moment.text) %>,
+      "startDate": "<%= moment.startdate.strftime("%Y,%m,%d") %>",
+      "headline": "<%= moment.headline %>",
+      "text": "<%= raw(moment.text) %>",
       "asset": {
-        "media": <%= raw(moment.media) %>,
-        "credit": <%= raw(moment.credit) %>,
-        "caption": <%= raw(moment.caption) %>
+        "media": "<%= raw(moment.media) %>",
+        "credit": "<%= raw(moment.credit) %>",
+        "caption": "<%= raw(moment.caption) %>"
       }
     },
     <% end %>

@@ -6,15 +6,15 @@
     - @moments.each do |moment|
       .row
         .span6
-          %h1= moment.title
+          %h1= moment.headline
           %p
             .floatleft= image_tag(moment.user.photos.first.photo.url(:icon)) unless moment.user.photos.empty?
-            = moment.summary
-          - if @max && moment.content.length > @max
-            = markdown(truncate(moment.content, :length => @max, :separator => "\n"))
+            = moment.text
+          - if @max && moment.media.length > @max
+            = markdown(truncate(moment.media :length => @max, :separator => "\n"))
             %p= link_to 'View full event &rarr;', moment
           - else
-            = markdown(moment.content)
+            = markdown(moment.media)
         .span3
           = avatar_for_user(moment.user, :size => :small)
           %p
@@ -24,16 +24,16 @@
             %br
             = link_to moment.user.volunteers.first.sector.name, moment.user.volunteers.first.sector if moment.user.volunteers.any?
             %br
-            = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
+            = link_to moment.startdate.year, moments_path(:year => moment.startdate.year)
             \-
-            = link_to moment.datapoint.year, moments_path(:year => moment.datapoint.year)
+            = link_to moment.startdate.year, moments_path(:year => moment.startdate.year)
           = button_to 'Edit', edit_moment_path(moment), :method => :get if can? :update, moment
           - if moment.photos.any?
             = link_to pluralize(moment.photos.count, 'photo'), moment if moment.photos.any?
             = render moment.photos.limit(3)
             %br
             = link_to 'view all photos', moment if moment.photos.count > 3
-          %h4= moment.datapoint.strftime('%B')
-          %h4= moment.datapoint.strftime('%Y')
+          %h4= moment.startdate.strftime('%B')
+          %h4= moment.startdate.strftime('%Y')
       %hr
 

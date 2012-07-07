@@ -10,20 +10,20 @@ class MomentsController < ApplicationController
       @decade = @year.to_s.truncate(2).to_i * 10
       start = "#{params[:year].to_s}-1-1".to_date
       stop = start.end_of_year
-      @moments = Moment.where(:datapoint => (start)..(stop))
+      @moments = Moment.where(:startdate=> (start)..(stop))
       @title = "Timeline | #{params[:year]}"
       render 'year'
     elsif params[:decade]
       @decade = params[:decade]
       start = "#{params[:decade].to_s}-1-1".to_date
       stop = start.end_of_year.advance(:years => 9)
-      @moments = Moment.where(:datapoint => (start)..(stop))
+      @moments = Moment.where(:startdate => (start)..(stop))
       @title = "Timeline | #{params[:decade]}s"
       render 'index'
     elsif params[:start] && params[:stop]
       start = "#{params[:start].to_s}-1-1".to_date
       stop = "#{params[:stop].to_s}-1-1".to_date
-      @moments = Moment.where(:datapoint => (start..stop))
+      @moments = Moment.where(:startdate => (start..stop))
       @title = "Timeline | #{params[:start]} to #{params[:stop]}"
       render 'index'
     elsif params[:all]
@@ -48,7 +48,7 @@ class MomentsController < ApplicationController
   # GET /moments/1.json
   def show
     @moment = Moment.find(params[:id])
-    @year = @moment.datapoint.year
+    @year = @moment.startdate.year
     @decade = @year.to_s.truncate(2).to_i * 10
 
     respond_to do |format|

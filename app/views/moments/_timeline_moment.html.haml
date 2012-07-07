@@ -1,16 +1,16 @@
 .row{:class => align}
   .bumper &nbsp;
   .date
-    %span= moment.datapoint.year
+    %span= moment.startdate.year
   .timeline_moment
     .box
       .avatar
         = avatar_for moment, :size => :small
         = link_to 'View Event', moment
       .info
-        %h2= moment.title
+        %h2= moment.headline
         %p
-          = moment.summary
+          = moment.text
           %br
           = moment.user.name
           = flag_icon(moment.country)

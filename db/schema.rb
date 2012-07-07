@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522151908) do
+ActiveRecord::Schema.define(:version => 20120707001741) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -132,14 +132,23 @@ ActiveRecord::Schema.define(:version => 20120522151908) do
   create_table "moments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "photo_id"
-    t.date     "datapoint"
-    t.string   "title"
-    t.text     "summary"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.date     "startdate"
+    t.string   "headline"
+    t.text     "text"
+    t.text     "media"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "country"
+    t.date     "enddate"
+    t.string   "caption"
+    t.string   "credit"
+    t.integer  "region_id"
+    t.integer  "site_id"
+    t.string   "years_of_service"
+    t.string   "sector"
   end
+
+  add_index "moments", ["media"], :name => "index_moments_on_media", :unique => true
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
