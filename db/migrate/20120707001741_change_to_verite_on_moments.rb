@@ -13,7 +13,6 @@ class ChangeToVeriteOnMoments < ActiveRecord::Migration
       t.integer :site_id
       t.string :years_of_service
       t.string :sector
-      t.index :media, :unique => true
     end
   end
 
@@ -31,7 +30,6 @@ class ChangeToVeriteOnMoments < ActiveRecord::Migration
     remove_column :moments, :site_id
     remove_column :moments, :years_of_service
     remove_column :moments, :sector
-    remove_index :moments, :media
   end
 
 end
