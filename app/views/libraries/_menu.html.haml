@@ -2,13 +2,13 @@
   %ul.nav.nav-pills
     %li.dropdown
       %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
-        Sort by
+        View by
         %b.caret
       %ul.dropdown-menu
         %li= link_to 'Alphabetical', libraries_path
-        %li= link_to 'Recently updated', libraries_path
-        %li= link_to 'Recently added', libraries_path
-    %li= link_to 'Table View', libraries_path
+        -#%li= link_to 'Recently updated', libraries_path
+        -#%li= link_to 'Recently added', libraries_path
+        -#%li= link_to 'Table', libraries_path
     %li= link_to 'Create Library', new_library_path if can? :create, Library
     %li= link_to 'Podcast it!', podcast_library_path, :rel => 'popover-bottom', :title => 'What does this do?', 'data-content' => "Clicking this link will take you to an RSS Podcast feed for all audio files in this library. Copy this link address, open iTunes, and past the URL into <code>Advanced -> Subscribe to Podcast</code>. It's that easy! You can also submit this URL to the iTunes store to create a registered podcast." if @library
     %li.dropdown
@@ -19,4 +19,4 @@
         %li= link_to 'Download as .zip', download_library_path(@library)
         %li= link_to 'Edit', edit_library_path(@library) if can? :edit, @library
         %li= link_to 'Destroy', '' if can? :destroy, @library
-    = render 'shared/search'
+    = render 'shared/search' unless params[:action] == 'table'

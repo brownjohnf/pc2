@@ -20,4 +20,4 @@
           %li= link_to 'Properties', '#edit_case_study_form_modal', 'data-toggle' => 'modal' if can? :edit, @case_study
           %li= link_to 'Edit', '/editor' + request.path, :id => 'edit_link', :data => { :save_url => mercury_update_case_study_path(@case_study) }, :rel => 'popover-left', :title => 'Edit using Mercury Editor', 'data-content' => "Mercury editor is a very slick in-page editor. It will allow you to see the results of your changes as you make them, like a word processor.<h3>Warning!</h3>Mercury Editor <strong>WILL NOT</strong> work with Internet Explorer, because IE is in no way standards compliant. If you want to edit pages, we <strong>strongly</strong> suggest you get a <em>real</em> browser such as Firefox or Chrome." if can? :edit, @case_study
           %li= link_to 'Delete', '#destroy_case_study_form_modal', 'data-toggle' => 'modal' if can? :destroy, @case_study
-    = render 'shared/search'
+    = render 'shared/search' unless params[:action] == 'table'

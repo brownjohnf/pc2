@@ -60,7 +60,6 @@
                     = v.local_name
                     %small
                       = link_to 'edit', "#edit_volunteer_#{v.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, v
-                      = link_to 'manage', edit_volunteer_path(v) if can? :manage, Volunteer
                   %div
                     %p
                       = "#{v.sector.name} Volunteer" if v.sector
@@ -91,7 +90,6 @@
                     Staff Member
                     %small
                       = link_to 'edit', "#edit_staff_#{s.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, s
-                      = link_to 'manage', edit_staff_path(s) if can? :manage, Staff
                   %h4= s.site.name if s.site
                   %p= Carmen.country_name(s.country) if s.country
                   %p
