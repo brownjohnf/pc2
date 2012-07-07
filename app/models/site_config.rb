@@ -11,14 +11,13 @@ class SiteConfig < ActiveRecord::Base
       :wide => '980x400#',
       :full => '1140x1140>'
     },
-    :convert_options => { :all => "-auto-orient" },
     :storage => :s3,
     :s3_credentials => {
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     },
     :url => ":s3_alias_url",
-    :s3_host_alias => ENV['CDN_NAME'],
+    :s3_host_alias => ENV['CDN_CNAME'],
     :bucket => ENV['S3_BUCKET'],
     :path => 'config_photos/:id/:style/:filename'
   }
