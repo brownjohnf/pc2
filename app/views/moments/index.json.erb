@@ -14,7 +14,7 @@
     {
       "startDate": "<%= moment.startdate.strftime("%Y,%m,%d") %>",
       "headline": "<%= moment.headline %>",
-      "text": "<%= raw(moment.text) %>",
+      "text": "<%= raw(ActiveSupport::JSON.encode(moment.text)) %>",
       "asset": {
         "media": <%= raw(ActiveSupport::JSON.encode(moment.media)) %>,
         "credit": "<%= raw(moment.credit) %>",

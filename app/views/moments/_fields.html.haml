@@ -9,7 +9,7 @@
 = f.date_select :startdate, :start_year => 1963, :end_year => Time.now.year
 = f.date_select :enddate, :start_year => 1963, :end_year => Time.now.year
 = f.text_field :headline
-= f.text_field :text
+= f.text_area :text
 %p You can include one of the following items as your moment content:
 %ul
   %li Text. Simply start typing! Needs to be formatted in HTML.
@@ -28,6 +28,7 @@
 = f.collection_select :site_id, Site.all, :id, :name
 = f.text_field :years_of_service
 = f.text_field :sector
+%hr
 %h2 Attach a photo
 = f.fields_for :photos do |p|
   = p.hidden_field :user_id, :value => current_user.id
