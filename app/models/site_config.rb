@@ -17,7 +17,7 @@ class SiteConfig < ActiveRecord::Base
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     },
-    :url => :s3_alias_url,
+    :url => ":s3_alias_url",
     :s3_host_alias => ENV['CDN_NAME'],
     :bucket => ENV['S3_BUCKET'],
     :path => 'config_photos/:id/:style/:filename'
@@ -35,6 +35,7 @@ class SiteConfig < ActiveRecord::Base
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     },
+    :url => ":s3_alias_url",
     :s3_host_alias => ENV['CDN_NAME'],
     :bucket => ENV['S3_BUCKET'],
     :path => 'config_files/:id/:style/:filename'
