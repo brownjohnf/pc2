@@ -16,3 +16,5 @@
 // require jquery.url
 //= require bootstrap
 //= require default
+//= require jquery.purr
+//= require best_in_place

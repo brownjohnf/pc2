@@ -133,6 +133,10 @@ $(function(){
     });
 
   /*********************************************/
+  /* best_in_place binding */
+  $('.best_in_place').best_in_place();
+
+  /*********************************************/
   /* assorted other js stuff */
 
   // sets default form focus based on input ID
