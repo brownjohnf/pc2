@@ -4,7 +4,7 @@
     %h3
       = link_to document.name, document
       %small
-        = time_ago_in_words(document.updated_at)
+        = timeago(document.updated_at)
         ago by
         = link_to document.user.name, document.user
     %p

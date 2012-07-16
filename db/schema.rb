@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707165721) do
+ActiveRecord::Schema.define(:version => 20120716123709) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -244,10 +244,10 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
 
   create_table "site_configs", :force => true do |t|
     t.string   "name"
-    t.string   "setting"
+    t.text     "setting"
     t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -256,7 +256,12 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "true",               :default => false
+    t.string   "category"
+    t.string   "title"
   end
+
+  add_index "site_configs", ["name"], :name => "index_site_configs_on_name", :unique => true
 
   create_table "sites", :force => true do |t|
     t.string   "name"

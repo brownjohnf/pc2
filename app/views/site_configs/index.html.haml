@@ -4,18 +4,23 @@
       = render 'shared/menu'
     .span9
       %h1 Site Configuration Settings
+      %p You have access to the following site configuration options. Click on a setting to edit it, or the link to set photo/file values.
 
       %table
         %tr
+          %th Title
           %th Name
           %th Setting
           %th Description
           %th Photo
           %th File
+          %th Category
         - @site_configs.each do |site_config|
           %tr
-            %td= link_to site_config.name, edit_site_config_path(site_config)
-            %td= site_config.setting
+            %td= link_to site_config.title, edit_site_config_path(site_config)
+            %td= site_config.name
+            %td= best_in_place_if can?(:update, site_config), site_config, :setting, :type => :textarea
             %td= site_config.description
             %td= image_tag(site_config.photo.url(:thumb)) if site_config.photo?
             %td= site_config.file.file_file_name if site_config.file?
+            %td= site_config.category

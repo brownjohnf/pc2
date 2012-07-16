@@ -65,7 +65,8 @@ class Ability
         end
         can :download_source, Document
         can :manage, [ Stage, Stack, Contribution ]
-        can :read, Feedback
+        can :read, [ Feedback, SiteConfig ]
+        can :update, SiteConfig, :category => 'timeline'
       end
     end
     #
