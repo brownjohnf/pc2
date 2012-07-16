@@ -5,7 +5,7 @@ class SiteConfigsController < ApplicationController
   # GET /site_configs
   # GET /site_configs.json
   def index
-    @site_configs = SiteConfig.all
+    @site_configs = SiteConfig.accessible_by(current_ability, :update)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,10 +26,10 @@ class SiteConfigsController < ApplicationController
     respond_to do |format|
       if @site_config.update_attributes(params[:site_config])
         format.html { redirect_to site_configs_path, notice: 'Site config was successfully updated.' }
-        format.json { head :no_content }
+        format.json { respond_with_bip @site_config }
       else
         format.html { render action: "edit" }
-        format.json { render json: @site_config.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip @site_config }
       end
     end
   end

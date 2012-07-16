@@ -3,7 +3,7 @@
   %span.icon-bar
   %span.icon-bar
 %a.brand{:href => '/splash'}
-  %span#org Peace Corps
+  %span#org= SiteConfig.find_by_name('site_title').setting
   %span#divider= '|'
   = Carmen.country_name(cookies[:country])
   %sub beta
@@ -11,7 +11,7 @@
   %ul.nav
     %li= link_to 'About us', Page.where(:country => cookies[:country]).find_by_title('About us')
     %li= link_to 'What We Do', Page.where(:country => cookies[:country]).find_by_title('What We Do')
-    %li= link_to 'Timeline', timeline_path
+    %li= link_to SiteConfig.find_by_name('timeline_title').setting, timeline_path
     %ul.nav
       %li.dropdown
         %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
@@ -179,10 +179,6 @@
               %li= link_to "region types", regiontypes_path
               %li= link_to "scopes", scopes_path
               %li= link_to "sectors (#{Sector.count})", sectors_path
-              %li
-                = link_to site_configs_path do
-                  %i.icon-cog
-                  Site Configuration
               %li= link_to "sites (#{Site.count})", sites_path
               %li= link_to "stacks", stacks_path
               %li
@@ -226,6 +222,12 @@
               = link_to '/help' do
                 %i.icon-question-sign
                 Help me!
+            - if can? :read, SiteConfig
+              %li.divider
+              %li
+                = link_to site_configs_path do
+                  %i.icon-cog
+                  Site Configuration
             %li.divider
             %li
               = link_to edit_user_path(current_user) do
