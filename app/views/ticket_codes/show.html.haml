@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ticket_code.name
+%p
+  %b Description:
+  = @ticket_code.description
+%p
+  %b Color:
+  = @ticket_code.color
+%p
+  %b Sender:
+  = @ticket_code.sender
+%p
+  %b Receiver:
+  = @ticket_code.receiver
+%p
+  %b Rank:
+  = @ticket_code.rank
+
+= link_to 'Edit', edit_ticket_code_path(@ticket_code)
+\|
+= link_to 'Back', ticket_codes_path

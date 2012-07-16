@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Ref:
+  = @ticket.ref_id
+%p
+  %b Ticket category:
+  = @ticket.ticket_category_id
+%p
+  %b Subject:
+  = @ticket.subject
+%p
+  %b Body:
+  = @ticket.body
+%p
+  %b Priority:
+  = @ticket.priority_id
+
+= link_to 'Edit', edit_ticket_path(@ticket)
+\|
+= link_to 'Back', tickets_path

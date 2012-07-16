@@ -1,0 +1,10 @@
+= semantic_form_for @ticket do |f|
+  = f.inputs do
+      = f.input :ref_id
+      = f.input :ticket_category_id
+      = f.input :subject
+      = f.input :body
+      = f.input :priority_id
+  
+  = f.buttons do
+    = f.commit_button

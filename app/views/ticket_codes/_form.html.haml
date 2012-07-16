@@ -1,0 +1,11 @@
+= semantic_form_for @ticket_code do |f|
+  = f.inputs do
+      = f.input :name
+      = f.input :description
+      = f.input :color
+      = f.input :sender
+      = f.input :receiver
+      = f.input :rank
+  
+  = f.buttons do
+    = f.commit_button

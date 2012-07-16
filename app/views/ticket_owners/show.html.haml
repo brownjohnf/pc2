@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b From:
+  = @ticket_owner.from_id
+%p
+  %b To:
+  = @ticket_owner.to_id
+%p
+  %b Ticket:
+  = @ticket_owner.ticket_id
+%p
+  %b Code:
+  = @ticket_owner.code_id
+
+= link_to 'Edit', edit_ticket_owner_path(@ticket_owner)
+\|
+= link_to 'Back', ticket_owners_path

@@ -63,6 +63,17 @@ class User < ActiveRecord::Base
   # pages, case studies to which this user has contributed/is author
   has_many :contributions, :dependent => :destroy
 
+  # support/grant tickets
+  has_many :ticket_updates
+
+  has_many :from, :foreign_key => :from_id, :class_name => 'TicketOwner', :dependent => :destroy
+  has_many :outgoing, :through => :from, :source => :ticket
+  has_many :sent_to, :through => :from, :source => :to
+
+  has_many :to, :foreign_key => :to_id, :class_name => 'TicketOwner', :dependent => :destroy
+  has_many :incoming, :through => :to, :source => :ticket
+  has_many :received_from, :through => :to, :source => :from
+
   # if the user sets an already uploaded photo as a profile image
   belongs_to :photo
 

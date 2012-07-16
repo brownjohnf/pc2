@@ -1,0 +1,25 @@
+%h1 Listing ticket_updates
+
+%table
+  %tr
+    %th Ticket
+    %th Ticket code
+    %th Comment
+    %th User
+    %th
+    %th
+    %th
+
+  - @ticket_updates.each do |ticket_update|
+    %tr
+      %td= ticket_update.ticket_id
+      %td= ticket_update.ticket_code_id
+      %td= ticket_update.comment
+      %td= ticket_update.user_id
+      %td= link_to 'Show', ticket_update
+      %td= link_to 'Edit', edit_ticket_update_path(ticket_update)
+      %td= link_to 'Destroy', ticket_update, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Ticket update', new_ticket_update_path

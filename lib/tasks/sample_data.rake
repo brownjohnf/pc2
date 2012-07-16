@@ -2,6 +2,7 @@ namespace :db do
 	task :sample_data => :environment do
 		Rake::Task['db:reset'].invoke
     Rake::Task['db:seed'].invoke
+    Rake::Task['db:update_config'].invoke
     make_pc_regions
     make_sectors
     make_languages
