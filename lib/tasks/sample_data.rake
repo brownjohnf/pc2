@@ -1,6 +1,8 @@
 namespace :db do
 	task :sample_data => :environment do
-		Rake::Task['db:reset'].invoke
+		Rake::Task['db:drop'].invoke
+		Rake::Task['db:create'].invoke
+		Rake::Task['db:migrate'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['db:update_config'].invoke
     make_pc_regions
@@ -17,6 +19,7 @@ namespace :db do
     make_files
     make_photos
 		Rake::Task['db:populate_timeline'].invoke
+    make_ticket_stuff
 	end
 end
 
@@ -79,10 +82,11 @@ end
 def make_users
   25.times do |n|
     user = User.create!(
-      :name => Faker::Name.name + Faker::Name.name, 
+      :name => Faker::Name.name, 
       :email => Faker::Internet.email,
       :password => 'testing', 
-      :country => 'SN'
+      :country => 'SN',
+      :tag_list => 'tag1, tag2, tag3'
     )
     user.confirmed_at = Time.now
     user.save!
@@ -92,10 +96,11 @@ end
 def make_volunteers
   50.times do |n|
     user = User.create!(
-      :name => Faker::Name.name + Faker::Name.name, 
+      :name => Faker::Name.name, 
       :email => Faker::Internet.email, 
       :password => 'testing', 
-      :country => 'SN'
+      :country => 'SN',
+      :tag_list => 'tag1, tag2, tag3'
     )
     user.confirmed_at = Time.now
     user.save!
@@ -106,10 +111,11 @@ end
 def make_staff
   25.times do |n|
     user = User.create!(
-      :name => Faker::Name.name + Faker::Name.name, 
+      :name => Faker::Name.name, 
       :email => Faker::Internet.email, 
       :password => 'testing', 
-      :country => 'SN'
+      :country => 'SN',
+      :tag_list => 'tag1, tag2, tag3'
     )
     user.confirmed_at = Time.now
     user.save!
@@ -146,7 +152,8 @@ def make_pages
         :description => Faker::Company.catch_phrase,
         :content => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
-        :language_id => 1+rand(2)
+        :language_id => 1+rand(2),
+        :tag_list => 'tag1, tag2, tag3'
       )
       page.contributions.build(:user_id => b.user.id)
       page.save!
@@ -176,7 +183,8 @@ def make_case_studies
         :title => Faker::Company.catch_phrase, 
         :summary => Faker::Lorem.paragraphs(8), 
         :country => 'SN', 
-        :language_id => 1+rand(2)
+        :language_id => 1+rand(2),
+        :tag_list => 'tag1, tag2, tag3'
       )
       case_study.contributions.build(:user_id => b.user.id)
       case_study.save!
@@ -192,7 +200,8 @@ def make_files
         :description => Faker::Company.catch_phrase,
         :file => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.pdf')),
         :source => File.open(File.join(File.dirname(__FILE__), 'fixtures', 'test.docx')),
-        :country => 'SN'
+        :country => 'SN',
+        :tag_list => 'tag1, tag2, tag3'
       )
       document.file_fingerprint = SecureRandom.hex(10)
       document.source_fingerprint = SecureRandom.hex(10)
@@ -214,3 +223,36 @@ def make_photos
   end
 end
 
+def make_ticket_stuff
+  Priority.create([{
+    :level => 1, :name => 'High', :description => 'VERY important, demands immediate attention.'
+  },{
+    :level => 5, :name => 'Medium', :description => 'Somewhat important, needs short-term attention.'
+  },{
+    :level => 10, :name => 'Low', :description => 'Non-critical, no rush.'
+  }])
+  TicketCategory.create([{
+    :name => 'SPA'
+  }])
+  TicketCode.create([{
+    :name => 'Initialized', :description => 'Just created.', :rank => 1, :color => '#000', :sender => true, :receiver => false
+  },{
+    :name => 'Received', :description => 'Received.', :rank => 5, :color => '#999', :sender => false, :receiver => true
+  }])
+  [ Volunteer, Staff ].each do |a|
+    a.all.each do |b|
+      ticket = Ticket.create!(
+        :ticket_category_id => TicketCategory.first.id,
+        :priority_id => Priority.first.id,
+        :subject => Faker::Company.catch_phrase,
+        :body => Faker::Company.catch_phrase
+      )
+      TicketOwner.create!(
+        :from_id => b.id,
+        :to_id => User.count - b.id + 1,
+        :ticket_id => ticket.id,
+        :ticket_code_id => Priority.first.id
+      )
+    end
+  end
+end

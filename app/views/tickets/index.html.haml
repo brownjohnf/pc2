@@ -14,10 +14,10 @@
   - @tickets.each do |ticket|
     %tr
       %td= ticket.ref_id
-      %td= ticket.ticket_category_id
+      %td= ticket.ticket_category.name
       %td= ticket.subject
       %td= ticket.body
-      %td= ticket.priority_id
+      %td= ticket.priority.name
       %td= link_to 'Show', ticket
       %td= link_to 'Edit', edit_ticket_path(ticket)
       %td= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete

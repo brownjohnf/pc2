@@ -1,21 +1,30 @@
-%p#notice= notice
+.container
+  .row
+    .span3
+      = render 'shared/menu'
+    .span9
+      %p#notice= notice
 
-%p
-  %b Ref:
-  = @ticket.ref_id
-%p
-  %b Ticket category:
-  = @ticket.ticket_category_id
-%p
-  %b Subject:
-  = @ticket.subject
-%p
-  %b Body:
-  = @ticket.body
-%p
-  %b Priority:
-  = @ticket.priority_id
 
-= link_to 'Edit', edit_ticket_path(@ticket)
-\|
-= link_to 'Back', tickets_path
+      %h1
+        = @ticket.subject
+        %small
+          = @ticket.ticket_category.name
+          |
+          = @ticket.priority.name
+          priority
+      %p
+        = @ticket.body
+      - unless @ticket.ref_id.nil?
+        %p
+          %b Ref:
+          = link_to Ticket.find(@ticket.ref_id).subject, Ticket.find(@ticket.ref_id)
+      %hr
+      %h3 Updates
+
+      = render @ticket.ticket_updates
+      %hr
+
+      = link_to 'Edit', edit_ticket_path(@ticket)
+      \|
+      = link_to 'Back', tickets_path

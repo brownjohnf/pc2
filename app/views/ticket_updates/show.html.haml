@@ -1,17 +1,20 @@
 %p#notice= notice
 
 %p
-  %b Ticket:
-  = @ticket_update.ticket_id
+  %b Subject:
+  = link_to @ticket_update.ticket.subject, @ticket_update.ticket
+%p
+  %b Body:
+  = @ticket_update.ticket.body
 %p
   %b Ticket code:
-  = @ticket_update.ticket_code_id
+  = @ticket_update.ticket_code.name
 %p
   %b Comment:
   = @ticket_update.comment
 %p
   %b User:
-  = @ticket_update.user_id
+  = @ticket_update.user.name
 
 = link_to 'Edit', edit_ticket_update_path(@ticket_update)
 \|

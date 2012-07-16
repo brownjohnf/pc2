@@ -1,11 +1,8 @@
-= semantic_form_for @ticket_code do |f|
-  = f.inputs do
-      = f.input :name
-      = f.input :description
-      = f.input :color
-      = f.input :sender
-      = f.input :receiver
-      = f.input :rank
-  
-  = f.buttons do
-    = f.commit_button
+= bootstrap_form_for @ticket_code do |f|
+  = f.text_field :name
+  = f.text_field :description
+  = f.text_field :color
+  = f.check_box :sender
+  = f.check_box :receiver
+  = f.text_field :rank
+  = f.actions

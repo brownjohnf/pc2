@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716123709) do
+ActiveRecord::Schema.define(:version => 20120716212642) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -197,6 +197,14 @@ ActiveRecord::Schema.define(:version => 20120716123709) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "priorities", :force => true do |t|
+    t.integer  "level"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "regions", :force => true do |t|
     t.string   "name"
     t.string   "short"
@@ -325,6 +333,51 @@ ActiveRecord::Schema.define(:version => 20120716123709) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "ticket_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ticket_codes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "color"
+    t.boolean  "sender"
+    t.boolean  "receiver"
+    t.integer  "rank"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ticket_owners", :force => true do |t|
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.integer  "ticket_id"
+    t.integer  "ticket_code_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "ticket_updates", :force => true do |t|
+    t.integer  "ticket_id"
+    t.integer  "ticket_code_id"
+    t.string   "comment"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "tickets", :force => true do |t|
+    t.integer  "ref_id"
+    t.integer  "ticket_category_id"
+    t.string   "subject"
+    t.string   "body"
+    t.integer  "priority_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -11,10 +11,10 @@ class Ticket < ActiveRecord::Base
   has_many :sent_to, :through => :ticket_owners, :source => :to
   
   validates :priority_id, :presence => true
-  validates :category_id, :presence => true
+  validates :ticket_category_id, :presence => true
   
   accepts_nested_attributes_for :ticket_updates
-  accepts_nested_attributes_for :Ticket_owners
+  accepts_nested_attributes_for :ticket_owners
   
   default_scope :order => 'created_at DESC'
   
