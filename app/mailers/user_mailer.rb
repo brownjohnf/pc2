@@ -1,9 +1,14 @@
 class UserMailer < ActionMailer::Base
-  default :from => "admin@pcsenegal.org"
  
   def signup_notification(user)
-    @user = user
-    @url  = "http://www.pcsenegal.org/login"
-    mail(:to => user.email, :subject => "Welcome to My Awesome Site")
+    recipients "#{user.name} <#{user.email}"
+    from 'Peace Corps Senegal'
+    subject 'Congrats!'
+    sent_on Time.now
+    body {
+      :user => user,
+      :url => "http://www.pcsenegal.org"
+    }
   end
+
 end
