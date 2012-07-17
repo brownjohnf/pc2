@@ -343,31 +343,33 @@ ActiveRecord::Schema.define(:version => 20120716212642) do
 
   create_table "ticket_codes", :force => true do |t|
     t.string   "name"
+    t.string   "past_name"
+    t.string   "verb",        :default => "to"
     t.string   "description"
     t.string   "color"
     t.boolean  "sender"
     t.boolean  "receiver"
     t.integer  "rank"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "ticket_owners", :force => true do |t|
     t.integer  "from_id"
     t.integer  "to_id"
     t.integer  "ticket_id"
-    t.integer  "ticket_code_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "ticket_code_id", :default => 1
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "ticket_updates", :force => true do |t|
     t.integer  "ticket_id"
-    t.integer  "ticket_code_id"
-    t.string   "comment"
+    t.integer  "ticket_code_id", :default => 1
+    t.string   "comment",        :default => "New ticket."
     t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "tickets", :force => true do |t|

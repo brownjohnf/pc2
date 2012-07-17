@@ -224,21 +224,6 @@ def make_photos
 end
 
 def make_ticket_stuff
-  Priority.create([{
-    :level => 1, :name => 'High', :description => 'VERY important, demands immediate attention.'
-  },{
-    :level => 5, :name => 'Medium', :description => 'Somewhat important, needs short-term attention.'
-  },{
-    :level => 10, :name => 'Low', :description => 'Non-critical, no rush.'
-  }])
-  TicketCategory.create([{
-    :name => 'SPA'
-  }])
-  TicketCode.create([{
-    :name => 'Initialized', :description => 'Just created.', :rank => 1, :color => '#000', :sender => true, :receiver => false
-  },{
-    :name => 'Received', :description => 'Received.', :rank => 5, :color => '#999', :sender => false, :receiver => true
-  }])
   [ Volunteer, Staff ].each do |a|
     a.all.each do |b|
       ticket = Ticket.create!(

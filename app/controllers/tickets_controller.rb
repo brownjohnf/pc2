@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
     @tickets = Ticket.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => 'layouts/application-fluid' } # index.html.erb
       format.json { render json: @tickets }
     end
   end
@@ -16,9 +16,11 @@ class TicketsController < ApplicationController
   # GET /tickets/1.json
   def show
     @ticket = Ticket.find(params[:id])
+    @ticket.ticket_owners.build
+    @ticket.ticket_updates.build
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => 'layouts/application-fluid' } # show.html.erb
       format.json { render json: @ticket }
     end
   end
@@ -27,6 +29,8 @@ class TicketsController < ApplicationController
   # GET /tickets/new.json
   def new
     @ticket = Ticket.new
+    @ticket.ticket_owners.build
+    @ticket.ticket_updates.build
 
     respond_to do |format|
       format.html # new.html.erb

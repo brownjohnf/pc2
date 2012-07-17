@@ -5,18 +5,15 @@
       = f.collection_select :ticket_category_id, TicketCategory.all, :id, :name, :label => 'My issue is related to:'
       = f.text_field :subject
     .span4
-      = f.text_area :body, :label => 'Tell us more...'
+      = f.text_area :body, :rows => 5, :label => 'Tell us more...'
     .span4
       = f.collection_select :priority_id, Priority.all, :id, :name, :label => 'Just how bad is it?'
 
       = f.fields_for :ticket_updates do |ff|
-        = ff.hidden_field :ticket_code_id, :value => 1
-        = ff.hidden_field :comment, :value => 'New ticket.'
         = ff.hidden_field :user_id, :value => 1
 
       = f.fields_for :ticket_owners do |ff|
         = ff.collection_select :from_id, User.all, :id, :name
         = ff.collection_select :to_id, User.all, :id, :name
-        = ff.hidden_field :code_id, :value => 1
 
   = f.actions

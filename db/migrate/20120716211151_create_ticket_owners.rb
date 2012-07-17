@@ -4,7 +4,7 @@ class CreateTicketOwners < ActiveRecord::Migration
       t.integer :from_id
       t.integer :to_id
       t.integer :ticket_id
-      t.integer :ticket_code_id
+      t.integer :ticket_code_id, :default => 1
 
       t.timestamps
     end

@@ -1,8 +1,6 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span9
+.container-fluid
+  .row-fluid
+    .span6
       %p#notice= notice
 
 
@@ -19,12 +17,25 @@
         %p
           %b Ref:
           = link_to Ticket.find(@ticket.ref_id).subject, Ticket.find(@ticket.ref_id)
-      %hr
+    .span6
       %h3 Updates
-
-      = render @ticket.ticket_updates
+      = bootstrap_form_for @ticket do |f|
+        = f.fields_for :ticket_updates do |ff|
+          - if ff.object.new_record?
+            = ff.hidden_field :user_id, :value => current_user.id
+            = ff.collection_select :ticket_code_id, TicketCode.all, :id, :name
+            = ff.text_field :comment, :value => nil, :placeholder => 'add a comment...'
+          - else
+            = render ff.object
+        = f.submit
       %hr
-
-      = link_to 'Edit', edit_ticket_path(@ticket)
-      \|
-      = link_to 'Back', tickets_path
+      %h3 Ownership
+      = bootstrap_form_for @ticket do |f|
+        = f.fields_for :ticket_owners do |ff|
+          - if ff.object.new_record?
+            = ff.hidden_field :ticket_code_id, :value => TicketCode.find_by_name('transfer').id
+            = ff.collection_select :from_id, User.all, :id, :name
+            = ff.collection_select :to_id, User.all, :id, :name
+          - else
+            = render ff.object
+        = f.submit
