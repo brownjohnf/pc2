@@ -1,41 +1,121 @@
+.control-group
+  %label.control-label
+    %h2 Time
+  .controls
+    %br
+.control-group
+  %label.control-label Start Date
+  .controls
+    = f.date_select(:startdate, {:start_year => 1963, :end_year => Time.now.year}, {:class => 'span1'})
+.control-group
+  %label.control-label End Date
+  .controls
+    = f.date_select(:enddate, {:start_year => 1963, :end_year => Time.now.year}, {:class => 'span1'})
+.control-group
+  %label.control-label
+    %h2 Location
+  .controls
+    %hr
 - if can? :manage, @moment
-  = f.collection_select :user_id, User.all, :id, :name
-  = f.select :country, allowed_countries
+  .control-group
+    %label.control-label Country
+    .controls
+      = f.collection_select :user_id, User.all, :id, :name
+      = f.select :country, allowed_countries
 - else
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :country, :value => current_user.country
 .control-group
-  %label.control-label Event Date
-= f.date_select :startdate, :start_year => 1963, :end_year => Time.now.year
-= f.date_select :enddate, :start_year => 1963, :end_year => Time.now.year
-= f.text_field :headline
-= f.text_area :text
-%p You can include one of the following items as your moment content:
-%ul
-  %li Text. Simply start typing! Needs to be formatted in HTML or Markdown, and enclosed in &lt;blockquote&gt; your content &lt;/blockquote&gt;.
-  %li YouTube. Paste the link to the video. Not the embed code.
-  %li Vimeo. Like YouTube. Paste in a link to the video.
-  %li Website. Type the link. Include the http:// or https://.
-  %li Google Map. Just include the link to the map.
-  %li Flickr. Paste the link to a photo page.
-  %li Tweet. Use the link to the tweet status.
-  %li SoundCloud. Paste the link to the track.
-%p If that doesn't cover your needs, get in touch with us, and we can accomadate you.
-= f.text_area :media
-= f.text_field :caption
-= f.text_field :credit
-= f.collection_select :region_id, Region.all, :id, :name
-= f.collection_select :site_id, Site.all, :id, :name
-= f.text_field :years_of_service
-= f.text_field :sector
-%hr
-%h2 Attach a photo
-%p WARNING! If you attach a photo, the media field will be ignored in the dynamic timeline!
-= f.fields_for :photos do |p|
-  = p.hidden_field :user_id, :value => current_user.id
-  = p.file_field :photo
-  = p.text_field :title
-  = p.text_field :description
-  = p.text_field :attribution
-  = p.text_field :tag_list
+  %label.control-label Region
+  .controls
+    = f.collection_select :region_id, Region.all, :id, :name
+.control-group
+  %label.control-label Site
+  .controls
+    = f.collection_select :site_id, Site.all, :id, :name
+.control-group
+  %label.control-label Dates of Service
+  .controls
+    = f.text_field :years_of_service
+.control-group
+  %label.control-label Sector
+  .controls
+    = f.text_field :sector
+.control-group
+  %label.control-label
+    %h2 Content
+  .controls
+    %hr
+.control-group
+  %label.control-label Headline
+  .controls
+    = f.text_field :headline, :class => 'span4'
+.control-group
+  %label.control-label Accompanying Text
+  .controls
+    = f.text_area :text, :rows => 5, :class => 'span4'
+.control-group
+  %label.control-label
+    %h2 Multimedia
+  .controls
+    %hr
+.control-group
+  %label.control-label Media
+  .controls
+    = f.text_area :media, :rows => 3, :class => 'span4'
+    %div.help-block
+      %p You can include one of the following items as your moment content:
+      %ul
+        %li Text. Simply start typing! Needs to be formatted in HTML or Markdown, and enclosed in &lt;blockquote&gt; your content &lt;/blockquote&gt;.
+        %li YouTube. Paste the link to the video. Not the embed code.
+        %li Vimeo. Like YouTube. Paste in a link to the video.
+        %li Website. Type the link. Include the http:// or https://.
+        %li Google Map. Just include the link to the map.
+        %li Flickr. Paste the link to a photo page.
+        %li Tweet. Use the link to the tweet status.
+        %li SoundCloud. Paste the link to the track.
+      %p If that doesn't cover your needs, get in touch with us, and we can accomadate you.
+.control-group
+  %label.control-label Media Caption
+  .controls
+    = f.text_field :caption, :class => 'span4'
+.control-group
+  %label.control-label Media Credit
+  .controls
+    = f.text_field :credit, :class => 'span4'
+.control-group
+  %label.control-label
+    %h2 Photos
+  .controls
+    %hr
+.control-group
+  .controls
+    .alert.alert-error
+      %h3.alert-heading WARNING!
+      %p If you attach a photo, the media field will be ignored in the dynamic timeline!
+.row
+  = f.fields_for :photos do |p|
+    .span4
+      = p.hidden_field :user_id, :value => current_user.id
+      .control-group
+        %label.control-label Select file
+        .controls
+          = p.file_field :photo
+      .control-group
+        %label.control-label Title
+        .controls
+          = p.text_field :title
+      .control-group
+        %label.control-label Description
+        .controls
+          = p.text_field :description
+      .control-group
+        %label.control-label Credit
+        .controls
+          = p.text_field :attribution
+      .control-group
+        %label.control-label Tags
+        .controls
+          = p.text_field :tag_list
+          %hr
 
