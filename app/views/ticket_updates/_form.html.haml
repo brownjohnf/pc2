@@ -1,0 +1,6 @@
+= bootstrap_form_for @ticket_update do |f|
+  = f.collection_select :ticket_id, Ticket.all, :id, :subject
+  = f.collection_select :ticket_code_id, TicketCode.all, :id, :name
+  = f.text_field :comment
+  = f.collection_select :user_id, User.all, :id, :name
+  = f.actions

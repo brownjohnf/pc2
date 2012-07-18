@@ -1,0 +1,17 @@
+.alert.alert-error
+  %h4.alert-heading Warning! Experimental feature!
+  %p The ticketing system is currently a pre-release experimental feature. Use at your own risk, and DO NOT be surprised if your tickets suddenly disappear, look different, or cease functioning.
+.subnav
+  %ul.nav.nav-pills
+    %li.dropdown
+      -#%a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+        View by
+        %b.caret
+      -#%ul.dropdown-menu
+        %li= link_to 'Hierarchical', pages_path
+        %li= link_to 'Recently updated', updated_pages_path
+        %li= link_to 'Recently added', added_pages_path
+        %li= link_to 'Table', table_pages_path
+    -#%li= link_to 'Most popular', ''
+    %li= link_to 'Your tickets', user_tickets_path(current_user)
+    %li= link_to 'Open a ticket', new_user_ticket_path(current_user)

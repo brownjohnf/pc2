@@ -1,0 +1,29 @@
+%h1 Listing ticket_codes
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Color
+    %th Sender
+    %th Receiver
+    %th Rank
+    %th
+    %th
+    %th
+
+  - @ticket_codes.each do |ticket_code|
+    %tr
+      %td= ticket_code.name
+      %td= ticket_code.description
+      %td= ticket_code.color
+      %td= ticket_code.sender
+      %td= ticket_code.receiver
+      %td= ticket_code.rank
+      %td= link_to 'Show', ticket_code
+      %td= link_to 'Edit', edit_ticket_code_path(ticket_code)
+      %td= link_to 'Destroy', ticket_code, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Ticket code', new_ticket_code_path

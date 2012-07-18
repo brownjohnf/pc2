@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b From:
+  = @ticket_owner.from.name
+%p
+  %b To:
+  = @ticket_owner.to.name
+%p
+  %b Subject:
+  = @ticket_owner.ticket.subject
+%p
+  %b Body:
+  = @ticket_owner.ticket.body
+%p
+  %b Code:
+  = @ticket_owner.ticket_code.name
+
+= link_to 'Edit', edit_ticket_owner_path(@ticket_owner)
+\|
+= link_to 'Back', ticket_owners_path

@@ -1,0 +1,21 @@
+%h1 Listing owners
+
+%table
+  %tr
+    %th From
+    %th To
+    %th Ticket
+    %th Code
+    %th
+    %th
+    %th
+
+  - @ticket_owners.each do |owner|
+    %tr
+      %td= owner.from.name
+      %td= owner.to.name
+      %td= owner.ticket.subject
+      %td= owner.ticket_code.name
+      %td= link_to 'Show', owner
+      %td= link_to 'Edit', edit_ticket_owner_path(owner)
+      %td= link_to 'Destroy', owner, :confirm => 'Are you sure?', :method => :delete

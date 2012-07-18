@@ -48,6 +48,8 @@ Page.create!([
   }
 ])
 
+Rake::Task['db:initialize_ticket_data'].invoke
+
 user = User.create!({
   :name => 'Administrator',
   :email => 'admin@example.com',

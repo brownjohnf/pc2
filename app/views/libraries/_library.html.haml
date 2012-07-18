@@ -5,10 +5,9 @@
     = link_to library.name, library
     %small
       = pluralize(library.stacks.count, 'item')
+      maintained by
+      = link_to library.user.name, library.user
   %p
     = library.description
     = render 'shared/tags', :tags => library.tag_list
-    %br
-    maintained by
-    = link_to library.user.name, library.user
   %hr.clearfloat

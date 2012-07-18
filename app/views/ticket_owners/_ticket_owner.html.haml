@@ -1,0 +1,6 @@
+- unless ticket_owner.new_record?
+  = ticket_owner.from.name
+  \->
+  = ticket_owner.to.name
+  = timeago(ticket_owner.created_at)
+  %hr

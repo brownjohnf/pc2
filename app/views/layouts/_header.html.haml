@@ -201,7 +201,7 @@
           %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
             = current_user.name
             %b.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.pull-right
             %li
               = link_to dashboard_path do
                 %i.icon-home
@@ -230,6 +230,10 @@
                   Site Configuration
             %li.divider
             %li
+              = link_to user_tickets_path(current_user) do
+                %i.icon-tasks
+                Tickets (#{current_user.tickets.count})
+            %li
               = link_to edit_user_path(current_user) do
                 %i.icon-cog
                 Edit Profile
@@ -247,7 +251,7 @@
           %a.dropdown-toggle{'href' => '#', 'data-toggle' => 'dropdown'}
             sign in
             %b.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.pull-right
             %li
               = link_to login_path do
                 %i.icon-arrow-right

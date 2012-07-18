@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Level:
+  = @priority.level
+%p
+  %b Name:
+  = @priority.name
+%p
+  %b Description:
+  = @priority.description
+
+= link_to 'Edit', edit_priority_path(@priority)
+\|
+= link_to 'Back', priorities_path
