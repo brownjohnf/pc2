@@ -46,7 +46,7 @@ class Ability
       if user.role?(:volunteer) || user.role?(:staff)
         can :read, [ User, Volunteer, Staff, TicketUpdate, Priority, TicketOwner, TicketCode, TicketCategory ]
         
-        can :read, Ticket do |item|
+        can [ :read, :update ], Ticket do |item|
           item.from?(user) || item.to?(user)
         end
 

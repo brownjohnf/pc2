@@ -231,8 +231,8 @@
             %li.divider
             %li
               = link_to user_tickets_path(current_user) do
-                %i.icon-cog
-                Tickets
+                %i.icon-tasks
+                Tickets (#{current_user.tickets.count})
             %li
               = link_to edit_user_path(current_user) do
                 %i.icon-cog

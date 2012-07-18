@@ -49,11 +49,11 @@
               - if ff.object.new_record?
                 = ff.hidden_field :ticket_code_id, :value => TicketCode.find_by_name('transfer').id
                 - if @ticket.from?(@user)
-                  = ff.collection_select :from_id, User.all, :id, :name
+                  = ff.collection_select :from_id, User.where("id != ?", @ticket.to.id), :id, :name
                   = ff.hidden_field :to_id, :value => @ticket.to.id
                 - elsif @ticket.to?(@user)
                   = ff.hidden_field :from_id, :value => @ticket.from.id
-                  = ff.collection_select :to_id, User.all, :id, :name
+                  = ff.collection_select :to_id, User.where("id != ?", @ticket.from.id), :id, :name
                 - else
                   = nil
               - else
