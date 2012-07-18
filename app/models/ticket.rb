@@ -22,4 +22,24 @@ class Ticket < ActiveRecord::Base
     updates.create!(:code_id => code)
   end
 
+  def from
+    ticket_owners.first.from
+  end
+
+  def to
+    ticket_owners.first.to
+  end
+
+  def from?(user)
+    from == user
+  end
+
+  def to?(user)
+    to == user
+  end
+
+  def transferred?(user)
+    to != user && from != user
+  end
+
 end

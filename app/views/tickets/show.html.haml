@@ -1,41 +1,66 @@
-.container-fluid
-  .row-fluid
-    .span6
-      %p#notice= notice
-
-
-      %h1
-        = @ticket.subject
-        %small
-          = @ticket.ticket_category.name
-          |
-          = @ticket.priority.name
-          priority
-      %p
-        = @ticket.body
-      - unless @ticket.ref_id.nil?
-        %p
-          %b Ref:
-          = link_to Ticket.find(@ticket.ref_id).subject, Ticket.find(@ticket.ref_id)
-    .span6
-      %h3 Updates
-      = bootstrap_form_for @ticket do |f|
-        = f.fields_for :ticket_updates do |ff|
-          - if ff.object.new_record?
-            = ff.hidden_field :user_id, :value => current_user.id
-            = ff.collection_select :ticket_code_id, TicketCode.all, :id, :name
-            = ff.text_field :comment, :value => nil, :placeholder => 'add a comment...'
-          - else
-            = render ff.object
-        = f.submit
-      %hr
-      %h3 Ownership
-      = bootstrap_form_for @ticket do |f|
-        = f.fields_for :ticket_owners do |ff|
-          - if ff.object.new_record?
-            = ff.hidden_field :ticket_code_id, :value => TicketCode.find_by_name('transfer').id
-            = ff.collection_select :from_id, User.all, :id, :name
-            = ff.collection_select :to_id, User.all, :id, :name
-          - else
-            = render ff.object
-        = f.submit
+.row-fluid
+  .span12
+    = render 'menu'
+    .row-fluid
+      .span8
+        .row-fluid
+          .span2
+            from:
+          .span8
+            %h3= @ticket.from.name
+        .row-fluid
+          .span2
+            to:
+          .span8
+            %h3= @ticket.to.name
+        .row-fluid
+          .span2
+            subject:
+          .span8
+            %h1
+              = @ticket.subject
+              %small
+                = @ticket.ticket_category.name
+                |
+                = @ticket.priority.name
+                priority
+            %p
+              = @ticket.body
+            - unless @ticket.ref_id.nil?
+              %p
+                %b Ref:
+                = link_to Ticket.find(@ticket.ref_id).subject, [Ticket.find(@ticket.ref_id).ticket_owners.first.from, Ticket.find(@ticket.ref_id)]
+        %hr
+        .well
+          %h3 Update ticket status:
+          = form_for([@user, @ticket], :html => { :class => 'form form-inline' }) do |f|
+            = f.fields_for :ticket_updates do |ff|
+              - if ff.object.new_record?
+                = ff.hidden_field :user_id, :value => current_user.id
+                = ff.collection_select :ticket_code_id, (@ticket.from?(@user) ? TicketCode.where(:sender => true) : TicketCode.where(:receiver => true)), :id, :name
+                = ff.text_field :comment, :value => nil, :placeholder => 'add a comment...', :class => 'input-large'
+              - else
+                = nil
+            = f.submit 'update ticket status', :class => 'btn btn-primary'
+        .well
+          %h3 Transfer ticket to:
+          = form_for([@user, @ticket], :html => { :class => 'form form-inline' }) do |f|
+            = f.fields_for :ticket_owners do |ff|
+              - if ff.object.new_record?
+                = ff.hidden_field :ticket_code_id, :value => TicketCode.find_by_name('transfer').id
+                - if @ticket.from?(@user)
+                  = ff.collection_select :from_id, User.all, :id, :name
+                  = ff.hidden_field :to_id, :value => @ticket.to.id
+                - elsif @ticket.to?(@user)
+                  = ff.hidden_field :from_id, :value => @ticket.from.id
+                  = ff.collection_select :to_id, User.all, :id, :name
+                - else
+                  = nil
+              - else
+                = nil
+            = f.submit 'transfer ticket', :class => 'btn'
+      .span4
+        .well
+          %h3 Ticket History
+          = render @ticket.ticket_owners
+          = render @ticket.ticket_updates

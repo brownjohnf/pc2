@@ -44,8 +44,13 @@ class Ability
       can :download_source, Document, :user_id => user.id
 
       if user.role?(:volunteer) || user.role?(:staff)
-        can :read, [ User, Volunteer, Staff, TicketUpdate, Ticket, Priority, TicketOwner, TicketCode, TicketCategory ]
-        can :create, [ Page, CaseStudy, Region, Stage, Moment ]
+        can :read, [ User, Volunteer, Staff, TicketUpdate, Priority, TicketOwner, TicketCode, TicketCategory ]
+        
+        can :read, Ticket do |item|
+          item.from?(user) || item.to?(user)
+        end
+
+        can :create, [ Page, CaseStudy, Region, Stage, Moment, Ticket ]
         can :manage, [ Moment, Photo, Document, Website, Blog, Library ], :user_id => user.id
         can [ :read, :create, :update ], [ Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack, :user_id => user.id

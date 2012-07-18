@@ -2,7 +2,6 @@ OmniauthDemo::Application.routes.draw do
 
   resources :ticket_updates
 
-  resources :tickets
 
   resources :priorities
 
@@ -32,6 +31,7 @@ OmniauthDemo::Application.routes.draw do
       get :search
       get :table
     end
+    resources :tickets, :except => [ :edit ]
   end
 
   resources :documents, :path => 'files' do

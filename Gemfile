@@ -54,4 +54,5 @@ group :development do
   gem 'foreman', '0.39.0'
   gem 'faker', '1.0.1'
   gem 'rspec-rails', '2.9.0'
+  gem 'railroady'
 end

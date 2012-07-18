@@ -67,12 +67,12 @@ class User < ActiveRecord::Base
   has_many :ticket_updates
 
   has_many :from, :foreign_key => :from_id, :class_name => 'TicketOwner', :dependent => :destroy
-  has_many :outgoing, :through => :from, :source => :ticket
-  has_many :sent_to, :through => :from, :source => :to
+  has_many :sent_tickets, :through => :from, :source => :ticket, :uniq => true
+  has_many :sent_to, :through => :from, :source => :to, :uniq => true
 
   has_many :to, :foreign_key => :to_id, :class_name => 'TicketOwner', :dependent => :destroy
-  has_many :incoming, :through => :to, :source => :ticket
-  has_many :received_from, :through => :to, :source => :from
+  has_many :received_tickets, :through => :to, :source => :ticket, :uniq => true
+  has_many :received_from, :through => :to, :source => :from, :uniq => true
 
   # if the user sets an already uploaded photo as a profile image
   belongs_to :photo
@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
 
   def to_param
     name ? "#{id}-#{name.parameterize}" : id
+  end
+
+  def tickets
+    sent_tickets + received_tickets
   end
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
