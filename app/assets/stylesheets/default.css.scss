@@ -94,6 +94,17 @@ img#pc_big {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F5F5F5', GradientType=0);
 }
 
+/* fix/addition for right-aligned dropdown menus */
+.dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+
+.navbar .pull-right .dropdown-menu::after, .navbar .dropdown-menu.pull-right::after {
+  right: 13px;
+  left: auto;
+}
+
 /********************************************/
 /* borrowed styles from the bootstrap demo page */
 

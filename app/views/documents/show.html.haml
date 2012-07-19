@@ -6,7 +6,7 @@
     %h1
       = @document.name
     %hr
-    %p= @document.description
+    %p= best_in_place_if can?(:update, @document), @document, :description
     %p
       - if @document.author
         author:

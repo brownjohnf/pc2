@@ -1,0 +1,31 @@
+= form_for [@user, @ticket], :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    .controls
+      %h1 Create a ticket
+  .control-group
+    %label.control-label Recipient
+    .controls
+      = f.fields_for :ticket_owners do |ff|
+        = ff.collection_select :to_id, User.where("id != ?", @user.id).all, :id, :name
+  .control-group
+    %label.control-label References
+    .controls
+      = f.collection_select :ref_id, Ticket.all, :id, :subject, :include_blank => true
+  .control-group
+    %label.control-label Subject
+    .controls
+      = f.text_field :subject
+  .control-group
+    %label.control-label Category
+    .controls
+      = f.collection_select :ticket_category_id, TicketCategory.all, :id, :name, :label => 'My issue is related to:'
+  .control-group
+    %label.control-label Body
+    .controls
+      = f.text_area :body, :rows => 5, :label => 'Tell us more...'
+  .control-group
+    %label.control-label Priority
+    .controls
+      = f.collection_select :priority_id, Priority.all, :id, :name, :label => 'Just how bad is it?'
+  .form-actions
+    = f.submit 'Yes! Do it!', :class => 'btn btn-primary'

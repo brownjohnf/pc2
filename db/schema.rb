@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707165721) do
+ActiveRecord::Schema.define(:version => 20120716212642) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -197,6 +197,14 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "priorities", :force => true do |t|
+    t.integer  "level"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "regions", :force => true do |t|
     t.string   "name"
     t.string   "short"
@@ -244,10 +252,10 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
 
   create_table "site_configs", :force => true do |t|
     t.string   "name"
-    t.string   "setting"
+    t.text     "setting"
     t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -256,7 +264,12 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "true",               :default => false
+    t.string   "category"
+    t.string   "title"
   end
+
+  add_index "site_configs", ["name"], :name => "index_site_configs_on_name", :unique => true
 
   create_table "sites", :force => true do |t|
     t.string   "name"
@@ -320,6 +333,53 @@ ActiveRecord::Schema.define(:version => 20120707165721) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "ticket_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ticket_codes", :force => true do |t|
+    t.string   "name"
+    t.string   "past_name"
+    t.string   "verb",        :default => "to"
+    t.string   "description"
+    t.string   "color"
+    t.boolean  "sender"
+    t.boolean  "receiver"
+    t.integer  "rank"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "ticket_owners", :force => true do |t|
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.integer  "ticket_id"
+    t.integer  "ticket_code_id", :default => 1
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "ticket_updates", :force => true do |t|
+    t.integer  "ticket_id"
+    t.integer  "ticket_code_id", :default => 1
+    t.string   "comment",        :default => "New ticket."
+    t.integer  "user_id"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "tickets", :force => true do |t|
+    t.integer  "ref_id"
+    t.integer  "ticket_category_id"
+    t.string   "subject"
+    t.string   "body"
+    t.integer  "priority_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|

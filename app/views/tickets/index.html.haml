@@ -1,0 +1,25 @@
+.container-fluid
+  .row-fluid
+    .span12
+      = render 'menu'
+      %h1 Your tickets
+      %table.table.table-striped.table-condensed.dyn-datatable
+        %thead
+          -#%th Ref
+          %th From
+          %th To
+          %th Ticket category
+          %th Subject
+          %th Body
+          %th Priority
+        %tbody
+        - @tickets.each do |ticket|
+          - if can?(:read, ticket) && !ticket.transferred?(@user)
+            %tr
+              -#%td= ticket.ref_id
+              %td= link_to ticket.ticket_owners.first.from.name, ticket.ticket_owners.first.from
+              %td= link_to ticket.ticket_owners.first.to.name, ticket.ticket_owners.first.to
+              %td= ticket.ticket_category.name
+              %td= link_to ticket.subject, user_ticket_path(ticket.ticket_owners.first.from, ticket)
+              %td= truncate(ticket.body, :length => 100, :separator => ' ')
+              %td= ticket.priority.name

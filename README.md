@@ -7,6 +7,15 @@ This is a demo app which offers instant support for login using:
 
 It's target user group is Peace Corps posts. The structure is customized to reflect their needs, and offers support for the storage, presentation, and manipulation of the following resources:
 
+### Features
+
+* File management
+* Multimedia timeline for post history
+* Volunteer profiles
+* Staff profiles
+* Friend & Family subscription
+* Site content
+
 #### Files
 
 All sorts, including

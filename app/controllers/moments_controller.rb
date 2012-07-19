@@ -105,10 +105,10 @@ class MomentsController < ApplicationController
     respond_to do |format|
       if @moment.update_attributes(params[:moment])
         format.html { redirect_to @moment, notice: 'Moment was successfully updated.' }
-        format.json { head :ok }
+        format.json { respond_with_bip @moment }
       else
         format.html { render action: "edit" }
-        format.json { render json: @moment.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip @moment }
       end
     end
   end

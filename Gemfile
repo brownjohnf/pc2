@@ -30,6 +30,7 @@ gem 'rubyzip', '0.9.5'
 gem 'ruby-mp3info', '0.7'
 gem 'mercury-rails', '0.3.1'
 gem 'bitly'
+gem 'best_in_place', '1.1.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -53,4 +54,5 @@ group :development do
   gem 'foreman', '0.39.0'
   gem 'faker', '1.0.1'
   gem 'rspec-rails', '2.9.0'
+  gem 'railroady'
 end

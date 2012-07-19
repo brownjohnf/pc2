@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ticket_category.name
+
+= link_to 'Edit', edit_ticket_category_path(@ticket_category)
+\|
+= link_to 'Back', ticket_categories_path

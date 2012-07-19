@@ -5,6 +5,7 @@
     = render 'menu'
     %table.table.table-striped.table-condensed.dyn-datatable
       %thead
+        %th
         %th Name
         %th Description
         %th Last Updated
@@ -18,15 +19,16 @@
       %tbody
         - @documents.each do |document|
           %tr
-            %td= link_to document.name, document
-            %td= document.description
+            %td= link_to 'view', document
+            %td= best_in_place_if can?(:update, document), document, :name
+            %td= best_in_place_if can?(:update, document), document, :description
             %td
               = time_ago_in_words(document.updated_at)
               ago by
               = link_to document.user.name, document.user
-            %td= document.author
+            %td= best_in_place_if can?(:update, document), document, :author
             %td= document.language.name if document.language
-            %td= document.tag_list
+            %td= best_in_place_if can?(:update, document), document, :tag_list
             %td
               = document.file.size
               bytes

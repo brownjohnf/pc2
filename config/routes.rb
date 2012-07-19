@@ -1,5 +1,16 @@
 OmniauthDemo::Application.routes.draw do
 
+  resources :ticket_updates
+
+
+  resources :priorities
+
+  resources :ticket_owners
+
+  resources :ticket_codes
+
+  resources :ticket_categories
+
   resources :site_configs, :except => [ :new, :create, :destroy, :show ]
 
   Mercury::Engine.routes
@@ -20,6 +31,7 @@ OmniauthDemo::Application.routes.draw do
       get :search
       get :table
     end
+    resources :tickets, :except => [ :edit ]
   end
 
   resources :documents, :path => 'files' do

@@ -67,6 +67,17 @@ class User < ActiveRecord::Base
   # pages, case studies to which this user has contributed/is author
   has_many :contributions, :dependent => :destroy
 
+  # support/grant tickets
+  has_many :ticket_updates
+
+  has_many :from, :foreign_key => :from_id, :class_name => 'TicketOwner', :dependent => :destroy
+  has_many :sent_tickets, :through => :from, :source => :ticket, :uniq => true
+  has_many :sent_to, :through => :from, :source => :to, :uniq => true
+
+  has_many :to, :foreign_key => :to_id, :class_name => 'TicketOwner', :dependent => :destroy
+  has_many :received_tickets, :through => :to, :source => :ticket, :uniq => true
+  has_many :received_from, :through => :to, :source => :from, :uniq => true
+
   # if the user sets an already uploaded photo as a profile image
   belongs_to :photo
 
@@ -81,6 +92,10 @@ class User < ActiveRecord::Base
 
   def to_param
     name ? "#{id}-#{name.parameterize}" : id
+  end
+
+  def tickets
+    sent_tickets + received_tickets
   end
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)

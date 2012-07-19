@@ -88,10 +88,10 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.update_attributes(params[:document])
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
-        format.json { head :ok }
+        format.json { respond_with_bip @document }
       else
         format.html { render action: "edit" }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip @document }
       end
     end
   end

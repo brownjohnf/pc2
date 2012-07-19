@@ -1,0 +1,8 @@
+- unless ticket_update.new_record?
+  %span.label
+    = ticket_update.ticket_code.past_name
+  by
+  = ticket_update.user.name
+  = timeago(ticket_update.created_at)
+  = "[ #{ticket_update.comment} ]" unless ticket_update.comment.blank?
+  %br
