@@ -18,7 +18,7 @@ module ApplicationHelper
   # @return [String] 'Peace Corps | X'
   #
   def title
-    base_title = "Peace Corps #{country}"
+    base_title = "#{SiteConfig.find_by_name('site_title').setting} #{country}"
     if @title.nil?
       base_title
     else
@@ -32,7 +32,7 @@ module ApplicationHelper
   # @return [String] Senegal
   #
   def country
-    'Senegal'
+    Carmen.country_name(cookies[:country])
   end
 
   # @author John Brown
