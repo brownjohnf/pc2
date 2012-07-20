@@ -2,7 +2,8 @@
 This is the manifest file for all SASS files. By using the @import
 directive, access to mixins, extensions, and variables is preserved.
 */
-
+$iconSpritePath: image-url('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-url('glyphicons-halflings-white.png');
 @import 'bootstrap';
 @import 'bootstrap-responsive';
 
