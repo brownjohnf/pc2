@@ -238,7 +238,8 @@
             %li
               = link_to user_tickets_path(current_user) do
                 %i.icon-tasks
-                Tickets (#{current_user.tickets.count})
+                Tickets
+                %span.badge.badge-success #{current_user.tickets.count}
             %li
               = link_to edit_user_path(current_user) do
                 %i.icon-cog
@@ -250,7 +251,7 @@
             %li
               = link_to '/logout' do
                 %i.icon-off
-                Sign out
+                %span.label.label-important Sign out
     - else
       %ul.nav
         %li.dropdown
@@ -261,7 +262,7 @@
             %li
               = link_to login_path do
                 %i.icon-arrow-right
-                Sign in
+                %span.label.label-success Sign in
             %li
               = link_to new_user_registration_path do
                 %i.icon-plus
