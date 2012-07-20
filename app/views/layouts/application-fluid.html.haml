@@ -11,7 +11,7 @@
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     %link{:href => image_path('favicon.ico'), :type => 'image/x-icon', :rel => 'icon'}
     = render 'shared/google_analytics' unless Rails.env.development? || Rails.env.test?
-  %body{:class => "#{params[:controller]}", :id => "#{params[:action]}"}
+  %body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
