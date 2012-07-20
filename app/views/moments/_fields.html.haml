@@ -2,7 +2,8 @@
   %label.control-label
     %h2 Time
   .controls
-    %br
+    .alert
+      %p Set the dates for the event. If it's a point in time, set both dates identically.
 .control-group
   %label.control-label Start Date
   .controls
@@ -13,14 +14,18 @@
     = f.date_select(:enddate, {:start_year => 1963, :end_year => Time.now.year}, {:class => 'span1'})
 .control-group
   %label.control-label
-    %h2 Location
+    %h2 Contributor
   .controls
-    %hr
+    .alert
+      %p If you are not the contributor, please fill out the following fields. Put the person's name in the media credit field (below).
 - if can? :manage, @moment
+  .control-group
+    %label.control-label Name
+    .controls
+      = f.collection_select :user_id, User.all, :id, :name
   .control-group
     %label.control-label Country
     .controls
-      = f.collection_select :user_id, User.all, :id, :name
       = f.select :country, allowed_countries
 - else
   = f.hidden_field :user_id, :value => current_user.id
@@ -43,7 +48,7 @@
     = f.text_field :sector
 .control-group
   %label.control-label
-    %h2 Content
+    %h2 Text Copy
   .controls
     %hr
 .control-group
@@ -86,9 +91,6 @@
 .control-group
   %label.control-label
     %h2 Photos
-  .controls
-    %hr
-.control-group
   .controls
     .alert.alert-error
       %h3.alert-heading WARNING!
