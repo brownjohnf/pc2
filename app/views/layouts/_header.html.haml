@@ -147,7 +147,10 @@
                 = link_to table_documents_path do
                   %i.icon-file
                   Documents
-              %li= link_to "feedback (#{Feedback.count})", feedback_index_path
+              %li
+                = link_to feedback_index_path do
+                  %i.icon-bullhorn
+                  Feedback (#{Feedback.count})
               %li= link_to "imports", imports_path
               %li= link_to "jobs", jobs_path
               %li= link_to "languages (#{Language.count})", languages_path
@@ -194,7 +197,10 @@
                 = link_to volunteers_path do
                   %i.icon-user
                   Volunteers
-              %li= link_to "websites", websites_path
+              %li
+                = link_to websites_path do
+                  %i.icon-globe
+                  Websites (#{Website.count})
       -#%li= avatar_for_user current_user, :size => :icon
       %ul.nav
         %li.dropdown
@@ -216,7 +222,7 @@
                 Encrypt session
             %li
               = link_to new_feedback_path do
-                %i.icon-comment
+                %i.icon-bullhorn
                 Leave feedback
             %li
               = link_to '/help' do
@@ -232,7 +238,8 @@
             %li
               = link_to user_tickets_path(current_user) do
                 %i.icon-tasks
-                Tickets (#{current_user.tickets.count})
+                Tickets
+                %span.badge.badge-success #{current_user.tickets.count}
             %li
               = link_to edit_user_path(current_user) do
                 %i.icon-cog
@@ -244,7 +251,7 @@
             %li
               = link_to '/logout' do
                 %i.icon-off
-                Sign out
+                %span.label.label-important Sign out
     - else
       %ul.nav
         %li.dropdown
@@ -255,7 +262,7 @@
             %li
               = link_to login_path do
                 %i.icon-arrow-right
-                Sign in
+                %span.label.label-success Sign in
             %li
               = link_to new_user_registration_path do
                 %i.icon-plus
