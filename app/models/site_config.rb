@@ -35,7 +35,7 @@ class SiteConfig < ActiveRecord::Base
       :secret_access_key => ENV['S3_SECRET']
     },
     :url => ":s3_alias_url",
-    :s3_host_alias => ENV['CDN_NAME'],
+    :s3_host_alias => ENV['CDN_CNAME'],
     :bucket => ENV['S3_BUCKET'],
     :path => 'config_files/:id/:style/:filename'
   }
