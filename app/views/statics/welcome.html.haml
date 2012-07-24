@@ -1,4 +1,17 @@
 .row
+  .span12
+    .hero-unit
+      %h1 Welcome, #{current_user.name}!
+      %h2 What would you like to do now?
+    - if current_user.pc?
+      .center
+        = link_to 'Browse all pages', pages_path, :class => 'btn btn-info btn-moron'
+        = link_to 'Upload a file', pages_path, :class => 'btn btn-primary btn-moron'
+        = link_to 'Create a case study', pages_path, :class => 'btn btn-success btn-moron'
+        = link_to 'Create a new page', pages_path, :class => 'btn btn-warning btn-moron'
+      %h1 Or, read on for more information...
+      %hr
+.row
   .span3
     = render 'shared/menu'
   .span7
@@ -35,6 +48,7 @@
         Latest Features
         %small Volunteers and Staff
       %ul
+        %li Suggested tags! When you're uploading files, you'll see a list of commonly used tags on the right. By selecting from that pool, you'll help keep everything tightly linked.
         %li Include source files with #{link_to 'file uploads', new_document_path}. Have a PDF that might need to be edited later? Include the original MS Office doc, and posterity will thank you. Plus, you can always get it back later, so it's like an archive!
         %li Upload #{link_to 'files', new_document_path} and #{link_to 'photos', new_photo_path} right from your computer! Have something beautiful? Useful? Essential? Upload it straight to the website.
         %li #{link_to 'Create pages', new_page_path} right here! It's as easy as using Microsoft Word! Well, almost... But trust us, it's easy.
