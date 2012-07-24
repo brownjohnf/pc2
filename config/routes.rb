@@ -118,13 +118,13 @@ OmniauthDemo::Application.routes.draw do
     end
   end
 
-  match '/disclaimer', :to => 'statics#disclaimer'
-  match '/privacy', :to => 'statics#privacy'
-  match '/security', :to => 'statics#security'
-  match '/about_us', :to => 'statics#about_us'
-  match '/splash', :to => 'statics#splash'
-  match '/help', :to => 'statics#help'
-  match '/search', :to => 'statics#search'
+  match '/disclaimer', :to => 'statics#disclaimer', :as => :disclaimer
+  match '/privacy', :to => 'statics#privacy', :as => :privacy_policy
+  match '/security', :to => 'statics#security', :as => :security
+  match '/about_us', :to => 'statics#about_us', :as => :about
+  match '/splash', :to => 'statics#splash', :as => :splash
+  match '/help', :to => 'statics#help', :as => :help
+  match '/search', :to => 'statics#search', :as => :search
   match '/welcome', :to => 'statics#welcome', :as => :entry
   match '/goodbye', :to => 'statics#goodbye', :as => :exit
   match '/dashboard', :to => 'statics#dashboard', :as => :dashboard

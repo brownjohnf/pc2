@@ -3,8 +3,14 @@
     .span3
       = render 'shared/menu'
     .span9
+      = render 'menu'
+      - if @results
+        - if @results.count > 0
+          = render @results
+        - else
+          %h2 Your search returned no results.
       .well
-        %h1 Google Search
+        %h1 Still can't find it? Try Google.
         :erb
           <form class="form-inline" method="get" action="http://www.google.com/search">
             <input type="hidden" name="ie" value="UTF-8" />
