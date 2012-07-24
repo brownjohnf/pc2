@@ -240,10 +240,31 @@ img#pc_big {
   margin-bottom: 10px;
 }
 
-/* add a class for convenient centering
-/* should prob be pulled from the SASS mixin */
+/* add classes for convenient alignment */
 .center {
   text-align: center;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+
+/* adjust height of user avatars */
+img.avatar {
+  height: auto;
+}
+
+div.left-v-menu {
+  border-right: 1px solid lightgray;
+}
+
+div.hero-unit.hero-unit-info {
+  background-color: $btnInfoBackground;
+  small {
+    color: $white;
+  }
 }
 
 /*************************************************/
