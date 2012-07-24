@@ -1,0 +1,8 @@
+.subnav
+  %ul.nav.nav-pills
+    %li= link_to 'Disclaimer', disclaimer_path
+    %li= link_to 'Privacy policy', privacy_policy_path
+    %li= link_to 'Help!', help_path
+    %li= link_to 'Security', security_path
+    %li= link_to 'About us', about_path
+    = render 'shared/search' unless params[:action] == 'table'
