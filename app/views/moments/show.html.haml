@@ -7,9 +7,12 @@
     = markdown(@moment.media) if @moment.media
     %hr
     = render @moment.user
+    .pagination.pagination-centered
+      %ul
+        %li= link_to raw('&lang;&lang; older'), @prev if @prev
+        %li= link_to "back to #{@moment.startdate.strftime('%Y')}", moments_path(:year => @moment.startdate.year)
+        %li= link_to raw('newer &rang;&rang;'), @next if @next
   .span2
-    &larr;
-    = link_to "back to #{@moment.startdate.strftime('%Y')}", moments_path(:year => @moment.startdate.year)
     %h1= @moment.startdate.strftime('%B %Y')
     - if @moment.photo
       = link_to image_tag(@moment.photo.photo.url(:medium)), @moment.user, :class => 'avatar'

@@ -23,6 +23,7 @@
     %label.control-label Name
     .controls
       = f.collection_select :user_id, User.all, :id, :name
+      %p.help-block If you set the name here, you can ignore the rest of the Contributor fields.
   .control-group
     %label.control-label Country
     .controls
@@ -34,10 +35,16 @@
   %label.control-label Region
   .controls
     = f.collection_select :region_id, Region.all, :id, :name
+    .help-inline
+      = link_to 'add a region', new_region_path if can? :create, Region
+      (you will lose all entered data)
 .control-group
   %label.control-label Site
   .controls
     = f.collection_select :site_id, Site.all, :id, :name
+    .help-inline
+      = link_to 'add a site', new_site_path if can? :create, Site
+      (you will lose all entered data)
 .control-group
   %label.control-label Dates of Service
   .controls
@@ -68,7 +75,7 @@
   %label.control-label Media
   .controls
     = f.text_area :media, :rows => 3, :class => 'span4'
-    %div.help-block
+    .help-block
       %p You can include one of the following items as your moment content:
       %ul
         %li Text. Simply start typing! Needs to be formatted in HTML or Markdown, and enclosed in &lt;blockquote&gt; your content &lt;/blockquote&gt;.
@@ -94,7 +101,7 @@
   .controls
     .alert.alert-error
       %h3.alert-heading WARNING!
-      %p If you attach a photo, the media field will be ignored in the dynamic timeline!
+      %p If you attach a photo, the media field will be ignored in the dynamic timeline! Also, you MUST specify a title for timeline photos, or the photo will be rejected with no warning.
 .row
   = f.fields_for :photos do |p|
     .span4
