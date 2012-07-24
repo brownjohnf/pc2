@@ -50,6 +50,8 @@ class MomentsController < ApplicationController
     @moment = Moment.find(params[:id])
     @year = @moment.startdate.year
     @decade = @year.to_s.truncate(2).to_i * 10
+    @next = Moment.unscoped.order('moments.startdate ASC').where("startdate > ?", @moment.startdate).limit(1).first
+    @prev = Moment.unscoped.order('moments.startdate DESC').where("startdate < ?", @moment.startdate).limit(1).first
 
     respond_to do |format|
       format.html # show.html.erb
