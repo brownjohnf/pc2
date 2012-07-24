@@ -50,7 +50,7 @@ class Ability
           item.from?(user) || item.to?(user)
         end
 
-        can :create, [ Page, CaseStudy, Region, Stage, Moment, Ticket ]
+        can :create, [ Page, CaseStudy, Stage, Moment, Ticket ]
         can :manage, [ Moment, Photo, Document, Website, Blog, Library ], :user_id => user.id
         can [ :read, :create, :update ], [ Volunteer, Staff ], :user_id => user.id
         can [ :create, :destroy], Stack, :user_id => user.id
@@ -68,7 +68,7 @@ class Ability
           user.country_list.include?(item.country)
         end
         can :download_source, Document
-        can :manage, [ Stage, Stack, Contribution ]
+        can :manage, [ Stage, Stack, Contribution, Region, Site, Regiontype ]
         can :read, [ Feedback, SiteConfig ]
         can :update, SiteConfig, :category => 'timeline'
       end
