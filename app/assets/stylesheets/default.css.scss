@@ -232,6 +232,14 @@ img#pc_big {
   font-size: 1.8em;
 }
 
+/* define a mega-size button for morons */
+.btn.btn-mega {
+  font-size: $baseFontSize * 8;
+  line-height: $baseLineHeight * 8;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
 /* add a class for convenient centering
 /* should prob be pulled from the SASS mixin */
 .center {
