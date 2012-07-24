@@ -15,10 +15,14 @@ class Moment < ActiveRecord::Base
   validates :caption, :length => { :maximum => 255 }
   validates :headline, :presence => true, :length => { :maximum => 255 }, :uniqueness => true
   validates :credit, :length => { :maximum => 255 }
+  validates :years_of_service, :presence => true, :if => lambda { |moment| moment.credit.present? }
   validates :years_of_service, :length => { :maximum => 255 }
   validates :text, :uniqueness => true
   validates :media, :length => { :maximum => 500 }
-  validates :media, :uniqueness => true, :if => lambda { |moment| !moment.media.blank? }
+  validates :media, :uniqueness => true, :if => lambda { |moment| moment.media.present? }
+  validates :country, :presence => true, :if => lambda { |moment| moment.credit.present? }
+  validates :region_id, :presence => true, :if => lambda { |moment| moment.credit.present? }
+  validates :sector, :length => { :maximum => 255 }
 
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['title'].blank? }, :allow_destroy => true
 

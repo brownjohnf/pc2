@@ -1,30 +1,37 @@
 = render :partial => 'menu', :locals => { :decades => [1960,1970,1980,1990,2000,2010], :years => nil }
 .row
-  .span3
-    = render 'shared/menu'
-  .span7
-    %h1= best_in_place_if can?(:update, @moment), @moment, :headline
-    = markdown(@moment.media) if @moment.media
-    %hr
-    = render @moment.user
-    .pagination.pagination-centered
-      %ul
-        %li= link_to raw('&lang;&lang; older'), @prev if @prev
-        %li= link_to "back to #{@moment.startdate.strftime('%Y')}", moments_path(:year => @moment.startdate.year)
-        %li= link_to raw('newer &rang;&rang;'), @next if @next
+  .span10
+    .hero-unit.hero-unit-info
+      %h1
+        = @moment.startdate.strftime('%B %Y')
+        %small= timeago(@moment.startdate.to_time)
+    .row
+      .span3
+        = render 'shared/menu'
+      .span7
+        %h1= best_in_place_if can?(:update, @moment), @moment, :headline
+        %p= best_in_place_if can?(:update, @moment), @moment, :text
+        = markdown(@moment.media) if @moment.media
+        - if @moment.photos.any?
+          = render @moment.photos
+        .pagination.pagination-right
+          %hr
+          %ul
+            %li= link_to raw('&lang;&lang; older'), @prev if @prev
+            %li= link_to "back to #{@moment.startdate.strftime('%Y')}", moments_path(:year => @moment.startdate.year)
+            %li= link_to raw('newer &rang;&rang;'), @next if @next
   .span2
-    %h1= @moment.startdate.strftime('%B %Y')
-    - if @moment.photo
-      = link_to image_tag(@moment.photo.photo.url(:medium)), @moment.user, :class => 'avatar'
+    - if @moment.photos.any?
+      = link_to image_tag(@moment.photos.first.photo.url(:small)), @moment.user, :class => 'avatar'
     - else
       = avatar_for_user(@moment.user, :size => :small)
+    %h3 Contributed by
     %p
-      = link_to @moment.user.volunteers.first.stage.swear_in.year, moments_path(:year => @moment.user.volunteers.first.stage.swear_in.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.swear_in
-      \-
-      = link_to @moment.user.volunteers.first.stage.cos.year, moments_path(:year => @moment.user.volunteers.first.stage.cos.year) if @moment.user.volunteers.any? && @moment.user.volunteers.first.stage && @moment.user.volunteers.first.stage.cos
-    .well
-      %p= best_in_place_if can?(:update, @moment), @moment, :text
-    - if @moment.photos.any?
-      .box
-        %h4 Photos
-        = render @moment.photos
+      - if @moment.credit
+        = @moment.credit
+        %br
+        = @moment.country
+        %br
+        = @moment.years_of_service
+      - else
+        = link_to @moment.user.name, @moment.user
