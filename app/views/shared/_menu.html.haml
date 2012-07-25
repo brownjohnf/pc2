@@ -1,5 +1,9 @@
 -#= link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
 .left-v-menu
+  - if signed_in? && current_user.beta?
+    .alert.alert-warning
+      %h4.alert-heading You're a beta user!
+      %p You'll see some experimental features around the site; if you don't like them, talk to Jack.
   %h3
     = flag_icon(cookies[:country].downcase)
     = Carmen.country_name(cookies[:country])

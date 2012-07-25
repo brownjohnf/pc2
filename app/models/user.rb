@@ -89,6 +89,10 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :documents, :photos
 
   default_scope :order => 'users.name ASC'
+  
+  def volunteer
+    volunteers.current.first
+  end
 
   def to_param
     name ? "#{id}-#{name.parameterize}" : id
