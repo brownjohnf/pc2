@@ -266,6 +266,24 @@ div.hero-unit.hero-unit-info {
     color: $white;
   }
 }
+div.hero-unit.hero-unit-success {
+  background-color: $btnSuccessBackground;
+  small {
+    color: $white;
+  }
+}
+div.hero-unit.hero-unit-warning {
+  background-color: $btnWarningBackground;
+  small {
+    color: $white;
+  }
+}
+div.hero-unit.hero-unit-danger {
+  background-color: $btnDangerBackground;
+  small {
+    color: $white;
+  }
+}
 
 /*************************************************/
 /* modal settings */

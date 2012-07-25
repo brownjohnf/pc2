@@ -2,7 +2,7 @@
   .floatleft= avatar_for page, :size => size ||= :icon
   %h3
     = link_to page.title, page, :rel => 'popover', 'title' => 'Info', 'data-content' => "authored by #{page.contributors.last.name if page.contributors.any?}<br>created #{page.created_at}"
-    %small #{timeago(page.updated_at)} ago
+    %small= timeago(page.updated_at)
   %p
     = truncate(page.description, :length => 100, :separator => ' ')
   %p

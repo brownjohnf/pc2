@@ -9,15 +9,18 @@
           = render @results
         - else
           %h2 Your search returned no results.
-      .well
-        %h1 Still can't find it? Try Google.
-        :erb
-          <form class="form-inline" method="get" action="http://www.google.com/search">
-            <input type="hidden" name="ie" value="UTF-8" />
-            <input type="hidden" name="oe" value="UTF-8" />
-            <input type="hidden" name="domains" value="http://www.pcsenegal.org" />
-            <input type="hidden" name="sitesearch" value="http://www.pcsenegal.org" checked />
-            <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
-            <input class="span6" id="google_search_input" type="text" name="q" maxlength="200" placeholder="Search pcsenegal.org using Google Search" />
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
+        .well
+          %h1 Still can't find it? Try Google.
+          :erb
+            <form class="form-inline" method="get" action="http://www.google.com/search">
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input type="hidden" name="oe" value="UTF-8" />
+              <input type="hidden" name="domains" value="http://www.pcsenegal.org" />
+              <input type="hidden" name="sitesearch" value="http://www.pcsenegal.org" checked />
+              <!--<input type="submit" name="btnG" value="Google Search" height="50px" />-->
+              <input class="span6" id="google_search_input" type="text" name="q" maxlength="200" placeholder="Search pcsenegal.org using Google Search" />
+              <button class="btn btn-success" type="submit">Search</button>
+            </form>
+      - else
+        .hero-unit.hero-unit-success
+          %p Use the search box above to search for content, case studies, files, people, libraries, and photos. If your search returns only one hit, you'll automatically be redirected to the result.
