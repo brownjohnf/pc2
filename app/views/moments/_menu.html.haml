@@ -20,7 +20,7 @@
         %ul.dropdown-menu
           - (0..9).each do |y|
             %li= year_link(truncate(@decade.to_s, :length => 2).to_i * 10 + y)
-    - if can? :edit, @moment
+    - if @moment && !@moment.new_record? && can?(:edit, @moment)
       %li.dropdown
         %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
           Actions

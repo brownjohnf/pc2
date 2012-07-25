@@ -45,7 +45,7 @@ class Moment < ActiveRecord::Base
     if photos.any?
       photos.first.photo.url(:large)
     # otherwise, use the media
-    elsif media.length > 1
+    elsif media.present?
       media
     # otherwise, use the headline
     else
