@@ -1,89 +1,89 @@
 -#= link_to image_tag('pc_logo.png', :alt => "#{organization} #{country}", :id => 'main_menu_logo', :width => '100%'), root_path
-
-%h3
-  = flag_icon(cookies[:country].downcase)
-  = Carmen.country_name(cookies[:country])
-%ul.nav.nav-list
-  - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
-    %li.nav-header= @page.title.upcase
-    - if @page.parent && can?(:read, @page.parent)
-      %li
-        = link_to @page.parent do
-          %i.icon-chevron-up
-          go back up
-    - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
+.left-v-menu
+  %h3
+    = flag_icon(cookies[:country].downcase)
+    = Carmen.country_name(cookies[:country])
+  %ul.nav.nav-list
+    - if @page && !@page.new_record? && @page.children.accessible_by(current_ability).any?
+      %li.nav-header= @page.title.upcase
+      - if @page.parent && can?(:read, @page.parent)
+        %li
+          = link_to @page.parent do
+            %i.icon-chevron-up
+            go back up
+      - Page.where(:parent_id => @page.id).order("#{@page.sort_by ? @page.sort_by : 'title'} #{@page.sort_order ? @page.sort_order : 'ASC'}").each do |item|
+        %li
+          = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
+      %hr
+    -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
+      %li.nav-header= @page.parent.title.upcase
+      - if @page.parent && can?(:read, @page.parent)
+        %li
+          = link_to @page.parent do
+            %i.icon-chevron-up
+            go back up
+      - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
+        %li
+          = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
+    %li.nav-header Browse
+    - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
       %li
         = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
-    %hr
-  -elsif @page && !@page.new_record? && @page.parent && @page.siblings.accessible_by(current_ability).any?
-    %li.nav-header= @page.parent.title.upcase
-    - if @page.parent && can?(:read, @page.parent)
+    - if Page.unscoped.tagged_with('quicklink').order('title').any?
+      %li.nav-header Quick Links
+      - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
+        %li= link_to link.canonical_title, link if can? :read, link
+  %ul.nav.nav-list.visible-desktop
+    %li.nav-header Resources
+    - if user_signed_in?
       %li
-        = link_to @page.parent do
-          %i.icon-chevron-up
-          go back up
-    - Page.where(:parent_id => @page.parent_id).order("#{@page.parent.sort_by ? @page.parent.sort_by : 'title'} #{@page.parent.sort_order ? @page.parent.sort_order : 'ASC'}").each do |item|
+        = link_to entry_path, :class => 'tooltip-right-slow', :title => "List of the latest features. If you've forgotten about something, check here first." do
+          %i.icon-star
+          Welcome
       %li
-        = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
-  %li.nav-header Browse
-  - Page.accessible_by(current_ability).order('title ASC').where("parent_id IS NULL AND country = ?", cookies[:country]).each do |item|
+        = link_to dashboard_path, :class => 'tooltip-right-slow', :title => "An overview of the various resources on the site, and what's been changing." do
+          %i.icon-home
+          Dashboard
     %li
-      = link_to item.title, item, :class => 'tooltip-right-slow', :title => item.description
-  - if Page.unscoped.tagged_with('quicklink').order('title').any?
-    %li.nav-header Quick Links
-    - Page.unscoped.tagged_with('quicklink').order('title').each do |link|
-      %li= link_to link.canonical_title, link if can? :read, link
-%ul.nav.nav-list.visible-desktop
-  %li.nav-header Resources
-  - if user_signed_in?
+      = link_to timeline_path, :class => 'tooltip-right-slow', :title => 'Stories, photos and videos shared by 50 years of Peace Corps Senegal Volunteers.' do
+        %i.icon-time
+        50th Anniversary Timeline
     %li
-      = link_to entry_path, :class => 'tooltip-right-slow', :title => "List of the latest features. If you've forgotten about something, check here first." do
-        %i.icon-star
-        Welcome
+      = link_to case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.' do
+        %i.icon-road
+        Case Studies
     %li
-      = link_to dashboard_path, :class => 'tooltip-right-slow', :title => "An overview of the various resources on the site, and what's been changing." do
-        %i.icon-home
-        Dashboard
-  %li
-    = link_to timeline_path, :class => 'tooltip-right-slow', :title => 'Stories, photos and videos shared by 50 years of Peace Corps Senegal Volunteers.' do
-      %i.icon-time
-      50th Anniversary Timeline
-  %li
-    = link_to case_studies_path, :class => 'tooltip-right-slow', :title => 'Documentation of projects past and present, successes and failures.' do
-      %i.icon-road
-      Case Studies
-  %li
-    = link_to updated_pages_path, :class => 'tooltip-right-slow', :title => 'Presentation content. Info about what we do, and how we do it.' do
-      %i.icon-list-alt
-      Content
-  %li
-    = link_to documents_path, :class => 'tooltip-right-slow', :title => 'Get the latest and greatest information, podcasts, and radio shows.' do
-      %i.icon-file
-      Files
-  %li
-    = link_to libraries_path, :class => 'tooltip-right-slow', :title => 'View collections put together by users, highlighting favorite or useful items.' do
-      %i.icon-book
-      Libraries
-  %li
-    = link_to photos_path, :class => 'tooltip-right-slow', :title => 'Browse Volunteer photos, or upload your own.' do
-      %i.icon-picture
-      Photos
-  -#%li= link_to videos_path do
-    %i.icon-film
-    Videos
-  %li
-    = link_to( { :controller => 'staff', :action => 'index' }, :class => 'tooltip-right-slow', :title => 'Get to know our staff.') do
-      %i.icon-user
-      Staff
-  %li
-    = link_to users_path, :class => 'tooltip-right-slow', :title => "Take a look at who's on the site." do
-      %i.icon-user
-      Users
-  %li
-    = link_to volunteers_path, :class => 'tooltip-right-slow', :title => 'Get to know our Volunteers.' do
-      %i.icon-user
-      Volunteers
-  %li
-    = link_to '/search', :class => 'tooltip-right-slow', :title => "Still can't find it? Search within our site using the power of Google." do
-      %i.icon-search
-      Google Search
+      = link_to updated_pages_path, :class => 'tooltip-right-slow', :title => 'Presentation content. Info about what we do, and how we do it.' do
+        %i.icon-list-alt
+        Content
+    %li
+      = link_to documents_path, :class => 'tooltip-right-slow', :title => 'Get the latest and greatest information, podcasts, and radio shows.' do
+        %i.icon-file
+        Files
+    %li
+      = link_to libraries_path, :class => 'tooltip-right-slow', :title => 'View collections put together by users, highlighting favorite or useful items.' do
+        %i.icon-book
+        Libraries
+    %li
+      = link_to photos_path, :class => 'tooltip-right-slow', :title => 'Browse Volunteer photos, or upload your own.' do
+        %i.icon-picture
+        Photos
+    -#%li= link_to videos_path do
+      %i.icon-film
+      Videos
+    %li
+      = link_to( { :controller => 'staff', :action => 'index' }, :class => 'tooltip-right-slow', :title => 'Get to know our staff.') do
+        %i.icon-user
+        Staff
+    %li
+      = link_to users_path, :class => 'tooltip-right-slow', :title => "Take a look at who's on the site." do
+        %i.icon-user
+        Users
+    %li
+      = link_to volunteers_path, :class => 'tooltip-right-slow', :title => 'Get to know our Volunteers.' do
+        %i.icon-user
+        Volunteers
+    %li
+      = link_to '/search', :class => 'tooltip-right-slow', :title => "Still can't find it? Search within our site using the power of Google." do
+        %i.icon-search
+        Google Search
