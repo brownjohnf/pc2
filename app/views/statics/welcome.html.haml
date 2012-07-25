@@ -6,9 +6,9 @@
     - if current_user.pc?
       .center
         = link_to 'Browse all pages', pages_path, :class => 'btn btn-info btn-moron'
-        = link_to 'Upload a file', pages_path, :class => 'btn btn-primary btn-moron'
-        = link_to 'Create a case study', pages_path, :class => 'btn btn-success btn-moron'
-        = link_to 'Create a new page', pages_path, :class => 'btn btn-warning btn-moron'
+        = link_to 'Upload a file', new_document_path, :class => 'btn btn-primary btn-moron'
+        = link_to 'Create a case study', new_case_study_path, :class => 'btn btn-success btn-moron'
+        = link_to 'Create a new page', new_page_path, :class => 'btn btn-warning btn-moron'
       %h1 Or, read on for more information...
       %hr
 .row
