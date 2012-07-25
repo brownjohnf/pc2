@@ -8,7 +8,9 @@
     - @moments.each do |moment|
       .row
         .span1
-          = image_tag(moment.user.photos.first.photo.url(:icon)) unless moment.user.photos.empty?
+          = render moment.photos
+          %br
+          &nbsp;
         .span5
           %h1
             = best_in_place_if can?(:update, moment), moment, :headline
@@ -18,8 +20,6 @@
               = moment.credit.present? ? moment.credit : moment.user.name
           %p= best_in_place_if can?(:update, moment), moment, :text
           = markdown(moment.media) if moment.media
-          - if moment.photos.any?
-            = render moment.photos
           %p.right
             = link_to 'Edit', edit_moment_path(moment), :class => 'btn btn-warning' if can? :update, moment
             = link_to raw('View full event &rarr;'), moment
