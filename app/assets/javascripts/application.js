@@ -18,4 +18,5 @@
 //= require default
 //= require jquery.purr
 //= require best_in_place
-//= require jquery.timeago.js
+//= require jquery.timeago
+//= require countdown

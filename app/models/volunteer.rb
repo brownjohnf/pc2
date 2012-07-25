@@ -8,9 +8,14 @@ class Volunteer < ActiveRecord::Base
   validates :user_id, :country, :presence => true
 
   default_scope :order => 'cos_date DESC'
+  scope :current, lambda { joins(:stage).where("cos_date > ?", Time.now).where("swear_in < ?", Time.now) }
   
   after_create :add_to_volunteers
   after_destroy :remove_from_volunteers
+
+  def swear_in_date
+    stage.swear_in
+  end
 
   def to_param
     "#{id}-#{user.name.parameterize}"

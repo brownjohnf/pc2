@@ -142,6 +142,10 @@ $(function(){
   $('time.timeago').timeago();
 
   /*********************************************/
+  /* countdown binding */
+  $('.countdown').countdown();
+
+  /*********************************************/
   /* assorted other js stuff */
 
   // sets default form focus based on input ID

@@ -124,6 +124,24 @@
 .nav-collapse.pull-right
   %ul.nav
     - if signed_in?
+      - if current_user.beta? && current_user.volunteer.present?
+        %ul.nav
+          %li
+            %a.navbar-text{:rel => 'popover-bottom', :title => 'COS Countdown', 'data-content' => 'Days until you COS. Scary, huh?'}
+              %span.countdown.badge.badge-warning{:title => "#{current_user.volunteers.first.cos_date.strftime('%m %B %Y')} 15:38:30"}
+                %span.days 00
+                days
+                -#\:
+                -#%span.hours 00
+                -#\:
+                -#%span.minutes 00
+                -#\:
+                -#%span.seconds 00
+      - elsif current_user.beta? && current_user.volunteers.any?
+        %ul.nav
+          %li
+            = link_to current_user, { :class => 'navbar-text', :rel => 'popover-bottom', :title => 'Missing Profile Info', 'data-content' => "You've got missing info in your profile! It's probably swear in/cos info. Complete your profile to see a COS countdown timer!" } do
+              %span.badge.badge-important incomplete!
       - if current_user.role? :admin
         %ul.nav
           %li.dropdown
@@ -134,7 +152,8 @@
               %li
                 = link_to blogs_path do
                   %i.icon-leaf
-                  Blogs (#{Blog.count})
+                  Blogs
+                  %span.badge= Blog.count
               %li
                 = link_to contributions_path do
                   %i.icon-asterisk
@@ -143,64 +162,91 @@
                 = link_to case_studies_path do
                   %i.icon-road
                   Case Studies
+                  %span.badge= CaseStudy.count
               %li
                 = link_to table_documents_path do
                   %i.icon-file
                   Documents
+                  %span.badge= Document.count
               %li
                 = link_to feedback_index_path do
                   %i.icon-bullhorn
-                  Feedback (#{Feedback.count})
+                  Feedback
+                  %span.badge= Feedback.count
               %li= link_to "imports", imports_path
-              %li= link_to "jobs", jobs_path
-              %li= link_to "languages (#{Language.count})", languages_path
+              %li
+                = link_to jobs_path do
+                  Jobs
+                  %span.badge= Job.count
+              %li
+                = link_to languages_path do
+                  Languages
+                  %span.badge= Language.count
               %li
                 = link_to libraries_path do
                   %i.icon-book
                   Libraries
+                  %span.badge= Library.count
               %li
                 = link_to moments_path do
                   %i.icon-time
                   Moments
+                  %span.badge= Moment.count
               %li
                 = link_to pages_path do
                   %i.icon-list-alt
                   Pages
+                  %span.badge= Page.count
               %li= link_to "pc regions", pc_regions_path
               %li
                 = link_to photos_path do
                   %i.icon-picture
                   Photos
-              -#%li= link_to videos_path do
-                %i.icon-film
-                Videos
-              %li= link_to "positions (#{Position.count})", positions_path
+                  %span.badge= Photo.count
+              %li
+                = link_to positions_path do
+                  Positions
+                  %span.badge= Position.count
               %li
                 = link_to regions_path do
                   %i.icon-globe
-                  Regions (#{Region.count})
+                  Regions
+                  %span.badge= Region.count
               %li= link_to "region types", regiontypes_path
               %li= link_to "scopes", scopes_path
-              %li= link_to "sectors (#{Sector.count})", sectors_path
-              %li= link_to "sites (#{Site.count})", sites_path
-              %li= link_to "stacks", stacks_path
+              %li
+                = link_to sectors_path do
+                  Sectors
+                  %span.badge= Sector.count
+              %li
+                = link_to sites_path do
+                  Sites
+                  %span.badge= Site.count
+              %li= link_to "Stacks", stacks_path
               %li
                 = link_to staff_path do
                   %i.icon-user
                   Staff
-              %li= link_to "stages (#{Stage.count})", stages_path
+                  %span.badge= Staff.count
+              %li
+                = link_to stages_path do
+                  Stages
+                  %span.badge= Stage.count
               %li
                 = link_to table_users_path do
                   %i.icon-user
                   Users
+                  %span.badge= User.count
               %li
                 = link_to volunteers_path do
                   %i.icon-user
                   Volunteers
+                  %span.badge= Volunteer.count
               %li
                 = link_to websites_path do
                   %i.icon-globe
-                  Websites (#{Website.count})
+                  Websites
+                  %span.badge= Website.count
       -#%li= avatar_for_user current_user, :size => :icon
       %ul.nav
         %li.dropdown
