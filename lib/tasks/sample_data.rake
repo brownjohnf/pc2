@@ -73,6 +73,31 @@ def make_admin
   admin.save!  
 end
 
+def make_moderator
+  jack = User.create!(
+    :name => 'Jack Brown',
+    :email => 'moderator@example.com',
+    :password => 'password',
+    :country => 'SN',
+  )
+  jack.volunteers.create!(
+    :local_name => 'Babakar Ndiaye',
+    :country => 'SN'
+  )
+  jack.staff.create!(
+    :country => 'SN'
+  )
+  jack.blogs.create!(
+    :title => 'Senegal et al',
+    :description => 'Info about my life in Senegal.',
+    :url => 'http://www.brownjohnf.com'
+  )
+  mod = jack
+  mod.roles << Role.find_by_or_create_by_name('Moderator')
+  mod.confirmed_at = Time.now
+  mod.save!  
+end
+
 def make_languages
   languages = Language.create!([
     { :name => 'Sereer', :code => 'SE', :description => 'A lovely little language.' }
