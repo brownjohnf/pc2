@@ -106,10 +106,16 @@
   = f.fields_for :photos do |p|
     .span4
       = p.hidden_field :user_id, :value => current_user.id
-      .control-group
-        %label.control-label Select file
-        .controls
-          = p.file_field :photo
+      - if p.object.new_record?
+        .control-group
+          %label.control-label Select file
+          .controls
+            = p.file_field :photo
+      - else
+        .control-group{:style => "background:url('#{p.object.photo.url(:thumb)}') no-repeat right top;height:80px;"}
+          %label.control-label Remove
+          .controls
+            = p.check_box :_destroy
       .control-group
         %label.control-label Title
         .controls

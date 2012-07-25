@@ -86,8 +86,10 @@ class StaticsController < ApplicationController
   
   def search
     @title = 'Search'
-    @results = Search.new(params[:q]).paginate(:per_page => 50) if params[:q].present?
-    redirect_to @results.first if @results.count == 1
+    if params[:q].present?
+      @results = Search.new(params[:q]).paginate(:per_page => 50)
+      redirect_to @results.first if @results.count == 1
+    end
   end
 
   def welcome
