@@ -17,6 +17,8 @@ class Library < ActiveRecord::Base
 
   validates :name, :user_id, :country, :presence => true
 
+  after_commit :asynch_create_zip
+
   def avatar
     photos.any? ? photos.first : SiteConfig.find_by_name('default_avatar')
   end
@@ -120,12 +122,23 @@ class Library < ActiveRecord::Base
   def full_name
     "#{self.name}-all_files"
   end
+
+  def asynch_create_zip
+    Resque.enqueue(Library, self.id)
+  end
+
+  @queue = :file_serve
+  def self.perform(lib_id)
+    lib = Library.find(lib_id)
+    lib.bundle
+  end
   
   # package library into .zip file for bulk download
   # this should probably be a worker task, but oh well...
   #
   # @todo make sure that only documents authorized for viewing are included.
   def bundle
+    sleep(50)
 
     # set the path.
     # on heroku, this amounts to a temporary path
@@ -159,7 +172,7 @@ class Library < ActiveRecord::Base
     File.chmod(0644, bundle_filename)
 
     # save the object
-    self.save
+    # self.save
   end
 
 end

@@ -37,4 +37,7 @@ OmniauthDemo::Application.configure do
 
   # set the path to imagemagick
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  # setup the redistogo connection
+  ENV['REDISTOGO_URL'] = 'redis://redistogo:3290ec0257efb08a13e66043343abaf5@chubb.redistogo.com:9730/'
 end
