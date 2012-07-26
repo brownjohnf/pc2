@@ -16,7 +16,7 @@
         Actions
         %b.caret
       %ul.dropdown-menu
-        %li= link_to 'Download as .zip', download_library_path(@library)
-        %li= link_to 'Edit', edit_library_path(@library) if can? :edit, @library
+        %li= link_to 'Download as .zip', download_library_path(@library) if @library && @library.zip?
+        %li= link_to 'Edit', edit_library_path(@library) if @library && !@library.new_record? && can?(:edit, @library)
         %li= link_to 'Destroy', '' if can? :destroy, @library
     = render 'shared/search' unless params[:action] == 'table'

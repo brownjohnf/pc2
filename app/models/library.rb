@@ -3,6 +3,15 @@ class Library < ActiveRecord::Base
   require 'zip/zip'
   require 'zip/zipfilesystem'
 
+  has_attached_file :zip, {
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+  }
+  validates_attachment_content_type :zip, :content_type => [
+    'application/zip',
+    'application/x-gzip'
+  ]
+
   acts_as_taggable_on :tags
   
   # records of stackable objects linked against this library
@@ -16,8 +25,6 @@ class Library < ActiveRecord::Base
   belongs_to :user
 
   validates :name, :user_id, :country, :presence => true
-
-  after_commit :asynch_create_zip
 
   def avatar
     photos.any? ? photos.first : SiteConfig.find_by_name('default_avatar')
@@ -123,11 +130,7 @@ class Library < ActiveRecord::Base
     "#{self.name}-all_files"
   end
 
-  def asynch_create_zip
-    Resque.enqueue(Library, self.id)
-  end
-
-  @queue = :file_serve
+  @queue = :zip
   def self.perform(lib_id)
     lib = Library.find(lib_id)
     lib.bundle
@@ -138,19 +141,17 @@ class Library < ActiveRecord::Base
   #
   # @todo make sure that only documents authorized for viewing are included.
   def bundle
-    sleep(5)
-
     # set the path.
     # on heroku, this amounts to a temporary path
     # so i've not included any system for removing them
     # except recreating them
     # put it in the appropriate folder for the environment
-    bundle_filename = "public/system/#{Rails.env}/#{file_name}"
+    bundle_filename = "tmp/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
-    if File.file?(bundle_filename)
-      File.delete(bundle_filename)
-    end
+    #if File.file?(bundle_filename)
+    #  File.delete(bundle_filename)
+    #end
 
     # open or create the zip file
     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
@@ -169,10 +170,14 @@ class Library < ActiveRecord::Base
     }
 
     # set read permissions on the file
-    File.chmod(0644, bundle_filename)
+    # File.chmod(0644, bundle_filename)
+    self.zip = File.open(bundle_filename)
 
     # save the object
-    # self.save
+    self.save
+
+    # trash the zip file
+    File.delete(bundle_filename)
   end
 
 end
