@@ -101,8 +101,8 @@ class LibrariesController < ApplicationController
   def download
     @library = Library.find(params[:id])
     
-    if File.file?("public/system/#{Rails.env}/#{@library.file_name}")
-      send_file "public/system/#{Rails.env}/#{@library.file_name}"
+    if @library.zip?
+      send_file @library.zip.to_file
     else
       redirect_to @library, alert: 'Sorry, but this library is still in line to be zipped...'
     end
