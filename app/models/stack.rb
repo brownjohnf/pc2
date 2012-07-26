@@ -23,10 +23,8 @@ class Stack < ActiveRecord::Base
   scope :case_studies, where(:stackable_type => 'CaseStudy').includes(:stackable)
   scope :pages, where(:stackable_type => 'Page').includes(:stackable)
 
-  private
-
-    def asynch_create_zip
-      Resque.enqueue(Library, self.library_id)
-    end
+  def asynch_create_zip
+    Resque.enqueue(Library, self.library_id)
+  end
   
 end
