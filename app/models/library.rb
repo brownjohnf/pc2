@@ -4,8 +4,15 @@ class Library < ActiveRecord::Base
   require 'zip/zipfilesystem'
 
   has_attached_file :zip, {
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    },
+    :url => ":s3_alias_url",
+    :s3_host_alias => ENV['CDN_CNAME'],
+    :bucket => ENV['S3_BUCKET'],
+    :path => 'zips/:id/:style/:filename'
   }
   validates_attachment_content_type :zip, :content_type => [
     'application/zip',
