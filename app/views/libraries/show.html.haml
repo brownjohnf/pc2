@@ -20,10 +20,22 @@
           = render @library.user
     .tabbable
       %ul.nav.nav-tabs
-        %li.active= link_to 'Files', '#files', 'data-toggle' => 'tab'
-        %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
-        %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
-        %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
+        %li.active
+          = link_to '#files', { 'data-toggle' => 'tab' } do
+            Files
+            %span{:class => (@library.documents.count > 0 ? 'badge badge-success' : 'badge')}= @library.documents.count
+        %li
+          = link_to '#photos', { 'data-toggle' => 'tab' } do
+            Photos
+            %span{:class => (@library.photos.count > 0 ? 'badge badge-success' : 'badge')}= @library.photos.count
+        %li
+          = link_to '#case_studies', { 'data-toggle' => 'tab' } do
+            Case Studies
+            %span{:class => (@library.case_studies.count > 0 ? 'badge badge-success' : 'badge')}= @library.case_studies.count
+        %li
+          = link_to '#files', { 'data-toggle' => 'tab' } do
+            Pages
+            %span{:class => (@library.pages.count > 0 ? 'badge badge-success' : 'badge')}= @library.pages.count
       .tab-content
         .tab-pane#files.active
           = render @library.documents
