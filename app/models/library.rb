@@ -138,7 +138,7 @@ class Library < ActiveRecord::Base
   #
   # @todo make sure that only documents authorized for viewing are included.
   def bundle
-    sleep(50)
+    sleep(5)
 
     # set the path.
     # on heroku, this amounts to a temporary path
