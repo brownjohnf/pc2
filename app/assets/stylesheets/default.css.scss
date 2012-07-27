@@ -215,13 +215,17 @@ img#pc_big {
 /* custom styles for random stuff */
 
 /* add quote images to blockquotes */
-blockquote {
-  &.blockquote-quotes {
+.blockquote-quote {
+  blockquote {
     background-image: image-url('open_quote.gif');
     background-repeat: no-repeat;
-    padding-top: 35px;
-    padding-left: 46px;
+    padding-top: 20px;
+    padding-left: 42px;
     border: none;
+    float: left;
+    width: 40%;
+    font-size: 2em;
+    line-height: 1em;
   }
 }
 

@@ -15,4 +15,5 @@
   = f.date_select :created_at
   = f.text_area :content
   = f.text_field :tag_list
+  = f.text_field :setting_list if can? :moderate, @page
   = f.actions
