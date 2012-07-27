@@ -57,6 +57,7 @@ class Photo < ActiveRecord::Base
   validates :photo_fingerprint, :uniqueness => true, :presence => true
 
   after_destroy :reset_pointers
+  after_commit :asynch_create_zip
 
   default_scope :order => 'photos.created_at DESC'
   
@@ -77,6 +78,12 @@ class Photo < ActiveRecord::Base
     "#{id}-#{canonical_title.parameterize}"
   end
 
+  def asynch_create_zip
+    for stack in self.stacks do
+      Resque.enqueue(Library, stack.library_id)
+    end
+  end
+  
   private
 
     def reset_pointers

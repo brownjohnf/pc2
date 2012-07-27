@@ -16,9 +16,15 @@ class Stack < ActiveRecord::Base
   # validations; everything's required, as this is basically a join table
   validates :library_id, :user_id, :stackable_id, :stackable_type, :presence => true
 
+  after_commit :asynch_create_zip
+
   scope :documents, where(:stackable_type => 'Document').includes(:stackable)
   scope :photos, where(:stackable_type => 'Photo').includes(:stackable)
   scope :case_studies, where(:stackable_type => 'CaseStudy').includes(:stackable)
   scope :pages, where(:stackable_type => 'Page').includes(:stackable)
 
+  def asynch_create_zip
+    Resque.enqueue(Library, self.library_id)
+  end
+  
 end

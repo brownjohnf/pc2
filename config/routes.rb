@@ -1,5 +1,11 @@
 OmniauthDemo::Application.routes.draw do
 
+  require 'resque/server'
+
+  authenticate 'user' do
+    mount Resque::Server.new, :at => '/resque'
+  end
+
   resources :ticket_updates
 
 

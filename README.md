@@ -116,6 +116,7 @@ Set up Facebook and YouTube redirects
 #### Add Heroku Addons
 
     heroku addons:add mailgun:starter --app <appname>
+    heroku addons:add redistogo:nano --app <appname>
 
 #### Set config variables on Heroku app
 

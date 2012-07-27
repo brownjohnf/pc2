@@ -1,7 +1,20 @@
 class Library < ActiveRecord::Base
+
+  if Rails.env.production?
+    extend HerokuResqueAutoScale
+  end
   
   require 'zip/zip'
   require 'zip/zipfilesystem'
+
+  has_attached_file :zip, {
+    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
+    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+  }
+  validates_attachment_content_type :zip, :content_type => [
+    'application/zip',
+    'application/x-gzip'
+  ]
 
   acts_as_taggable_on :tags
   
@@ -120,24 +133,29 @@ class Library < ActiveRecord::Base
   def full_name
     "#{self.name}-all_files"
   end
+
+  @queue = :zip
+  def self.perform(lib_id)
+    lib = Library.find(lib_id)
+    lib.bundle
+  end
   
   # package library into .zip file for bulk download
   # this should probably be a worker task, but oh well...
   #
   # @todo make sure that only documents authorized for viewing are included.
   def bundle
-
     # set the path.
     # on heroku, this amounts to a temporary path
     # so i've not included any system for removing them
     # except recreating them
     # put it in the appropriate folder for the environment
-    bundle_filename = "public/system/#{Rails.env}/#{file_name}"
+    bundle_filename = "tmp/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
-    if File.file?(bundle_filename)
-      File.delete(bundle_filename)
-    end
+    #if File.file?(bundle_filename)
+    #  File.delete(bundle_filename)
+    #end
 
     # open or create the zip file
     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
@@ -156,10 +174,14 @@ class Library < ActiveRecord::Base
     }
 
     # set read permissions on the file
-    File.chmod(0644, bundle_filename)
+    # File.chmod(0644, bundle_filename)
+    self.zip = File.open(bundle_filename)
 
     # save the object
     self.save
+
+    # trash the zip file
+    File.delete(bundle_filename)
   end
 
 end

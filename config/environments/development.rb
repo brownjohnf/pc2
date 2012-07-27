@@ -37,4 +37,5 @@ OmniauthDemo::Application.configure do
 
   # set the path to imagemagick
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
 end

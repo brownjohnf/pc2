@@ -101,12 +101,12 @@ class LibrariesController < ApplicationController
   def download
     @library = Library.find(params[:id])
     
-    if @library.bundle
-      send_file "public/system/#{Rails.env}/#{@library.file_name}"
-      File.delete("public/system/#{Rails.env}/#{@library.file_name}")
+    if @library.zip?
+      send_file @library.zip.to_file
     else
-      redirect_to @library, notice: 'There was an error zipping your file. Please try again later.'
+      redirect_to @library, alert: 'Sorry, but this library is still in line to be zipped...'
     end
+
   end
   
   # GET /libraries/1/podcast

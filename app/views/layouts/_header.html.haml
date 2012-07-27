@@ -287,10 +287,6 @@
                 Tickets
                 %span.badge.badge-success #{current_user.tickets.count}
             %li
-              = link_to edit_user_path(current_user) do
-                %i.icon-cog
-                Edit Profile
-            %li
               = link_to edit_user_registration_path(current_user) do
                 %i.icon-barcode
                 Change password

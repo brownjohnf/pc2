@@ -88,6 +88,7 @@ class Document < ActiveRecord::Base
   before_validation :clear_empty_attrs
   before_save :run_before_save
   after_save :run_after_save
+  after_commit :asynch_create_zip
 
   def canonical_title
     self.name
@@ -103,6 +104,12 @@ class Document < ActiveRecord::Base
     "#{id}-#{canonical_title.parameterize}"
   end
 
+  def asynch_create_zip
+    for stack in self.stacks do
+      Resque.enqueue(Library, stack.library_id)
+    end
+  end
+  
   private
 
     def clear_empty_attrs
