@@ -219,13 +219,10 @@ img#pc_big {
   blockquote {
     background-image: image-url('open_quote.gif');
     background-repeat: no-repeat;
-    padding-top: 20px;
-    padding-left: 42px;
+    padding: 20px 20px 20px 42px;
     border: none;
     float: left;
     width: 40%;
-    font-size: 1.8em;
-    line-height: 1em;
     text-align: justify;
   }
 }
