@@ -214,6 +214,17 @@ img#pc_big {
 /*************************************************/
 /* custom styles for random stuff */
 
+/* add quote images to blockquotes */
+blockquote {
+  &.blockquote-quotes {
+    background-image: image-url('open_quote.gif');
+    background-repeat: no-repeat;
+    padding-top: 35px;
+    padding-left: 46px;
+    border: none;
+  }
+}
+
 /* set the links around photos to cover the photo */
 .photo_thumb {
   display: inline-block;

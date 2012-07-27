@@ -4,14 +4,17 @@
     .hero-unit.hero-unit-info
       %h1
         = @moment.startdate.strftime('%B %Y')
-        %small= timeago(@moment.startdate.to_time)
+        %small
+          = timeago(@moment.startdate.to_time)
+          %br
+          %h1= best_in_place_if can?(:update, @moment), @moment, :headline
     .row
       .span3
         = render 'shared/menu'
       .span7
-        %h1= best_in_place_if can?(:update, @moment), @moment, :headline
-        %p= best_in_place_if can?(:update, @moment), @moment, :text
-        = markdown(@moment.media) if @moment.media
+        = markdown(@moment.media) if @moment.media.present?
+        %hr
+        = raw(@moment.text)
         - if @moment.photos.any?
           = render @moment.photos
         .pagination.pagination-right
@@ -21,13 +24,13 @@
             %li= link_to "back to #{@moment.startdate.strftime('%Y')}", moments_path(:year => @moment.startdate.year)
             %li= link_to raw('newer &rang;&rang;'), @next if @next
   .span2
-    - if @moment.photos.any?
+    - if @moment.photos.any? && @moment.credit.present?
       = link_to image_tag(@moment.photos.first.photo.url(:small)), @moment.user, :class => 'avatar'
     - else
       = avatar_for_user(@moment.user, :size => :small)
     %h3 Contributed by
     %p
-      - if @moment.credit
+      - if @moment.credit.present?
         = @moment.credit
         %br
         = @moment.country
