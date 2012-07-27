@@ -2,7 +2,7 @@ namespace :db do
 	task :sample_data => :environment do
 		Rake::Task['db:drop'].invoke
 		Rake::Task['db:create'].invoke
-		Rake::Task['db:migrate'].invoke
+		Rake::Task['db:schema:load'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['db:update_config'].invoke
     make_pc_regions
@@ -11,6 +11,7 @@ namespace :db do
     make_regiontypes
 		make_regions
     make_admin
+    make_moderator
     make_users
     make_volunteers
     make_staff
@@ -75,25 +76,13 @@ end
 
 def make_moderator
   jack = User.create!(
-    :name => 'Jack Brown',
+    :name => 'Moderator',
     :email => 'moderator@example.com',
     :password => 'password',
     :country => 'SN',
   )
-  jack.volunteers.create!(
-    :local_name => 'Babakar Ndiaye',
-    :country => 'SN'
-  )
-  jack.staff.create!(
-    :country => 'SN'
-  )
-  jack.blogs.create!(
-    :title => 'Senegal et al',
-    :description => 'Info about my life in Senegal.',
-    :url => 'http://www.brownjohnf.com'
-  )
   mod = jack
-  mod.roles << Role.find_by_or_create_by_name('Moderator')
+  mod.roles << Role.find_or_create_by_name('Moderator')
   mod.confirmed_at = Time.now
   mod.save!  
 end

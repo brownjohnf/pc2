@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726103624) do
+ActiveRecord::Schema.define(:version => 20120727142944) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20120726103624) do
     t.string   "headline"
     t.text     "text"
     t.text     "media"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "country"
     t.date     "enddate"
     t.string   "caption"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120726103624) do
     t.integer  "site_id"
     t.string   "years_of_service"
     t.string   "sector"
+    t.string   "credit_local_name"
   end
 
   create_table "pages", :force => true do |t|
