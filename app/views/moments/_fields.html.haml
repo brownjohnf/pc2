@@ -2,13 +2,12 @@
   %label.control-label
     %h2 Time
   .controls
-    .alert
-      %p Set the dates for the event. If it's a point in time, set both dates identically.
-.control-group
+    .alert.alert-info Set the dates for the event. If it's a point in time, set both dates identically.
+.control-group.warning
   %label.control-label Start Date
   .controls
     = f.date_select(:startdate, {:start_year => 1963, :end_year => Time.now.year}, {:class => 'span1'})
-.control-group
+.control-group.warning
   %label.control-label End Date
   .controls
     = f.date_select(:enddate, {:start_year => 1963, :end_year => Time.now.year}, {:class => 'span1'})
@@ -16,8 +15,8 @@
   %label.control-label
     %h2 Contributor
   .controls
-    .alert
-      %p If you are not the contributor, please fill out the following fields. Put the person's name in the media credit field (below).
+    .alert.alert-info If you are not the contributor, please fill out the following fields.
+    .alert.alert-warning IF YOU ARE THE CONTRIBUTOR, THIS IS NOT NECESSARY!
 - if can? :manage, @moment
   .control-group
     %label.control-label Name
@@ -31,6 +30,14 @@
 - else
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :country, :value => current_user.country
+.control-group
+  %label.control-label Contributor's Name
+  .controls
+    = f.text_field :credit, :class => 'span4'
+.control-group
+  %label.control-label Contributor's Local Name
+  .controls
+    = f.text_field :credit_local_name, :class => 'span4'
 .control-group
   %label.control-label Region
   .controls
@@ -58,7 +65,7 @@
     %h2 Text Copy
   .controls
     %hr
-.control-group
+.control-group.warning
   %label.control-label Headline
   .controls
     = f.text_field :headline, :class => 'span4'
@@ -91,10 +98,6 @@
   %label.control-label Media Caption
   .controls
     = f.text_field :caption, :class => 'span4'
-.control-group
-  %label.control-label Media Credit
-  .controls
-    = f.text_field :credit, :class => 'span4'
 .control-group
   %label.control-label
     %h2 Photos
