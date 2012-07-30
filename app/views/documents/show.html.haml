@@ -81,5 +81,5 @@
   = render 'shared/modal_standard', :id => 'new_stack_form_modal', :title => 'Add to library', :body => render('documents/stacks_form')
 - if can? :edit, @document
   = render 'shared/modal_standard', :id => 'edit_document_form_modal', :title => 'Edit file', :body => render('documents/form')
-- if can? :destroy, @documnt
+- if can? :destroy, @document
   = render 'shared/modal_standard', :id => 'destroy_document_form_modal', :title => 'Are you sure?', :body => button_to('Delete file', @document, :method => :delete, :class => 'btn btn-danger')
