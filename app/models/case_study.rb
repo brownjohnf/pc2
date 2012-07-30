@@ -1,6 +1,6 @@
 class CaseStudy < ActiveRecord::Base
 
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :tags, :settings
 
   validates :title, :language_id, :summary, :country, :presence => true
   

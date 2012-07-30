@@ -23,7 +23,7 @@ class Library < ActiveRecord::Base
     'application/x-gzip'
   ]
 
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :tags, :settings
   
   # records of stackable objects linked against this library
   has_many :stacks, :dependent => :destroy
