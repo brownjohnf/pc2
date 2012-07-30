@@ -36,7 +36,7 @@ class Photo < ActiveRecord::Base
     'image/gif'
   ]
 
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :tags, :settings
 
   has_many :pages
   has_many :case_studies

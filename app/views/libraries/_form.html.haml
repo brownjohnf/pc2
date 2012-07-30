@@ -1,21 +1,11 @@
-= form_for(@library) do |f|
-  = render 'shared/form_error' if @library.errors.any?
-
-  .field
-    = f.label :name, 'Name*'
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :country_id, 'Country*'
-    = f.country_select(:country, 'SN')
+= bootstrap_form_for(@library) do |f|
+  = f.text_field :name
+  = f.text_field :description
+  = f.country_select(:country, 'SN')
   - if can? :manage, Library
-    .field
-      = f.label :user_id, 'User*'
-      = f.collection_select(:user_id, User.all, :id, :name)
+    = f.collection_select(:user_id, User.all, :id, :name)
   - else
     = f.hidden_field(:user_id, :value => current_user.id)
-  = render 'shared/tag_field', :f => f
-  .actions
-    = f.submit
+  = f.text_field :tag_list
+  = f.text_field :setting_list
+  = f.submit
