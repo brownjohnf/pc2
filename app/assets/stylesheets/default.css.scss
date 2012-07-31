@@ -11,6 +11,7 @@ $iconWhiteSpritePath: image-url('glyphicons-halflings-white.png');
 @import 'bootstrap';
 @import 'bootstrap-responsive';
 @import 'countdown';
+//@import 'tagit';
 
 $dark_blue: #005580;
 
@@ -312,3 +313,9 @@ div.hero-unit.hero-unit-danger {
   }
 }
 
+/***********************************************/
+/* tagit settings *
+
+#tags-select {
+  width: auto;
+}*/

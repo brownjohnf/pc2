@@ -17,25 +17,24 @@
     %h1
       = flag_icon(@page.country.downcase)
       = @page.title
+    %blockquote
+      %p
+        %i= @page.description
+    %h1.right
       %small
-        last updated
-        = time_ago_in_words(@page.updated_at)
-        ago
-        = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
-          %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this page." }
-        = link_to '#bitly_url', 'data-toggle' => 'modal' do
-          %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
-    %h4
-      %small originally posted
-      = @page.created_at.strftime('%d %B %Y')
+        last updated #{timeago(@page.updated_at)},
+        originally posted
+        = @page.created_at.strftime('%d %B %Y')
+    .tags
+      = render 'shared/tags', :tags => @page.tag_list
+      = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
+        %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this page." }
+      = link_to '#bitly_url', 'data-toggle' => 'modal' do
+        %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
     %hr
     - if can? :edit, @page
-      %p= @page.description
-      .tags.right= render 'shared/tags', :tags => @page.tag_list
       .mercury-region#page_content{'data-type' => 'editable'}= raw(@page.content)
     - else
-      %p= @page.description
-      .tags.right= render 'shared/tags', :tags => @page.tag_list
       = markdown(@page.content)
     %hr
     :erb

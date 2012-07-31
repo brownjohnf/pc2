@@ -3,3 +3,4 @@
 = f.text_field :description
 = f.text_field :attribution
 = f.text_field :tag_list
+= f.text_field :setting_list if can? :moderate, @photo
