@@ -1,10 +1,14 @@
 OmniauthDemo::Application.routes.draw do
 
+  #get "tag/index"
+
   require 'resque/server'
 
   authenticate 'user' do
     mount Resque::Server.new, :at => '/resque'
   end
+
+  resources :tags, :only => [ :index ]
 
   resources :ticket_updates, :priorities
 
