@@ -146,6 +146,13 @@ $(function(){
   $('.countdown').countdown();
 
   /*********************************************/
+  /* tagit bindings *
+  $('#tags-select').tagit({
+    tags: ["spotlight_large","spotlight_small"],
+    field: "tag"
+  });*/
+
+  /*********************************************/
   /* assorted other js stuff */
 
   // sets default form focus based on input ID
