@@ -6,10 +6,7 @@ OmniauthDemo::Application.routes.draw do
     mount Resque::Server.new, :at => '/resque'
   end
 
-  resources :ticket_updates
-
-
-  resources :priorities
+  resources :ticket_updates, :priorities
 
   resources :ticket_owners
 
@@ -27,10 +24,6 @@ OmniauthDemo::Application.routes.draw do
     get 'login', :to => 'devise/sessions#new', :as => :login
     get 'logout', :to => 'devise/sessions#destroy', :as => :logout
   end
-  
-  #constraints :subdomain => '' do
-  #  match '/' => redirect('/') #("http://www.pcsenegal.com")
-  #end
   
   resources :users, :only => [ :index, :show, :edit, :update, :destroy ] do
     collection do

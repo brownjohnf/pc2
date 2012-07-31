@@ -4,4 +4,5 @@
   = f.select :country, current_user.countries, :include_blank => false
   = f.collection_select :photo_id, current_user.photos.all, :id, :title, :include_blank => true
   = f.text_field :tag_list
+  = f.text_field :setting_list if can? :moderate, @case_study
   = f.actions
