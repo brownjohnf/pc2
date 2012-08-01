@@ -8,13 +8,6 @@
         = @user.name
       %p
         = render 'shared/tags', :tags => @user.tag_list
-        %form
-          %fieldset
-            .clearfix
-              %label Tags
-              .input
-                %ul#tags-select.fake-input{'tab-index' => '1'}
-                  %li Sexy
       %hr
       .tabbable.tabs-right
         %ul.nav.nav-tabs
