@@ -47,8 +47,8 @@ OmniauthDemo::Application.configure do
 
   # environment-spcefic paperclip defaults
   config.paperclip_defaults = {
-    :path => "public/system/test/:attachment/:id/:style/:filename",
-    :url => "/system/test/:attachment/:id/:style/:filename"
+    :path => ":rails_root/public/system/test/:class/:attachment/:id_partition/:style/:filename",
+    :url => "/system/test/:class/:attachment/:id_partition/:style/:filename"
   }
 
 end
