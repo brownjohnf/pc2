@@ -85,7 +85,6 @@ OmniauthDemo::Application.configure do
       :access_key_id => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECET']
     },
-    :path => ":attachment/:id/:style/:filename",
     :url => ":s3_alias_url",
     :s3_host_alias => ENV['CDN_CNAME']
   }
