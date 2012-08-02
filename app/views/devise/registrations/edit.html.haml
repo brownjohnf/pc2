@@ -45,4 +45,5 @@
     = link_to "Back", :back      
   .span3.offset1
     %h3 Unhappy?
-    %p Boy, we sure hope not. But if you are, you can #{link_to "cancel your account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete} here.
+    %p Boy, we sure hope not. But if you are, you can destroy your account here.
+    = button_to 'DESTROY My Account', resource, :class => 'btn btn-danger', :method => :delete, :confirm => 'Are you sure?'
