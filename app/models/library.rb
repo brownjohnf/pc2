@@ -7,10 +7,7 @@ class Library < ActiveRecord::Base
   require 'zip/zip'
   require 'zip/zipfilesystem'
 
-  has_attached_file :zip, {
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
-  }
+  has_attached_file :zip
   validates_attachment_content_type :zip, :content_type => [
     'application/zip',
     'application/x-gzip'
@@ -164,12 +161,12 @@ class Library < ActiveRecord::Base
       self.documents.collect {
         |document|
           # add each track to the archive, using its canonical_title for file name
-          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", document.file.to_file)
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", Paperclip.io_adapters.for(document.file).path)
       }
       self.photos.collect {
         |photo|
           # add each track to the archive, using its canonical_title and credit for file name
-          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", photo.photo.to_file)
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", Paperclip.io_adapters.for(photo.photo).path)
       }
     }
 

@@ -11,8 +11,7 @@ class SiteConfig < ActiveRecord::Base
       :wide => '980x400#',
       :full => '1140x1140>'
     },
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
+    :path => "config_photos/:id/:style/:filename"
   }
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
@@ -21,10 +20,7 @@ class SiteConfig < ActiveRecord::Base
     'image/gif'
   ]
 
-  has_attached_file :file, {
-    :path => "public/system/#{Rails.env}/:attachment/:id/:style/:filename",
-    :url => "/system/#{Rails.env}/:attachment/:id/:style/:filename"
-  }
+  has_attached_file :file
   validates_attachment_content_type :file, :content_type => [
     'text/plain'
   ]

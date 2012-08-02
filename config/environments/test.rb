@@ -41,4 +41,14 @@ OmniauthDemo::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # set the path to imagemagick
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  # environment-spcefic paperclip defaults
+  config.paperclip_defaults = {
+    :path => "public/system/test/:attachment/:id/:style/:filename",
+    :url => "/system/test/:attachment/:id/:style/:filename"
+  }
+
 end
