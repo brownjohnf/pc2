@@ -171,12 +171,12 @@ class Library < ActiveRecord::Base
       self.documents.collect {
         |document|
           # add each track to the archive, using its canonical_title for file name
-          zipfile.add( "#{full_name}/files/#{document.canonical_title}", document.file.to_file)
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", document.file.to_file)
       }
       self.photos.collect {
         |photo|
           # add each track to the archive, using its canonical_title and credit for file name
-          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}", photo.photo.to_file)
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", photo.photo.to_file)
       }
     }
 
