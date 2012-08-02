@@ -153,9 +153,9 @@ class Library < ActiveRecord::Base
     bundle_filename = "tmp/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
-    #if File.file?(bundle_filename)
-    #  File.delete(bundle_filename)
-    #end
+    if File.file?(bundle_filename)
+      File.delete(bundle_filename)
+    end
 
     # open or create the zip file
     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
@@ -164,12 +164,12 @@ class Library < ActiveRecord::Base
       self.documents.collect {
         |document|
           # add each track to the archive, using its canonical_title for file name
-          zipfile.add( "#{full_name}/files/#{document.canonical_title}", document.file.to_file)
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", document.file.to_file)
       }
       self.photos.collect {
         |photo|
           # add each track to the archive, using its canonical_title and credit for file name
-          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}", photo.photo.to_file)
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", photo.photo.to_file)
       }
     }
 
