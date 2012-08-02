@@ -7,17 +7,7 @@ class Library < ActiveRecord::Base
   require 'zip/zip'
   require 'zip/zipfilesystem'
 
-  has_attached_file :zip, {
-    :storage => :s3,
-    :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
-    },
-    :url => ":s3_alias_url",
-    :s3_host_alias => ENV['CDN_CNAME'],
-    :bucket => ENV['S3_BUCKET'],
-    :path => 'zips/:id/:style/:filename'
-  }
+  has_attached_file :zip
   validates_attachment_content_type :zip, :content_type => [
     'application/zip',
     'application/x-gzip'
@@ -171,12 +161,12 @@ class Library < ActiveRecord::Base
       self.documents.collect {
         |document|
           # add each track to the archive, using its canonical_title for file name
-          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", document.file.to_file)
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", Paperclip.io_adapters.for(document.file).path)
       }
       self.photos.collect {
         |photo|
           # add each track to the archive, using its canonical_title and credit for file name
-          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", photo.photo.to_file)
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", Paperclip.io_adapters.for(photo.photo).path)
       }
     }
 

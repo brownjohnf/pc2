@@ -163,9 +163,10 @@ GEM
     omniauth-twitter (0.0.7)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.6)
-    paperclip (2.5.2)
-      activerecord (>= 2.3.0)
-      activesupport (>= 2.3.2)
+    paperclip (3.1.4)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
     pg (0.13.0)
@@ -301,7 +302,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-identity
   omniauth-twitter
-  paperclip (= 2.5.2)
+  paperclip
   pg (= 0.13.0)
   railroady
   rails (= 3.2.1)

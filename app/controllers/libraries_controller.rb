@@ -102,9 +102,10 @@ class LibrariesController < ApplicationController
     @library = Library.find(params[:id])
     
     if @library.zip?
-      send_file @library.zip.to_file
+      send_file Paperclip.io_adapters.for(@library.zip).path
     else
-      redirect_to @library, alert: 'Sorry, but this library is still in line to be zipped...'
+      Resque.enqueue(Library, @library.id)
+      redirect_to @library, alert: 'Sorry, but this library is still in line to be zipped... Try again in a few minutes.'
     end
 
   end
