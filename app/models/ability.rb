@@ -65,7 +65,7 @@ class Ability
         can :manage, [ Document, Photo, Library, Moment ] do |item|
           user.country_list.include?(item.country)
         end
-        can [ :update, :destroy, :moderate ], Page do |item|
+        can [ :update, :destroy, :moderate ], [ Page, CaseStudy ] do |item|
           user.country_list.include?(item.country)
         end
         can :download_source, Document
