@@ -20,7 +20,9 @@ class SiteConfig < ActiveRecord::Base
     'image/gif'
   ]
 
-  has_attached_file :file
+  has_attached_file :file, {
+    :path => "config_files/:id/:style/:filename"
+  }
   validates_attachment_content_type :file, :content_type => [
     'text/plain'
   ]
