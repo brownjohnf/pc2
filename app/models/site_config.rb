@@ -10,7 +10,8 @@ class SiteConfig < ActiveRecord::Base
       :large => '980x980>',
       :wide => '980x400#',
       :full => '1140x1140>'
-    }
+    },
+    :path => "config_photos/:id/:style/:filename"
   }
   validates_attachment_content_type :photo, :content_type => [
     'image/png',
