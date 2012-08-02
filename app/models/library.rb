@@ -153,9 +153,9 @@ class Library < ActiveRecord::Base
     bundle_filename = "tmp/#{file_name}"
 
     # check to see if the file exists already, and if it does, delete it.
-    #if File.file?(bundle_filename)
-    #  File.delete(bundle_filename)
-    #end
+    if File.file?(bundle_filename)
+      File.delete(bundle_filename)
+    end
 
     # open or create the zip file
     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
