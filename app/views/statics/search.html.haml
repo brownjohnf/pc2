@@ -6,6 +6,7 @@
       = render 'menu'
       - if @results
         - if @results.count > 0
+          .alert.alert-info Each entry below represents one hit on your query in the resource. You may see multiple copies of the same resource.
           = render @results
         - else
           %h2 Your search returned no results.
