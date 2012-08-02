@@ -17,16 +17,7 @@ class Photo < ActiveRecord::Base
       :large => '980x980>',
       :wide => '980x400#',
       :full => '1140x1140>' 
-    },
-    :storage => :s3,
-    :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
-    },
-    :url => ":s3_alias_url",
-    :s3_host_alias => ENV['CDN_CNAME'],
-    :bucket => ENV['S3_BUCKET'],
-    :path => 'photos/:id/:style/:filename'
+    }
   }
   validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => [

@@ -38,4 +38,10 @@ OmniauthDemo::Application.configure do
   # set the path to imagemagick
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
+  # environment-spcefic paperclip defaults
+  config.paperclip_defaults = {
+    :path => "public/system/development/:attachment/:id/:style/:filename",
+    :url => "/system/development/:attachment/:id/:style/:filename"
+  }
+
 end

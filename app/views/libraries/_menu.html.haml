@@ -11,13 +11,14 @@
         -#%li= link_to 'Table', libraries_path
     %li= link_to 'Create Library', new_library_path if can? :create, Library
     %li= link_to 'Podcast it!', podcast_library_path, :rel => 'popover-bottom', :title => 'What does this do?', 'data-content' => "Clicking this link will take you to an RSS Podcast feed for all audio files in this library. Copy this link address, open iTunes, and past the URL into <code>Advanced -> Subscribe to Podcast</code>. It's that easy! You can also submit this URL to the iTunes store to create a registered podcast." if @library
-    %li.dropdown
-      %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
-        Actions
-        %b.caret
-      %ul.dropdown-menu
-        %li= link_to 'Download as .zip', download_library_path(@library) if @library && @library.zip?
-        - if @library && !@library.new_record?
-          %li= link_to 'Edit', edit_library_path(@library) if can?(:edit, @library)
-          %li= link_to 'Destroy', '#destroy_page_form_modal', 'data-toggle' => 'modal' if can? :destroy, @library
+    - if @library && !@library.new_record?
+      %li.dropdown
+        %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+          Actions
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to (@library.zip? ? 'Download as .zip' : 'Bundle as .zip'), download_library_path(@library)
+          - if @library && !@library.new_record?
+            %li= link_to 'Edit', edit_library_path(@library) if can?(:edit, @library)
+            %li= link_to 'Destroy', '#destroy_page_form_modal', 'data-toggle' => 'modal' if can? :destroy, @library
     = render 'shared/search' unless params[:action] == 'table'

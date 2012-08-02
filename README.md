@@ -47,6 +47,10 @@ Libraries allow users to build collections of files, pages, case studies, photos
 
 To use the search functions in the app, you must be running on PostgreSQL. It's possible to develop/test with SQLite, but the tests/actions involving searches will fail.
 
+## S3 and Local Storage
+
+S3 is the default production storage location, but the Paperclip attachment gem is configured in the various environment files (config/environments/production.rb, development.rb, test.rb) to store files locally for testing and development. There is a special directory structure, "public/system/#{Rails.env}/:attachment/:id/:style/:filename", used to avoid mingling between the environments, and allow clearing out of the test files after testing. 
+
 ## Installation on Heroku
 
 #### Purchase and Configure Domain

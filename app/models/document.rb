@@ -3,14 +3,7 @@ class Document < ActiveRecord::Base
   require 'mp3info'
 
   # main document
-  has_attached_file :file, {
-    :storage => :s3,
-    :bucket => ENV['S3_BUCKET'],
-    :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
-    }
-  }
+  has_attached_file :file
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => [
     'audio/mpeg',
@@ -35,14 +28,7 @@ class Document < ActiveRecord::Base
   ]
 
   # source file for document, for archiving
-  has_attached_file :source, {
-    :storage => :s3,
-    :bucket => ENV['S3_BUCKET'],
-    :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
-    }
-  }
+  has_attached_file :source
   validates_attachment_content_type :source, :content_type => [
     'text/plain', 
     'text/csv', 

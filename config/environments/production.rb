@@ -76,4 +76,18 @@ OmniauthDemo::Application.configure do
 
   config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
 
+  # environment-spcefic paperclip defaults
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket => ENV['S3_BUCKET'],
+    :s3_credentials =>
+    {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECET']
+    },
+    :path => ":attachment/:id/:style/:filename",
+    :url => ":s3_alias_url",
+    :s3_host_alias => ENV['CDN_CNAME']
+  }
+
 end

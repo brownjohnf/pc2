@@ -24,12 +24,6 @@ class User < ActiveRecord::Base
       :medium => '380x380',
       :large => '980x980>',
       :full => '1140x1140>'
-    },
-    :storage => :s3,
-    :bucket => ENV['S3_BUCKET'],
-    :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
     }
   }
   

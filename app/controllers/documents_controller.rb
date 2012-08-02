@@ -111,12 +111,13 @@ class DocumentsController < ApplicationController
   # GET /documents/1/download
   def download
     @document = Document.find(params[:id])
-    send_file @document.file.to_file, :type => @document.file_content_type
+    # send_file @document.file.to_file, :type => @document.file_content_type
+    send_file Paperclip.io_adapters.for(@document.file).path, :type => @document.file_content_type
   end
  
   # GET /documents/1/download_source
   def download_source
     @document = Document.find(params[:id])
-    send_file @document.source.to_file, :type => @document.file_content_type
+    send_file Paperclip.io_adapters.for(@document.source).path, :type => @document.source_content_type
   end
 end
