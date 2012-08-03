@@ -48,42 +48,44 @@
           - if @user.bio
             %h4 A little bit about #{@user.name}...
             = markdown(@user.bio)
+          - @user.roles.each do |role|
+            %span.label.label-success= role.name
+            &nbsp;
+          = link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
         .span9
           %hr
-      .row
-        .span4
-          .alert-list
-            .alert.alert-info
-              %i.icon-file.close
-              %i.icon-pencil
-              Updated file metadata
-              = timeago(Time.now)
-            .alert
-              %i.icon-tag.close
-              %i.icon-eye-open
-              Started watching #{link_to 'Food Security', ''} tag
-            .alert.alert-success
-              %i.icon-plus
-              Created #{link_to 'Kounkane Well Project', ''}
-              %i.icon-road.close
-            .alert.alert-danger
-              %i.icon-remove
-              Destroyed a photo
-              %i.icon-picture.close
-        .span5
           .tabbable.tabs-right
             %ul.nav.nav-tabs
-              %li.active= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
+              %li.active= link_to 'Site Activity', '#activity', 'data-toggle' => 'tab'
+              %li= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
               %li= link_to 'Staff Details', '#staff', 'data-toggle' => 'tab'
-              %li= link_to 'Groups', '#groups', 'data-toggle' => 'tab'
               %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
               %li= link_to 'Files', '#documents', 'data-toggle' => 'tab'
               %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
               %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
-              %li= link_to 'Timeline events', '#moments', 'data-toggle' => 'tab'
+              %li= link_to SiteConfig.find_by_name('timeline_title').setting, '#moments', 'data-toggle' => 'tab'
               %li= link_to 'Libraries', '#libraries', 'data-toggle' => 'tab'
             .tab-content
-              .tab-pane#volunteers.active
+              .tab-pane#activity.active
+                .alert-list
+                  .alert.alert-info
+                    %i.icon-file.close
+                    %i.icon-pencil
+                    Updated file metadata
+                    = timeago(Time.now)
+                  .alert
+                    %i.icon-tag.close
+                    %i.icon-eye-open
+                    Started watching #{link_to 'Food Security', ''} tag
+                  .alert.alert-success
+                    %i.icon-road.close
+                    %i.icon-plus
+                    Created #{link_to 'Kounkane Well Project', ''} super cool case study!
+                  .alert.alert-danger
+                    %i.icon-picture.close
+                    %i.icon-remove
+                    Destroyed a photo
+              .tab-pane#volunteers
                 - if can?(:read, Volunteer) && @user.volunteers.any?
                   - @user.volunteers.each do |v|
                     .well
@@ -144,14 +146,6 @@
                 - else
                   .well
                     %p You do not have permission to view this user's details. Most likely, this means that you are neither a Peace Corps Volunter nor Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
-              .tab-pane#groups
-                .well
-                  %h3
-                    Groups
-                    %small= link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
-                  %ul
-                    - @user.roles.each do |role|
-                      %li= role.name
               .tab-pane#photos
                 - if @user.photos.any?
                   .box
