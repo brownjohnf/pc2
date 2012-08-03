@@ -6,7 +6,9 @@
     %h1
       = (@photo.title) ? @photo.title : @photo.photo_file_name
       %small
-        uploaded by
+        uploaded
+        = timeago(@photo.created_at)
+        by
         = link_to @photo.user.name, @photo.user
     %p
       = @photo.description
