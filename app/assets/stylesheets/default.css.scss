@@ -303,6 +303,13 @@ div.hero-unit.hero-unit-danger {
   }
 }
 
+/* adjust the margin below alerts for use in a feed-style list of alerts */
+div.alert-list {
+  div.alert {
+    margin-bottom: 3px;
+  }
+}
+
 /*************************************************/
 /* modal settings */
 

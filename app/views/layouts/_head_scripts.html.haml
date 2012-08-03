@@ -1,4 +1,4 @@
-- unless Rails.env.development? || Rails.env.test?
+- if Rails.env.production?
   :erb
     <script type="text/javascript">var switchTo5x=false;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
