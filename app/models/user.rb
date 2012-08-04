@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  if Rails.env.production?
+    extend HerokuResqueAutoScale
+  end
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -77,6 +81,7 @@ class User < ActiveRecord::Base
 
   before_validation :clear_empty_attrs
   before_destroy :reset_possessions
+  after_commit :update_percentage
 
   accepts_nested_attributes_for :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs, :reject_if => lambda { |a| a[:url].blank? } 
@@ -140,6 +145,34 @@ class User < ActiveRecord::Base
 
   def canonical_title
     self.name
+  end
+
+  def percent_complete
+    counter = 0
+    attrs = [
+      :name,
+      :email,
+      :bio,
+      :phone1,
+      :country,
+      :site
+    ]
+    attrs.each { |attr| counter += 1 unless self[attr].blank? }
+    counter.to_f / attrs.count.to_f * 100
+  end
+
+  def update_percentage
+    percent = self.percent_complete
+    [ 'volunteers', 'staff' ].each do |item|
+      if self.send(item).any?
+        self.send(item).each { |item2| percent = (item2.percent_complete.to_f + percent.to_f) / 2 }
+      end
+    end
+    REDIS.multi do
+      REDIS.hset("users:#{id}", 'name', name)
+      REDIS.hset("users:#{id}:stats", 'perc_profile', percent.to_i)
+      REDIS.zadd('users:stats:perc_profile', percent.to_i, id)
+    end
   end
 
   private

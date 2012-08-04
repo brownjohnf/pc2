@@ -19,6 +19,8 @@
     .container
       = render 'layouts/notice', :notice => notice if notice
       = render 'layouts/alert', :alert => alert if alert
+      - percent = REDIS.hget("users:#{(current_user.role?(:admin) && @user) ? @user.id : current_user.id}:stats", 'perc_profile') || 0
+      = render 'shared/percentages', :percent => percent if percent.to_i < 100
       = yield
       - if Rails.env.development?
         .row
