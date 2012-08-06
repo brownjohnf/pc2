@@ -49,6 +49,7 @@ Page.create!([
 ])
 
 Rake::Task['db:initialize_ticket_data'].invoke
+Rake::Task['db:update_config'].invoke
 
 user = User.create!({
   :name => 'Administrator',
