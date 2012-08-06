@@ -1,0 +1,5 @@
+page:
+  create: "<%= owner.name %> created <%= trackable.canonical_title %>"
+  update: "<%= owner.name %> edited <%= trackable.canonical_title %>"
+  destroy: "<%= owner.name %> destroyed <%= trackable.canonical_title %>"
+  mercury_edit: "merc edit"
