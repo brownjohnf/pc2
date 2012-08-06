@@ -2,6 +2,9 @@ class Page < ActiveRecord::Base
 
   attr_accessible :title, :description, :content, :parent_id, :photo_id, :language_id, :tag_list, :setting_list, :country, :sort_by, :sort_order, :created_at
 
+  # for the public_activity gem
+  tracked
+
   acts_as_nested_set
 
   acts_as_taggable_on :tags, :settings
@@ -42,17 +45,20 @@ class Page < ActiveRecord::Base
   private
 
     def set_parent
-      unless parent_id.nil?
-        if self.country == self.parent.country
-          move_to_child_of(parent_id)
-        else
-          self.parent_id = nil
-          self.save
+      if parent_id != REDIS.hget("pages:#{id}", 'parent_id')
+        unless parent_id.nil?
+          if self.country == self.parent.country
+            move_to_child_of(parent_id)
+          else
+            self.parent_id = nil
+            self.save
+          end
+        end 
+        self.descendants.each do |d|
+          d.country = self.country
+          d.save
         end
-      end 
-      self.descendants.each do |d|
-        d.country = self.country
-        d.save
+        REDIS.hset("pages:#{id}", 'parent_id', "#{parent_id}")
       end
     end
     

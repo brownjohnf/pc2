@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :role_ids, :country, :bio, :email2, :phone1, :phone2, :tag_list, :blogs_attributes, :site, :volunteers_attributes, :staff_attributes, :avatar
   
+  cattr_accessor :current_user
+  activist
+
   has_and_belongs_to_many :roles
   
   accepts_nested_attributes_for :roles, :allow_destroy => true

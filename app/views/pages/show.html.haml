@@ -37,6 +37,11 @@
     - else
       = markdown(@page.content)
     %hr
+    .alert-list
+      - @page.activities.each do |activity|
+        .alert.alert-info
+          = activity.text
+    %hr
     :erb
       <div id="disqus_thread"></div>
       <script type="text/javascript">

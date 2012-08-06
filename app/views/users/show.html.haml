@@ -58,6 +58,12 @@
           .tab-content
             .tab-pane#activity.active
               .alert-list
+                - @user.activities.order('created_at DESC').each do |activity|
+                  .alert.alert-info
+                    %i.icon-list-alt.close
+                    %i.icon-pencil
+                    = link_to activity.text, activity.trackable
+                    = timeago(activity.created_at)
                 .alert.alert-info
                   %i.icon-file.close
                   %i.icon-pencil
