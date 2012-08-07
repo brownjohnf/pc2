@@ -83,7 +83,7 @@ OmniauthDemo::Application.configure do
     :s3_credentials =>
     {
       :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECET']
+      :secret_access_key => ENV['S3_SECRET']
     },
     :path => ":class/:attachment/:id_partition/:style/:filename",
     :url => ":s3_alias_url",
