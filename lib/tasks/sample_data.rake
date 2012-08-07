@@ -21,6 +21,7 @@ namespace :db do
     make_photos
 		Rake::Task['db:populate_timeline'].invoke
     make_ticket_stuff
+    make_libraries
 	end
 end
 
@@ -252,6 +253,17 @@ def make_ticket_stuff
         :ticket_id => ticket.id,
         :ticket_code_id => Priority.first.id
       )
+    end
+  end
+end
+
+def make_libraries
+  10.times do |n|
+    Library.create(:name => "Test Library #{n}", :country => 'SN', :user_id => User.first.id)
+  end
+  [ Document, Photo ].each do |item|
+    item.all.each do |item2|
+      Stack.create(:library_id => Library.find(1+rand(Library.count)).id, :user_id => User.first.id, :stackable_id => item2.id, :stackable_type => item.to_s)
     end
   end
 end

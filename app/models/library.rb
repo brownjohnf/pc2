@@ -161,19 +161,19 @@ class Library < ActiveRecord::Base
       self.documents.collect {
         |document|
           # add each track to the archive, using its canonical_title for file name
-          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", Paperclip.io_adapters.for(document.file).path )
+          zipfile.add( "#{full_name}/files/#{document.canonical_title}-#{document.created_at.to_i}", File.open(Paperclip.io_adapters.for(document.file).path) )
       }
       self.photos.collect {
         |photo|
           # add each track to the archive, using its canonical_title and credit for file name
-          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", Paperclip.io_adapters.for(photo.photo).path )
+          zipfile.add( "#{full_name}/photos/#{photo.canonical_title}-#{photo.attribution ? photo.attribution : photo.user.name}-#{photo.created_at.to_i}", File.open(Paperclip.io_adapters.for(photo.photo).path) )
       }
     }
 
     # set read permissions on the file
     # File.chmod(0644, bundle_filename)
 
-    #self.zip = File.open(bundle_filename)
+    self.zip = File.open(bundle_filename)
 
     # save the object
     self.save
