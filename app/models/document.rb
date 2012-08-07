@@ -113,7 +113,7 @@ class Document < ActiveRecord::Base
 
     def run_before_save
       if (file_content_type == 'audio/mpeg') || (file_content_type == 'audio/mp3')
-        self.audio_length = Mp3Info.open(file.to_file).length.round
+        self.audio_length = Mp3Info.open(Paperclip.io_adapters.for(file).path).length.round
       end
     end
 
