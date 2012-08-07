@@ -20,6 +20,6 @@
         Staff
         %b.caret
       %ul.dropdown-menu
-        %li= link_to 'Alphabetical', staff_path(:sort => 'name')
-        %li= link_to 'Recently updated', staff_path(:sort => 'updated_at')
+        %li= link_to 'Alphabetical', staff_index_path(:sort => 'name')
+        %li= link_to 'Recently updated', staff_index_path(:sort => 'updated_at')
     = render 'shared/search' unless params[:action] == 'table'
