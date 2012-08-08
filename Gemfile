@@ -35,6 +35,7 @@ gem 'best_in_place', '1.1.2'
 
 gem 'resque'
 gem 'public_activity'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.

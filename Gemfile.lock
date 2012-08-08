@@ -136,6 +136,7 @@ GEM
     multi_xml (0.4.1)
     multipart-post (1.1.4)
     netrc (0.7.5)
+    newrelic_rpm (3.4.1)
     nokogiri (1.5.0)
     oauth (0.4.5)
     oauth2 (0.5.2)
@@ -306,6 +307,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   mercury-rails (= 0.3.1)
+  newrelic_rpm
   omniauth-facebook (= 1.2.0)
   omniauth-github
   omniauth-google-oauth2
