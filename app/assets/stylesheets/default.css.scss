@@ -13,6 +13,7 @@ $iconWhiteSpritePath: image-url('glyphicons-halflings-white.png');
 @import 'countdown';
 //@import 'tagit';
 
+
 /**********************************************/
 /* FIXES */
 
@@ -330,6 +331,18 @@ div.alert-list {
   }
 }
 
+form.form-mega {
+  input, select {
+    padding: 20px;
+    font-size: 38px;
+    line-height: 38px;
+    height: auto;
+    &[type=text] {
+      width: 60%;
+    }
+  }
+}
+
 
 /*************************************************/
 /* modal settings */
@@ -350,3 +363,5 @@ div.alert-list {
 #tags-select {
   width: auto;
 }*/
+
+@import 'media_queries';

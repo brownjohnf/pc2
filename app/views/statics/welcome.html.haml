@@ -3,6 +3,11 @@
     .hero-unit
       %h1 Welcome, #{current_user.name}!
       %h2 What would you like to do now?
+    .well
+      = form_tag search_path, :method => :get, :class => 'navbar-form form-mega' do
+        = text_field_tag :q, nil, :placeholder => "search the site!"
+        = select_tag :resource, options_for_select(['all'], 'all'), :class => ''
+        = submit_tag 'search', :class => 'btn btn-success'
     - if current_user.pc?
       .center
         = link_to 'Browse all pages', pages_path, :class => 'btn btn-info btn-moron'

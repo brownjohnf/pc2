@@ -55,7 +55,8 @@ user = User.create!({
   :name => 'Administrator',
   :email => 'admin@example.com',
   :password => 'password',
-  :country => 'SN'
+  :country => 'SN',
+  :beta => true
 });
 user.confirmed_at = Time.now
 for role in Role.all do
