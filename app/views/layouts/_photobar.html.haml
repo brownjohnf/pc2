@@ -1,4 +1,4 @@
-#photobar
+#photobar.visible-desktop
   - photobar_selector.each do |p|
     = link_to image_tag(p.photo.url(:icon), :rel => 'popover-bottom', :title => p.title, 'data-content' => (p.description.blank? ? 'No description. Is this your photo? You should add a description.' : p.description)), p
   .clearfloat

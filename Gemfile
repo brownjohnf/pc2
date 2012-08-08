@@ -34,7 +34,8 @@ gem 'bitly'
 gem 'best_in_place', '1.1.2'
 
 gem 'resque'
-gem 'heroku'
+gem 'public_activity'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -59,4 +60,8 @@ group :development do
   gem 'faker', '1.0.1'
   gem 'rspec-rails', '2.9.0'
   gem 'railroady'
+end
+
+group :production do
+  gem 'heroku'
 end

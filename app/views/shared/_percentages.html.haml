@@ -1,0 +1,16 @@
+.row
+  .span6.offset3
+    - if percent.to_i > 80
+      .alert.alert-success Looking goood! You're profile is #{percent}% finished! Go to your #{link_to 'profile', current_user} to add the final pieces!
+      .progress.progress-striped.progress-success
+        .bar{:style => "width:#{percent}%"}
+    - elsif percent.to_i > 60
+      .alert.alert-warning Oh no! Your profile is sadly incomplete! You're only #{percent}% finished! Go to your #{link_to 'profile', current_user} to get it up to snuff!
+      .progress.progress-striped.progress-warning
+        .bar{:style => "width:#{percent}%"}
+    - else
+      .alert.alert-danger Whoa, what have you been doing? Finish your profile! It's only #{percent}% filled out!
+      .progress.progress-striped.progress-danger
+        .bar{:style => "width:#{percent}%"}
+  .span12
+    %hr

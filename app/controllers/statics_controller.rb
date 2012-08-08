@@ -86,7 +86,10 @@ class StaticsController < ApplicationController
   
   def search
     @title = 'Search'
-    if params[:q].present?
+    if params[:q].present? && params[:resource] == 'all'
+      @results = Search.new(params[:q]).paginate(:per_page => 50)
+      redirect_to @results.first if @results.count == 1
+    elsif params[:q].present?
       @results = Search.new(params[:q]).paginate(:per_page => 50)
       redirect_to @results.first if @results.count == 1
     end

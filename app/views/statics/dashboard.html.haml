@@ -55,6 +55,14 @@
               that's
               %strong= pluralize((total_resources - User.count) / (User.count > 0 ? User.count : 1), 'resource')
               per user!
+          %h1 Most complete profiles
+          %ul
+            - REDIS.zrevrange('users:stats:perc_profile', 0, 9).each do |user_id|
+              %li= link_to REDIS.hget("users:#{user_id}", 'name'), user_path(user_id)
+          %h1 Least complete profiles
+          %ul
+            - REDIS.zrange('users:stats:perc_profile', 0, 9).each do |user_id|
+              %li= link_to REDIS.hget("users:#{user_id}", 'name'), user_path(user_id)
         .tab-pane#tags
           %h1 Top Tags
           .well
