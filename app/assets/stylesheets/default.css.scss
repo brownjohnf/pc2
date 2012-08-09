@@ -45,9 +45,13 @@ body {
 .floatright {
   float: right;
 }
-.avatar {
-  padding: 0 10px 10px 0;
-  display: block;
+img {
+  &.avatar {
+    padding: 0 10px 10px 0;
+    /* auto adjust height */
+    height: auto;
+    display: block;
+  }
 }
 
 section {
@@ -267,18 +271,16 @@ img#pc_big {
 }
 
 /* set default styling for in-body photos */
-img {
-  /* adjust height of user avatars */
-  &.avatar {
-    height: auto;
-  }
-  p.&[align=left] {
-    margin-right: 1em;
-    margin-bottom: 1em;
-  }
-  p.&[align=right] {
-    margin-left: 1em;
-    margin-bottom: 1em;
+p {
+  & img {
+    &[align=left] {
+      margin-right: 1em;
+      margin-bottom: .5em;
+    }
+    &[align=right] {
+      margin-left: 1em;
+      margin-bottom: .5em;
+    }
   }
 }
 
