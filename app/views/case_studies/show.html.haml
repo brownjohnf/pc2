@@ -11,7 +11,7 @@
         = time_ago_in_words(@case_study.updated_at)
         ago
     = render 'shared/tags', :tags => @case_study.tag_list
-    - if can? :update, @case_study
+    - if params[:mercury_frame] == 'true' && can?(:update, @case_study)
       .mercury-region#cs_summary{'data-type' => 'editable'}
         = markdown @case_study.summary
       %h2 Context
