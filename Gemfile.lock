@@ -111,6 +111,11 @@ GEM
       rubyzip
     heroku-api (0.3.1)
       excon (~> 0.15.4)
+    heroku_san (3.0.4)
+      activesupport
+      heroku (>= 2)
+      heroku-api (>= 0.1.2)
+      rake
     hike (1.2.1)
     httparty (0.8.1)
       multi_json
@@ -305,6 +310,7 @@ DEPENDENCIES
   haml (= 3.1.4)
   haml-rails (= 0.3.4)
   heroku
+  heroku_san
   jquery-rails
   mercury-rails (= 0.3.1)
   newrelic_rpm

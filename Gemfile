@@ -60,6 +60,7 @@ group :development do
   gem 'faker', '1.0.1'
   gem 'rspec-rails', '2.9.0'
   gem 'railroady'
+  gem 'heroku_san'
 end
 
 group :production do
