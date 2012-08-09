@@ -11,6 +11,7 @@
         = time_ago_in_words(@case_study.updated_at)
         ago
     = render 'shared/tags', :tags => @case_study.tag_list
+    %hr
     - if params[:mercury_frame] == 'true' && can?(:update, @case_study)
       .mercury-region#cs_summary{'data-type' => 'editable'}
         = markdown @case_study.summary
@@ -58,7 +59,7 @@
       - if @case_study.next_steps
         %h2 Next Steps
         = markdown @case_study.next_steps
-    %hr
+    %hr.clearfloat
     :erb
       <div id="disqus_thread"></div>
       <script type="text/javascript">
