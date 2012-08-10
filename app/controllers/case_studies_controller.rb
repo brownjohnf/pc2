@@ -49,6 +49,12 @@ class CaseStudiesController < ApplicationController
     @title = @case_study.title
     @case_studies = @case_study.find_related_tags
     @pages = Page.tagged_with(@case_study.tag_list, :any => true)
+    @locked = REDIS.exists("locks:case_studies:#{@case_study.id}")
+    if params[:mercury_frame] == 'true' && !@locked
+      REDIS.setex("locks:case_studies:#{@case_study.id}", 300, @case_study.canonical_title)
+    elsif params[:mercury_frame] == 'true'
+      render(text: "<html><body><script type='text/javascript' charset='utf-8'>window.parent.document.location.href = '#{page_path(@case_study)}';</script></body></html>", content_type: :html) and return
+    end    
 
     respond_to do |format|
       format.html # show.html.erb

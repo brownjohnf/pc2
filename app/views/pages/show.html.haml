@@ -1,6 +1,8 @@
 .row
   .span12
     = render 'menu'
+    - if @locked && signed_in? && can?(:edit, @page)
+      .alert This page is currently being edited. If you would like to edit it, please try again later.
 .row
   .span3
     = render 'shared/menu'

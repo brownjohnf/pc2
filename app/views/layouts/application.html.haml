@@ -17,6 +17,24 @@
           = render 'layouts/header'
     = render 'layouts/photobar' #if Photo.count > 19
     .container
+      - if signed_in? && current_user.role?(:admin)
+        .well{:style => "position:fixed;right:0;top:136px;max-width:200px;"}
+          %h4 Locked Pages
+          - @locks = REDIS.keys('locks:pages:*')
+          - if @locks.any?
+            %ol
+              - REDIS.mget(@locks).each do |item|
+                %li= item
+          - else
+            %p -
+          %h4 Locked Case Studies
+          - @locks = REDIS.keys('locks:case_studies:*')
+          - if @locks.any?
+            %ol
+              - REDIS.mget(@locks).each do |item|
+                %li= item
+          - else
+            %p -
       = render 'layouts/notice', :notice => notice if notice
       = render 'layouts/alert', :alert => alert if alert
       = yield
