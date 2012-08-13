@@ -1,6 +1,8 @@
 .row
   .span12
     = render 'menu'
+    - if @locked && signed_in? && can?(:edit, @page)
+      .alert This page is currently being edited. If you would like to edit it, please try again later.
 .row
   .span3
     = render 'shared/menu'
@@ -36,6 +38,11 @@
       .mercury-region#page_content{'data-type' => 'editable'}= raw(@page.content)
     - else
       = markdown(@page.content)
+    %hr
+    .alert-list
+      - @page.activities.each do |activity|
+        .alert.alert-info
+          = activity.text
     %hr
     :erb
       <div id="disqus_thread"></div>

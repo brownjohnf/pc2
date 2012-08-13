@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :handle_cookies
   before_filter :check_for_users
+  before_filter :define_current_user
   
   protect_from_forgery
   
@@ -26,6 +27,10 @@ class ApplicationController < ActionController::Base
     if User.any?
       #redirect_to login_path
     end
+  end
+
+  def define_current_user
+    User.current_user = current_user
   end
 
   def after_sign_in_path_for(resource)

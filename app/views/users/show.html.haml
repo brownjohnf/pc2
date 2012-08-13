@@ -1,196 +1,216 @@
-.container
-  .row
-    .span3
-      = render 'shared/menu'
-    .span7
-      = render 'users/menu'
-      %h1
-        = @user.name
-      %p
-        = render 'shared/tags', :tags => @user.tag_list
-      %hr
-      .tabbable.tabs-right
-        %ul.nav.nav-tabs
-          %li.active= link_to 'Basic', '#user', 'data-toggle' => 'tab'
-          %li= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
-          %li= link_to 'Staff Details', '#staff', 'data-toggle' => 'tab'
-          %li= link_to 'Groups', '#groups', 'data-toggle' => 'tab'
-          %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
-          %li= link_to 'Files', '#documents', 'data-toggle' => 'tab'
-          %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
-          %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
-          %li= link_to 'Timeline events', '#moments', 'data-toggle' => 'tab'
-          %li= link_to 'Libraries', '#libraries', 'data-toggle' => 'tab'
-        .tab-content
-          .tab-pane#user.active
-            .well
-              %h2
-                = flag_icon(@user.country)
-                = Carmen.country_name(@user.country) if @user.country
-                %small
-                  = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, @user
-              - if can? :read, @user
-                %h3 Connect
-                %p
-                  = @user.email
-                  - unless @user.email2.nil?
-                    %br
-                    = @user.email2
-                - unless @user.phone1.nil?
-                  %p
-                    = @user.phone1
-                    - unless @user.phone2.nil?
-                      %br
-                      = @user.phone2
+.row
+  .span3
+    = render 'shared/menu'
+  .span9
+    = render 'users/menu'
+    .row
+      .span2
+        = avatar_for_user @user, :size => :small
+      .span7
+        %h1
+          = @user.name
+        %p
+          = render 'shared/tags', :tags => @user.tag_list
+        %h2
+          = flag_icon(@user.country)
+          = Carmen.country_name(@user.country) if @user.country
+          %small
+            = link_to 'Edit profile', '#edit_user_form_modal', :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, @user
+        - if can? :read, @user
+          %h3 Connect
+          %p
+            = @user.email
+            - unless @user.email2.nil?
+              %br
+              = @user.email2
+          - unless @user.phone1.nil?
+            %p
+              = @user.phone1
+              - unless @user.phone2.nil?
+                %br
+                = @user.phone2
+        - else
+          %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
+        - if @user.blogs.any?
+          %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
+        - unless @user.site.nil?
+          %p= @user.site
+        - if @user.bio
+          %h4 A little bit about #{@user.name}...
+          = markdown(@user.bio)
+        - @user.roles.each do |role|
+          %span.label.label-success= role.name
+          &nbsp;
+        = link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
+      .span9
+        %hr
+        .tabbable.tabs-right
+          %ul.nav.nav-tabs
+            %li.active= link_to 'Site Activity', '#activity', 'data-toggle' => 'tab'
+            %li= link_to 'Volunteer Details', '#volunteers', 'data-toggle' => 'tab'
+            %li= link_to 'Staff Details', '#staff', 'data-toggle' => 'tab'
+            %li= link_to 'Photos', '#photos', 'data-toggle' => 'tab'
+            %li= link_to 'Files', '#documents', 'data-toggle' => 'tab'
+            %li= link_to 'Pages', '#pages', 'data-toggle' => 'tab'
+            %li= link_to 'Case Studies', '#case_studies', 'data-toggle' => 'tab'
+            %li= link_to SiteConfig.find_by_name('timeline_title').setting, '#moments', 'data-toggle' => 'tab'
+            %li= link_to 'Libraries', '#libraries', 'data-toggle' => 'tab'
+          .tab-content
+            .tab-pane#activity.active
+              .alert-list
+                - @user.activities.order('created_at DESC').each do |activity|
+                  .alert.alert-info
+                    %i.icon-list-alt.close
+                    %i.icon-pencil
+                    = link_to activity.text, activity.trackable
+                    = timeago(activity.created_at)
+                .alert.alert-info
+                  %i.icon-file.close
+                  %i.icon-pencil
+                  Updated file metadata
+                  = timeago(Time.now)
+                .alert
+                  %i.icon-tag.close
+                  %i.icon-eye-open
+                  Started watching #{link_to 'Food Security', ''} tag
+                .alert.alert-success
+                  %i.icon-road.close
+                  %i.icon-plus
+                  Created #{link_to 'Kounkane Well Project', ''} super cool case study!
+                .alert.alert-danger
+                  %i.icon-picture.close
+                  %i.icon-remove
+                  Destroyed a photo
+            .tab-pane#volunteers
+              - if can?(:read, Volunteer) && @user.volunteers.any?
+                - @user.volunteers.each do |v|
+                  .well
+                    %h3
+                      = flag_icon(v.country)
+                      = v.local_name
+                      %small
+                        = link_to 'edit', "#edit_volunteer_#{v.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, v
+                    %div
+                      %p
+                        = "#{v.sector.name} Volunteer" if v.sector
+                        %br
+                        = Carmen.country_name(v.country) if v.country
+                        %br
+                        = v.stage.name if v.stage
+                      %h4 Site
+                      %p= v.site.name if v.site
+                      - if v.emphasis
+                        %h4 Emphasis
+                        %p= v.emphasis
+                      - if v.projects
+                        %h4 Projects
+                        %p= v.projects
+              - elsif can? :read, Volunteer
+                .well
+                  %p This user is not currently registered as a Peace Corps Volunteer. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
               - else
-                %h4 Please indicate that you are a member of a Peace Corps post to access contact information.
-              - if @user.blogs.any?
-                %p #{link_to @user.blogs.first.title, @user.blogs.first.url} &rang; #{@user.blogs.first.description}
-              - unless @user.site.nil?
-                %p= @user.site
-              - if @user.bio
-                %h4 A little bit about #{@user.name}...
-                = markdown(@user.bio)
-          .tab-pane#volunteers
-            - if can?(:read, Volunteer) && @user.volunteers.any?
-              - @user.volunteers.each do |v|
                 .well
-                  %h3
-                    = flag_icon(v.country)
-                    = v.local_name
-                    %small
-                      = link_to 'edit', "#edit_volunteer_#{v.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, v
-                  %div
+                  You do not have permission to view this user's details.
+            .tab-pane#staff
+              - if can?(:read, Staff) && @user.staff.any?
+                - @user.staff.each do |s|
+                  .well
+                    %h3
+                      = flag_icon(s.country)
+                      Staff Member
+                      %small
+                        = link_to 'edit', "#edit_staff_#{s.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, s
+                    %h4= s.site.name if s.site
+                    %p= Carmen.country_name(s.country) if s.country
                     %p
-                      = "#{v.sector.name} Volunteer" if v.sector
-                      %br
-                      = Carmen.country_name(v.country) if v.country
-                      %br
-                      = v.stage.name if v.stage
-                    %h4 Site
-                    %p= v.site.name if v.site
-                    - if v.emphasis
-                      %h4 Emphasis
-                      %p= v.emphasis
-                    - if v.projects
-                      %h4 Projects
-                      %p= v.projects
-            - elsif can? :read, Volunteer
-              .well
-                %p This user is not currently registered as a Peace Corps Volunteer. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
-            - else
-              .well
-                You do not have permission to view this user's details.
-          .tab-pane#staff
-            - if can?(:read, Staff) && @user.staff.any?
-              - @user.staff.each do |s|
+                      = s.building unless s.office.blank?
+                      = "| #{s.office}" unless s.office.blank?
+                      = "| #{s.floor.to_i.ordinalize} floor" unless s.floor.blank?
+                    -if s.morning_open
+                      %p
+                        = s.morning_open.to_formatted_s(format = :time)
+                        \-
+                        = s.morning_close.to_formatted_s(format = :time)
+                        %br
+                        = s.afternoon_open.to_formatted_s(format = :time)
+                        \-
+                        = s.afternoon_close.to_formatted_s(format = :time)
+                    = markdown(s.details) if s.details
+              - elsif can? :read, Staff
                 .well
-                  %h3
-                    = flag_icon(s.country)
-                    Staff Member
-                    %small
-                      = link_to 'edit', "#edit_staff_#{s.id}_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :update, s
-                  %h4= s.site.name if s.site
-                  %p= Carmen.country_name(s.country) if s.country
-                  %p
-                    = s.building unless s.office.blank?
-                    = "| #{s.office}" unless s.office.blank?
-                    = "| #{s.floor.to_i.ordinalize} floor" unless s.floor.blank?
-                  -if s.morning_open
-                    %p
-                      = s.morning_open.to_formatted_s(format = :time)
-                      \-
-                      = s.morning_close.to_formatted_s(format = :time)
-                      %br
-                      = s.afternoon_open.to_formatted_s(format = :time)
-                      \-
-                      = s.afternoon_close.to_formatted_s(format = :time)
-                  = markdown(s.details) if s.details
-            - elsif can? :read, Staff
-              .well
-                %p This user is not currently registered as a Peace Corps Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
-            - else
-              .well
-                %p You do not have permission to view this user's details. Most likely, this means that you are neither a Peace Corps Volunter nor Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
-          .tab-pane#groups
-            .well
-              %h3
-                Groups
-                %small= link_to 'edit', "#edit_user_form_modal", :class => 'btn btn-mini', 'data-toggle' => 'modal' if can? :manage, User
-              %ul
-                - @user.roles.each do |role|
-                  %li= role.name
-          .tab-pane#photos
-            - if @user.photos.any?
-              .box
-                %h3 Recently Uploaded Photos
-                - @user.photos.limit(5).each do |p|
-                  = render p
-            - else
-              .well
-                %p This user has not uploaded any photos.
-            %p= link_to 'view all photos', photos_path
-          .tab-pane#documents
-            - if @user.documents.any?
-              .box
-                %h3 Recently Uploaded Files
-                %ul.feed
-                  = render @user.documents.limit(5)
-            - else
-              .well
-                %p This user has not uploaded any files.
-          .tab-pane#pages
-            - if (contributions = @user.contributions.where(:contributable_type => 'Page').limit(10)).any?
-              .box
-                %h3 Pages
-                %ul.feed
-                  - contributions.each do |contribution|
-                    = render contribution.contributable
-            - else
-              .well
-                %p This user has neither created nor contributed to any pages.
-          .tab-pane#case_studies
-            - if (contributions = @user.contributions.where(:contributable_type => 'CaseStudy').limit(10)).any?
-              .box
-                %h3 Pages
-                %ul.feed
-                  - contributions.each do |contribution|
-                    = render contribution.contributable
-            - else
-              .well
-                %p This user has neither created nor contributed to any case studies.
-          .tab-pane#moments
-            - if @user.moments.any?
-              .box.moments
-                %h3 Timeline Events
-                = render @user.moments
-            - else
-              .well
-                %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
-          .tab-pane#libraries
-            - if @user.libraries.any?
-              %ul= render @user.libraries
-            - else
-              .well
-                %p This user has not yet created any libraries.
-    .span2
-      = avatar_for_user @user, :size => :small
-      - if can? :update, @user
-        .btn-group.span2
-          %a.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
-            Manage
-            %span.caret
-          %ul.dropdown-menu.pull-right
-            %li= link_to 'Remove photo', remove_avatar_user_path, :method => :put if @user.photo
-            %li= link_to "I'm with PC!", volunteer_request_feedback_index_path, :rel => 'popover-left', :title => "Are you a PCV or Staff member?", 'data-content' => "Click this link to fill out a form requesting authorization as a PC user. You country doesn't matter; we support them all."
-            %li= link_to 'Change password', edit_user_registration_path
-            %li= link_to 'Terminate Account', edit_user_registration_path
-    - if can? :update, @user
-      = render 'shared/modal_standard',:id => 'edit_user_form_modal', :title => 'Edit user information', :body => render('users/form'), :footer => nil
-    - for volunteer in @user.volunteers do
-      - if can? :update, volunteer
-        = render 'shared/modal_standard',:id => "edit_volunteer_#{volunteer.id}_form_modal", :title => 'Edit Volunteer information', :body => render('volunteers/form', :volunteer => volunteer), :footer => nil
-    - for staff in @user.staff do
-      - if can? :update, staff
-        = render 'shared/modal_standard',:id => "edit_staff_#{staff.id}_form_modal", :title => 'Edit staff information', :body => render('staff/form', :staff => staff), :footer => nil
-        
+                  %p This user is not currently registered as a Peace Corps Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
+              - else
+                .well
+                  %p You do not have permission to view this user's details. Most likely, this means that you are neither a Peace Corps Volunter nor Staff member. If you believe this is an error, please #{link_to 'let us know', 'feedback/volunteer_request'}.
+            .tab-pane#photos
+              - if @user.photos.any?
+                .box
+                  %h3 Recently Uploaded Photos
+                  - @user.photos.limit(5).each do |p|
+                    = render p
+              - else
+                .well
+                  %p This user has not uploaded any photos.
+              %p= link_to 'view all photos', photos_path
+            .tab-pane#documents
+              - if @user.documents.any?
+                .box
+                  %h3 Recently Uploaded Files
+                  %ul.feed
+                    = render @user.documents.limit(5)
+              - else
+                .well
+                  %p This user has not uploaded any files.
+            .tab-pane#pages
+              - if (contributions = @user.contributions.where(:contributable_type => 'Page').limit(10)).any?
+                .box
+                  %h3 Pages
+                  %ul.feed
+                    - contributions.each do |contribution|
+                      = render contribution.contributable
+              - else
+                .well
+                  %p This user has neither created nor contributed to any pages.
+            .tab-pane#case_studies
+              - if (contributions = @user.contributions.where(:contributable_type => 'CaseStudy').limit(10)).any?
+                .box
+                  %h3 Pages
+                  %ul.feed
+                    - contributions.each do |contribution|
+                      = render contribution.contributable
+              - else
+                .well
+                  %p This user has neither created nor contributed to any case studies.
+            .tab-pane#moments
+              - if @user.moments.any?
+                .box.moments
+                  %h3 Timeline Events
+                  = render @user.moments
+              - else
+                .well
+                  %p This user has not submitted any events to the #{link_to 'timeline', moments_path}.
+            .tab-pane#libraries
+              - if @user.libraries.any?
+                %ul= render @user.libraries
+              - else
+                .well
+                  %p This user has not yet created any libraries.
+      -#.span2
+        - if can? :update, @user
+          .btn-group.span2
+            %a.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
+              Manage
+              %span.caret
+            %ul.dropdown-menu.pull-right
+              %li= link_to 'Remove photo', remove_avatar_user_path, :method => :put if @user.photo
+              %li= link_to "I'm with PC!", volunteer_request_feedback_index_path, :rel => 'popover-left', :title => "Are you a PCV or Staff member?", 'data-content' => "Click this link to fill out a form requesting authorization as a PC user. You country doesn't matter; we support them all."
+              %li= link_to 'Change password', edit_user_registration_path
+              %li= link_to 'Terminate Account', edit_user_registration_path
+- if can? :update, @user
+  = render 'shared/modal_standard',:id => 'edit_user_form_modal', :title => 'Edit user information', :body => render('users/form'), :footer => nil
+- for volunteer in @user.volunteers do
+  - if can? :update, volunteer
+    = render 'shared/modal_standard',:id => "edit_volunteer_#{volunteer.id}_form_modal", :title => 'Edit Volunteer information', :body => render('volunteers/form', :volunteer => volunteer), :footer => nil
+- for staff in @user.staff do
+  - if can? :update, staff
+    = render 'shared/modal_standard',:id => "edit_staff_#{staff.id}_form_modal", :title => 'Edit staff information', :body => render('staff/form', :staff => staff), :footer => nil

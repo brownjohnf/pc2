@@ -3,6 +3,8 @@
     = render 'shared/menu'
   .span7
     = render 'menu'
+    - if @locked && signed_in? && can?(:edit, @case_study)
+      .alert This page is currently being edited. If you would like to edit it, please try again later.
     %h1
       = flag_icon @case_study.country.downcase
       = @case_study.title

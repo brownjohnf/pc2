@@ -13,10 +13,27 @@ $iconWhiteSpritePath: image-url('glyphicons-halflings-white.png');
 @import 'countdown';
 //@import 'tagit';
 
+
+/**********************************************/
+/* FIXES */
+
+/* Form prepends - added 06 aug 2012 on bootstrap v 2.0.4 */
+form.form-horizontal {
+  .control-group {
+    .controls {
+      .input-prepend {
+        span.add-on {
+          margin-right: -5px;
+        }
+      }
+    }
+  }
+}
+
 $dark_blue: #005580;
 
 body {
-  padding-top: 40px;
+  //padding-top: 40px;
 }
 
 #admin_menu_bar {
@@ -25,10 +42,14 @@ body {
   bottom: 0;
   width: 100px;
 }
+#top-fixed-buffer {
+  margin-top: 40px;
+}
 #photobar {
   background-color: black;
   border-bottom: 1em solid $dark_blue;
   margin-bottom: 2em;
+  margin-top: 40px;
   a {
     img {
       width: 5%;
@@ -253,8 +274,8 @@ img#pc_big {
 
 /* define a mega-size button for morons */
 .btn.btn-moron {
-  font-size: $baseFontSize * 8;
-  line-height: $baseLineHeight * 8;
+  font-size: $baseFontSize * 6;
+  line-height: $baseLineHeight * 6;
   width: 90%;
   margin-bottom: 10px;
 }
@@ -313,6 +334,26 @@ div.hero-unit.hero-unit-danger {
   }
 }
 
+/* adjust the margin below alerts for use in a feed-style list of alerts */
+div.alert-list {
+  div.alert {
+    margin-bottom: 3px;
+  }
+}
+
+form.form-mega {
+  input, select {
+    padding: 20px;
+    font-size: 30px;
+    line-height: 30px;
+    height: auto;
+    &[type=text] {
+      width: 60%;
+    }
+  }
+}
+
+
 /*************************************************/
 /* modal settings */
 
@@ -332,3 +373,5 @@ div.hero-unit.hero-unit-danger {
 #tags-select {
   width: auto;
 }*/
+
+@import 'media_queries';

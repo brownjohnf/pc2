@@ -3,16 +3,21 @@
     .hero-unit
       %h1 Welcome, #{current_user.name}!
       %h2 What would you like to do now?
+    .center
+      = form_tag search_path, :method => :get, :class => 'form-inline form-mega' do
+        -#= select_tag :resource, options_for_select(['all of it'], 'all'), :class => ''
+        = text_field_tag :q, nil, :placeholder => "search the site!"
+        = submit_tag 'search', :class => 'btn btn-success'
     - if current_user.pc?
       .center
         = link_to 'Browse all pages', pages_path, :class => 'btn btn-info btn-moron'
         = link_to 'Upload a file', new_document_path, :class => 'btn btn-primary btn-moron'
         = link_to 'Create a case study', new_case_study_path, :class => 'btn btn-success btn-moron'
         = link_to 'Create a new page', new_page_path, :class => 'btn btn-warning btn-moron'
-      %h1 Or, read on for more information...
+      %h1.center Or, read on for more information...
       %hr
 .row
-  .span3
+  .span3.offset1
     = render 'shared/menu'
   .span7
     - if current_user.role?(:moderator)

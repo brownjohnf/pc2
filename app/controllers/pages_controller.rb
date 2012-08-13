@@ -61,6 +61,12 @@ class PagesController < ApplicationController
     @title = @page.title
     @pages = @page.find_related_tags
     @case_studies = CaseStudy.tagged_with(@page.tag_list, :any => true)
+    @locked = REDIS.exists("locks:pages:#{@page.id}")
+    if params[:mercury_frame] == 'true' && !@locked
+      REDIS.setex("locks:pages:#{@page.id}", 300, @page.canonical_title)
+    elsif params[:mercury_frame] == 'true'
+      render(text: "<html><body><script type='text/javascript' charset='utf-8'>window.parent.document.location.href = '#{page_path(@page)}';</script></body></html>", content_type: :html) and return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -119,7 +125,10 @@ class PagesController < ApplicationController
 
     #update page
     page.content = params[:content][:page_content][:value]
-    page.save!
+
+    if page.update_attribute(:content, params[:content][:page_content][:value])
+      REDIS.del("locks:pages:#{page.id}")
+    end
     
     render text: ""
   end
