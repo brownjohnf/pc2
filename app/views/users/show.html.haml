@@ -64,20 +64,20 @@
                     %i.icon-pencil
                     = link_to activity.text, activity.trackable
                     = timeago(activity.created_at)
-                .alert.alert-info
+                -#.alert.alert-info
                   %i.icon-file.close
                   %i.icon-pencil
                   Updated file metadata
                   = timeago(Time.now)
-                .alert
+                -#.alert
                   %i.icon-tag.close
                   %i.icon-eye-open
                   Started watching #{link_to 'Food Security', ''} tag
-                .alert.alert-success
+                -#.alert.alert-success
                   %i.icon-road.close
                   %i.icon-plus
                   Created #{link_to 'Kounkane Well Project', ''} super cool case study!
-                .alert.alert-danger
+                -#.alert.alert-danger
                   %i.icon-picture.close
                   %i.icon-remove
                   Destroyed a photo
