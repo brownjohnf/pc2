@@ -8,7 +8,7 @@ OmniauthDemo::Application.routes.draw do
     mount Resque::Server.new, :at => '/resque'
   end
 
-  resources :tags, :only => [ :index ]
+  resources :tags, :only => [ :index, :show ]
 
   resources :ticket_updates, :priorities
 

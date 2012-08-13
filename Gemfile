@@ -61,6 +61,7 @@ group :development do
   gem 'rspec-rails', '2.9.0'
   gem 'railroady'
   gem 'heroku_san'
+  gem 'sextant'
 end
 
 group :production do

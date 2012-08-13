@@ -43,16 +43,23 @@ class Page < ActiveRecord::Base
     self.title
   end
 
+  def load_redis
+    REDIS.del(["pages:#{id}:tags"])
+    tags.each do |tag|
+      REDIS.multi do
+        REDIS.zincrby('tags', 1, tag.name)
+        REDIS.zincrby('pages:tags', 1, tag.name)
+        REDIS.sadd("pages:#{id}:tags", tag.name)
+        REDIS.sadd("tags:#{tag.name}", "pages:#{id}")
+      end
+    end
+    REDIS.hmset("pages:#{id}", :canonical_title, canonical_title, :path, Rails.application.routes.url_helper.page_path(self))
+  end
+
   private
 
     def do_after_commit
-      tags.each do |tag|
-        REDIS.multi do
-          REDIS.zincrby('tags', 1, tag.name)
-          REDIS.zincrby('pages:tags', 1, tag.name)
-          REDIS.sadd("pages:#{id}:tags", tag.name)
-        end
-      end
+      load_redis
     end      
 
     def set_parent

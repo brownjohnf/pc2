@@ -95,6 +95,18 @@ class Document < ActiveRecord::Base
       Resque.enqueue(Library, stack.library_id)
     end
   end
+
+  def load_redis
+    tags.each do |tag|
+      REDIS.multi do
+        REDIS.zincrby('tags', 1, tag.name)
+        REDIS.zincrby('documents:tags', 1, tag.name)
+        REDIS.sadd("documents:#{id}:tags", tag.name)
+        REDIS.sadd("tags:#{tag}", "documents:#{id}")
+      end
+    end
+    REDIS.hmset("documents:#{id}", :canonical_title, canonical_title, :path, Rails.application.routes.url_helpers.document_path(self))
+  end
   
   private
 
@@ -109,13 +121,7 @@ class Document < ActiveRecord::Base
       if roles.empty?
         roles << Role.find_by_name('Public')
       end
-      tags.each do |tag|
-        REDIS.multi do
-          REDIS.zincrby('tags', 1, tag.name)
-          REDIS.zincrby('documents:tags', 1, tag.name)
-          REDIS.sadd("documents:#{id}:tags", tag.name)
-        end
-      end
+      self.load_redis
     end
 
     def run_before_save

@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
 
   before_validation :clear_empty_attrs
   before_destroy :reset_possessions
-  after_commit :update_percentage
+  after_commit :do_after_commit
 
   accepts_nested_attributes_for :volunteers, :staff, :allow_destroy => true
   accepts_nested_attributes_for :blogs, :reject_if => lambda { |a| a[:url].blank? } 
@@ -172,16 +172,29 @@ class User < ActiveRecord::Base
       end
     end
     REDIS.multi do
-      REDIS.hset("users:#{id}", 'name', name)
       REDIS.hset("users:#{id}:stats", 'perc_profile', percent.to_i)
       REDIS.zadd('users:stats:perc_profile', percent.to_i, id)
-      REDIS.zincrby('tags', 1, tag.name)
-      REDIS.zincrby('users:tags', 1, tag.name)
-      REDIS.sadd("users:#{id}:tags", tag.name)
     end
   end
 
+  def load_redis
+    tags.each do |tag|
+      REDIS.multi do
+        REDIS.zincrby('tags', 1, tag.name)
+        REDIS.zincrby('users:tags', 1, tag.name)
+        REDIS.sadd("users:#{id}:tags", tag.name)
+        REDIS.sadd("tags:#{tag.name}", "users:#{id}")
+      end
+    end
+    REDIS.hmset("users:#{id}", :name, name, :canonical_title, canonical_title, :path, Rails.application.routes.url_helper.user_path(self))
+  end
+
   private
+
+    def do_after_commit
+      load_redis
+      update_percentage
+    end
 
     def clear_empty_attrs
       @attributes.each do |key,value|
