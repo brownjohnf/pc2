@@ -30,6 +30,7 @@ class Page < ActiveRecord::Base
   validates :title, :description, :content, :language_id, :presence => true
 
   after_save :set_parent
+  after_commit :do_after_commit
   before_destroy :reset_children
   
   #default_scope :order => 'title ASC'
@@ -43,6 +44,16 @@ class Page < ActiveRecord::Base
   end
 
   private
+
+    def do_after_commit
+      tags.each do |tag|
+        REDIS.multi do
+          REDIS.zincrby('tags', 1, tag.name)
+          REDIS.zincrby('pages:tags', 1, tag.name)
+          REDIS.sadd("pages:#{id}:tags", tag.name)
+        end
+      end
+    end      
 
     def set_parent
       if parent_id != REDIS.hget("pages:#{id}", 'parent_id')

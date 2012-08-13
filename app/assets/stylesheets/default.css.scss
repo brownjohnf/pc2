@@ -135,6 +135,7 @@ img#pc_big {
   left: auto;
 }
 
+
 /********************************************/
 /* borrowed styles from the bootstrap demo page */
 
@@ -286,6 +287,12 @@ img#pc_big {
 .right {
   text-align: right;
 }
+
+/* fix the STUPID popover hidden crossover property coinciding with 'right' */
+.popover {
+  text-align: left;
+}
+
 .left {
   text-align: left;
 }
@@ -343,6 +350,11 @@ form.form-mega {
   }
 }
 
+/* adjust form margins for use with buttons in i.close */
+i.close form {
+  margin: 0;
+}
+
 
 /*************************************************/
 /* modal settings */
@@ -365,3 +377,4 @@ form.form-mega {
 }*/
 
 @import 'media_queries';
+

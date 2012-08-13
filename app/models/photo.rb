@@ -43,6 +43,8 @@ class Photo < ActiveRecord::Base
   accepts_nested_attributes_for :stacks
 
   before_validation :clear_empty_attrs
+  after_save :do_after_commit
+
   validates :title, :imageable_id, :imageable_type, :user_id, :presence => true
   validates :description, :length => { :maximum => 255 }
   validates :photo_fingerprint, :uniqueness => true, :presence => true
@@ -76,6 +78,16 @@ class Photo < ActiveRecord::Base
   end
   
   private
+
+    def do_after_commit
+      tags.each do |tag|
+        REDIS.multi do
+          REDIS.zincrby('tags', 1, tag.name)
+          REDIS.zincrby('photos:tags', 1, tag.name)
+          REDIS.sadd("photos:#{id}:tags", tag.name)
+        end
+      end
+    end      
 
     def reset_pointers
       [User,Page,Moment,CaseStudy].each do |remove_from|

@@ -1,4 +1,4 @@
-= bootstrap_form_for(@document, :multipart => true) do |f|
+= form_for(@document, :html =>{ :multipart => true, :class => 'form-horizontal' }) do |f|
   = render 'fields', :f => f
-  = f.submit 'Upload it!'
-  = f.cancel
+  .form-actions
+    = f.submit :class => 'btn btn-primary'

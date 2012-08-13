@@ -1,80 +1,94 @@
 .row
   .span3
     = render 'shared/menu'
-  .span7
-    = render 'menu'
-    %h1
-      = @document.name
-    %hr
-    %p= best_in_place_if can?(:update, @document), @document, :description
-    %p
-      - if @document.author
-        author:
-        = @document.author
-        %br
-      - if @document.language
-        language:
-        = @document.language.name
-    %p
-      = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
-        %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this document." }
-      = link_to '#bitly_url', 'data-toggle' => 'modal' do
-        %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
-      - if can? :read, @document    
-        = link_to download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)}")}" do
-          %i.icon-download-alt
-          download
-      = mime_icon(@document.file_content_type)
-      = change_units(@document.file.size)
-      = render @document.roles
-      = render 'shared/tags', :tags => @document.tag_list
-      - if @document.source.path
-        %br
-        %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
-        = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download_source, @document
-        = @document.source.content_type
-        = change_units @document.source.size
-        = mime_icon(@document.source.content_type)
-    .well
-      - if @document.stacks.any?
-        %h3 Libraries containing this file
-        %ul
-          - @document.stacks.each do |s|
-            %li #{link_to s.library.name, s.library if s.id} #{button_to 'remove', s, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger', :style => 'display:inline-block;' if can? :destroy, s}
-      = link_to 'Add to a library', '#new_stack_form_modal', 'data-toggle' => 'modal', :class => 'btn btn-success' if can? :create, Stack
-      = link_to 'Create a library', new_library_path, :class => 'btn btn-primary' if can? :create, Library
-    %hr
-    :erb
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'pcsenegal'; // required: replace example with your forum shortname
-        // turn on dev mode for dev/test env
-        var disqus_developer = <%= Rails.env.production? ? 0 : 1 %>;
-        // identify current page
-        var disqus_identifier = "document-<%= @document.id %>";
-        // identify current url
-        var disqus_url = "<%= document_url(@document) %>";
-        // set the thread title
-        var disqus_title = "<%= @document.canonical_title %>";
-        // set the category to pages
-        var disqus_category_id = '1483651';
+  .span9
+    .row
+      .span9
+        = render 'menu'
+    .row
+      .span1
+        = document_icon_for @document, :size => :small
+      .span5
+        %h1
+          = flag_icon @document.country.downcase
+          = @document.name
+        %blockquote
+          %p
+            %i= best_in_place_if can?(:update, @document), @document, :description
+          %small
+            last updated #{timeago(@document.updated_at)}, originally uploaded
+            = @document.created_at.strftime('%d %B %Y')
+        .tags
+          - if @document.author
+            %span.label.label-info= @document.author
+          - if @document.language
+            %span.label.label-info= @document.language.name
+          = render 'shared/tags', :tags => @document.tag_list
+          = render @document.roles
+          = link_to '#bitly_url_qrcode', 'data-toggle' => 'modal' do
+            %i.icon-qrcode{ :rel => 'popover-top', :title => 'Get a QR Code', 'data-content' => "<h3>What's a QR Code?</h3>QR Codes are 3-dimensional barcodes which can be scanned by smartphones and used to store URLs. This link will take you to a QR Code image you can use online or in print to represent this document." }
+          = link_to '#bitly_url', 'data-toggle' => 'modal' do
+            %i.icon-resize-small{ :rel => 'popover-top', :title => 'Get a shortened URL', 'data-content' => "<h3>Why should I care?</h3>URLs can be long. Just take a look up in your address bar. If you want to Tweet this URL, post it somewhere, or just save space, you can use this one instead. Click to retrieve it." }
+          - if can? :read, @document    
+            = link_to download_document_path(@document), :rel => 'popover-top', :title => 'Download', 'data-content' => "#{@document.file_file_name}<br/>#{@document.file_content_type}<hr/>#{((@document.audio_length ? "#{@document.formatted_audio_length}<br/>" : ' ') + "#{change_units(@document.file_file_size)}")}" do
+              %i.icon-download-alt
+              download
+          = mime_icon(@document.file_content_type)
+          = change_units(@document.file.size)
+        %p
+          - if @document.source.path
+            %br
+            %i.icon-folder-close{ :rel => 'popover-top', :title => 'Source File Present', 'data-content' => "This file has an attached source file, which may be an editable version of this document. If you would like access to it, please contact your PCVL.<hr/>#{@document.source_file_name}<br/>#{@document.source_comment}" }
+            = link_to 'download source', download_document_path(@document, :file => :source), :rel => 'popover-top', :title => 'Warning!', 'data-content' => "By downloading this file, you are taking on the burden of responsibility for its contents. DO NOT redistribute it indiscriminatlely. It is to be used to update the PDF or otherwise static version hosted here for redistribution." if can? :download_source, @document
+            = @document.source.content_type
+            = change_units @document.source.size
+            = mime_icon(@document.source.content_type)
+      .span3
+        - if @document.stacks.any?
+          %ul.nav.nav-list
+            %li.nav-header This file is in #{pluralize(@document.stacks.count, 'library')}:
+            - @document.stacks.each do |s|
+              %li
+                %i.close
+                  = button_to 'x', s, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' if can? :destroy, s
+                = link_to s.library.name, s.library if s.id
+            - if can? :create, Library
+              %li
+                = link_to new_library_path do
+                  %i.icon-plus
+                  create a library
+            %li.nav-header Top File Tags
+            = my_tag_cloud 'documents:tags'
+            %li.nav-header Top Tags
+            = my_tag_cloud 'tags'
+    .row
+      .span9
+        %hr
+        :erb
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'pcsenegal'; // required: replace example with your forum shortname
+            // turn on dev mode for dev/test env
+            var disqus_developer = <%= Rails.env.production? ? 0 : 1 %>;
+            // identify current page
+            var disqus_identifier = "document-<%= @document.id %>";
+            // identify current url
+            var disqus_url = "<%= document_url(@document) %>";
+            // set the thread title
+            var disqus_title = "<%= @document.canonical_title %>";
+            // set the category to pages
+            var disqus_category_id = '1483651';
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-  .span2
-    = document_icon_for @document, :size => :small
-    .box
-      %h3 Top Document Tags
-      = cloud_of_tags
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 = render 'shared/modal_standard', :id => "bitly_url", :title => 'Bit.ly Shortened URL', :body => raw("<p>#{shorten_url(document_url(@document))}<p>#{link_to 'Why is this not a link?', '/help#shortlinks'}</p>"), :footer => nil
 = render 'shared/modal_standard',:id => "bitly_url_qrcode", :title => 'QR Code', :body => image_tag(shorten_url(document_url(@document), :qr, :medium => 'qrcode')) + raw("<p>#{link_to 'What do I do with this?', '/help#qrcodes'}</p>"), :footer => nil
 - if can? :create, Stack

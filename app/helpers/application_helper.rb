@@ -265,4 +265,25 @@ module ApplicationHelper
     end
   end
 
+
+  # See the README for an example using tag_cloud.
+  def my_tag_cloud(key = 'tags', count = -1, classes = %w(tag1 tag2 tag3 tag4))
+    #tags = tags.all if tags.respond_to?(:all)
+
+    #return [] if tags.empty?
+
+    #max_count = tags.sort_by(&:count).last.count.to_f
+    unless tags = REDIS.get("clouds:#{key}")
+      max_count = REDIS.zrevrangebyscore(key, '+inf', '-inf', :with_scores => true, :limit => [0,1])[0][1].to_f
+      tags = []
+      REDIS.zrevrangebyscore(key, '+inf', '-inf', :with_scores => true, :limit => [0,count.to_i]).each do |tag|
+        index = ((tag[1] / max_count) * (classes.size - 1))
+        tags << (link_to tag[0], '', :class => classes[index.nan? ? 0 : index.round])
+      end
+      tags = tags.join(' ') + "<br/>generated at #{Time.now.to_s}"
+      REDIS.setex("clouds:#{key}", 300, tags)
+    end
+    return raw(tags)
+  end
+
 end

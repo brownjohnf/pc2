@@ -109,6 +109,13 @@ class Document < ActiveRecord::Base
       if roles.empty?
         roles << Role.find_by_name('Public')
       end
+      tags.each do |tag|
+        REDIS.multi do
+          REDIS.zincrby('tags', 1, tag.name)
+          REDIS.zincrby('documents:tags', 1, tag.name)
+          REDIS.sadd("documents:#{id}:tags", tag.name)
+        end
+      end
     end
 
     def run_before_save

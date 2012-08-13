@@ -18,6 +18,7 @@ class CaseStudy < ActiveRecord::Base
   accepts_nested_attributes_for :stacks
 
   before_save :clear_empty_attrs
+  after_commit :do_after_commit
   
   default_scope :order => 'updated_at DESC'
 
@@ -30,6 +31,16 @@ class CaseStudy < ActiveRecord::Base
   end
 
   private
+
+    def do_after_commit
+      tags.each do |tag|
+        REDIS.multi do
+          REDIS.zincrby('tags', 1, tag.name)
+          REDIS.zincrby('case_studies:tags', 1, tag.name)
+          REDIS.sadd("case_studies:#{id}:tags", tag.name)
+        end
+      end
+    end      
 
     def clear_empty_attrs
       @attributes.each do |key,value|

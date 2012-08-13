@@ -175,6 +175,9 @@ class User < ActiveRecord::Base
       REDIS.hset("users:#{id}", 'name', name)
       REDIS.hset("users:#{id}:stats", 'perc_profile', percent.to_i)
       REDIS.zadd('users:stats:perc_profile', percent.to_i, id)
+      REDIS.zincrby('tags', 1, tag.name)
+      REDIS.zincrby('users:tags', 1, tag.name)
+      REDIS.sadd("users:#{id}:tags", tag.name)
     end
   end
 

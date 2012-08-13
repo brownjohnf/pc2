@@ -22,6 +22,7 @@ namespace :db do
 		Rake::Task['db:populate_timeline'].invoke
     make_ticket_stuff
     make_libraries
+    Rake::Task['db:tag_everything'].invoke
 	end
 end
 
