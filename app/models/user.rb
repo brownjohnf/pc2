@@ -1,9 +1,5 @@
 class User < ActiveRecord::Base
 
-  if Rails.env.production?
-    extend HerokuResqueAutoScale
-  end
-  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

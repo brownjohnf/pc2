@@ -1,9 +1,5 @@
 class Library < ActiveRecord::Base
 
-  if Rails.env.production?
-    extend HerokuResqueAutoScale
-  end
-  
   require 'zip/zip'
   require 'zip/zipfilesystem'
 
